@@ -1,0 +1,33 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.TblInspectionVm
+@{
+    ViewBag.Title = "افزودن دستور کار بازرسی منهول";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@using (Html.BeginForm("Add", "ManholInspection", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <table class="form">
+        <tr>
+            <td>
+                <hr />
+                <label style="color: red" class="fieldLabel">ثبت دستور کار بازرسی </label>
+                <hr />
+            </td>
+            <td>
+                <hr />
+            </td>
+        </tr>
+        @Html.ValidationSummary(true)
+        @Html.AntiForgeryToken()
+        @Html.EnhancedEditorField(model => model.CodePm)
+        @Html.EnhancedEditorField(model => model.DateOrder)
+        <tr>
+            <td>
+                <Br/>
+            </td>
+            <td>
+            </td>
+        </tr>
+        @Html.EnhancedSubmit(" افزودن دستور کار بازرسی منهول")
+    </table>
+}

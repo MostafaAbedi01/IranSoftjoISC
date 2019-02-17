@@ -1,0 +1,55 @@
+﻿@model IEnumerable<IranSoftjo.Package.WebUi.ViewModels.TblItemVm>
+@{
+    ViewBag.Title = "لیست جبهه های کاری";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hgroup class="title">
+    <h1> <a href="@Url.Action("ProjectList", "RasTblProject")">@Session["TblProjects"] </a>  >> @ViewBag.Title</h1>
+    <hr />
+</hgroup>
+<div class="k-rtl">
+    @(Html.Kendo().Grid(Model)
+          .Name("Grid")
+          .Columns(columns =>
+          {
+              columns.Bound(item => @item.TblProjectId).Title("لیست").Filterable(false).Groupable(false)
+          .Template(@<text>
+                    @Html.ActionLink("لیست آیتم ها", "SubItemList", "RasTblSubItem", new { id = @item.TblItemId }, new { @class = "k-button k-button-icontext k-grid-delete" })
+                    @Html.ActionLink("تصاویر جبهه کاری", "Index", "TblPhotoList", new { id = @item.TblItemId }, new { @class = "k-button k-button-icontext k-grid-delete" })
+        </text>).Width(250);
+              columns.Bound(model => model.TblItemId).Visible(false);
+              columns.Bound(model => model.ItemCode).Width(100);
+              columns.Bound(model => model.Title).Width(150);
+              columns.Bound(model => model.Address);
+
+              columns.Bound(item => @item.TblItemId).Title("دستورات").Filterable(false).Groupable(false)
+                  .Template(@<text>
+                    @if (item.IsGoogleMap)
+                    {
+                        @Html.ActionLink("مختصات نقشه", "SearchByItemId", new { id = @item.TblItemId }, new { @class = "k-button k-button-icontext k-grid-delete" })
+                    }
+                    @Html.ActionLink("جزئیات", "ItemDetails", new { id = @item.TblItemId }, new { @class = "k-button k-button-icontext k-grid-delete" })
+                    @Html.ActionLink("ویرایش", "ItemEdit", new { id = @item.TblItemId }, new { @class = "k-button k-button-icontext k-grid-edit" })
+                    @Html.ActionLink("حذف", "ItemDelete", new { id = @item.TblItemId }, new { @class = "k-button k-button-icontext k-grid-delete" })
+                </text>).Width(350);
+
+          })
+                                                                                                          .ToolBar(toolbar => toolbar.Custom().Action("ItemCreate", "RasTblItems").Text("افزودن جبهه کاری جدید"))
+                                                                                                          .Pageable(d => d.PageSizes(true).Refresh(true))
+                                                                                                          .Sortable()
+                                                                                                          .Scrollable()
+                                                                                                          .Filterable().Groupable()
+                                                                                                          .HtmlAttributes(new { style = "height:550px; " })
+                                                                                                          .DataSource(dataSource => dataSource
+                                                                                                              .Server()
+                                                                                                              .Model(model => model.Id(item => item.TblItemId)).PageSize(10)
+                                                                                                          )
+                                                                                                          .Resizable(resize => resize.Columns(true))
+                                                                                                          .ColumnMenu()
+    )
+</div>
+<style>
+    .container {
+        width: 1300px !important;
+    }
+</style>

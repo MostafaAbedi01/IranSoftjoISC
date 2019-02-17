@@ -1,0 +1,37 @@
+﻿@model IEnumerable<IranSoftjo.Package.DataModel.Propaganda>
+@{
+    ViewBag.Title = "درآمد تبلیغات";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+
+
+<h2 style="font-size: 12px">
+    جهت واریز درآمد تبلیغاتی خود به حساب شخصی خود نزد بانک طرح شتابی 
+    @Html.ActionLink("اینجا کلیک", "RequestAgency", "Account", null, new {@class = "k-button k-button-icontext"}) نمایید.
+</h2>
+
+<div class="k-rtl">
+    @(Html.Kendo().Grid(Model)
+          .Name("Grid")
+          .Columns(columns =>
+                   {
+                       columns.Bound(model => model.PropagandaId).Title("سریال").Width(150);
+                       columns.Bound(model => model.IpVisitor).Title("آی پی").Width(150);
+                       columns.Bound(model => model.DateTimeVisit).Title("تاریخ").Width(200);
+                   })
+          .Pageable()
+          .Sortable()
+          .Scrollable()
+          .Filterable()
+          .DataSource(dataSource => dataSource
+              .Server()
+              .Model(model => model.Id(item => item.PropagandaId))
+          )              
+          )
+</div>
+
+
+<h2>
+    کد تبلیغات شما :
+</h2>
+@Html.Partial("_Propadanda","Home/Index/"+Session["UserId123"])

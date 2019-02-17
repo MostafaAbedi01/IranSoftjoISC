@@ -1,0 +1,25 @@
+﻿@using IranSoftjo.Package.WebUi.Configs
+@model IranSoftjo.Package.DataModel.SiteSetting
+<title>@ViewBag.ViewBag </title>
+<meta charset="utf-8" />
+<meta name="keywords" content="@ViewBag.Metakeywords " />
+<meta name="description" content="@ViewBag.MetaDescription " />
+<meta name="author" content="Mostafa Abedi , مصطفی عابدی" />
+<meta name="copyright" content="IranSoftjo , ایران سافتجو" />
+@if (Model != null)
+{
+    <link href="@Model.IconImageUrl" rel="shortcut icon" type="image/x-icon" />
+}
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/jquery")
+<link rel="stylesheet" href="~/Content/Site.css?@PackageSettings.Active.Version" />
+<link rel="stylesheet" href="~/Package/@PackageSettings.Active.SiteTheme/Content/Theme.css?@PackageSettings.Active.Version" />
+<link href="@Url.Content("~/Content/kendo/2014.1.318/kendo.common.min.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/kendo/2014.1.318/kendo.rtl.min.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/kendo/2014.1.318/kendo.default.min.css")" rel="stylesheet" type="text/css" />
+@*    <script src="@Url.Content("~/Scripts/kendo/2014.1.318/kendo.all.min.js")"> </script>*@
+<script src="@Url.Content("~/Scripts/ShamsiDatePicker/kendo.all.min.js")"> </script>
+<script src="/Scripts/kendo/2014.1.318/kendo.aspnetmvc.min.js"> </script>
+<link rel="author" href="http://www.iransoftjo.com/"/>
+

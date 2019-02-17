@@ -1,0 +1,27 @@
+﻿@model List<IranSoftjo.Package.WebUi.ViewModels.PageVM>
+@{
+    ViewBag.Title = Session["PageGroupTitle"];
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<h1>
+    @ViewBag.Title
+</h1>
+<hr />
+<div class="k-rtl">
+    <div class="k-rtl">
+           @(Html.Kendo().TabStrip()
+              .Name("tabstrip")
+              .Items(tabstrip =>
+              {
+                  bool expanded = true;
+                  foreach (var item in Model)
+                  {
+                      tabstrip.Add().Text(item.PageTitle)
+                                 .Selected(expanded)
+                         .LoadContentFrom(Url.Action("PageNull", "Home", new { id = item.PageId }));
+                      expanded = false;
+                  }
+              })
+             )
+    </div>
+</div>

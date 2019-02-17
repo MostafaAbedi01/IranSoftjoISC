@@ -1,0 +1,28 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@using Mehr
+@model IranSoftjo.Package.WebUi.ViewModels.IncreaseBalanceVM
+@{
+    ViewBag.Title = "افزایش موجودی حساب";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+<h2 style="font-size: 13px;">کاربر گرامی، از طریق این صفحه شما می توانید موجودی حساب خود نزد سایت را افزایش دهید.
+</h2>
+<p>
+    توجه کنید که در صورت افزایش موجودی حساب به صورت آنلاین از طریق درگاه  پرداخت بانکهای مرتبط
+    بلافاصله حساب اعتباری شما شارژ خواهد شد.
+</p>
+<br />
+<br />
+<p>
+    @Html.EnhancedLabelField(model => model.AccountBalance)
+</p>
+<br />
+@using (Html.BeginForm())
+{
+    <table class="form">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.EnhancedEditorField(model => model.Amount)
+        @Html.EnhancedSubmit("افزایش موجودی حساب با پرداخت آنلاین", new { @class = "k-button k-button-icontext" })
+    </table>
+}

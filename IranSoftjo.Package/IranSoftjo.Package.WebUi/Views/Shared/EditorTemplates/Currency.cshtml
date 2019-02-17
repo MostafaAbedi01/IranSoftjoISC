@@ -1,0 +1,10 @@
+﻿@model int?
+
+@(Html.Kendo().NumericTextBoxFor(model=>model)
+            .Step(1)
+                .Format("{0:#,0 ریال}")
+            .Placeholder("مبلغ را وارد نمایید")
+      .HtmlAttributes(new { style = "width: 20em" })
+      .Min(1)
+      .Max(int.MaxValue)
+)

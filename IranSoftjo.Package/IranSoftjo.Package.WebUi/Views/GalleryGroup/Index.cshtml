@@ -1,0 +1,29 @@
+﻿@model IEnumerable<IranSoftjo.Package.WebUi.ViewModels.GalleryGroupVM>
+@{
+    ViewBag.Title = "مدیریت گالری عکس";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="k-rtl">
+    @(Html.Kendo().Grid(Model)
+          .Name("Grid")
+          .Columns(columns =>
+                   {
+                       columns.Bound(model => model.GalleryGroupOrder).Width(70);
+                       columns.Bound(model => model.GalleryGroupTitle).Width(100);
+                       columns.Bound(item => @item.GalleryGroupId).Title("دستورات").Filterable(false).Groupable(false)
+                           .Template(@<text>
+    @Html.ActionLink("ویرایش", "Edit", new { id = @item.GalleryGroupId }, new { @class = "k-button k-button-icontext k-grid-edit" })
+    @Html.ActionLink("حذف", "Delete", new { id = @item.GalleryGroupId }, new { @class = "k-button k-button-icontext k-grid-delete" })
+    </text>).Width(80);
+                   })
+        .ToolBar(toolbar => toolbar.Custom().Action("Create", "GalleryGroup").Text("افزودن"))
+          .Sortable()
+          .Scrollable()
+          .Filterable()
+          .HtmlAttributes(new { style = "height:500px;" })
+          .DataSource(dataSource => dataSource
+              .Server()
+              .Model(model => model.Id(item => item.GalleryGroupId))
+          )
+          )
+</div>

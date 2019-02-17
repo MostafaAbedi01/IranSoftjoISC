@@ -1,0 +1,53 @@
+﻿@model System.Collections.Generic.List<IranSoftjo.Package.WebUi.ViewModels.TblProjectVm>
+
+@{
+    ViewBag.Title = "گزارش پیشرفت و مصرف پروژه ها";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@if (Request.IsAuthenticated && (User.IsInRole("Administrator") || User.IsInRole("Customer")))
+{
+    <hgroup class="title">
+        <h1>@ViewBag.Title</h1>
+        <hr/>
+    </hgroup>
+
+    <div class="k-rtl">
+        @(Html.Kendo().Grid(Model)
+              .Name("Grid")
+              .Columns(columns =>
+              {
+                  columns.Bound(model => model.TblProjectId).Visible(false);
+                  columns.Bound(item => @item.TblProjectId).Title("گزارش سطح پایین").Filterable(false).Groupable(false)
+                      .Template(@<text>
+                                    @Html.ActionLink("گزارش جبهه کاری", "ReportTblItems", "RasTblAndroidLevel", new {id = @item.TblProjectId}, new {@class = "k-button k-button-icontext k-grid-delete"})
+                                 </text>).Width(150);
+                  columns.Bound(model => model.ProjectCode).Width(90);
+                  columns.Bound(model => model.ProjectName).Width(200);
+                  columns.Bound(model => model.AllMetraj);
+                  columns.Bound(model => model.AllMetrajColor);
+                  columns.Bound(model => model.AllColorUse);
+                  columns.Bound(model => model.AllColorLine);
+                  columns.Bound(model => model.AllThinner);
+                  columns.Bound(model => model.AllHardener);
+                  columns.Bound(model => model.AllProgress);
+                  columns.Bound(model => model.AllRate);
+              })
+
+              .Sortable()
+              .Scrollable()
+              .Filterable()
+              .HtmlAttributes(new {style = "height:300px; "})
+              .DataSource(dataSource => dataSource
+                  .Server()
+                  .Model(model => model.Id(item => item.TblProjectId))
+              )
+              .Resizable(resize => resize.Columns(true))
+              .ColumnMenu()
+              )
+    </div>
+    <style>
+        .container {
+            width: 1300px !important;
+        }
+    </style>
+}

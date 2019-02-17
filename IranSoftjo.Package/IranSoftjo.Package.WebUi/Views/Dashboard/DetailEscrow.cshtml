@@ -1,0 +1,236 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@using IranSoftjo.Package.DataModel
+@using IranSoftjo.Package.WebUi.ViewModels
+@model IEnumerable<IranSoftjo.Package.WebUi.ViewModels.EscrowLogVm>
+@{
+    ViewBag.Title = "جزئیات مبادله پیشنهاد شده";
+    Layout = "~/Views/Shared/_AdminDashboardWithPanel.cshtml";
+    var _db = new Entities();
+    var detailEscrowid = (int)Session["DetailEscrow"];
+    var escrows = _db.Escrows.FirstOrDefault(d => d.EscrowID == detailEscrowid);
+    var escrowVm = (EscrowVm)escrows;
+    escrowVm.MobaadelehTypeTitle = _db.TblKeyValues.FirstOrDefault(d => d.Type == 5 && d.KeyID == escrows.Type).Title;
+    var userName = User.Identity.Name;
+    var user = _db.Users.FirstOrDefault(d => d.Username == userName);
+}
+
+<div class="timeline">
+    <!-- TIMELINE ITEM -->
+    <!-- TIMELINE ITEM -->
+    <div class="timeline-item">
+        <div class="timeline-badge">
+            <div class="timeline-icon">
+                <i class="icon-user-following font-green-haze"></i>
+            </div>
+        </div>
+        <div class="timeline-body" style="background-color: #a7eaf1">
+            <div class="timeline-body-arrow" style="border-color: transparent transparent transparent #a7eaf1;"> </div>
+            <div class="timeline-body-head">
+                <div class="timeline-body-head-caption">
+                    <span class="timeline-body-time font-grey-cascade">تاریخ ایجاد مبادله : @escrows.CreateDate.Value.ToLongDateString() @escrows.CreateDate.Value.ToLongTimeString() </span>
+                </div>
+                <div class="timeline-body-head-actions"> </div>
+            </div>
+            <div class="timeline-body-content">
+                <span class=" timeline-body-title font-blue-dark">
+                    پیشنهاد مبادله با مشخصات زیر از
+                    <strong>  @escrows.User1.FirstName @escrows.User1.LastName (@escrows.User1.Username) </strong>
+                    به
+                    <strong style="color: #14B9D6">  @escrows.User.FirstName @escrows.User.LastName (@escrows.User.Username) </strong>
+                    ارسال گردیده است.
+                    <hr />
+                    <table class="form">
+                        @Html.EnhancedLabelField(m => escrowVm.MobaadelehTypeTitle)
+                        @Html.EnhancedLabelField(m => escrowVm.Price)
+                        @Html.EnhancedLabelField(m => escrowVm.PaymentTime, note: "روز")
+                        @if (escrowVm.Type == 1)
+                        {
+                            var MerchandiseScrow = _db.MerchandiseScrows.FirstOrDefault(d => d.EscrowID == detailEscrowid);
+                            var merchandiseVM = (MerchandiseVM)MerchandiseScrow;
+                            @Html.EnhancedLabelField(m => merchandiseVM.Name)
+                            @Html.EnhancedLabelField(m => merchandiseVM.Postage)
+                            @Html.EnhancedLabelField(m => merchandiseVM.Description)
+                        }
+                        @if (escrowVm.Type == 2)
+                        {
+                            var domainScrow = _db.DomainScrows.FirstOrDefault(d => d.EscrowID == detailEscrowid);
+                            var domainScrowVm = (DomainVm)domainScrow;
+                            @Html.EnhancedLabelField(m => domainScrowVm.IrDomainName)
+                        }
+                        @if (escrowVm.Type == 3)
+                        {
+                            var domainScrow = _db.DomainScrows.FirstOrDefault(d => d.EscrowID == detailEscrowid);
+                            var domainScrowVm = (DomainVm)domainScrow;
+                            @Html.EnhancedLabelField(m => domainScrowVm.PublicDomainName)
+                        }
+                    </table>
+                    <hr />
+
+                </span>
+            </div>
+            <div class="timeline-body-head-actions">
+                @foreach (var item in _db.EscrowAttachments.Where(d => d.EscrowID == detailEscrowid))
+                {
+                    <div style="float: left; text-align: center;">
+                        <a target="_blank" href="@item.ImageUrl">
+                            <img style="height: 100px; width: 100px;" src="@item.ThumbnailImageUrl" title="@item.EscrowAttachmentID" />
+
+                        </a>
+
+                    </div>
+                    @*<span>
+                            @item.CreateDate
+                            @item.User.Username
+                            @item.Comment
+                        </span>*@
+                }
+            </div>
+        </div>
+    </div>
+    <!-- END TIMELINE ITEM -->
+    @foreach (var item in Model)
+    {
+        var att = item.UserID == user.UserID ? "" : "background-color:#EDFDF0";
+        <div class="timeline-item">
+            <div class="timeline-badge">
+                @if (string.IsNullOrEmpty(item.ImageUrlProfile))
+                {
+                    <img class="timeline-badge-userpic" src="@item.ImageUrlProfile">
+                }
+                else
+                {
+                    <img class="timeline-badge-userpic" src="/PackageAdmin/img/User.png">
+                }
+            </div>
+            <div class="timeline-body" style="@att">
+                <div class="timeline-body-arrow"> </div>
+                <div class="timeline-body-head">
+                    <div class="timeline-body-head-caption">
+                        <a href="#" class="timeline-body-title font-blue-madison">@item.NameUser</a>
+                        <span class="timeline-body-time font-grey-cascade">
+                            @escrows.CreateDate.Value.ToLongDateString() @escrows.CreateDate.Value.ToLongTimeString()
+                        </span>
+                    </div>
+                </div>
+                <div class="timeline-body-content">
+                    <span class="font-grey-cascade">
+                        <p>
+                            نوع دستور وارد شده :
+                            @if (item.TypeAction == 1)
+                            {
+                                <b>
+                                    <i class="icon-fire font-blue"></i>
+                                    تایید مبادله
+                                </b>
+                            }
+                            else if (item.TypeAction == 2)
+                            {
+                                <b>
+                                    <i class="ui-icon-cancel font-red"></i>
+                                    لغو مبادله
+                                </b>
+                            }
+                            else if (item.TypeAction == 3)
+                            {
+                                <b>
+                                    <i class="icon-calculator font-blue"></i>
+                                    پرداخت
+                                </b>
+                                foreach (var itemlog in _db.PaymentLogs.Where(d => d.EscrowID == escrowVm.EscrowID && d.PaymentLogID == item.IDAction))
+                                {
+                                    <div class="timeline-body-alerttitle font-blue-dark">
+                                        مبلغ پرداختی :   @itemlog.Amount
+                                        <br />
+                                        تاریخ پرداخت :   @itemlog.PaymentDate
+                                        <br />
+                                        وضعیت پرداخت :   @if ((bool)itemlog.IsSuccessful)
+                                        {
+                                            <span>موفق</span>
+                                        }
+                                        else
+                                        {
+                                            <span>ناموفق</span>
+                                        }
+                                    </div>
+                                }
+                            }
+                            else if (item.TypeAction == 4)
+
+                            {
+                                <b>
+                                    <i class="icon-clock font-blue"></i>
+                                    ثبت کد انتقال دامین
+                                </b>
+                                <div class="timeline-body-alerttitle font-blue-dark">
+
+                                    @if (escrowVm.Type == 1)
+                                    {
+                                        <div class="timeline-body-head-caption">
+                                            کد انتقال دامین ثبت شده :   @escrowVm.TrackingNumber
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <b>
+                                            ثبت کد بار نامه
+                                        </b>
+                                        <div class="timeline-body-head-caption">
+                                            کد بار نامه ثبت شده :   @escrowVm.TrackingNumber
+                                        </div>
+                                    }
+                                </div>
+                            }
+                            else if (item.TypeAction == 5)
+                            {
+                                <b>
+                                    <b>
+                                        <i class="icon-refresh font-blue"></i>
+                                        آزاد سازی وجه
+                                    </b>
+                                </b>
+                            }
+                            else if (item.TypeAction == 6)
+                            {
+                                <b>
+                                    <i class="icon-att font-blue"></i>
+                                    افزودن ضمائم
+                                </b>
+                            }
+                            else if (item.TypeAction == 7)
+                            {
+                                <b>
+                                    <i class="icon-att font-blue"></i>
+                                    درخواست حل اختلاف
+                                </b>
+                                var conflictResolutions = _db.ConflictResolutions.FirstOrDefault(d => d.EscrowID == escrowVm.EscrowID && d.ConflictResolutionId == item.IDAction);
+                                <div class="timeline-body-head-caption">
+                                    @if (conflictResolutions != null)
+                                    {
+                                        <div class="timeline-body-head-caption">
+                                           شرح اختلاف :   @conflictResolutions.Comment
+                                        </div>
+                                        <br />
+                                        <div class="timeline-body-head-caption">
+                                            تاریخ ایجاد :   @conflictResolutions.CreateDate
+                                        </div>
+                                        <br/>
+                                        <div class="timeline-body-head-caption">
+                                            کاربر ثبت کننده :   @conflictResolutions.User.FirstName 
+                                            @conflictResolutions.User.LastName
+                                        </div>
+                                    
+                                    }
+                                </div>
+
+                            }
+                        </p>
+                    </span>
+                </div>
+            </div>
+
+
+        </div>
+        <!-- END TIMELINE ITEM -->
+    }
+
+</div>

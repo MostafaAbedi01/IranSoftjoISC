@@ -1,0 +1,21 @@
+﻿@model IranSoftjo.Package.DataModel.SiteSetting
+@{
+    
+    ViewBag.Title = "تبلیغات";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<hgroup class="title">
+    <h1>تبلیغات در سایت  @Model.WebSiteTitle </h1>
+    <hr />
+</hgroup>
+<p>
+    جهت تبادل لینک و ارائه تبلیغات شما در وب سایت  @Model.WebSiteTitle  میتوانید با ما تماس حاصل نمایید.
+</p>
+<br />
+<span class="label">جهت اطلاعات بیشتر با بخش تبلیغات تماس حاصل نمایید :</span>
+<span>@Model.PhoneNumber</span>
+
+<p>
+    کد تبلیغاتی ما :
+</p>
+@Html.Partial("_Propadanda", Model)

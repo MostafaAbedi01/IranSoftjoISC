@@ -1,0 +1,36 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.TblSubItemVm
+@{
+    ViewBag.Title = "ویرایش آیتم ";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+@using (Html.BeginForm())
+{
+    <table class="form">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(false)
+        @Html.HiddenFor(model => model.TblSubItemId)
+        @Html.HiddenFor(model => model.TblItemId)
+        <tr>
+            <td>
+                <hr />
+                <label style="color: red" class="fieldLabel">مشخصات </label>
+                <hr />
+            </td>
+            <td>
+                <hr />
+            </td>
+        </tr>
+        @Html.EnhancedEditorField(model => model.SubItemCode)
+        @Html.EnhancedEditorField(model => model.Title)
+        @Html.EnhancedEditorField(model => model.MetrajKolStr)
+        @Html.EnhancedSubmit("ویرایش ")
+    </table>
+}
+<div>
+    @Html.ActionLink("بازگشت به لیست", "SubItemList", new { id = Model.TblItemId })
+</div>

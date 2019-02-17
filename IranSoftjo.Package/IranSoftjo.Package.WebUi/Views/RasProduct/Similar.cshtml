@@ -1,0 +1,22 @@
+﻿@model List<IranSoftjo.Package.WebUi.ViewModels.ProductVM>
+@{
+    Layout = "~/Views/Shared/_LayoutNull.cshtml";
+    ViewBag.Title = "محصولات";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+@if (Model.Count == 0)
+{
+    <p style="color: red">هیچ موردی یافت نشد</p>
+}
+@{ Session["ListViewName"] = "ListViewName1"; }
+
+@*@Html.Partial("_ListProducts", Model.OrderByDescending(d => d.ProductOrder).ToList())*@
+
+@Html.Partial("_CaptionHoverEffects", Model.OrderByDescending(d => d.ProductOrder).ToList())
+
+@Html.Partial("_ScriptProducts")
+
+

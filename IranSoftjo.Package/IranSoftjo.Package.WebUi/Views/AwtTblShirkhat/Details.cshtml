@@ -1,0 +1,131 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@using IranSoftjo.Package.WebUi.Configs
+@model IranSoftjo.Package.WebUi.ViewModels.TblShirkhatVm
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "جزئیات شیرخط";
+}
+
+<div style="box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); height: auto;">
+
+    <div style="float: right; margin: 10px; width: 40%">
+        <a href="@Url.Action("Index", "TblPhotoList", new {id = Model.TblShirkhatId})">
+            <div>
+                <img width="@PackageSettings.Active.PageThumbnailImageUrlWidth" height="@PackageSettings.Active.PageThumbnailImageUrlHeight" src="@Model.ThumbnailImageUrl" alt="عکس " title="عکس "/>
+            </div>
+            <div style="float: right; margin-top: 0px;">
+                بزرگنمایی عکس
+            </div>
+        </a>
+    </div>
+
+    <div>
+        <h1 style="color: #D24B28; font-size: 1.8em; padding: 25px;">کد پی ام : @Model.CodePm</h1>
+        <div style="margin: 30px; padding: 20px;">
+            <hr/>
+            <label style="color: red" class="fieldLabel"> مشخصات اولیه </label>
+            <hr/>
+            @Html.EnhancedLabelField(model => model.CodeTag)
+            @Html.EnhancedLabelField(model => model.CodePm)
+
+            <hr/>
+
+            <label style="color: red" class="fieldLabel">مشخصات ثبت کننده </label>
+            <br/>
+            @Html.EnhancedLabelField(model => model.SizeDariceh)
+            @Html.EnhancedLabelField(model => model.SizeOtaghak)
+            @Html.EnhancedLabelField(model => model.Comment)
+            @Html.EnhancedLabelField(model => model.DateTimeSabt)
+            <hr/>
+            <br/>
+            <label class="fieldLabel">وضعیت ظاهری : </label>
+            @if (Model.VaziatZaheri == 0)
+            {
+                <span> مرئی </span>
+            }
+            else if (Model.VaziatZaheri == 1)
+            {
+                <span> نامرئی </span>
+            }
+            else
+            {
+                <span> ... </span>
+            }
+            <br/>
+            <label class="fieldLabel">نوع اتاقک : </label>
+            @if (Model.OtaghakType == 1)
+                                                          {
+                                                              <span> رینگ بتونی </span>
+                                                          }
+                                                          else if (Model.OtaghakType == 0)
+                                                          {
+                                                              <span> آجری </span>
+                                                          }
+                                                          else
+                                                          {
+                                                              <span> ... </span>
+                                                          }
+            <br/>
+            <label class="fieldLabel">وضعیت  : </label>
+            @if (Model.VaziatZaheri == 0)
+            {
+                <span> باز  </span>
+            }
+            else if (Model.VaziatZaheri == 1)
+            {
+                <span> بسته </span>
+            }
+            else
+            {
+                <span> ... </span>
+            }
+            <br/>
+            <label class="fieldLabel">وضعیت دریچه : </label>
+            @if (Model.VaziatDaricheh == 1)
+            {
+                <span> ناسالم  </span>
+            }
+            else if (Model.VaziatDaricheh == 0)
+            {
+                <span> سالم </span>
+            }
+            else
+            {
+                <span> ... </span>
+            }
+            <br/>
+            <label class="fieldLabel">وضعیت شیر : </label>
+            @if (Model.VaziatShir == 1)
+            {
+                <span> ناسالم  </span>
+            }
+            else if (Model.VaziatShir == 0)
+            {
+                <span> سالم </span>
+            }
+            else
+            {
+                <span> ... </span>
+            }
+            <br/>
+            <label class="fieldLabel">وضعیت پلاک : </label>
+            @if (Model.VaziatPelak == 1)
+            {
+                <span> ناسالم  </span>
+            }
+            else if (Model.VaziatPelak == 0)
+            {
+                <span> سالم </span>
+            }
+            else
+            {
+                <span> ... </span>
+            }
+            <br/>
+            @Html.EnhancedLabelField(model => model.TblUserId)
+        </div>
+    </div>
+</div>
+<div>
+    @Html.ActionLink("بازگشت به لیست", "List")
+</div>

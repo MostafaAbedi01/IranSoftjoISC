@@ -1,0 +1,38 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.AgencyVM
+@{
+    ViewBag.Title = "ویرایش نمایندگی";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <table class="form">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.UserId)
+        @Html.HiddenFor(model => model.Id)
+        @Html.EnhancedEditorField(model => model.Name)
+        @Html.EnhancedEditorField(model => model.Phone, new { @class = "numeric" }, "نمونه  : ۲۱۲۲۰۰۰۲۲۶۶")
+        @Html.EnhancedEditorField(model => model.Mobile, new { @class = "numeric" }, "نمونه  :  ۹۱۲۰۰۰۲۲۶۶")
+        @Html.EnhancedEditorField(model => model.Manager)
+        @Html.EnhancedEditorField(model => model.Email, new { @class = "latin k-textbox" }, "نمونه : myname@samplesite.com")
+        @Html.EnhancedEditorField(model => model.Country)
+        @Html.EnhancedEditorField(model => model.City)
+        @Html.EnhancedCheckBoxField(model => model.Active)
+        @Html.EnhancedEditorField(model => model.Code)
+        @Html.EnhancedTextAreaField(model => model.Address)
+        @Html.EnhancedTextAreaField(model => model.Description)
+        <td class="labelWrp">
+            <label class="fieldLabel">@Html.LabelFor(model => model.ImageUrl)</label>
+        </td>
+        <td colspan="1" class="inputWrp">
+            @Html.Kendo().Upload().Name("file").Multiple(false).Async(async => async.Save("SaveFile", "Agency"))
+            <img style="width: 100px;" src="@Model.ImageUrl"/>
+        </td>
+        @Html.EnhancedSubmit("ویرایش نمایندگی")
+    </table>
+}
+
+<div>
+    @Html.ActionLink("بازگشت به لیست", "Index")
+</div>

@@ -1,0 +1,44 @@
+﻿@model List<IranSoftjo.Package.WebUi.ViewModels.ProductVM>
+    @{
+        Layout = "~/Views/Shared/_LayoutBox.cshtml";
+        ViewBag.Title = "فروشگاه اینترنتی";
+    }
+
+    <div class="col-md-8 col-sm-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <hgroup class="title">
+                    <h1>@ViewBag.Title</h1>
+                    <hr />
+                </hgroup>
+                @if (Request.IsAuthenticated)
+            {
+                if (Model.Count == 0)
+                {
+                        <p style="color: red">هیچ موردی یافت نشد</p>
+                    }
+                    foreach (var item in Model.OrderBy(d => d.ProductGroup.ProductGroupOrder).Select(d => d.ProductGroupID).Distinct())
+                    {
+                        <div class="block_up">
+                            <h3 class="header">@Model.FirstOrDefault(d => d.ProductGroupID == item).ProductGroupTitle</h3>
+                        </div>
+                        Session["ListViewName"] = "ListViewName" + item;
+                        @Html.Partial("_CaptionHoverEffects", Model.Where(d => d.ProductGroupID == item).OrderByDescending(d => d.ProductOrder).ToList())
+                    }
+                    @Html.Partial("_ScriptProducts")
+
+                }
+                else
+                {
+                    <p style="color: hotpink ;font-size: 40px;font-family: BKoodakBold;text-align: center">مژده               مژده</p>
+                    <br />
+                    <br />
+                    <p style="color: green ;font-size: 70px;font-family: BKoodakBold;text-align: center">فروشگاه اینترنتی تارنما نیوز</p>
+                    <br />
+                    <br />
+                    <p style="color: darkorange ;font-size: 30px;font-family: BKoodakBold;text-align: center">به زودی راه اندازی خواهد شد</p>
+                }
+
+            </div>
+        </div>
+    </div>

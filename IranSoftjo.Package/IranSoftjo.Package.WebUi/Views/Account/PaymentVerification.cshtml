@@ -1,0 +1,23 @@
+﻿@model IranSoftjo.Common.PaymentResponse
+@{
+    ViewBag.Title = "وضعیت نهایی پرداخت";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+@if (Model.Successful)
+{
+    <h2>کاربر گرامی،پرداخت شما با موفقیت انجام شد.
+    </h2>
+    <p>موجودی شما با موفقیت افزایش یافت.</p>
+    <p>
+        @Model.ResponseMessage
+    </p>
+}
+else
+{
+    <h2>کاربر گرامی،پرداخت انجام نشد.
+    </h2>
+    <p>
+        @Model.ResponseMessage
+    </p>
+}
+

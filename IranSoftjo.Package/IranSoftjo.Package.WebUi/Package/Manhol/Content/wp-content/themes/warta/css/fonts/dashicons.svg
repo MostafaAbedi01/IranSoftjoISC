@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html 
+lang="en-US" id='page-404'         class=""
+>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found | Warta - News/Magazine WordPress Theme</title>
+<link rel="profile" href="../../../../../../../../gmpg.org/xfn/11">
+<link rel="pingback" href="http://friskamax.com/warta/wp/xmlrpc.php">
+<link rel="alternate" type="application/rss+xml" title="Warta - News/Magazine WordPress Theme &raquo; Feed" href="../../../../../feed/default.htm" />
+<link rel="alternate" type="application/rss+xml" title="Warta - News/Magazine WordPress Theme &raquo; Comments Feed" href="../../../../../comments/feed/default.htm" />
+<link rel='stylesheet' id='bbp-default-css'  href='../../../../plugins/bbpress/templates/default/css/bbpress.css@ver=2.5.4-5380' type='text/css' media='screen' />
+<link rel='stylesheet' id='woocommerce-layout-css'  href='../../../../plugins/woocommerce/assets/css/woocommerce-layout.css@ver=2.1.12' type='text/css' media='all' />
+<link rel='stylesheet' id='woocommerce-smallscreen-css'  href='../../../../plugins/woocommerce/assets/css/woocommerce-smallscreen.css@ver=2.1.12' type='text/css' media='only screen and (max-width: 768px)' />
+<link rel='stylesheet' id='warta-style-css'  href='../style.min.css@ver=3.9.2' type='text/css' media='all' />
+<script type='text/javascript' src='../../../../../wp-includes/js/jquery/jquery.js@ver=1.11.0'></script>
+<script type='text/javascript' src='../../../../../wp-includes/js/jquery/jquery-migrate.min.js@ver=1.2.1'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://friskamax.com/warta/wp/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../../../wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 3.9.2" />
+<meta name="generator" content="WooCommerce 2.1.12" />
+        <link rel="stylesheet/less" type="text/css" href="../../customizer/style.less">                
+        <script src="../../../../../../../../cdnjs.cloudflare.com/ajax/libs/less.js/1.7.0/less.min.js"></script>
+<style type="text/css" title="dynamic-css" class="options-output">body,p,blockquote,dt,dd,#blog-detail #main-content .post-navigation .nav-previous .meta-nav,#blog-detail #main-content .post-navigation .nav-next .meta-nav{font-weight:normal;font-style:normal;}h1,h2,h3,h4,h5,h6,.widget .nav-tabs li a,.author.widget .name,.widget_rss li > a.rsswidget,.widget_recent_comments .recentcomments a:last-child,.widget_recent_entries a,.cart_list li a,.product_list_widget li a{font-weight:700;font-style:normal;}.widget header h4,.widget .nav-tabs li a,.breaking-news header h4,#footer-main .title h4,#footer-main .nav-tabs a{font-weight:700;font-style:normal;}.navbar{font-weight:normal;font-style:normal;}#title .container .title-container .primary{font-weight:700;font-style:normal;}#title .container .title-container .secondary{font-weight:normal;font-style:normal;}.post-meta a,.comment-meta a,.comment-container .reply a,#reviews #comments ol.commentlist li .meta{font-weight:normal;font-style:normal;}button,input[type=button],input[type=reset],input[type=submit],.btn,.button,#respond input#submit{font-weight:700;font-style:normal;}</style>                <style>
+                        #title { 
+                                background-image: url('../../../../uploads/2009/05/sf-rowing-730x150.jpg') !important;
+                                height          : 150px; 
+                        }
+
+                        @media(min-width: 731px) {
+                                #title { 
+                                        background-image: url('../../../../uploads/2009/05/sf-rowing-1366x150.jpg') !important;
+                                        height          : 150px;
+                                }
+                        }
+
+                        @media(min-width: 1367px) { 
+                                #title { 
+                                        background-image: url('../../../../uploads/2009/05/sf-rowing.jpg') !important;
+                                        height          : 150px; 
+                                }
+                        }
+                </style>
+
+    
+        <style>
+            @media(min-width: 828px) {
+                .boxed-style body  { background-image: url('../../../../uploads/2014/02/tree-247122-1366x768.jpg') !important }
+            }
+
+            @media(min-width: 1367px) { 
+                .boxed-style body  { background-image: url('../../../../uploads/2014/02/tree-247122.jpg') !important }
+            }
+        </style>
+        
+          
+        <!--[if lt IE 9]>
+           <link href="../ie8.css" rel="stylesheet">        
+           <script src="../../../../../../../../https@oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+           <script src="../../../../../../../../https@oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+           <script src="../../js/ie8.js"></script>
+        <![endif]-->
+                <link rel       ="shortcut icon" 
+                      type      ="image/png" 
+                      href      ="../../../../uploads/2014/04/favicon.png" 
+                      sizes     ="32x32"
+                >
+                        <style>
+                                #main-nav .navbar-header .navbar-brand {
+                                        padding-top: 15px;
+                                        padding-bottom: 15px;
+                                }
+                                #main-nav .navbar-header .navbar-brand img {
+                                        height: 30px;
+                                }
+                        </style>
+</head>
+
+<body class="error404 group-blog">
+        
+        <header>        
+                <!-- TOP NAVBAR
+                =============== -->
+                <nav class="navbar navbar-inverse " id="top-nav" role="navigation">
+                        <div class="container">
+                                <!-- Brand and toggle get grouped for better mobile display -->
+                                <div class="navbar-header">
+                                        <a class="sr-only" href="#content">Skip to content</a>
+                                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top-nav-collapse">
+                                                <span class="sr-only">Menu</span>
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                        </button>
+                                </div>
+
+                                <!-- Collect the nav links, forms, and other content for toggling -->
+                                <div class="collapse navbar-collapse" id="top-nav-collapse">
+<ul id="menu-short" class="nav navbar-nav"><li id="menu-item-1833" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1833"><a title="Home" href="../../../../../default.htm">Home</a></li>
+<li id="menu-item-2028" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2028"><a title="About" href="../../../../../about-us/default.htm">About</a></li>
+<li id="menu-item-1834" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1834"><a title="Contact" href="../../../../../contact-2/default.htm">Contact</a></li>
+</ul>                    
+                                                <form class="navbar-form navbar-right" method="get" action="http://friskamax.com/warta/wp/" role="search">
+                                                                <label class="sr-only" for="top_search_form">Search for:</label>
+                                                                <input id="top_search_form" 
+                                                                       name="s"
+                                                                       type="search" 
+                                                                       placeholder="Search&hellip;" 
+                                                                       value="">
+                                                                <button type="submit" >
+                                                                        <span class="fa fa-search"></span>
+                                                                        <span class="sr-only">Search</span>
+                                                                </button>
+                                                </form>
+
+                                        <!--Addon menu--> 
+                                        <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                        <a href="../../../../../../../../facebook.com/default.htm" title="Facebook" target="_blank">
+                                                <i class="sc-sm sc-dark sc-facebook"></i>
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="../../../../../../../../fahri.max/friskamax/warta/wp/@feed=rss2" title="RSS" target="_blank">
+                                                <i class="sc-sm sc-dark sc-rss"></i>
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="../../../../../../../../https@twitter.com/friska_max" title="Twitter" target="_blank">
+                                                <i class="sc-sm sc-dark sc-twitter"></i>
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="../../../../../../../../vimeo.com/default.htm" title="Vimeo" target="_blank">
+                                                <i class="sc-sm sc-dark sc-vimeo"></i>
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="../../../../../../../../youtube.com/default.htm" title="YouTube" target="_blank">
+                                                <i class="sc-sm sc-dark sc-youtube"></i>
+                                        </a>
+                                </li>
+                        <li class="dropdown menu-cart">
+                                <a class="cart-contents" href="../../../../../cart/default.htm" title="View your shopping cart">
+                                        <i class="fa fa-shopping-cart"></i> 
+                                        0 items - 
+                                        <span class="amount">&pound;0.00</span>                                </a>
+
+                                <div class="dropdown-menu">
+<div class="widget woocommerce widget_shopping_cart"><h2 class="widgettitle"> </h2><div class="widget_shopping_cart_content"></div></div>                                </div>
+                        </li>
+                                        </ul>
+                                        
+                                        
+                                </div><!-- .navbar-collapse -->
+                        </div><!--.container-->
+                </nav><!--#top-nav-->
+                
+                <!-- MAIN NAVIBAR
+                ================= -->
+                <nav class="navbar navbar-default" id="main-nav" role="navigation">
+                        <div class="container">
+                                <!-- Brand and toggle get grouped for better mobile display -->
+                                <div class="navbar-header">
+                                        <a class="sr-only" href="#content">Skip to content</a>
+                                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav-collapse">
+                                                <span class="sr-only">Menu</span>
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                        </button>
+
+                <a class="navbar-brand" href="../../../../../default.htm" rel="home">
+<img width="95" height="30" src="../../../../uploads/2009/05/logo.png" class="attachment-full" alt="logo" />                </a>
+                        
+                                </div>
+
+                                <!-- Collect the nav links, forms, and other content for toggling -->
+                                <div class="collapse navbar-collapse" id="main-nav-collapse">
+<ul id="menu-main-menu" class="nav navbar-nav navbar-right"><li id="menu-item-1733" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1733"><a href="../../../../../default.htm"><i class="fa fa-home"></i></a></li>
+<li id="menu-item-2176" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2176 dropdown"><a title="Home" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">Home <span class="caret"></span></a>
+<ul role="menu" class=" dropdown-menu">
+	<li id="menu-item-2083" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2083"><a title="Home Version 1" href="../../../../../home-version-1/default.htm">Home Version 1</a></li>
+	<li id="menu-item-2084" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2084"><a title="Home Version 2" href="../../../../../default.htm">Home Version 2</a></li>
+</ul>
+</li>
+<li id="menu-item-2178" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2178 dropdown"><a title="Blog" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">Blog <span class="caret"></span></a>
+<ul role="menu" class=" dropdown-menu">
+	<li id="menu-item-1741" class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-1741"><a title="Blog Version 1" href="../../../../../latest-news/default.htm">Blog Version 1</a></li>
+	<li id="menu-item-2089" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2089"><a title="Blog Version 2" href="../../../../../blog-version-2/default.htm">Blog Version 2</a></li>
+</ul>
+</li>
+<li id="menu-item-2183" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2183 dropdown"><a title="Posts" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">Posts <span class="caret"></span></a>
+<ul role="menu" class=" dropdown-menu">
+	<li id="menu-item-2240" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2240"><a title="Gallery" href="../../../../../2014/03/05/wonderfull-journey-only-once-in-your-life/default.htm">Gallery</a></li>
+	<li role="presentation" class="divider"></li>
+	<li id="menu-item-2230" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2230"><a title="Review Bar" href="../../../../../2014/03/03/the-scarlet-plague/default.htm">Review Bar</a></li>
+	<li id="menu-item-2231" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2231"><a title="Review Star" href="../../../../../2014/03/01/how-to-train-your-dragon-2-movie-trailer/default.htm">Review Star</a></li>
+	<li id="menu-item-2235" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2235"><a title="Review Bar Bottom" href="../../../../../2014/03/02/noah-movie-trailer/default.htm">Review Bar Bottom</a></li>
+	<li id="menu-item-2234" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2234"><a title="Review Star Bottom" href="../../../../../2014/03/01/help-help-im-being-repressed/default.htm">Review Star Bottom</a></li>
+</ul>
+</li>
+<li id="menu-item-2082" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2082 dropdown"><a title="Pages" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">Pages <span class="caret"></span></a>
+<ul role="menu" class=" dropdown-menu">
+	<li id="menu-item-2017" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2017"><a title="Full Width Page" href="../../../../../full-width-page/default.htm">Full Width Page</a></li>
+	<li role="presentation" class="divider"></li>
+	<li id="menu-item-1805" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1805"><a title="Contact Page" href="../../../../../contact-2/default.htm">Contact Page</a></li>
+	<li id="menu-item-2023" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2023"><a title="Contact Page Full Width" href="../../../../../contact-page-full-width/default.htm">Contact Page Full Width</a></li>
+</ul>
+</li>
+<li id="menu-item-2309" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2309"><a title="Shop" href="../../../../../shop/default.htm">Shop</a></li>
+<li id="menu-item-2577" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2577"><a title="Forums" href="../../../../../forums/default.htm">Forums</a></li>
+<li id="menu-item-2011" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2011"><a title="Shortcodes" href="../../../../../shortcodes/default.htm">Shortcodes</a></li>
+<li id="menu-item-2179" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2179 dropdown"><a title="Test Posts" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">Test Posts <span class="caret"></span></a>
+<ul role="menu" class=" dropdown-menu">
+	<li id="menu-item-1748" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1748"><a title="Markup" href="../../../../../category/general/markup/default.htm">Markup</a></li>
+	<li id="menu-item-1775" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1775"><a title="Template" href="../../../../../category/general/template-2/default.htm">Template</a></li>
+	<li id="menu-item-1780" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1780"><a title="Post Formats" href="../../../../../category/general/post-formats/default.htm">Post Formats</a></li>
+	<li id="menu-item-1788" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1788"><a title="Edge Case" href="../../../../../category/general/edge-case-2/default.htm">Edge Case</a></li>
+</ul>
+</li>
+<li id="menu-item-2262" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2262 dropdown"><a title="Test Pages" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">Test Pages <span class="caret"></span></a>
+<ul role="menu" class=" dropdown-menu">
+	<li id="menu-item-2027" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2027"><a title="Sample Page" href="../../../../../about-us/default.htm">Sample Page</a></li>
+	<li id="menu-item-1810" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1810"><a title="Page Markup And Formatting" href="../../../../../page-markup-and-formatting/default.htm">Page Markup And Formatting</a></li>
+	<li id="menu-item-1811" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1811"><a title="Page Image Alignment" href="../../../../../page-image-alignment/default.htm">Page Image Alignment</a></li>
+	<li id="menu-item-1812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1812"><a title="Clearing Floats" href="../../../../../clearing-floats/default.htm">Clearing Floats</a></li>
+</ul>
+</li>
+</ul>                                </div><!-- .navbar-collapse -->
+                        </div><!--.container-->
+                </nav><!--#main-nav-->
+</header><!--header-->
+
+<div id="content">
+    
+    <div class="container">
+
+        <h1>404</h1>
+        <p>Sorry, the page you requested was not found.</p>            
+        <button class="btn btn-primary" data-back>Back to previous page</button>
+        
+    </div><!--.container-->
+
+</div><!-- #content -->
+
+
+    <footer>
+        
+        <!-- MAIN FOOTER
+        ==================================================================== -->
+        <div id="footer-main">
+
+            <div class="container">
+
+                <div class="row">                    
+                    
+                    <section id="warta_sub_categories-2" class="widget col-md-2 col-sm-4 widget_warta_sub_categories"><div class="title"><h4 class="widget-title">                                <a href="../../../../../category/national/default.htm">
+National	
+                                </a>
+</h4></div>
+                        <ul class="categories">
+                                        <li>
+                                                <a href ="../../../../../category/national/bussiness/default.htm" 
+                                                   title="View 3 posts under Bussiness category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> Bussiness                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href ="../../../../../category/national/finance-national/default.htm" 
+                                                   title="View 1 posts under Finance category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> Finance                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href ="../../../../../category/national/food-drink/default.htm" 
+                                                   title="View 5 posts under Food &amp; Drink category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> Food &amp; Drink                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href ="../../../../../category/national/health-national/default.htm" 
+                                                   title="View 5 posts under Health category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> Health                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href ="../../../../../category/national/lifestyle-national/default.htm" 
+                                                   title="View 1 posts under Lifestyle category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> Lifestyle                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href ="../../../../../category/national/politics-national/default.htm" 
+                                                   title="View 1 posts under Politics category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> Politics                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href ="../../../../../category/national/transportation-national/default.htm" 
+                                                   title="View 2 posts under Transportation category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> Transportation                                                </a>
+                                        </li>
+                        </ul>
+</section><section id="warta_sub_categories-3" class="widget col-md-2 col-sm-4 widget_warta_sub_categories"><div class="title"><h4 class="widget-title">                                <a href="../../../../../category/world-2/default.htm">
+World	
+                                </a>
+</h4></div>
+                        <ul class="categories">
+                                        <li>
+                                                <a href ="../../../../../category/world-2/africa/default.htm" 
+                                                   title="View 1 posts under Africa category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> Africa                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href ="../../../../../category/world-2/asia/default.htm" 
+                                                   title="View 3 posts under Asia category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> Asia                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href ="../../../../../category/world-2/europe/default.htm" 
+                                                   title="View 3 posts under Europe category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> Europe                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href ="../../../../../category/world-2/middle-east/default.htm" 
+                                                   title="View 1 posts under Middle East category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> Middle East                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href ="../../../../../category/world-2/north-america/default.htm" 
+                                                   title="View 2 posts under North America category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> North America                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href ="../../../../../category/world-2/pacific/default.htm" 
+                                                   title="View 1 posts under Pacific category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> Pacific                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href ="../../../../../category/world-2/south-america/default.htm" 
+                                                   title="View 1 posts under South America category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> South America                                                </a>
+                                        </li>
+                        </ul>
+</section><section id="warta_sub_categories-4" class="widget col-md-2 col-sm-4 widget_warta_sub_categories"><div class="title"><h4 class="widget-title">                                <a href="../../../../../category/sport/default.htm">
+Sport	
+                                </a>
+</h4></div>
+                        <ul class="categories">
+                                        <li>
+                                                <a href ="../../../../../category/sport/badminton/default.htm" 
+                                                   title="View 2 posts under Badminton category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> Badminton                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href ="../../../../../category/sport/baseball/default.htm" 
+                                                   title="View 1 posts under Baseball category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> Baseball                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href ="../../../../../category/sport/basketball/default.htm" 
+                                                   title="View 1 posts under Basketball category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> Basketball                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href ="../../../../../category/sport/boxing/default.htm" 
+                                                   title="View 1 posts under Boxing category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> Boxing                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href ="../../../../../category/sport/football/default.htm" 
+                                                   title="View 2 posts under Football category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> Football                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href ="../../../../../category/sport/motorsport/default.htm" 
+                                                   title="View 2 posts under Motorsport category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> Motorsport                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href ="../../../../../category/sport/tennis/default.htm" 
+                                                   title="View 2 posts under Tennis category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> Tennis                                                </a>
+                                        </li>
+                        </ul>
+</section><section id="warta_sub_categories-5" class="widget col-md-2 col-sm-4 widget_warta_sub_categories"><div class="title"><h4 class="widget-title">                                <a href="../../../../../category/entertainment/default.htm">
+Entertainment	
+                                </a>
+</h4></div>
+                        <ul class="categories">
+                                        <li>
+                                                <a href ="../../../../../category/entertainment/awards/default.htm" 
+                                                   title="View 1 posts under Awards category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> Awards                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href ="../../../../../category/entertainment/booksmagazines/default.htm" 
+                                                   title="View 5 posts under Books category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> Books                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href ="../../../../../category/entertainment/celebrity-life/default.htm" 
+                                                   title="View 1 posts under Celebrity Life category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> Celebrity Life                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href ="../../../../../category/entertainment/celebrity-style/default.htm" 
+                                                   title="View 1 posts under Celebrity Style category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> Celebrity Style                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href ="../../../../../category/entertainment/movies/default.htm" 
+                                                   title="View 5 posts under Movies category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> Movies                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href ="../../../../../category/entertainment/music/default.htm" 
+                                                   title="View 1 posts under Music category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> Music                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href ="../../../../../category/entertainment/tv/default.htm" 
+                                                   title="View 1 posts under TV category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> TV                                                </a>
+                                        </li>
+                        </ul>
+</section><section id="warta_sub_categories-6" class="widget col-md-2 col-sm-4 widget_warta_sub_categories"><div class="title"><h4 class="widget-title">                                <a href="../../../../../category/technology/default.htm">
+Technology	
+                                </a>
+</h4></div>
+                        <ul class="categories">
+                                        <li>
+                                                <a href ="../../../../../category/technology/design/default.htm" 
+                                                   title="View 1 posts under Design category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> Design                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href ="../../../../../category/technology/environment/default.htm" 
+                                                   title="View 2 posts under Environment category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> Environment                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href ="../../../../../category/technology/gadgets/default.htm" 
+                                                   title="View 2 posts under Gadgets category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> Gadgets                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href ="../../../../../category/technology/gaming/default.htm" 
+                                                   title="View 1 posts under Gaming category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> Gaming                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href ="../../../../../category/technology/online/default.htm" 
+                                                   title="View 1 posts under Online category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> Online                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href ="../../../../../category/technology/science/default.htm" 
+                                                   title="View 4 posts under Science category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> Science                                                </a>
+                                        </li>
+                        </ul>
+</section><section id="warta_sub_categories-7" class="widget col-md-2 col-sm-4 widget_warta_sub_categories"><div class="title"><h4 class="widget-title">                                <a href="../../../../../category/travel/default.htm">
+Travel	
+                                </a>
+</h4></div>
+                        <ul class="categories">
+                                        <li>
+                                                <a href ="../../../../../category/travel/holidays/default.htm" 
+                                                   title="View 2 posts under Holidays category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> Holidays                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href ="../../../../../category/travel/national-travel/default.htm" 
+                                                   title="View 1 posts under National Travel category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> National Travel                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href ="../../../../../category/travel/travel-advices/default.htm" 
+                                                   title="View 1 posts under Travel Advices category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> Travel Advices                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href ="../../../../../category/travel/travel-ideas/default.htm" 
+                                                   title="View 2 posts under Travel Ideas category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> Travel Ideas                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href ="../../../../../category/travel/travel-updates/default.htm" 
+                                                   title="View 1 posts under Travel Updates category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> Travel Updates                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href ="../../../../../category/travel/world-travel/default.htm" 
+                                                   title="View 3 posts under World Travel category"
+                                                >
+                                                        <i class="fa fa-angle-right"></i> World Travel                                                </a>
+                                        </li>
+                        </ul>
+</section>
+                </div><!--.row-->
+
+            </div><!--.container-->
+
+        </div><!--#footer-main-->
+        
+        <div id="footer-bottom">                
+            <div class="container">                
+                        <p>Copyright © 2014 - <strong>WarTa</strong></p>                
+                        <ul id="menu-short-1" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1833"><a href="../../../../../default.htm">Home</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2028"><a href="../../../../../about-us/default.htm">About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1834"><a href="../../../../../contact-2/default.htm">Contact</a></li>
+</ul>                
+            </div><!--.container-->            
+        </div><!--#footer-bottom-->
+            
+    </footer><!-- footer -->
+
+<script type='text/javascript' src='../../../../plugins/bbpress/templates/default/js/editor.js@ver=2.5.4-5380'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var wc_add_to_cart_params = {"ajax_url":"../../../../../wp-admin/admin-ajax.php","ajax_loader_url":"../../../../../../..//friskamax.com/warta/wp/wp-content/plugins/woocommerce/assets/images/ajax-loader_402x.gif","i18n_view_cart":"View Cart","cart_url":"../../../../../cart/default.htm","is_cart":"","cart_redirect_after_add":"no"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='//friskamax.com/warta/wp/wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart.min.js?ver=2.1.12'></script>
+<script type='text/javascript' src='//friskamax.com/warta/wp/wp-content/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.min.js?ver=2.60'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var woocommerce_params = {"ajax_url":"../../../../../wp-admin/admin-ajax.php","ajax_loader_url":"../../../../../../..//friskamax.com/warta/wp/wp-content/plugins/woocommerce/assets/images/ajax-loader_402x.gif"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='//friskamax.com/warta/wp/wp-content/plugins/woocommerce/assets/js/frontend/woocommerce.min.js?ver=2.1.12'></script>
+<script type='text/javascript' src='//friskamax.com/warta/wp/wp-content/plugins/woocommerce/assets/js/jquery-cookie/jquery.cookie.min.js?ver=1.3.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var wc_cart_fragments_params = {"ajax_url":"../../../../../wp-admin/admin-ajax.php","fragment_name":"wc_fragments"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='//friskamax.com/warta/wp/wp-content/plugins/woocommerce/assets/js/frontend/cart-fragments.min.js?ver=2.1.12'></script>
+<script type='text/javascript' src='../../../../../wp-includes/js/jquery/ui/jquery.ui.core.min.js@ver=1.10.4'></script>
+<script type='text/javascript' src='../../../../../wp-includes/js/jquery/ui/jquery.ui.effect.min.js@ver=1.10.4'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var ajax_object = {"ajax_url":"../../../../../wp-admin/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../js/script.min.js@ver=1409232542'></script>
+<script type='text/javascript' src='../../js/init.min.js@ver=1409232542'></script>
+<script type='text/javascript' src='../../js/skip-link-focus-fix.js@ver=1409232542'></script>
+        <link href="../../customizer/css/customizer.css" rel="stylesheet" property>
+        <div id="customizer">
+                <p><label><input type="color" name="primary-color" value="#fd4a29">             Primary Color           </label></p>
+                <p><label><input type="color" name="secondary-color" value="#606068">           Secondary Color         </label></p>
+                <p><label><input type="color" name="headings-link-color" value="#606068">       Headings Link Color     </label></p>
+                <p><label><input type="color" name="body-link-color" value="#3a74a6">           Body Link Color         </label></p>
+                <p><label><input type="checkbox" name="flat">                                   Flat style              </label></p>
+                <p><label><input type="checkbox" name="boxed">                                  Boxed style             </label></p>
+                <p><label><input type="checkbox" name="light">                                  Light on images         </label></p>
+
+
+                <!--wp lag dir-->
+                <p><label><input type="checkbox" name="direction" > Right to Left</label></p>
+                <i class="fa fa-chevron-left customizer-toggle" title="hide"></i>
+        </div>
+        <script src="../../customizer/js/customizer.js"></script>
+</body>
+</html>
+<script>
+    +function( $ ) { "use strict"; 
+        $('[data-back]').click( function() {
+            window.history.back();
+        } );
+    } (jQuery);
+</script>

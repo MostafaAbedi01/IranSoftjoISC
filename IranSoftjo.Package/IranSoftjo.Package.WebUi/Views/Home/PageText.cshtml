@@ -1,0 +1,36 @@
+﻿@model IranSoftjo.Package.WebUi.ViewModels.PageVM
+@{
+    ViewBag.Title = Model.PageTitle;
+    Layout = "~/Views/Shared/_LayoutBox.cshtml";
+
+}
+<div class="col-md-8 col-sm-12">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="row aside">
+
+                @if (Request.IsAuthenticated && User.IsInRole("Administrator"))
+                {
+                    <section id="warta_ads-2" class="col-md-12 widget widget_warta_ads">
+                        <div id="id1674111196" class=" hidden-xs no-mobile">
+                            <a href="@Url.Action("Edit", "Page", new { id = Model.PageID })">
+                                ویرایش صفحه جاری
+                            </a>
+                        </div>
+                    </section>
+                }
+
+                <hgroup class="title">
+                    <h2>@ViewBag.Title</h2>
+                </hgroup>
+            </div>
+
+
+            <p style="text-align: justify;">
+                @Html.Raw(Model.PageText)
+            </p>
+
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,24 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.TblKeyValueVm
+
+@{
+    ViewBag.Title = "ویرایش ";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@using (Html.BeginForm())
+{
+    <table class="form">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(false)
+        @Html.HiddenFor(model => model.TblKeyValueId)
+        @Html.HiddenFor(model => model.KeyId)
+        @Html.EnhancedDropDownList(model => model.Type, "Type")
+        @Html.EnhancedEditorField(model => model.Title)
+     
+        @Html.EnhancedSubmit("ویرایش")
+    </table>
+
+}
+<div>
+    @Html.ActionLink("بازگشت به لیست", "List")
+</div>

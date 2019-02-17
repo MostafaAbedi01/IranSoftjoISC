@@ -1,0 +1,112 @@
+﻿@using IranSoftjo.MvcPaging
+@using IranSoftjo.Package.WebUi.ViewModels
+@using Mehr
+@model IEnumerable<IranSoftjo.Package.WebUi.ViewModels.AgencyVM>
+@{
+    ViewBag.Title = "نمایندگی ها";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+
+    List<AgencyVM> comments = Model.ToList();
+    var currentPageIndex =(int) Session["searchpage"];
+    var toPagedList = comments.ToPagedList(currentPageIndex-1, 4);
+}
+@Html.Partial("_KendoFilePartial")
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+<div class="BoxWelcome">
+    <h2 style="font-size: 12px">جهت دریافت نمایندگی میتوانید درخواست خود را جهت دریافت نمایندگی شرکت از طریق 
+        @Html.ActionLink("این لینک", "Create", "Agency", null, new { @class = "k-button k-button-icontext" }) ارسال نمایید.</h2>
+    @*    <h4>جهت مشاهده شرایط و ضوابط دریافت نمایندگی شرکت ایران سافتجو 
+        <a id="AgencyConditions" class="k-button k-button-icontext">اینجا کلیک</a>
+        کنید.
+    </h4>
+    @(Html.Kendo().Window()
+      .Name("window")
+      .Width(550)
+      .Height(550)
+      .Draggable()
+      .Resizable()
+      .Title("شرایط و ضوابط دریافت نمایندگی")
+      .LoadContentFrom("AgencyConditions", "Help")
+      .Iframe(true)
+      .Visible(false)
+      .Actions(actions => actions.Refresh().Maximize().Close())
+      )
+    <script>
+        $(document).ready(function () {
+            $("#AgencyConditions")
+                .bind("click", function () {
+                    $("#window").data("kendoWindow").center().open();
+                });
+        });
+    </script>*@
+</div>
+<div class="block_up">
+    <h3 class="header">لیست نمایندگی ها </h3>
+</div>
+<br />
+<table style="width: 300px">
+    @foreach (AgencyVM item in toPagedList)
+    {
+        <tr>
+            <div style="border: 1px #777576 solid">
+                <div style="margin: 0 100px 0 100px">
+                    <h1 style="text-align: center; color: #FF6600">
+                        @item.Name
+                    </h1>
+                    <br />
+                    @if (!string.IsNullOrEmpty(item.Address))
+                    {
+                        <p><strong>آدرس:</strong>  @item.Address</p>
+                    }
+                    @if (!string.IsNullOrEmpty(item.Phone))
+                    {
+                        <p><strong>تلفن تماس:</strong> @item.Phone.LocalizeNumbers()</p>
+                    }
+                    @if (!string.IsNullOrEmpty(item.Mobile))
+                    {
+                        <p><strong>تلفن همراه:</strong> @item.Mobile.LocalizeNumbers()</p>
+                    }
+                    @if (!string.IsNullOrEmpty(item.Name))
+                    {
+                        <p><strong>کد نمایندگی:</strong> @item.Code.LocalizeNumbers()</p>
+                    }
+                    @if (!string.IsNullOrEmpty(item.Country))
+                    {
+                        <p><strong>کشور:</strong>  @item.Country</p>
+                    }
+                    @if (!string.IsNullOrEmpty(item.City))
+                    {
+                        <p><strong>استان:</strong>  @item.City</p>
+                    }
+                    @if (!string.IsNullOrEmpty(item.Manager))
+                    {
+                        <p><strong>نام مدیریت:</strong>  @item.Manager</p>
+                    }
+                    @if (!string.IsNullOrEmpty(item.Description))
+                    {
+                        <p><strong>توضیحات:</strong>  @item.Description</p>
+                    }
+                </div>
+                <div style="margin: 0 0 0 40px; text-align: center">
+                    @if (item.ImageUrl == null)
+                    {
+                        item.ImageUrl = "/Images/Common/IranSoftJoAgency.jpg";
+                    }
+                    <img style="height: 200px; width: 200px;" alt="@item.Name" src="@item.ImageUrl">
+                </div>
+            </div>
+        </tr>
+        <tr>
+            <hr style="width: 80%" />
+        </tr>
+    }
+    <div class="pager">
+        @Html.Pager(toPagedList.PageSize, toPagedList.PageNumber,
+                    toPagedList.TotalItemCount).Options(o => o.PageRouteValueKey("searchpage")
+                    .AlwaysAddFirstPageNumber())
+    </div>
+</table>
+

@@ -1,0 +1,142 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.TblManholVm
+@{
+    ViewBag.Title = "ویرایش منهول";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr/>
+</hgroup>
+<div style="float: left; margin: 10px;">
+    <a href="/Manhol/SearchByManhoId/@Model.TblManholId">
+        <div>
+            <img style="float: left;" width="60%" height="60%" src="/Package/Manhol/Photo/GPS.png" alt="@Model.CodePm" title="@Model.CodePm"/>
+        </div>
+        <div style="float: left; margin-top: 0px;">
+            نمایش موقعیت روی نقشه
+        </div>
+    </a>
+</div>
+@using (Html.BeginForm())
+{
+    <table class="form">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(false)
+
+        @Html.HiddenFor(model => model.TblManholId)
+        @Html.HiddenFor(model => model.ImageUrl)
+        @Html.HiddenFor(model => model.ThumbnailImageUrl)
+        <tr>
+            <td>
+                <hr/>
+                <label style="color: red" class="fieldLabel">مشخصات مکانی </label>
+                <hr/>
+            </td>
+            <td>
+                <hr/>
+            </td>
+        </tr>
+
+        @Html.EnhancedEditorField(model => model.CodeTag, note: "کد تکی که داخل منهول قرار داده شده است")
+        @Html.EnhancedEditorField(model => model.CodeGis)
+        @Html.EnhancedEditorField(model => model.CodeMakani)
+        @Html.EnhancedEditorField(model => model.CodePm)
+      
+        @Html.EnhancedEditorField(model => model.Latitude)
+        @Html.EnhancedEditorField(model => model.Longitude)
+        @Html.EnhancedTextAreaField(model => model.Address)
+        @Html.EnhancedEditorField(model => model.DateSabt)
+        <tr>
+            <td>
+                <hr/>
+                <label style="color: red" class="fieldLabel">مشخصات منهول </label>
+                <hr/>
+            </td>
+            <td>
+                <hr/>
+            </td>
+        </tr>
+        @Html.EnhancedDropDownList(model => model.VaziatZaheri1, "VaziatZaheri1")
+        @Html.EnhancedDropDownList(model => model.VaziatZaheri2, "VaziatZaheri2")
+        @Html.EnhancedDropDownList(model => model.VaziatZaheri3, "VaziatZaheri3")
+        @Html.EnhancedDropDownList(model => model.JenseDaricheh, "JenseDaricheh")
+        @Html.EnhancedDropDownList(model => model.GhotrDariche, "GhotrDariche")
+        @Html.EnhancedEditorField(model => model.OmgheManhol)
+        @Html.EnhancedEditorField(model => model.GhotreManhol)
+        @Html.EnhancedDropDownList(model => model.NoeManhol, "NoeManhol")
+        @Html.EnhancedDropDownList(model => model.JenseManhol, "JenseManhol")
+        @Html.EnhancedEditorField(model => model.GhotreLolehVorodi)
+        @Html.EnhancedEditorField(model => model.GhotreLolehKhoroji)
+        @Html.EnhancedEditorField(model => model.TedadLoleVorodi)
+
+     
+        @Html.EnhancedDropDownList(model => model.Pelekan1, "Pelekan1")
+        @Html.EnhancedDropDownList(model => model.Pelekan2, "Pelekan2")
+        @Html.EnhancedDropDownList(model => model.SamPashi, "SamPashi")
+        @Html.EnhancedDropDownList(model => model.BandKeshi, "BandKeshi")
+        @Html.EnhancedDropDownList(model => model.LiRobi, "LiRobi")
+        @Html.EnhancedDropDownList(model => model.Mahicheh, "Mahicheh")
+        @Html.EnhancedDropDownList(model => model.Pashneh, "Pashneh")
+    
+        @Html.EnhancedEditorField(model => model.DateSakht)
+        @Html.EnhancedEditorField(model => model.DateNasb)
+        @Html.EnhancedEditorField(model => model.DateBahrebardari)
+     
+        @Html.EnhancedEditorField(model => model.MehvarName)
+        @Html.EnhancedEditorField(model => model.CodeEshterak)
+        @Html.EnhancedEditorField(model => model.Comment)
+        <tr>
+            <td>
+                <hr />
+                <label style="color: red" class="fieldLabel">مشخصات مکانی </label>
+                <hr />
+            </td>
+            <td>
+                <hr />
+            </td>
+        </tr>
+      
+        @Html.EnhancedEditorField(model => model.CodeNaheyeh)
+        @Html.EnhancedEditorField(model => model.MapOld)
+        @Html.EnhancedEditorField(model => model.MapNew)
+        @Html.EnhancedEditorField(model => model.CodeTasfieKhane)
+        @Html.EnhancedEditorField(model => model.MantagheShahrdari)
+        @Html.EnhancedEditorField(model => model.MantagheGaz)
+        @Html.EnhancedEditorField(model => model.MantagheBargh)
+        @Html.EnhancedEditorField(model => model.MantagheMohakhaberat)
+        @Html.EnhancedEditorField(model => model.MantagheRanandegi)
+        <tr>
+            <td>
+                <hr />
+                <label style="color: red" class="fieldLabel">مشخصات ثبت کننده </label>
+                <hr />
+            </td>
+            <td>
+                <hr />
+            </td>
+        </tr>
+     
+        @Html.EnhancedEditorField(model => model.TblUserId)
+        @Html.EnhancedEditorField(model => model.CodeCompany)
+        @Html.EnhancedEditorField(model => model.CodeSystem)
+        <td class="labelWrp">
+            <label for="ProductGroupID" class="fieldLabel">@Html.LabelFor(model => model.ImageUrl)</label>
+        </td>
+        <td colspan="1" class="inputWrp">
+            @Html.Kendo().Upload().Name("file").Multiple(false).Async(async => async.Save("SaveFile", "Product"))
+            <br>
+            <span data-valmsg-replace="true" data-valmsg-for="ProductGroupID" class="field-validation-valid"></span>
+            <img src="@Model.ThumbnailImageUrl"/>
+        </td>
+        @Html.EnhancedSubmit(" ویرایش منهول")
+    </table>
+}
+<div>
+    @Html.ActionLink("بازگشت به لیست", "ManholList")
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#file").closest(".k-upload").find("span").text("انتخاب تصویر");
+    });
+</script>

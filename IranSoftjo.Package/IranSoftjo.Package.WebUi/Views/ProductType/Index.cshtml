@@ -1,0 +1,30 @@
+﻿@model IEnumerable<IranSoftjo.Package.WebUi.ViewModels.ProductTypeVM>
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "نوع محصولات";
+}
+<div class="k-rtl">
+    @(Html.Kendo().Grid(Model)
+           .Name("Grid")
+           .Columns(columns =>
+               {
+                   columns.Bound(item => item.ProductTypeID);
+                   columns.Bound(item => item.ProductTypeTitle);
+                   columns.Bound(item => @item.ProductTypeID).Title("دستورات").Filterable(false).Groupable(false)
+                          .Template(@<text>
+    @Html.ActionLink("ویرایش", "Edit", new { id = @item.ProductTypeID }, new { @class = "k-button k-button-icontext k-grid-edit" })
+    @Html.ActionLink("حذف", "Delete", new { id = @item.ProductTypeID }, new { @class = "k-button k-button-icontext k-grid-delete" })
+    </text>).Width(200);
+               })
+           .ToolBar(toolbar => toolbar.Custom().Action("Create", "ProductType").Text("افزودن"))
+           .Sortable()
+
+           .Scrollable()
+           .Filterable()
+           .HtmlAttributes(new { style = "height:500px;" })
+           .DataSource(dataSource => dataSource
+                                         .Server()
+                                         .Model(model => model.Id(item => item.ProductTypeID))
+           )
+           )
+</div>

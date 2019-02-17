@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D1A46CA8-C2E2-4A45-9C35-0DE45AA1D514}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IranSoftjo.Core</RootNamespace>
+    <AssemblyName>IranSoftjo.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Build.Framework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BigConstant.cs" />
+    <Compile Include="CellPhoneLogic.cs" />
+    <Compile Include="Collections\ListExtensions.cs" />
+    <Compile Include="Common.cs" />
+    <Compile Include="CommonExtensions.cs" />
+    <Compile Include="CommonRegex.cs" />
+    <Compile Include="ConfigurablePathResolver.cs" />
+    <Compile Include="DataAnnotations\EnumFilterAttribute.cs" />
+    <Compile Include="Data\CrudRepository.cs" />
+    <Compile Include="Data\ObjectParameterWrapper.cs" />
+    <Compile Include="DefaultPathResolver.cs" />
+    <Compile Include="Diagnostics\EmailTraceListener.cs" />
+    <Compile Include="DictionaryExtensions.cs" />
+    <Compile Include="Guard.cs" />
+    <Compile Include="ICacheProvider.cs" />
+    <Compile Include="IO\Compression\ZipStorer.cs" />
+    <Compile Include="IPathResolver.cs" />
+    <Compile Include="Job\IJob.cs" />
+    <Compile Include="Job\JobBase.cs" />
+    <Compile Include="Job\JobScheduler.cs" />
+    <Compile Include="Job\LiveBeingJob.cs" />
+    <Compile Include="LazyExtensions.cs" />
+    <Compile Include="LinqKit\ExpandableQuery.cs" />
+    <Compile Include="LinqKit\ExpressionExpander.cs" />
+    <Compile Include="LinqKit\ExpressionVisitor.cs" />
+    <Compile Include="LinqKit\Extensions.cs" />
+    <Compile Include="LinqKit\Linq.cs" />
+    <Compile Include="LinqKit\PredicateBuilder.cs" />
+    <Compile Include="Linq\Dynamic\DynamicQueryable.cs" />
+    <Compile Include="Linq\Dynamic\FilterInfo.cs" />
+    <Compile Include="Linq\Dynamic\QueryableExtensions.cs" />
+    <Compile Include="Linq\Dynamic\SortInfo.cs" />
+    <Compile Include="Linq\EntityFrameworkTips.cs" />
+    <Compile Include="Linq\ExTuple.cs" />
+    <Compile Include="Linq\IPaginated.cs" />
+    <Compile Include="Linq\IPaginatedList_1.cs" />
+    <Compile Include="Linq\PaggingInfo.cs" />
+    <Compile Include="Linq\PaginatedList_1.cs" />
+    <Compile Include="Linq\QueryableExtensions.cs" />
+    <Compile Include="Linq\SortHelper.cs" />
+    <Compile Include="Messagging\EmailSender.cs" />
+    <Compile Include="Messagging\SmsSender.cs" />
+    <Compile Include="Messagging\TemplatedMessageBuilder.cs" />
+    <Compile Include="NationalCodeLogic.cs" />
+    <Compile Include="NumberFormatter.cs" />
+    <Compile Include="PersianDateRange.cs" />
+    <Compile Include="PersianDateTime.cs" />
+    <Compile Include="PersianDateTimeExtensions.cs" />
+    <Compile Include="ProccessCacheProvider.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyName.cs" />
+    <Compile Include="Reflection\AttributeMapper.cs" />
+    <Compile Include="Reflection\EnumAttribute.cs" />
+    <Compile Include="Reflection\EnumItemAttribute.cs" />
+    <Compile Include="Reflection\EnumItemMappingAttribute.cs" />
+    <Compile Include="Reflection\EnumMapAttribute.cs" />
+    <Compile Include="Reflection\EnumMapInfoAttribute.cs" />
+    <Compile Include="Reflection\EnumMetadata.cs" />
+    <Compile Include="Reflection\EnumMetadataFactory.cs" />
+    <Compile Include="Reflection\IEnumMetadataFactory.cs" />
+    <Compile Include="Reflection\MemberInfoExtensions.cs" />
+    <Compile Include="Reflection\NamingEnumMapAttribute.cs" />
+    <Compile Include="Security\Cryptography\Crypto.cs" />
+    <Compile Include="ServiceLocator.cs" />
+    <Compile Include="ServiceModel\AuthorizationContext.cs" />
+    <Compile Include="ServiceModel\CommonErrorCode.cs" />
+    <Compile Include="ServiceModel\CommunicationObjectExtensions.cs" />
+    <Compile Include="ServiceModel\ExceptionWrapper.cs" />
+    <Compile Include="ServiceModel\FaultData.cs" />
+    <Compile Include="ServiceModel\ServiceClientAgent.cs" />
+    <Compile Include="ServiceModel\SingleCommunicationObject.cs" />
+    <Compile Include="Setting\ConfigurationSettingProvider.cs" />
+    <Compile Include="Setting\ISettingProvider.cs" />
+    <Compile Include="Setting\PackSettingReader.cs" />
+    <Compile Include="Setting\SettingReader.cs" />
+    <Compile Include="Setting\SettingTypeActivator.cs" />
+    <Compile Include="StringExtensions.cs" />
+    <Compile Include="StringMan.cs" />
+    <Compile Include="Threading\ThreadSafeCacheProvider.cs" />
+    <Compile Include="Web\CacheExtensions.cs" />
+    <Compile Include="Web\CloakHttpHeaderModule.cs" />
+    <Compile Include="Web\HttpContextCacheProvider.cs" />
+    <Compile Include="Web\HttpSessionStateExtensions.cs" />
+    <Compile Include="Web\ImageHelper.cs" />
+    <Compile Include="Web\Mvc\CaptchaImage.cs" />
+    <Compile Include="Web\Mvc\ClientModel\ClientList.cs" />
+    <Compile Include="Web\Mvc\ClientModel\ClientObject.cs" />
+    <Compile Include="Web\Mvc\ClientModel\ClientProperty.cs" />
+    <Compile Include="Web\Mvc\ClientModel\ClientProperty_1.cs" />
+    <Compile Include="Web\Mvc\ClientModel\EnumValue.cs" />
+    <Compile Include="Web\Mvc\ClientModel\Function.cs" />
+    <Compile Include="Web\Mvc\ClientModel\IJsonSerializable.cs" />
+    <Compile Include="Web\Mvc\ClientModel\JsonEnumAttribute.cs" />
+    <Compile Include="Web\Mvc\ClientModel\JsonEnumValueAttribute.cs" />
+    <Compile Include="Web\Mvc\ContentJsonpResult.cs" />
+    <Compile Include="Web\Mvc\ControllerExtensions.cs" />
+    <Compile Include="Web\Mvc\GlobalHelpers.cs" />
+    <Compile Include="Web\Mvc\Html\HtmlHelperExtension.cs" />
+    <Compile Include="Web\Mvc\Html\InputExtensions.cs" />
+    <Compile Include="Web\Mvc\Html\KnockoutHtmlExtensions.cs" />
+    <Compile Include="Web\Mvc\Html\MvcHtmlStringExtensions.cs" />
+    <Compile Include="Web\Mvc\Html\RadioButtonListHtmlInputExtensions.cs" />
+    <Compile Include="Web\Mvc\Html\UiHelperExtensions.cs" />
+    <Compile Include="Web\Mvc\HttpParamActionAttribute.cs" />
+    <Compile Include="Web\Mvc\ImageResult.cs" />
+    <Compile Include="Web\Mvc\IntToBoolBinder.cs" />
+    <Compile Include="Web\Mvc\JqGrid\ClientModel\ColumnPropertyModel\ClientCalculateValueColumnGridProperty.cs" />
+    <Compile Include="Web\Mvc\JqGrid\ClientModel\ColumnPropertyModel\CommandLinkFormatOptions.cs" />
+    <Compile Include="Web\Mvc\JqGrid\ClientModel\ColumnPropertyModel\DateTimeColumnGridProperty.cs" />
+    <Compile Include="Web\Mvc\JqGrid\ClientModel\ColumnPropertyModel\EmptyExportableColumnGridProperty.cs" />
+    <Compile Include="Web\Mvc\JqGrid\ClientModel\ColumnPropertyModel\EnumColumnGridProperty.cs" />
+    <Compile Include="Web\Mvc\JqGrid\ClientModel\ColumnPropertyModel\EnumColumnGridProperty_1.cs" />
+    <Compile Include="Web\Mvc\JqGrid\ClientModel\ColumnPropertyModel\FormatOptionsGridProperty.cs" />
+    <Compile Include="Web\Mvc\JqGrid\ClientModel\ColumnPropertyModel\IClientCalculateValue.cs" />
+    <Compile Include="Web\Mvc\JqGrid\ClientModel\ColumnPropertyModel\IExportFormatable.cs" />
+    <Compile Include="Web\Mvc\JqGrid\ClientModel\ColumnPropertyModel\IServerFormatable.cs" />
+    <Compile Include="Web\Mvc\JqGrid\ClientModel\ColumnPropertyModel\SearchOperator.cs" />
+    <Compile Include="Web\Mvc\JqGrid\ClientModel\ColumnPropertyModel\SearchOperatorClientList.cs" />
+    <Compile Include="Web\Mvc\JqGrid\ClientModel\ColumnPropertyModel\SearchOperatorTranslator.cs" />
+    <Compile Include="Web\Mvc\JqGrid\ClientModel\ColumnPropertyModel\SearchOptionsGridProperty.cs" />
+    <Compile Include="Web\Mvc\JqGrid\ClientModel\ColumnPropertyModel\TimeColumnGridProperty.cs" />
+    <Compile Include="Web\Mvc\JqGrid\ClientModel\ColumnsGridProperty.cs" />
+    <Compile Include="Web\Mvc\JqGrid\ClientModel\CommandBarGridProperty.cs" />
+    <Compile Include="Web\Mvc\JqGrid\ClientModel\DefaultSerializeMinifyManager.cs" />
+    <Compile Include="Web\Mvc\JqGrid\ClientModel\ExportFileGridProperty.cs" />
+    <Compile Include="Web\Mvc\JqGrid\ClientModel\FilterToolbarGridProperty.cs" />
+    <Compile Include="Web\Mvc\JqGrid\ClientModel\GridColumn.cs" />
+    <Compile Include="Web\Mvc\JqGrid\ClientModel\GridDataType.cs" />
+    <Compile Include="Web\Mvc\JqGrid\ClientModel\ISelfSerializeMinifyManager.cs" />
+    <Compile Include="Web\Mvc\JqGrid\ClientModel\ISerializeMinifyManager.cs" />
+    <Compile Include="Web\Mvc\JqGrid\ClientModel\SearchCommandOptionsProperty.cs" />
+    <Compile Include="Web\Mvc\JqGrid\ControllerExtesnions.cs" />
+    <Compile Include="Web\Mvc\JqGrid\DefaultGridLogic.cs" />
+    <Compile Include="Web\Mvc\JqGrid\ExportFileInfo.cs" />
+    <Compile Include="Web\Mvc\JqGrid\ExportInfo.cs" />
+    <Compile Include="Web\Mvc\JqGrid\FilterTranslation\DefaultExpressionBuilder.cs" />
+    <Compile Include="Web\Mvc\JqGrid\FilterTranslation\DefaultFilterExpressionProvider.cs" />
+    <Compile Include="Web\Mvc\JqGrid\FilterTranslation\DefaultFilterTranslator.cs" />
+    <Compile Include="Web\Mvc\JqGrid\FilterTranslation\FilterItemMetadata.cs" />
+    <Compile Include="Web\Mvc\JqGrid\FilterTranslation\GorgianDateTimeExpressionBuilder.cs" />
+    <Compile Include="Web\Mvc\JqGrid\FilterTranslation\GuidExpressionBuilder.cs" />
+    <Compile Include="Web\Mvc\JqGrid\FilterTranslation\IExpressionBuilder.cs" />
+    <Compile Include="Web\Mvc\JqGrid\FilterTranslation\IFilterExpressionProvider.cs" />
+    <Compile Include="Web\Mvc\JqGrid\FilterTranslation\IFilterTranslator.cs" />
+    <Compile Include="Web\Mvc\JqGrid\FilterTranslation\IntDateExpressionBuilder.cs" />
+    <Compile Include="Web\Mvc\JqGrid\FilterTranslation\JqGridFilterException.cs" />
+    <Compile Include="Web\Mvc\JqGrid\FilterTranslation\LongDateTimeExpressionBuilder.cs" />
+    <Compile Include="Web\Mvc\JqGrid\Grid.cs" />
+    <Compile Include="Web\Mvc\JqGrid\GridColumnExtensions.cs" />
+    <Compile Include="Web\Mvc\JqGrid\GridLogicBase_2.cs" />
+    <Compile Include="Web\Mvc\JqGrid\HttpRequestExtensions.cs" />
+    <Compile Include="Web\Mvc\JqGrid\Icons.cs" />
+    <Compile Include="Web\Mvc\JqGrid\JqGridException.cs" />
+    <Compile Include="Web\Mvc\JqGrid\QueryableExtensions.cs" />
+    <Compile Include="Web\Mvc\JqGrid\SearchFilter.cs" />
+    <Compile Include="Web\Mvc\JsonBinderAttribute.cs" />
+    <Compile Include="Web\Mvc\JsonpResult.cs" />
+    <Compile Include="Web\Mvc\Pagging\PaggingExtensions.cs" />
+    <Compile Include="Web\Mvc\Pagging\PaginatedView.cs" />
+    <Compile Include="Web\Mvc\PersianDateTimeDefaultModelBinder.cs" />
+    <Compile Include="Web\Mvc\ScriptSeperation\ILinkAppendStrategy.cs" />
+    <Compile Include="Web\Mvc\ScriptSeperation\InlineScriptSeperatorFilterAttribute.cs" />
+    <Compile Include="Web\Mvc\ScriptSeperation\ReplaceLinkAppendStrategy.cs" />
+    <Compile Include="Web\Mvc\ScriptSeperation\ScriptSeperatorFilterAttribute.cs" />
+    <Compile Include="Web\Mvc\ScriptSeperation\ScriptSeperatorStream.cs" />
+    <Compile Include="Web\Mvc\ScriptSeperation\StopScriptSeperatorAttribute.cs" />
+    <Compile Include="Web\Mvc\Security\ProtectedBySecurityTokenAttribute.cs" />
+    <Compile Include="Web\Mvc\Security\SecurityTokenManager.cs" />
+    <Compile Include="Web\Mvc\Security\T4MVCActionResultExtensions.cs" />
+    <Compile Include="Web\Mvc\Syndication\RssResult.cs" />
+    <Compile Include="Web\Mvc\TabsViewModel.cs" />
+    <Compile Include="Web\Mvc\TempDataDictionaryExtensions.cs" />
+    <Compile Include="Web\Mvc\UIHelperExtensions.cs" />
+    <Compile Include="Web\Mvc\ValidationScriptSeperatorFilterAttribute.cs" />
+    <Compile Include="Web\Mvc\ValidationScriptSeperatorStream.cs" />
+    <Compile Include="Web\Mvc\Validation\CaptchaValidationAttribute.cs" />
+    <Compile Include="Web\Mvc\Validation\CellPhoneAttribute.cs" />
+    <Compile Include="Web\Mvc\Validation\DataTypeValidator.cs" />
+    <Compile Include="Web\Mvc\Validation\NationalCodeAttribute.cs" />
+    <Compile Include="Web\Mvc\Validation\NationalCodeValidator.cs" />
+    <Compile Include="Web\Mvc\Validation\NonPesianDateAttribute.cs" />
+    <Compile Include="Web\Mvc\Validation\NonZeroRequiredAttribute.cs" />
+    <Compile Include="Web\Mvc\Validation\PersianDateAttribute.cs" />
+    <Compile Include="Web\Mvc\Validation\PersianDateValidator.cs" />
+    <Compile Include="Web\Mvc\Validation\PhoneAttribute.cs" />
+    <Compile Include="Web\Mvc\Validation\PropertiesMustMatchAttribute.cs" />
+    <Compile Include="Web\Mvc\Validation\PropertiesMustMatchValidator.cs" />
+    <Compile Include="Web\Mvc\Validation\RangeValidator.cs" />
+    <Compile Include="Web\Mvc\Validation\RequiredValidator.cs" />
+    <Compile Include="Web\Mvc\Validation\StringLengthValidator.cs" />
+    <Compile Include="Web\WebPathResolver.cs" />
+    <Compile Include="Web\WebServicePathResolver.cs" />
+    <Compile Include="Web\WhiteSpaceRemoverModule.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ServiceModel\Syndication\" />
+    <Folder Include="Web\Mvc\NewFolder1\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

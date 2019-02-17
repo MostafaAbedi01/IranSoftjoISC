@@ -1,0 +1,123 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@using IranSoftjo.Package.WebUi.Configs
+@using Mehr
+@model IranSoftjo.Package.WebUi.ViewModels.SiteSettingVM
+@{
+    ViewBag.Title = "تنظیمات";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <table class="form">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <tr>
+            <td class="labelWrp">
+                <label class="fieldLabel">
+                    نوع بسته ایران سافتجو : 
+                </label>
+            </td>
+            <td colspan="1" class="inputWrp">
+                @if (PackageSettings.Active.SiteTypeCms)
+                {
+                    <b>سیستم مدیریت محتوا
+                    </b>         
+                }
+                @if (PackageSettings.Active.SiteTypeEShop)
+                {
+                    <b>فروشگاه ساز اینترنتی
+                    </b>         
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="labelWrp">
+                <label class="fieldLabel">
+                    ورژن بسته : 
+                </label>
+            </td>
+            <td colspan="1" class="inputWrp">
+                @PackageSettings.Active.Version.LocalizeNumbers()
+            </td>
+        </tr>
+        <tr>
+            <td class="labelWrp">
+                <label class="fieldLabel">
+                    نام قالب : 
+                </label>
+            </td>
+            <td colspan="1" class="inputWrp">
+                @PackageSettings.Active.SiteTheme
+            </td>
+        </tr>
+        @Html.HiddenFor(model => model.SiteSettingID)
+        @Html.EnhancedEditorField(model => model.WebSiteTitle, note: "حداقل 30 و حداکثر 60 کاراکتر باشد")
+        @Html.EnhancedEditorField(model => model.WebSiteName, note: "مثال : www.iransoftjo.com")
+        @Html.EnhancedEditorField(model => model.PhoneNumber, note: "مثال : 09124094634 ")
+        @if (PackageSettings.Active.SiteTypeEShop)
+        {
+        @Html.EnhancedEditorField(model => model.AccountNumberOnline, note: "مثال : bvb05b0c-3abc-48bd-8e27-783e5bef37d4  ")
+        @Html.EnhancedCheckBoxField(model => model.PopularProducts)
+        @Html.EnhancedCheckBoxField(model => model.SpecialProducts)
+        @Html.EnhancedCheckBoxField(model => model.NewProducts)
+        @Html.EnhancedCheckBoxField(model => model.ProductCategories)
+        @Html.EnhancedCheckBoxField(model => model.PaymentGuarantee)
+
+        @Html.EnhancedCheckBoxField(model => model.Weather)
+        @Html.EnhancedCheckBoxField(model => model.Translate)
+        @Html.EnhancedCheckBoxField(model => model.FlashClocks)
+        @Html.EnhancedCheckBoxField(model => model.Prayer)
+        @Html.EnhancedCheckBoxField(model => model.Date)
+        }
+
+        @Html.EnhancedCheckBoxField(model => model.FixHeaderTop)
+        @Html.EnhancedCheckBoxField(model => model.ThemeChange)
+
+        @Html.EnhancedCheckBoxField(model => model.Propaganda)
+        <td class="labelWrp">
+            <label class="fieldLabel">@Html.LabelFor(model => model.IconImageUrl)</label>
+        </td>
+        <td class="inputWrp">
+            @Html.Kendo().Upload().Name("fileIconImageUrl").Multiple(false).Async(async => async.Save("SaveFileIconImageUrl", "SiteSetting"))
+            <img width="50px" height="50px" src="@Model.IconImageUrl"/>
+
+        </td>
+        
+        @*META-Title 30 min -65 max characters
+        META-Description 70 min -160 max characters
+        META-Keywords 5 words – 200 characters (not that they matter)
+        H-Tags 70 characters max
+        URL length 115 characters max
+        Image Alt Attribute 100 characters max*@
+
+
+        @Html.EnhancedTextAreaField(model => model.MetaDescription, note: "کاراکتر مطلوب برای تگ توضیح باید حداقل 70 و حداکثر 170 کاراکتر می باشد")
+        @Html.EnhancedTextAreaField(model => model.Metakeywords, note: "کاراکتر مطلوب برای تگ کلیدواژه ها حداقل 5 و حداکثر 200 کاراکتر می باشد")
+        @Html.HiddenFor(model => model.LogoImageUrl)
+        @Html.HiddenFor(model => model.IconImageUrl)
+        <td class="labelWrp">
+            <label class="fieldLabel">@Html.LabelFor(model => model.LogoImageUrl)</label>
+        </td>
+        <td class="inputWrp">
+            @Html.Kendo().Upload().Name("fileLogoImageUrl").Multiple(false).Async(async => async.Save("SaveFileLogoImageUrl", "SiteSetting"))
+            <img width="200" height="70" src="@Model.LogoImageUrl"/>
+
+        </td>
+        @Html.EnhancedEditorField(model => model.SendMailHost)
+        @Html.EnhancedEditorField(model => model.SendMailUserName)
+        @Html.EnhancedEditorField(m => m.SendMailPassword)
+        @Html.EnhancedCheckBoxField(model => model.SendMailEnableSsl)
+        @Html.EnhancedEditorField(model => model.HtmlTemplateMail)
+        @Html.EnhancedSubmit("ویرایش")
+    </table>
+<script src="@Url.Content("/Scripts/LimitTextArea/jquery.limit-textarea.js")" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("[id$='MetaDescription']").limit_textarea({ maxLength: 170, displayText: ' : تعداد کاراکتر باقی مانده' });
+            $("[id$='Metakeywords']").limit_textarea({ maxLength: 200, displayText: ' : تعداد کاراکتر باقی مانده' });
+            $("[id$='WebSiteTitle']").limit_textarea({ maxLength: 60, displayText: ' : تعداد کاراکتر باقی مانده' });
+        });
+    </script>
+}
+    

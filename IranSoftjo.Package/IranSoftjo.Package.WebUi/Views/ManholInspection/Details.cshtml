@@ -1,0 +1,54 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@using IranSoftjo.Package.WebUi.Configs
+@model IranSoftjo.Package.WebUi.ViewModels.TblInspectionVm
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "جزئیات بازرسی منهول";
+}
+
+<div style="box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); height: auto;">
+    <div style="float: right; margin: 10px; width: 40%">
+        <a href="@Model.ImageUrl">
+            <div>
+                <img width="@PackageSettings.Active.PageThumbnailImageUrlWidth" height="@PackageSettings.Active.PageThumbnailImageUrlHeight" src="@Model.ThumbnailImageUrl" alt="عکس منهول" title="عکس منهول" />
+            </div>
+            <div style="float: right; margin-top: 0px;">
+                بزرگنمایی عکس منهول
+            </div>
+        </a>
+    </div>
+    <div style="float: left; margin: 10px;">
+        <a href="/Manhol/SearchByManhoId/@Model.TblManholId">
+            <div>
+                <img style="float: left;" width="60%" height="60%" src="/Package/Manhol/Photo/GPS.png" alt="@Model.CodePm" title="@Model.CodePm" />
+            </div>
+            <div style="float: left; margin-top: 0px;">
+                نمایش موقعیت روی نقشه
+            </div>
+        </a>
+    </div>
+    <div>
+        <h1 style="color: #D24B28; font-size: 1.8em; padding: 25px;">کد پی ام : @Model.CodePm</h1>
+        <div style="margin: 30px; padding: 20px;">
+            <hr />
+            <label style="color: red" class="fieldLabel">مشخصات مکانی </label>
+            <hr />
+            @Html.EnhancedLabelField(model => model.CodeTag)
+            @Html.EnhancedLabelField(model => model.DateSabt)
+
+            @Html.EnhancedLabelField(model => model.Address)
+            <hr />
+            <label style="color: red" class="fieldLabel">مشخصات منهول </label>
+            <hr />
+
+
+            <hr />
+            <label style="color: red" class="fieldLabel">مشخصات ثبت کننده </label>
+            <hr />
+          
+        </div>
+    </div>
+</div>
+<div>
+    @Html.ActionLink("بازگشت به لیست", "List")
+</div>

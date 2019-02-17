@@ -1,0 +1,23 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.RasProductTypeVM
+@{
+    ViewBag.Title = "حذف واحد محصول";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+@using (Html.BeginForm())
+{
+    <table class="form">
+
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.ProductTypeID)
+        @Html.EnhancedLabelField(model => model.ProductTypeTitle)
+        @Html.EnhancedSubmit("حذف")
+    </table>
+}
+<div>
+    @Html.ActionLink("بازگشت به لیست", "Index")
+</div>

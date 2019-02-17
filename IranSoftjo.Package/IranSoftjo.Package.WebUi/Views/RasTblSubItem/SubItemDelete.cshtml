@@ -1,0 +1,33 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.TblSubItemVm
+
+@{
+    ViewBag.Title = "حذف آیتم کاری";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr/>
+</hgroup>
+
+
+<div>
+
+    @Html.EnhancedLabelField(model => model.SubItemCode)
+    @Html.EnhancedLabelField(model => model.Title)
+    @Html.EnhancedLabelField(model => model.MetrajKol)
+    @using (Html.BeginForm())
+    {
+        <table class="form">
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.TblSubItemId)
+            @Html.EnhancedSubmit("حذف ")
+        </table>
+    }
+
+
+</div>
+
+<div>
+    @Html.ActionLink("بازگشت به لیست", "SubItemList", new { id = Model.TblItemId })
+</div>

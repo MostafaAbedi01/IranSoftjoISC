@@ -1,0 +1,22 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.AgencyVM
+@{
+    ViewBag.Title = "حذف نمایندگی";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<table class="form">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.EnhancedLabelField(model => model.Name)
+        @Html.EnhancedLabelField(model => model.Phone)
+        @Html.EnhancedLabelField(model => model.Manager)
+        @Html.EnhancedLabelField(model => model.Email)
+        @Html.EnhancedLabelField(model => model.Country)
+        @Html.EnhancedLabelField(model => model.City)
+        @Html.EnhancedLabelField(model => model.Address)
+        @Html.EnhancedLabelField(model => model.Description)
+        @Html.EnhancedSubmit("حذف نمایندگی")
+    }
+</table >
+@Html.ActionLink("بازگشت به لیست", "Index")

@@ -1,0 +1,65 @@
+﻿@using Mehr
+@model System.Collections.Generic.IEnumerable<IranSoftjo.Package.WebUi.ViewModels.TblAndroidLevelVm>
+@{
+    ViewBag.Title = "عملکردها دریافتی اندروید";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hgroup class="title">
+    <h1>
+        <a href="@Url.Action("ProjectList", "RasTblProject")">@Session["TblProjects"] </a> >>
+        <a href="@Url.Action("ItemList", "RasTblItems", new {id = Session["TblItemsId"]})">@Session["TblItems"] </a> >>
+        <a href="@Url.Action("SubItemList", "RasTblSubItem", new { id = Session["TblItemsId"] })">@Session["TblSubItems"] </a> >>
+        @ViewBag.Title
+    </h1>
+    <hr />
+</hgroup>
+<div class="k-rtl">
+    @(Html.Kendo().Grid(Model)
+          .Name("Grid")
+          .Columns(columns =>
+          {
+
+              columns.Bound(model => model.TblAndroidLevelId).Visible(false);
+              columns.Bound(model => model.KeyID1Title);
+              columns.Bound(model => model.KeyID2Title).Width(130);
+              columns.Bound(model => model.DateDo).Format("{0:yyyy/MM/dd}").Width(85);
+              columns.Bound(model => model.TimeStart);
+              columns.Bound(model => model.TimeEnd) ;
+              columns.Bound(model => model.Metraj).FooterTemplate(@<text>جمع  : @string.Format("{0:#,0.00}",
+              Model.Sum(d => d.Metraj)).LocalizeNumbers()</text>);
+              columns.Bound(model => model.Color).FooterTemplate(@<text>جمع  : @string.Format("{0:#,0.00}",
+              Model.Sum(d => d.Color)).LocalizeNumbers()</text>);
+              columns.Bound(model => model.DateSend).Format("{0:yyyy/MM/dd HH:mm}").Width(130);
+              columns.Bound(model => model.Hardener);
+              columns.Bound(model => model.Thinner);
+              columns.Bound(model => model.FirrstAndLastName);
+              columns.Bound(model => model.Comment);
+              columns.Bound(item => @item.TblAndroidLevelId).Title("دستورات").Filterable(false).Groupable(false)
+                  .Template(@<text>
+                    @*@Html.ActionLink("ویرایش", "Edit", new { id = @item.TblAndroidLevelId }, new { @class = "k-button k-button-icontext k-grid-edit" })*@
+                    @Html.ActionLink("حذف", "Delete", new { id = @item.TblAndroidLevelId }, new { @class = "k-button k-button-icontext k-grid-delete" })
+                </text>).Width(80);
+            
+
+          })
+                                  .Sortable()
+                                  .Scrollable()
+                                  .Filterable().Groupable()
+                                  .HtmlAttributes(new { style = "height:600px; " })
+                                  .DataSource(dataSource => dataSource
+                                      .Server()
+                                                                   .Group(groups => groups.Add(p => p.KeyID1Title))
+                                  )
+                                  .Resizable(resize => resize.Columns(true))
+                                  .ColumnMenu()
+)
+</div>
+<style>
+    .container {
+        width: 1300px !important;
+          
+    }
+    .pageContentRightDiv {
+        height: 750px;;
+    }
+</style>

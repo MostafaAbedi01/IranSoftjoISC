@@ -1,0 +1,62 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.ProductGroupVM
+@{
+    ViewBag.Title = "افزودن گروه محصول";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@using (Html.BeginForm())
+{
+    <table class="form">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+          <span>چیدمان گروه محصولات:</span>
+        @(Html.Kendo().TreeView()
+              .HtmlAttributes(new {style = "width:96%x;background-color:#e3e3e3;padding: 15px;"})
+              .Animation(animation => animation.Expand(open =>
+                                                       {
+                                                           open.Expand(ExpandDirection.Horizontal);
+                                                           open.SlideIn(SlideDirection.Down);
+                                                           open.Fade(FadeDirection.In);
+                                                       }))
+              .Name("treeview")
+              .Events(events => events
+                  .Select("onSelect")
+                  .DataBound("dataBound")
+              )
+              .ExpandAll(true)
+              .HighlightPath(true)
+              .DataTextField("Name")
+              .DataSource(dataSource => dataSource
+                  .Read(read => read
+                      .Action("ProductGroupTree", "ProductGroup")
+                  )
+              )
+              )
+        <script>
+            var treeview;
+
+            function dataBound(e) {
+                var treeview = $("#treeview").data("kendoTreeView");
+                treeview.loadOnDemand = false;
+                treeview.expand('.k-item');
+            }
+
+            function onSelect(e) {
+                var nodeid = $("#treeview").getKendoTreeView().dataItem(e.node).id;
+                $("#ProductGroupIDTree").val(nodeid);
+            }
+
+            $(document).ready(function () {
+                treeview = $("#treeview").data("kendoTreeView");
+            });
+        </script>
+        @Html.HiddenFor(model => model.ProductGroupIDTree)
+        @Html.EnhancedEditorField(model => model.ProductGroupTitle)
+               @Html.EnhancedEditorField(model => model.ProductGroupOrder)
+        @Html.EnhancedCheckBoxField(model => model.IsActive)
+        @Html.EnhancedSubmit("ایجاد")
+    </table>
+}
+<div>
+    @Html.ActionLink("بازگشت به لیست", "Index")
+</div>

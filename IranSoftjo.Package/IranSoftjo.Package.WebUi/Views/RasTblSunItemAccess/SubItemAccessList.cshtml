@@ -1,0 +1,58 @@
+﻿@model System.Collections.Generic.IEnumerable<IranSoftjo.Package.WebUi.ViewModels.TblSubItemAccessVm>
+
+@{
+    ViewBag.Title = "لیست مراحل انجام";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hgroup class="title">
+    <h1>
+        <a href="@Url.Action("ProjectList", "RasTblProject")">@Session["TblProjects"] </a> >>
+        <a href="@Url.Action("ItemList", "RasTblItems", new {id = Session["TblItemsId"]})">@Session["TblItems"] </a> >>
+        <a href="@Url.Action("SubItemList", "RasTblSubItem", new { id = Session["TblItemsId"] })">@Session["TblSubItems"] </a> >>
+        @ViewBag.Title
+    </h1>
+    <hr />
+</hgroup>
+<div class="k-rtl">
+    @(Html.Kendo().Grid(Model)
+          .Name("Grid")
+          .Columns(columns =>
+          {
+              columns.Bound(item => @item.TblSubItemAccessId).Title("وضعیت").Filterable(false).Groupable(false)
+                  .Template(@<text>
+                    @Html.ActionLink("اخرین عملکردها دریافتی اندروید", "TblAndroidLevelList", "RasTblAndroidLevel", new { id = @item.TblSubItemId }, new { @class = "k-button k-button-icontext k-grid-delete" })
+                </text>).Width(210);
+              columns.Bound(model => model.TblSubItemAccessId).Visible(false);
+              columns.Bound(model => model.KeyID1Title);
+              columns.Bound(model => model.KeyID2Title);
+              columns.Bound(model => model.Ral);
+              columns.Bound(model => model.HardenerTypeTitle);
+              columns.Bound(model => model.ThinnerTypeTitle);
+              columns.Bound(model => model.Title);
+              columns.Bound(item => @item.TblSubItemAccessId).Title("دستورات").Filterable(false).Groupable(false)
+                  .Template(@<text>
+                    @Html.ActionLink("جزئیات", "SubItemAccessDetails", new { id = @item.TblSubItemAccessId }, new { @class = "k-button k-button-icontext k-grid-delete" })
+                    @Html.ActionLink("ویرایش", "SubItemAccessEdit", new { id = @item.TblSubItemAccessId }, new { @class = "k-button k-button-icontext k-grid-edit" })
+                    @Html.ActionLink("حذف", "SubItemAccessDelete", new { id = @item.TblSubItemAccessId }, new { @class = "k-button k-button-icontext k-grid-delete" })
+                </text>).Width(230);
+
+          })
+                                   .ToolBar(toolbar => toolbar.Custom().Action("SubItemAccessCreate", "RasTblSunItemAccess").Text("افزودن مراحل جدید"))
+                                                          .Sortable()
+                                                          .Scrollable()
+                                                          .Filterable().Groupable()
+                                                          .HtmlAttributes(new { style = "height:600px; " })
+                                                          .DataSource(dataSource => dataSource
+                                                              .Server()
+                                                                                      .Model(model => model.Id(item => item.TblSubItemAccessId))
+                                                                           .Group(groups => groups.Add(p => p.KeyID1Title))
+                                                          )
+                                                          .Resizable(resize => resize.Columns(true))
+                                                          .ColumnMenu()
+    )
+</div>
+<style>
+    .container {
+        width: 1300px !important;
+    }
+</style>

@@ -1,0 +1,39 @@
+﻿@model IranSoftjo.Package.WebUi.ViewModels.TblSubItemVm
+
+
+@using IranSoftjo.Core.Web.Mvc.Html
+@{
+    ViewBag.Title = "افزودن آیتم ";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+
+@using (Html.BeginForm("SubItemCreate", "RasTblSubItem", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <table class="form">
+        @Html.ValidationSummary(true)
+        @Html.AntiForgeryToken()
+        <tr>
+            <td>
+                <hr />
+                <label style="color: red" class="fieldLabel">مشخصات  </label>
+                <hr />
+            </td>
+            <td>
+                <hr />
+            </td>
+        </tr>
+        @Html.EnhancedLabelField(model => model.SubItemCode)
+        @Html.HiddenFor(model => model.SubItemCode)
+        @Html.EnhancedEditorField(model => model.Title)
+        @Html.EnhancedEditorField(model => model.MetrajKolStr)
+        @Html.EnhancedSubmit("ثبت ")
+    </table>
+}
+
+<div>
+    @Html.ActionLink("بازگشت به لیست", "SubItemList", new { id = Model.TblItemId })
+</div>

@@ -1,0 +1,18 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.ProductTypeVM
+@{
+    ViewBag.Title = "افزودن نوع محصول";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@using (Html.BeginForm())
+{
+    <table class="form">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.EnhancedEditorField(model => model.ProductTypeTitle)
+        @Html.EnhancedSubmit("ایجاد")
+    </table>
+}
+<div>
+    @Html.ActionLink("بازگشت به لیست", "Index")
+</div>

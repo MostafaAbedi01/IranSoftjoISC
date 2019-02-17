@@ -1,0 +1,99 @@
+﻿@model IEnumerable<IranSoftjo.Package.WebUi.ViewModels.TblManholVm>
+    @{
+        ViewBag.Title = "شناسنامه منهول ها";
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+    <div class="k-rtl">
+        @(Html.Kendo().Grid(Model)
+    .Name("Grid")
+    .Columns(columns =>
+    {
+        columns.Bound(item => @item.TblManholId).Title("دستورات").Filterable(false).Groupable(false)
+            .Template(@<text>
+            @Html.ActionLink("موقعیت بروی نقشه", "SearchByManhoId", "ManholMap", new { id = @item.TblManholId }, new { @class = "btn btn-default green-haze" })
+            @Html.ActionLink("تصاویر دیگر", "Index", "TblPhotoList", new { id = @item.TblManholId }, new { @class = "btn btn-default blue-stripe" })
+            @Html.ActionLink("جزئیات", "ManholDetails", new { id = @item.TblManholId }, new { @class = "btn btn-default blue-steel" })
+            @Html.ActionLink("ویرایش", "ManholEdit", new { id = @item.TblManholId }, new { @class = "btn btn-default blue-hoki" })
+            @Html.ActionLink("حذف", "ManholDelete", new { id = @item.TblManholId }, new { @class = "btn btn-default red" })
+            </text>).Width(280);
+        columns.Bound(model => model.Address).Width(230);
+        columns.Bound(model => model.CodePm).Width(100);
+        columns.Bound(model => model.CodeGis).Width(100);
+        columns.Bound(model => model.CodeMakani).Width(100);
+        columns.ForeignKey(p => p.VaziatZaheri1, (System.Collections.IEnumerable)ViewBag.VaziatZaheri1, "KeyID", "Title").Width(100);
+        columns.Bound(model => model.DateSabt).Width(100);
+        columns.ForeignKey(p => p.JenseManhol, (System.Collections.IEnumerable)ViewBag.JenseManhol, "KeyID", "Title").Width(100);
+        columns.Bound(model => model.GhotreManhol).Width(100);
+        columns.ForeignKey(p => p.NoeManhol, (System.Collections.IEnumerable)ViewBag.NoeManhol, "KeyID", "Title").Width(100);
+        columns.ForeignKey(p => p.VaziatZaheri2, (System.Collections.IEnumerable)ViewBag.VaziatZaheri2, "KeyID", "Title").Width(100);
+        columns.ForeignKey(p => p.VaziatZaheri3, (System.Collections.IEnumerable)ViewBag.VaziatZaheri3, "KeyID", "Title").Width(100);
+        columns.ForeignKey(p => p.JenseDaricheh, (System.Collections.IEnumerable)ViewBag.JenseDaricheh, "KeyID", "Title").Width(100);
+        columns.ForeignKey(p => p.GhotrDariche, (System.Collections.IEnumerable)ViewBag.GhotrDariche, "KeyID", "Title").Width(100);
+        columns.Bound(model => model.Comment).Width(100);
+        columns.Bound(model => model.CodeTag).Width(100);
+        columns.Bound(model => model.TblManholId).Width(100);
+
+    })
+    .ToolBar(toolbar => toolbar.Custom().Action("ManholCreate", "Manhol").Text("<i class='fa fa fa-plus'></i> افزودن منهول جدید ").HtmlAttributes(new { @class = "btn btn-circle default green-stripe" }))
+      .ToolBar(toolBar =>
+            toolBar.Custom()
+                .Text("<i class='fa fa-file-excel-o'></i> خروجی اکسل ").HtmlAttributes(new { @class = "btn btn-circle default blue-stripe" })
+                .HtmlAttributes(new { id = "export" })
+                .Url(Url.Action("Export", "Manhol", new { page = 1, pageSize = "~", filter = "~", sort = "~" }))
+        )
+    .Pageable(d => d.PageSizes(true).Refresh(true).PageSizes(new int[] {5, 10, 20, 30,100,500,1000,2000,5000,10000,100000 }))
+    .Sortable()
+    .Scrollable()
+    .Filterable()
+       .Resizable(resize => resize.Columns(true))
+    .HtmlAttributes(new { style = "height:550px;" })
+    .DataSource(dataSource => dataSource
+        .Server()
+        .Sort(sort => sort.Add("TblManholId").Descending())
+        .Model(model => model.Id(item => item.TblManholId)).PageSize(5)
+    )
+        )
+    </div>
+    <style>
+        .k-grid-content {
+            height: 400px !important;
+        }
+    </style>
+
+
+<script type="text/javascript">
+    $(function () {
+         var grid = $('#Grid').data('kendoGrid');
+
+        // ask the parameterMap to create the request object for you
+        var requestObject = (new kendo.data.transports["aspnetmvc-server"]({ prefix: "" }))
+        .options.parameterMap({
+            page: grid.dataSource.page(),
+            sort: grid.dataSource.sort(),
+            filter: grid.dataSource.filter()
+        });
+
+        // Get the export link as jQuery object
+        var $exportLink = $('#export');
+
+        // Get its 'href' attribute - the URL where it would navigate to
+        var href = $exportLink.attr('href');
+
+        // Update the 'page' parameter with the grid's current page
+        href = href.replace(/page=([^&]*)/, 'page=' + requestObject.page || '~');
+
+        // Update the 'sort' parameter with the grid's current sort descriptor
+        href = href.replace(/sort=([^&]*)/, 'sort=' + requestObject.sort || '~');
+
+        // Update the 'pageSize' parameter with the grid's current pageSize
+        href = href.replace(/pageSize=([^&]*)/, 'pageSize=' + grid.dataSource._pageSize);
+
+        //update filter descriptor with the filters applied
+
+        href = href.replace(/filter=([^&]*)/, 'filter=' + (requestObject.filter || '~'));
+
+        // Update the 'href' attribute
+        $exportLink.attr('href', href);
+    });
+
+</script>

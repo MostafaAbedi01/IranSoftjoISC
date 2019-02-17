@@ -1,0 +1,198 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.TblManholVm
+@{
+    ViewBag.Title = "افزودن منهول";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr/>
+</hgroup>
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <aside class="widget widget_warta_slider_tabs">
+                    <div id="slider-tabs-768237792">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab"> لطفا مختصات منهول را از روی نقشه انتخاب کنید </a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="googleMap" style="width:100%;height:300px;"></div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+</div>
+@using (Html.BeginForm("ManholCreate", "Manhol", FormMethod.Post, new {enctype = "multipart/form-data"}))
+{
+    <table class="form">
+        @Html.ValidationSummary(true)
+        @Html.AntiForgeryToken()
+        <tr>
+            <td>
+                <hr />
+                <label style="color: red" class="fieldLabel">مشخصات مکانی </label>
+                <hr />
+            </td>
+            <td>
+                <hr />
+            </td>
+        </tr>
+        @Html.EnhancedEditorField(model => model.LatitudeStr)
+        @Html.EnhancedEditorField(model => model.LongitudeStr)
+
+        @Html.EnhancedEditorField(model => model.CodeTag, note: "کد تکی که داخل منهول قرار داده شده است")
+        @Html.EnhancedEditorField(model => model.CodeGis)
+        @Html.EnhancedEditorField(model => model.CodeMakani)
+        @Html.EnhancedEditorField(model => model.CodePm)
+
+    
+        @Html.EnhancedTextAreaField(model => model.Address)
+        @Html.EnhancedEditorField(model => model.DateSabt)
+        <tr>
+            <td>
+                <hr />
+                <label style="color: red" class="fieldLabel">مشخصات منهول </label>
+                <hr />
+            </td>
+            <td>
+                <hr />
+            </td>
+        </tr>
+        @Html.EnhancedDropDownList(model => model.VaziatZaheri1, "VaziatZaheri1")
+        @Html.EnhancedDropDownList(model => model.VaziatZaheri2, "VaziatZaheri2")
+        @Html.EnhancedDropDownList(model => model.VaziatZaheri3, "VaziatZaheri3")
+        @Html.EnhancedDropDownList(model => model.JenseDaricheh, "JenseDaricheh")
+        @Html.EnhancedDropDownList(model => model.GhotrDariche, "GhotrDariche")
+        @Html.EnhancedEditorField(model => model.OmgheManhol)
+        @Html.EnhancedEditorField(model => model.GhotreManhol)
+        @Html.EnhancedDropDownList(model => model.NoeManhol, "NoeManhol")
+        @Html.EnhancedDropDownList(model => model.JenseManhol, "JenseManhol")
+        @Html.EnhancedEditorField(model => model.GhotreLolehVorodi)
+        @Html.EnhancedEditorField(model => model.GhotreLolehKhoroji)
+        @Html.EnhancedEditorField(model => model.TedadLoleVorodi)
+
+
+        @Html.EnhancedDropDownList(model => model.Pelekan1, "Pelekan1")
+        @Html.EnhancedDropDownList(model => model.Pelekan2, "Pelekan2")
+        @Html.EnhancedDropDownList(model => model.SamPashi, "SamPashi")
+        @Html.EnhancedDropDownList(model => model.BandKeshi, "BandKeshi")
+        @Html.EnhancedDropDownList(model => model.LiRobi, "LiRobi")
+        @Html.EnhancedDropDownList(model => model.Mahicheh, "Mahicheh")
+        @Html.EnhancedDropDownList(model => model.Pashneh, "Pashneh")
+
+        @Html.EnhancedEditorField(model => model.DateSakht)
+        @Html.EnhancedEditorField(model => model.DateNasb)
+        @Html.EnhancedEditorField(model => model.DateBahrebardari)
+
+        @Html.EnhancedEditorField(model => model.MehvarName)
+        @Html.EnhancedEditorField(model => model.CodeEshterak)
+        @Html.EnhancedEditorField(model => model.Comment)
+        <tr>
+            <td>
+                <hr />
+                <label style="color: red" class="fieldLabel">مشخصات مکانی </label>
+                <hr />
+            </td>
+            <td>
+                <hr />
+            </td>
+        </tr>
+
+        @Html.EnhancedEditorField(model => model.CodeNaheyeh)
+        @Html.EnhancedEditorField(model => model.MapOld)
+        @Html.EnhancedEditorField(model => model.MapNew)
+        @Html.EnhancedEditorField(model => model.CodeTasfieKhane)
+        @Html.EnhancedEditorField(model => model.MantagheShahrdari)
+        @Html.EnhancedEditorField(model => model.MantagheGaz)
+        @Html.EnhancedEditorField(model => model.MantagheBargh)
+        @Html.EnhancedEditorField(model => model.MantagheMohakhaberat)
+        @Html.EnhancedEditorField(model => model.MantagheRanandegi)
+        <tr>
+            <td>
+                <hr />
+                <label style="color: red" class="fieldLabel">مشخصات ثبت کننده </label>
+                <hr />
+            </td>
+            <td>
+                <hr />
+            </td>
+        </tr>
+
+        @Html.EnhancedEditorField(model => model.TblUserId)
+        @Html.EnhancedEditorField(model => model.CodeCompany)
+        @Html.EnhancedEditorField(model => model.CodeSystem)
+        <td class="labelWrp">
+            <label class="fieldLabel">@Html.LabelFor(model => model.ImageUrl)</label>
+        </td>
+        <td colspan="1" class="inputWrp">
+            @Html.Kendo().Upload().Name("file").Multiple(false).Async(async => async.Save("SaveFile", "Manhol"))
+        </td>
+        @Html.EnhancedSubmit("ثبت منهول")
+    </table>
+}
+
+<div>
+    @Html.ActionLink("بازگشت به لیست", "ManholList")
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#file").closest(".k-upload").find("span").text("انتخاب تصویر");
+    });
+</script>
+
+@*<script src="~/Scripts/jquery-1.10.2.js"></script>*@
+@*<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>*@
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC4QY3t06BnpiMl-0rgHG9-Pe8MdLlq5W0&sensor=false"></script>
+<style>
+    #map_canvas img {
+        max-width: none;
+    }
+</style>
+
+
+<style>
+    .infoDiv {
+        height: 200px;
+        width: 300px;
+        -webkit-user-select: none;
+        background-color: white;
+    }
+</style>
+
+<script type="text/javascript">
+
+
+    $(document).ready(function () {
+        Initialize();
+    });
+
+    // Where all the fun happens
+    function Initialize() {
+
+        // Google has tweaked their interface somewhat - this tells the api to use that new UI
+        google.maps.visualRefresh = true;
+        var Liverpool = new google.maps.LatLng(35.7, 51.4);
+
+        // These are options that set initial zoom level, where the map is centered globally to start, and the type of map to show
+        var mapOptions = {
+            zoom: 11,
+            center: Liverpool,
+            mapTypeId: google.maps.MapTypeId.G_NORMAL_MAP
+        };
+
+        // This makes the div with id "map_canvas" a google map
+        var map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);
+
+        google.maps.event.addListener(map, 'click', function (event) {
+            var ddLatitude = document.getElementById("LatitudeStr");
+            ddLatitude.value = event.latLng.lat();
+            var ddLongitude = document.getElementById("LongitudeStr");
+            ddLongitude.value = event.latLng.lng();
+            alert("عرض جغرافیایی: " + event.latLng.lat() + " " + ", طول جغرافیایی : " + event.latLng.lng() + "با موفقیت انتخاب شد.");
+        });
+    }
+</script>

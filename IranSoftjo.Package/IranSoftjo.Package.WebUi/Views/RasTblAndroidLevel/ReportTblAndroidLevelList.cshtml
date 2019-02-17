@@ -1,0 +1,57 @@
+﻿@using Mehr
+@model System.Collections.Generic.IEnumerable<IranSoftjo.Package.WebUi.ViewModels.TblAndroidLevelVm>
+@{
+    ViewBag.Title = "گزارش دریافتی اندروید";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hgroup class="title">
+    <h1>
+       
+        @ViewBag.Title
+    </h1>
+    <hr />
+</hgroup>
+<div class="k-rtl">
+    @(Html.Kendo().Grid(Model)
+          .Name("Grid")
+          .Columns(columns =>
+          {
+
+              columns.Bound(model => model.TblAndroidLevelId).Visible(false);
+              columns.Bound(model => model.FirrstAndLastName);
+              columns.Bound(model => model.ProjectName).Width(110);
+              columns.Bound(model => model.ItemsTitle);
+              columns.Bound(model => model.SubItemsTitle);
+              columns.Bound(model => model.KeyID1Title);
+              columns.Bound(model => model.KeyID2Title).Width(130);
+              columns.Bound(model => model.DateDo).Format("{0:yyyy/MM/dd}").Width(85);
+              columns.Bound(model => model.TimeStart).Width(70);
+              columns.Bound(model => model.TimeEnd).Width(70);
+              columns.Bound(model => model.Metraj);
+              columns.Bound(model => model.Color);
+              columns.Bound(model => model.DateSend).Format("{0:yyyy/MM/dd HH:mm}").Width(130);
+              columns.Bound(model => model.Hardener);
+              columns.Bound(model => model.Thinner);
+              columns.Bound(model => model.Comment);
+          })
+                                  .Sortable()
+                                  .Scrollable()
+                                                          .Filterable().Groupable().Pageable()
+                                  .HtmlAttributes(new { style = "height:630px; " })
+                                  .DataSource(dataSource => dataSource
+                                      .Server()
+                                                                  
+                                  )
+                                  .Resizable(resize => resize.Columns(true))
+                                  .ColumnMenu()
+)
+</div>
+<style>
+    .container {
+        width: 1300px !important;
+          
+    }
+    .pageContentRightDiv {
+        height: 750px;;
+    }
+</style>

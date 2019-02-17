@@ -1,0 +1,66 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.TblStoreVm
+@{
+    ViewBag.Title = "افزودن ";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+
+@using (Html.BeginForm("Create", "RasTblStore", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <table class="form">
+        @Html.ValidationSummary(true)
+        @Html.AntiForgeryToken()
+        <span id="states-loading-progress" style="display: none;">چند لحظه صبر کنید...</span>
+        @Html.EnhancedDropDownList(model => model.ProductGroupID, "ProductGroupID")
+        @Html.EnhancedDropDownList(model => model.ProductID, "ProductID")
+        @Html.EnhancedEditorField(model => model.CountStr)
+        @Html.EnhancedEditorField(model => model.Ral)
+        @Html.HiddenFor(model => model.TblProjectId)
+        @Html.EnhancedSubmit("ثبت ")
+    </table>
+}
+
+
+<script type="text/javascript">
+    $(function () {
+        $("#ProductGroupID").change(function () {
+            var selectedItem = $(this).val();
+            var ddlStates = $("#ProductID");
+            var statesProgress = $("#states-loading-progress");
+            statesProgress.show();
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: '@Url.Action("GetStatesById", "RasTblStore")',
+                data: { "idValue": selectedItem },
+                success: function (data) {
+                    ddlStates.html('');
+                    $.each(data, function (id, option) {
+                        ddlStates.append($('<option></option>').val(option.ProductID).html(option.ProductTitle));
+                    });
+                    statesProgress.hide();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('Failed to retrieve states.');
+                    statesProgress.hide();
+                }
+            });
+
+            var ral = $("#Ral");
+            var ddlStates2 = $('#ProductGroupID').val();
+            if (ddlStates2 == 1) {
+                ral.show();
+            } else {
+                ral.hide();
+            }
+        });
+    });
+</script>
+
+<div>
+    @Html.ActionLink("بازگشت به لیست", "TblStoreList")
+</div>

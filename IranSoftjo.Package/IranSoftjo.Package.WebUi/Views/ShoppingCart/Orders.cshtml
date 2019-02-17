@@ -1,0 +1,62 @@
+﻿
+@using IranSoftjo.Package.DataModel
+@model IEnumerable<IranSoftjo.Package.WebUi.ViewModels.OrderVM>
+@{
+    ViewBag.Title = "لیست سفارشات ";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+<hgroup class="title">
+    <h2>جهت اطلاعات بیشتر در رابطه با انواع نحوه پرداخت می توانید
+        <a class = "k-button k-button-icontext" href="@Url.Action("Payments", "Help")"  target="_blank">اینجا کلیک
+        </a>کنید.</h2>
+    <h2>جهت مشاهده جزئیات خرید خود بر روی مثلت کنار شماره فاکتور کلیک کنید</h2>
+    <br />
+</hgroup>
+<div class="k-rtl">
+    @( Html.Kendo().Grid(Model)
+           .Name("Grid")
+           .Pageable()
+           .Columns(columns =>
+                    {
+                        columns.Bound(item => item.OrderID).Width(100);
+                        columns.Bound(item => item.OrderDateLocalize).Width(150);
+                        columns.Bound(item => item.IsFinalizedType).Width(100);
+                        columns.Bound(item => item.OrderTotalLocalize).Width(100);
+                        columns.Bound(item => item.OrderID).Title("عملیات پرداخت").Filterable(false).Groupable(false)
+                            .Template(@<text>
+    @if (item.IsFinalized == IsFinalizedEnum.Unpaid)
+    {
+        @Html.ActionLink("پرداخت آنلاین", "OnlinePayment", new { id = @item.OrderID }, new { @class = "k-button k-button-icontext k-grid-delete" })
+        @Html.ActionLink("پرداخت از موجودی", "BalancePayment", new { id = @item.OrderID }, new { @class = "k-button k-button-icontext k-grid-delete" })
+        @Html.ActionLink("پرداخت آفلاین", "PosPayment", new { id = @item.OrderID }, new { @class = "k-button k-button-icontext k-grid-delete" })
+        @Html.ActionLink("حذف فاکتور", "DeleteFactor", new { id = @item.OrderID }, new { @class = "k-button k-button-icontext k-grid-delete" })
+
+    }
+    else if (item.IsFinalized == IsFinalizedEnum.Waiting)
+    {
+        @Html.Display("در انتظار تایید پرداخت")
+    }
+    else
+    {
+        @Html.Display("پرداخت شده")
+    }
+    </text>).Width(400);
+                    })
+           .DetailTemplate(
+               @<text>
+    @(Html.Kendo().Grid(item.OrderDetails)
+                          .Name("Orders_" + item.OrderID)
+                          .Columns(columns =>
+                                   {
+                                       columns.Bound(o => o.Product.ProductTitle).Title("نام محصول").Width(140);
+                                       columns.Bound(o => o.PriceUnit).Format("{0:#,0 ریال}").Title("قیمت").Width(200);
+                                   })
+                          .DataSource(dataSource => dataSource.Server())
+                          .Sortable()
+                          .Filterable()
+                          )
+    </text>
+           )
+           .RowAction(row => { row.DetailRow.Expanded = false; })
+          )
+</div>

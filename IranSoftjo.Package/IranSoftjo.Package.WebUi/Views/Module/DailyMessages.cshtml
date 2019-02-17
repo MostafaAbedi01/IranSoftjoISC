@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "نمایش پیامهای روزانه خودکار";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<hgroup class="title">
+    <h1>نمایش پیامهای روزانه خودکار</h1>
+    <hr />
+    <h2>ثبت 30 پیام نمایش پیامهای روزانه خودکار هر روز در صفحه مورد نظرتان</h2>
+</hgroup>
+<script language="javascript">
+    var msg = new Array();
+    Stamp = new Date();
+    today = Stamp.getDate();
+    msg[1] = "پيام روز 1";
+    msg[2] = "پيام روز 2";
+    msg[3] = "پيام روز 3";
+    msg[4] = "پيام روز 4";
+    msg[5] = "پيام روز 5";
+    msg[6] = "پيام روز 6";
+    msg[7] = "پيام روز 7";
+    msg[8] = "پيام روز 8";
+    msg[9] = "پيام روز 9";
+    msg[10] = "پيام روز 10";
+    msg[11] = "پيام روز 11";
+    msg[12] = "پيام روز 12";
+    msg[13] = "پيام روز 13";
+    msg[14] = "پيام روز 14";
+    msg[15] = "پيام روز 15";
+    msg[16] = "پيام روز 16";
+    msg[17] = "پيام روز 17";
+    msg[18] = "پيام روز 18";
+    msg[19] = "پيام روز 19";
+    msg[20] = "پيام روز 20";
+    msg[21] = "پيام روز 21";
+    msg[22] = "پيام روز 22";
+    msg[23] = "پيام روز 23";
+    msg[24] = "پيام روز 24";
+    msg[25] = "پيام روز 25";
+    msg[26] = "پيام روز 26";
+    msg[27] = "پيام روز 27";
+    msg[28] = "پيام روز 28";
+    msg[29] = "پيام روز 29";
+    msg[30] = "پيام روز 30";
+    msg[31] = "پيام روز 31";
+
+    function writeTip() {
+        document.write(msg[today]);
+    }
+</script>
+<p align="right">
+<b>پيام امروز:</b>  
+<script>
+    writeTip();
+</script>
+    
+    <br/>
+@Html.ActionLink("بازگشت به لیست ماژول ها","BuyCms", "Home",null, new {@class = "k-button k-button-icontext"} )
+

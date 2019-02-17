@@ -1,0 +1,161 @@
+﻿@font-face {
+    font-family: 'BKoodakBold';
+    src: url('/Content/fonts/BKoodakBold.eot') format('eot'), /* IE6–8 */
+    url('/Content/fonts/BKoodakBold.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('/Content/fonts/BKoodakBold.ttf') format('truetype'); /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
+}
+ .k-numerictextbox , .k-datepicker {
+    width: 100% !important;
+    margin: 5px 0 5px 0;
+    direction: ltr !important;
+ }
+/* styles for validation helpers */
+.inputNote {
+    color: #6f6f6f;
+    display: block;
+    font-size: 11px;
+    text-align: justify;
+}
+
+.field-validation-error {
+    color: #e80c4d;
+    font-weight: bold;
+}
+
+
+body {
+    background-image: url('/Package/Manhol/Photo/images.jpg') ;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #e80c4d;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #e80c4d;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+#title {
+    background-image: url('/Package/Manhol/Content/wp-content/themes/warta/img/title-background-medium.jpg') !important;
+    height: 150px;
+}
+
+/*@media(min-width: 731px)
+{
+    #title{
+    background-image: url('http://friskamax.com/warta/wp/wp-content/uploads/2009/05/sf-rowing-1366x150.jpg') !important;
+    height: 150px;}
+}
+
+@media(min-width: 1367px)
+{
+    #title{
+    background-image: url('http://friskamax.com/warta/wp/wp-content/uploads/2009/05/sf-rowing.jpg') !important;
+    height: 150px;}
+}
+
+@media(min-width: 828px)
+{
+    .boxed-style body{
+    background-image: url('http://friskamax.com/warta/wp/wp-content/uploads/2014/02/tree-247122-1366x768.jpg') !important;}
+}
+
+@media(min-width: 1367px){.boxed-style body{background-image: url('http://friskamax.com/warta/wp/wp-content/uploads/2014/02/tree-247122.jpg') !important;}}*/
+
+.displayLabelPage {
+    background: linear-gradient(to bottom, #f8fbfd 0%, #0F57A3 200%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border-radius: 5px;
+    border-style: outset;
+    border-width: 0.01px;
+    color: #5F2726;
+    font-size: 10px;
+    margin: 5px 0 8px;
+    padding: 8px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+
+.pager .current {
+    background-color: #6ea9bf;
+    border: 4px solid #6e99aa;
+    color: #fff;
+    font-weight: bold;
+    margin-top: 4px;
+    padding: 3px 5px;
+    text-align: center;
+}
+
+.pager a {
+    border: 2px solid #aaa;
+    padding: 3px 5px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.pager span, .pager a {
+    margin: 4px 3px;
+}
+
+.pager {
+    margin: 8px 3px;
+    padding: 3px;
+}
+
+
+.msgWrraper {
+    padding: 0 0 15px;
+    vertical-align: top;
+}
+
+.errorMsg {
+    background-color: red;
+    border-color: #CC2222;
+    color: black;
+}
+
+.msg {
+    font-weight: bold;
+    height: 30px;
+    padding: 5px;
+    text-align: right;
+    vertical-align: middle;
+}
+
+.msgImg {
+    background: url("/Images/Layout/msgIcon.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    height: 20px;
+    padding-bottom: 5px;
+    vertical-align: middle;
+    width: 20px;
+    margin-left: 10px;
+}
+
+.errorImg {
+    background-position: -40px 0;
+}
+
+.successMsg {
+    background-color: #7FE073;
+    border-color: #84C47B;
+    color: black;
+}

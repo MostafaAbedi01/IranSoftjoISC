@@ -1,0 +1,20 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.EscrowVm
+@{
+    ViewBag.Title = Model.Type == 1 ? "  ثبت کد انتقال دامین " : " ثبت کد بار نامه  ";
+    Layout = "~/Views/Shared/_AdminDashboardWithPanel.cshtml";
+}
+@using (Html.BeginForm("TrackingNumber", "Dashboard", FormMethod.Post, new { role = "form" }))
+{
+    <table class="form">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.EscrowID)
+        @Html.HiddenFor(m => m.StatusNext)
+        @Html.EnhancedLabelField(m => m.MobaadelehTypeTitle)
+        @Html.EnhancedLabelField(m => m.UsernameUserSaller)
+        @Html.EnhancedLabelField(m => m.CreateDate)
+        @Html.EnhancedLabelField(m => m.Price)
+        @Html.EnhancedEditorField(m => m.TrackingNumber)
+        @Html.EnhancedSubmit()
+    </table>
+}

@@ -1,0 +1,31 @@
+﻿@model bool
+@{
+    if (@Session["DomainName"] != null)
+    {
+        using (Html.BeginForm("DeleteDomainName", "Home", FormMethod.Post, new {id = "deleteDomainNameForm"}))
+        {
+            <span> نام سایت درخواستی : www.<b>@Session["DomainName"]</b>.ir</span>
+            if (Model)
+            {
+                <br/>
+            }
+            <a  class = "k-button k-button-icontext"  href="javascript:document.getElementById('deleteDomainNameForm').submit()">ویرایش اسم درخواستی سایت
+            </a>
+        }
+    }
+    else
+    {
+        using (Html.BeginForm("SaveDomainName", "Home", FormMethod.Post, new {id = "domainNameForm"}))
+        {
+            <span >www.</span>
+            <input type="text" value="" name="domainName" id="domainName" title="سفارش سایت" style="padding: 2px; width: 140px;" />
+            <span >.ir</span>
+            if (Model)
+            {
+                <br/>
+            }
+            <a  class = "k-button k-button-icontext" href="javascript:document.getElementById('domainNameForm').submit()">ثبت اسم درخواستی سایت
+            </a>
+        }
+    }
+}

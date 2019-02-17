@@ -1,0 +1,38 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.PosPaymentVM
+@{
+    ViewBag.Title = "پرداخت آفلاین - فیش بانکی یا کارت به کارت";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+<hgroup class="title">
+    <h2>جهت اطلاعات بیشتر در رابطه با انواع نحوه پرداخت می توانید
+        <a class = "k-button k-button-icontext" href="@Url.Action("Payments", "Help")"  target="_blank">
+            اینجا کلیک
+        </a> کنید.</h2>
+</hgroup>
+<p>
+    از لیست کشویی نوع پرداخت، فیش نقدی یا کارت به کارت را انتخاب کرده
+    و اطلاعات فیش واریزی (یا شماره تراکنش کارت به کارت) را وارد نموده
+    و روی دکمه ارسال کلیک کنید. با این کار اطلاعات فیش به واحد مالی شرکت ایران سافتجو ارسال می گردد
+    و معمولا در کمتر از یک روز کاری (در صورت صحت اطلاعات پرداخت) تایید خواهد شد.
+</p>
+<br/>
+
+<p>
+    @Html.EnhancedLabelField(model => model.AccountBalance) 
+</p>
+<br/>
+@using (Html.BeginForm())
+{
+    <table class="form">
+        
+        @Html.AntiForgeryToken()
+        @Html.EnhancedDropDownListField(model => model.PaymentType, Model.SelectListType)
+        @Html.EnhancedEditorField(model => model.Amount)
+        @Html.EnhancedEditorField(model => model.PaymentDate)
+        @Html.EnhancedEditorField(model => model.TrackingCode)
+        @Html.EnhancedTextAreaField(model => model.PaymentResponseMessage)
+        @Html.EnhancedSubmit("ثبت پرداخت آفلاین", new {@class = "k-button k-button-icontext"})
+
+    </table>
+}

@@ -1,0 +1,60 @@
+﻿<link rel="stylesheet" type="text/css" href="/Content/SlidingBackgroundImageMenu/style.css" />
+<link rel="stylesheet" type="text/css" href="/Content/SlidingBackgroundImageMenu/sbimenu.css" />
+@*<link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css' />
+<link href='http://fonts.googleapis.com/css?family=News+Cycle&v1' rel='stylesheet' type='text/css' />*@
+<div class="container">
+    <div class="content">
+        <div id="sbi_container" class="sbi_container" >
+            <div class="sbi_panel" data-bg="/Package/Massageabc/Images/image-sbi-3.jpg">
+                <a class="sbi_label" href="#">کالری تصاویر</a>
+                <div class="sbi_content">
+                    <ul>
+                        <li><a href="#"> تصاویر ماساژ پا</a></li>
+                        <li><a href="#"> تصاویر ماساژ صورت</a></li>
+                        <li><a href="#"> تصاویر ماساژ لاغــری</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sbi_panel" data-bg="/Package/Massageabc/Images/image-sbi-2.jpg">
+                <a class="sbi_label" href="#">مراکز تحت پوشش آدونیس</a>
+                <div class="sbi_content">
+                    <ul>
+                        <li><a href="#">تهران</a></li>
+                        <li><a href="#">پردیس</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sbi_panel" data-bg="/Package/Massageabc/Images/image-sbi-3.jpg">
+                <a class="sbi_label" href="#">ماساژ های محبوب</a>
+                <div class="sbi_content">
+                    <ul>
+                        <li><a href="#">آرومـــا</a></li>
+                        <li><a href="#">ماساژ پا</a></li>
+                        <li><a href="#">ماساژ صورت</a></li>
+                        <li><a href="#">ماساژ لاغــری</a></li>
+                        <li><a href="#">ماساژ سنگ های داغ</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/Scripts/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="/Scripts/SlidingBackgroundImageMenu/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="/Scripts/SlidingBackgroundImageMenu/jquery.bgImageMenu.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#sbi_container').bgImageMenu({
+            defaultBg: '/Package/Massageabc/Images/image-sbi-default.jpg',
+            border: 2,
+            width: 965,
+            type: {
+                mode: 'seqHorizontalSlide',
+                speed: 250,
+                easing: 'jswing',
+                seqfactor: 100,
+                width: 970,
+            }
+        });
+    });
+</script>

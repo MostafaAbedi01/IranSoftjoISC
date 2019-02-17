@@ -1,0 +1,37 @@
+﻿@model dynamic
+@{
+    ViewBag.Title = "درآمد نمایندگی";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+
+<h3 style="color: red">
+    شما نمایندگی ایران سافتجو را ندارید.
+</h3>
+  <h2 style="font-size: 12px">جهت دریافت نمایندگی شرکت نرم افزاری ایران سافتجو و بهرمندی و دریافت از حداقل 10% تخفیف در هر گونه خرید میتوانید هم اکنون درخواست خود را جهت دریافت نمایندگی شرکت ایران سافتجو از طریق 
+      @Html.ActionLink("این لینک", "RequestAgency", "Home", null, new {@class = "k-button k-button-icontext"}) ارسال نمایید.</h2>
+<p>
+    جهت مشاهده شرایط و ضوابط دریافت نمایندگی شرکت ایران سافتجو 
+    <a id="AgencyConditions"  class="k-button k-button-icontext"> اینجا کلیک</a>
+    کنید.
+</p>
+
+   @(Html.Kendo().Window()
+      .Name("window")
+      .Width(550)
+      .Height(550)
+      .Draggable()
+      .Resizable()
+      .Title("شرایط و ضوابط دریافت نمایندگی")
+      .LoadContentFrom("AgencyConditions", "Help")
+      .Iframe(true)
+      .Visible(false)
+      .Actions(actions => actions.Refresh().Maximize().Close())
+      )
+    <script>
+        $(document).ready(function() {
+            $("#AgencyConditions")
+                .bind("click", function() {
+                    $("#window").data("kendoWindow").center().open();
+                });
+        });
+    </script>

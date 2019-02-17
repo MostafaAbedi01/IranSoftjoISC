@@ -1,0 +1,36 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model  IranSoftjo.Package.WebUi.ViewModels.SlideShowVM
+@{
+    ViewBag.Title = "افزودن اسلایدر";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm("Edit", "SlideShow", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <table class="form">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.SlideShowID)
+        @Html.HiddenFor(model => model.SlideShowImageUrl)
+        @Html.EnhancedTextAreaField(model => model.SlideShowTitle)
+        @Html.EnhancedTextAreaField(model => model.SlideShowSubTitle)
+        @Html.EnhancedEditorField(model => model.SlideShowHref)
+        <p>سایز عکس باید حتما 960 در 320 باشد.</p>
+        <td class="labelWrp">
+            <label for="ProductGroupID" class="fieldLabel">@Html.LabelFor(model => model.SlideShowImageUrl)</label>
+        </td>
+        <td colspan="1" class="inputWrp">
+            @Html.Kendo().Upload().Name("file").Multiple(false).Async(async => async.Save("SaveFile", "Product"))
+            <img style="width: 100px;" src="@Model.SlideShowImageUrl"/>
+        </td>
+        @Html.EnhancedSubmit("ذخیره")
+    </table>
+}
+
+<div>
+    @Html.ActionLink("بازگشت به لیست", "Index")
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#file").closest(".k-upload").find("span").text("انتخاب تصویر");
+    });
+</script>

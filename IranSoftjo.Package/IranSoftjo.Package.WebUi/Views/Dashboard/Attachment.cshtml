@@ -1,0 +1,31 @@
+﻿@model IEnumerable<IranSoftjo.Package.WebUi.ViewModels.EscrowAttachmentVm>
+@{
+    ViewBag.Title = "ضمائم مبادله";
+    Layout = "~/Views/Shared/_AdminDashboardWithPanel.cshtml";
+}
+
+<div class="k-rtl">
+    @(Html.Kendo().Grid(Model)
+          .Name("Grid")
+          .Columns(columns =>
+          {
+                  columns.Bound(item => item.ThumbnailImageUrl).Width(100)
+                       .Template(@@<div style="text-align: center;"><a target="_blank" href="@item.ImageUrl"><img style=" width: 50px;height: 50px" src="@item.ThumbnailImageUrl" title="@item.EscrowAttachmentID" /></a></div>);
+              columns.Bound(model => model.CreateDate);
+              columns.Bound(model => model.NameUser);
+              columns.Bound(model => model.Comment);
+          })
+          .ToolBar(toolbar => toolbar.Custom().Action("AddAttachment", "Dashboard").Text("افزودن ضمیمه جدید").HtmlAttributes(new { @class = "btn btn-primary blue" }))
+          .Pageable()
+          .Sortable()
+          .Scrollable()
+          .Filterable()
+          .Resizable(resize => resize.Columns(true))
+          .ColumnMenu()
+          .HtmlAttributes(new { style = "" })
+          .DataSource(dataSource => dataSource
+              .Server()
+              .Model(model => model.Id(item => item.EscrowAttachmentID))
+          )
+    )
+</div>

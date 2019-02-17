@@ -1,0 +1,53 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.RasProductVM
+@{
+    ViewBag.Title = "افزودن محصول";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+@using (Html.BeginForm("Create", "RasProduct", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <table class="form">
+        @Html.AntiForgeryToken()
+        @Html.EnhancedDropDownList(model => model.ProductGroupID, "ProductGroupID")
+        @Html.EnhancedDropDownList(model => model.ProductTypeID, "ProductTypeID")
+        <span id="states-loading-progress" style="display: none;">
+            @Html.EnhancedDropDownList(model => model.ProductIdHardener, "ProductIdHardener")
+            @Html.EnhancedDropDownList(model => model.ProductIdThinner, "ProductIdThinner")
+        </span>
+        @Html.EnhancedEditorField(model => model.ProductTitle)
+        @Html.EnhancedEditorField(model => model.ProductCode)
+        @Html.EnhancedTextAreaField(model => model.ProductDescription)
+        @Html.EnhancedCheckBoxField(model => model.IsActive)
+        @Html.EnhancedEditorField(model => model.ProductOrder)
+        @Html.EnhancedSubmit("ذخیره")
+    </table>
+}
+
+<script type="text/javascript">
+    $(function () {
+        $("#ProductGroupID").change(function () {
+            
+            var ProductIdHardener = $("#ProductIdHardener");
+            var ProductIdThinner = $("#ProductIdThinner");
+            var ddlStates = $("#ProductGroupID");
+            ddlStates = $('#ProductGroupID').val();
+            if (ddlStates == 1) {
+                ProductIdHardener.show();
+                ProductIdThinner.show();
+  
+            } else {
+                ProductIdHardener.hide();
+                ProductIdThinner.hide();
+            }
+       
+           
+        });
+    });
+</script>
+<div>
+    @Html.ActionLink("بازگشت به لیست", "Index")
+</div>

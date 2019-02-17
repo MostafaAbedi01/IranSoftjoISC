@@ -1,0 +1,31 @@
+﻿@model List<IranSoftjo.Package.WebUi.ViewModels.PageVM>
+@{
+    ViewBag.Title = Session["PageGroupTitle"];
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<h3 class="BookName">@Session["PageGroupTitle"]
+
+</h3>
+@Html.Partial("_ScriptBook")
+@Html.Partial("_GoToPage")
+<div style="float: right; margin: 10px 55px 0 0; padding-bottom: 10px;">
+    <div id="mybook" style="float: right; margin-right: 23px;">
+
+        <div id="mainBook" style="float: right; width: 100%;" runat="server" class="b-load">
+
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                <div  id='Div'@item.PageId class="PageDiv">
+                    <h4 style="margin: 4px; text-align: center">
+                        @item.PageTitle
+                    </h4>
+                    @Html.Raw(item.PageText)
+                </div>
+                }
+            }
+
+        </div>
+    </div>
+</div>

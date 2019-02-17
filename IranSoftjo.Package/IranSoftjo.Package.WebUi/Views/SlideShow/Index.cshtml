@@ -1,0 +1,33 @@
+﻿@model IEnumerable<IranSoftjo.Package.WebUi.ViewModels.SlideShowVM>
+@{
+    ViewBag.Title = "افزودن اسلایدر";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="k-rtl">
+        @(Html.Kendo().Grid(Model)
+              .Name("Grid")
+              .Columns(columns =>
+                  {
+				  	columns.Bound(model => model.SlideShowID).Visible(false);
+                    columns.Bound(model => model.SlideShowTitle);
+                    columns.Bound(model => model.SlideShowSubTitle);
+                         columns.Bound(item => item.SlideShowImageUrl).Width(100)
+                        .Template(@@<div style="text-align: center;"><img style=" width: 50px;height: 50px" src="@item.SlideShowImageUrl" title="@item.SlideShowTitle"/></div>);					
+   	
+                    columns.Bound(item => @item.SlideShowID).Title("دستورات").Filterable(false).Groupable(false)
+							.Template(@<text>
+									@Html.ActionLink("ویرایش", "Edit", new {id = @item.SlideShowID}, new {@class = "k-button k-button-icontext k-grid-edit"})
+									@Html.ActionLink("حذف", "Delete", new {id = @item.SlideShowID}, new {@class = "k-button k-button-icontext k-grid-delete"})
+									</text>).Width(200);  
+								                 
+		})
+		.ToolBar(toolbar => toolbar.Custom().Action("Create","SlideShow").Text("افزودن"))
+	    .Sortable()
+           .Scrollable()
+           .Filterable()    .HtmlAttributes(new { style = "height:500px;" })         
+		.DataSource(dataSource => dataSource
+									.Server()
+									.Model(model => model.Id(item => item.SlideShowID))
+					)              
+	)
+ </div>

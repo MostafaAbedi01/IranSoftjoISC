@@ -1,0 +1,124 @@
+﻿@using IranSoftjo.Core.Web.Mvc
+@using IranSoftjo.Core.Web.Mvc.Html
+@using IranSoftjo.Package.DataModel
+@model IranSoftjo.Package.WebUi.ViewModels.ProfileVm
+@{
+    ViewBag.Title = "حساب کاربری من";
+    var user = Session["User"] as User;
+    Layout = "~/Views/Shared/_AdminDashboard.cshtml";
+    var _db = new Entities();
+}
+<div class="row">
+    <!-- BEGIN PROFILE SIDEBAR -->
+    <div class="col-md-3 profile-sidebar">
+        <!-- PORTLET MAIN -->
+        <div class="portlet light profile-sidebar-portlet ">
+            <!-- SIDEBAR USERPIC -->
+            <div class="profile-userpic">
+                @*@if (user != null && !string.IsNullOrEmpty(user.ImageUrlProfile))
+                {
+                    <img alt="کاربر" class="img-responsive img-circle" src="@user.ImageUrlProfile" />
+                }
+                else
+                {
+                    <img alt="کاربر" class="img-responsive img-circle" src="/PackageAdmin/img/User.png" />
+                }*@
+                <img alt="کاربر" class="img-responsive img-circle" src="/PackageAdmin/img/User.png" />
+            </div>
+            <!-- END SIDEBAR USERPIC -->
+            <!-- SIDEBAR USER TITLE -->
+            <div class="profile-usertitle">
+                <div class="profile-usertitle-name" style="font-size: 18px;">
+                    <br> @user.FirstName @user.LastName
+                </div>
+                <div class="profile-usertitle-job" style="font-size: 16px;"> @user.Username@@ </div>
+            </div>
+            <!-- END SIDEBAR USER TITLE -->
+        </div>
+        <!-- END PORTLET MAIN -->
+    </div>
+    <!-- END BEGIN PROFILE SIDEBAR -->
+    <!-- BEGIN PROFILE CONTENT -->
+    <div class="col-md-9 profile-content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet light ">
+                    <div class="portlet-title tabbable-line">
+                        <div class="caption caption-md">
+                            <i class="icon-globe theme-font hide"></i>
+                            <span class="caption-subject font-blue-madison bold uppercase">حساب کاربری</span>
+                        </div>
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#tab_1_1" data-toggle="tab" aria-expanded="true">ویرایش حساب کاربری</a>
+                            </li>
+                            <li class="">
+                                <a href="#tab_1_2" data-toggle="tab" aria-expanded="false">تاریخچه ورود و خروج ها</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="tab-content">
+                            <!-- PERSONAL INFO TAB -->
+                            <div class="tab-pane active" id="tab_1_1">
+                                @Html.GetMessage("/Content/emsgIcon.gif")
+
+                                <table class="form">
+                                    @using (Html.BeginForm("ProfileUser", "Account", FormMethod.Post, new { role = "form" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.HiddenFor(model => model.Username)
+                                        @Html.EnhancedLabelField(model => model.Username)
+                                        @Html.EnhancedEditorField(model => model.UsernameNew)
+                                        @Html.EnhancedEditorField(model => model.Password)
+                                        @Html.EnhancedEditorField(model => model.NewPassword)
+                                        @Html.EnhancedEditorField(model => model.NewPasswordConfirm)
+                                        <tr>
+                                            <td class="labelWrp">
+                                                <label for="UserImageUrl" class="fieldLabel">@Html.LabelFor(model => model.ImageUrlProfile):</label>
+                                            </td>
+                                            <td colspan="1" class="inputWrp">
+                                                @Html.Kendo().Upload().Name("file").Multiple(false).Async(async => async.Save("SaveFile", "Account")).HtmlAttributes(new { accept = ".png,.jpg" })
+                                                <br>
+                                                <span data-valmsg-replace="true" data-valmsg-for="ImageUrlProfile" class="field-validation-valid"></span>
+                                                <img style="width: 100px;" src="@Model.ImageUrlProfile" />
+                                            </td>
+                                        </tr>
+                                        @Html.EnhancedSubmit("ویرایش", new { @class = "k-button k-button-icontext" })
+                                    }
+                                </table>
+                            </div>
+                            <!-- END PERSONAL INFO TAB -->
+                            <!-- CHANGE AVATAR TAB -->
+                            <div class="tab-pane" id="tab_1_2">
+                                <div class="k-rtl">
+                                    @(Html.Kendo().Grid(_db.LoginLogs)
+                                          .Name("Grid")
+                                          .Columns(columns =>
+                                          {
+                                              columns.Bound(model => model.Id).Title("سریال").Width(150);
+                                              columns.Bound(model => model.TypeLogEnum).Title("نوع").Width(150);
+                                              columns.Bound(model => model.LogDatetime).Title("تاریخ").Width(200);
+                                              columns.Bound(model => model.LogIp).Title("آی پی").Width(200);
+                                          })
+                                          .Pageable()
+                                          .Sortable()
+                                          .Scrollable()
+                                          .Filterable()
+                                          .DataSource(dataSource => dataSource
+                                              .Server()
+                                              .Model(model => model.Id(item => item.Id))
+                                          )
+                                    )
+                                </div>
+
+                            </div>
+                            <!-- END CHANGE AVATAR TAB -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END PROFILE CONTENT -->
+</div>

@@ -1,0 +1,34 @@
+﻿@model IEnumerable<IranSoftjo.Package.WebUi.Android.ViewModels.UserVm>
+@{
+    ViewBag.Title = "لیست کاربران";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="k-rtl">
+    @(Html.Kendo().Grid(Model)
+          .Name("Grid")
+          .Columns(columns =>
+                   {
+                       columns.Bound(model => model.UserID).Visible(false);
+                       columns.Bound(model => model.RoleTitle);
+                       columns.Bound(model => model.FirstName);
+                       columns.Bound(model => model.LastName);
+                       columns.Bound(model => model.Username);
+                       columns.Bound(item => @item.UserID).Title("دستورات").Filterable(false).Groupable(false)
+                           .Template(@<text>
+                                          @Html.ActionLink("ویرایش", "Edit", new {id = @item.UserID}, new {@class = "k-button k-button-icontext k-grid-edit"})
+                                          @Html.ActionLink("حذف", "Delete", new {id = @item.UserID}, new {@class = "k-button k-button-icontext k-grid-delete"})
+                                      </text>).Width(200);
+                   })
+          .ToolBar(toolbar => toolbar.Custom().Action("Create", "User").Text("<i class='fa fa fa-plus'></i> افزودن کاربر جدید ").HtmlAttributes(new { @class = "btn btn-circle default green-stripe" })
+          )
+          .Pageable()
+          .Sortable()
+          .Scrollable()
+          .Filterable()
+          .HtmlAttributes(new {style = "height:500px;"})
+          .DataSource(dataSource => dataSource
+              .Server()
+              .Model(model => model.Id(item => item.UserID))
+          )
+          )
+</div>

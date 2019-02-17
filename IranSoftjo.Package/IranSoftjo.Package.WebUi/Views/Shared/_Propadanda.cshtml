@@ -1,0 +1,31 @@
+﻿@using IranSoftjo.Package.WebUi.Configs
+@model IranSoftjo.Package.DataModel.SiteSetting
+<table width="95%">
+    <tbody>
+        <tr align="center">
+            <td>
+                <img width="468" height="60" alt="@Model.WebSiteTitle" src="/Package/@PackageSettings.Active.SiteTheme/images/banner/Banner1_468_60.gif"></td>
+        </tr>
+        <tr align="center">
+            <td>
+                <textarea class="TextareaBanner">
+&lt;!-- @Model.WebSiteName  --&gt;
+&lt;a href="@Model.WebSiteName" target="_blank"&gt;&lt;img  alt="@Model.WebSiteTitle" src="@Model.WebSiteName/Package/@PackageSettings.Active.SiteTheme/images/banner/Banner1_468_60.gif" width="468" height="60" border="0" alt=""&gt;&lt;/a&gt;
+</textarea>
+            </td>
+        </tr>
+
+        <tr align="center">
+            <td>
+                <img width="120" height="240" alt="@Model.WebSiteTitle" src="~/Package/@PackageSettings.Active.SiteTheme/images/banner/Banner1_120_240.gif"></td>
+        </tr>
+        <tr align="center">
+            <td>
+                <textarea class="TextareaBanner">
+&lt;!-- @Model.WebSiteName  --&gt;
+&lt;a href="@Model.WebSiteName" target="_blank"&gt;&lt;img  alt="@Model.WebSiteTitle" src="@Model.WebSiteName/Package/@PackageSettings.Active.SiteTheme/images/banner/Banner1_120_240.gif" width="120" height="240" border="0" alt=""&gt;&lt;/a&gt;
+</textarea></td>
+        </tr>
+
+    </tbody>
+</table>

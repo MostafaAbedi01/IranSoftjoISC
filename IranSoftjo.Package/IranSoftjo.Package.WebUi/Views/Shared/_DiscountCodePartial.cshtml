@@ -1,0 +1,30 @@
+﻿@model bool
+@{
+    if (@Session["DiscountCode"] != null)
+    {
+        using (Html.BeginForm("DeleteDiscountCode", "Home", FormMethod.Post, new {id = "discountCodeNameForm"}))
+        {
+            <span> کد تخفیف شما : <b>@Session["DiscountCode"]</b></span>
+            if (Model)
+            {
+                <br/>
+            }
+            <a  class = "k-button k-button-icontext"  href="javascript:document.getElementById('discountCodeNameForm').submit()">ویرایش کد تخفیف
+            </a>
+        }
+    }
+    else
+    {
+        using (Html.BeginForm("SaveDiscountCode", "Home", FormMethod.Post, new {id = "DiscountCodeForm"}))
+        {
+            <span >کد ۷ رقمی تخفیف : </span>
+            <input type="text" value="" name="DiscountCode" id="DiscountCode" title="سفارش سایت" style="padding: 2px; width: 140px;" />
+            if (Model)
+            {
+                <br/>
+            }
+            <a class = "k-button k-button-icontext"  href="javascript:document.getElementById('DiscountCodeForm').submit()">ثبت کد تخفیف
+            </a>
+        }
+    }
+}

@@ -1,0 +1,29 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.CommentVM
+@{
+    ViewBag.Title = "ویرایش نظر";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@using (Html.BeginForm())
+{
+       <table class="form">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "موارد مشخص شده با رنگ قرمز را مجددا بررسی نمایید.")
+            @Html.HiddenFor(model => model.CommentID)
+            @Html.HiddenFor(model => model.SubID)
+            @Html.HiddenFor(model => model.CommentDate)
+            @Html.EnhancedEditorField(model => model.UserEmail)
+            @Html.EnhancedEditorField(model => model.UserName)
+            @Html.EnhancedEditorField(model => model.UserSite)
+            @Html.EnhancedCheckBoxField(model => model.IsActive)
+            @Html.EnhancedEditorField(model => model.CommentText)
+            @Html.EnhancedSubmit("ویرایش", new {@class = "k-button k-button-icontext"})
+        }
+    </table>
+}
+<br/>
+<div>
+    @Html.ActionLink("بازگشت به لیست", "Index")
+</div>

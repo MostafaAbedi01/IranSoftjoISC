@@ -1,0 +1,459 @@
+﻿@using IranSoftjo.Core.Web.Mvc
+@using IranSoftjo.Package.DataModel
+@using IranSoftjo.Package.WebUi.Configs
+@{
+    var db = new Entities();
+    var siteSettings = db.SiteSettings.FirstOrDefault();
+    ViewBag.MetaDescription = siteSettings.MetaDescription + " , " + ViewBag.Title; ;
+    ViewBag.Metakeywords = siteSettings.Metakeywords + "," + ViewBag.Title;
+    ViewBag.TitleTag = ViewBag.Title;
+    ViewBag.FirstAndLastName = "";
+    if (Request.IsAuthenticated)
+    {
+        var userName = User.Identity.Name;
+        var user = db.Users.FirstOrDefault(d => d.Username == userName);
+        if (user != null)
+        {
+            ViewBag.FirstAndLastName = user.FirstName + " " + user.LastName;
+        }
+    }
+    if (ViewBag.HomeIndex == "HomeIndex")
+    {
+        ViewBag.TitleTag = "سامانه هوشمند نظارت بر عملکرد پیمانکاران بهره بردار شبکه تاسیسات آب و فاضلاب تهران";
+    }
+    var active = "active";
+    var activeitemGalleries = "active";
+    var lstTblManhols =
+     (from n in db.TblManhols.OrderByDescending(d => d.TblManholId)
+      select new { n.TblManholId, n.NoeManhol, n.CodeMakani, n.CodeGis, n.DateSabt, n.CodePm }).ToList();
+}
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <title>@ViewBag.TitleTag </title>
+    <meta />
+    <meta name="keywords" content="@ViewBag.Metakeywords " />
+    <meta name="description" content="@ViewBag.MetaDescription " />
+    <meta name="author" content="Mostafa Abedi , مصطفی عابدی" />
+    <meta name="copyright" content="IranSoftjo , ایران سافتجو" />
+    <link href="@siteSettings.IconImageUrl" rel="shortcut icon" type="image/x-icon" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @*@Scripts.Render("~/bundles/jquery")*@
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+
+    @if (ViewBag._LayoutAdmin == "_LayoutAdmin")
+    {
+        <link href="@Url.Content("~/Content/kendo/2014.3/kendo.common.min.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/kendo/2014.3/kendo.rtl.min.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/kendo/2014.3/kendo.default.min.css")" rel="stylesheet" type="text/css" />
+        @*<script src="@Url.Content("~/Scripts/ShamsiDatePicker/kendo.all.min.js")"> </script>*@
+        <script src="/Scripts/kendo/2014.3/kendo.all.min.js"> </script>
+        <script src="/Scripts/kendo/2014.1.318/kendo.aspnetmvc.min.js"> </script>
+        <script src="~/Scripts/kendo/2014.3/Shamsi/JalaliDate.js"></script>
+        <script src="~/Scripts/kendo/2014.3/Shamsi/kendo.web.js"></script>
+        <script src="~/Scripts/kendo/2014.3/Shamsi/fa-IR.js"></script>
+
+
+    }
+    else
+    {
+        <script type='text/javascript' src='/Package/Manhol/Content/wp-includes/js/jquery/jquery.js'></script>
+        <script type='text/javascript' src='/Package/Manhol/Content/wp-includes/less.min.js'></script>
+        <script type='text/javascript' src='/Package/Manhol/Content/wp-includes/js/jquery/jquery.js@ver=1.11.0'></script>
+        <script type='text/javascript' src='/Package/Manhol/Content/wp-includes/js/jquery/jquery-migrate.min.js@ver=1.2.1'></script>
+    }
+    <link rel="stylesheet" href="~/Package/Manhol/Content/Theme.css?@PackageSettings.Active.Version" />
+    <link rel="author" href="http://www.iransoftjo.com/" />
+    @*<link rel='stylesheet' id='bbp-default-css' href='/Package/Manhol/Content/wp-content/plugins/bbpress/templates/default/css/bbpress.css' type='text/css' media='screen' />
+        <link rel='stylesheet' id='woocommerce-layout-css' href='/Package/Manhol/Content/wp-content/plugins/woocommerce/assets/css/woocommerce-layout.css' type='text/css' media='all' />*@
+    <link rel='stylesheet' id='woocommerce-smallscreen-css' href='/Package/Manhol/Content/wp-content/plugins/woocommerce/assets/css/woocommerce-smallscreen.css' type='text/css' media='only screen and (max-width: 768px)' />
+    <link rel='stylesheet' id='warta-style-css' href='/Package/Manhol/Content/wp-content/themes/warta/css/style.min.css' type='text/css' media='all' />
+    @*<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="/Package/Manhol/Content/wp-includes/wlwmanifest.xml" />*@
+    <link rel="stylesheet/less" type="text/css" href="/Package/Manhol/Content/Theme.css">
+    <link rel="stylesheet" type="text/css" href="/Package/Manhol/Content/wp-content/themes/warta/css/rtl.min.css">
+    <link rel="stylesheet" href="/Package/Manhol/Content/wp-content/themes/warta/rtl.css" type="text/css" media="screen" />
+    <style type="text/css" title="dynamic-css" class="options-output">
+        #main-nav-collapse {
+            margin-right: 0px!important;
+        }
+         body, p, blockquote, dt, dd, #blog-detail #main-content .post-navigation .nav-previous .meta-nav, #blog-detail #main-content .post-navigation .nav-next .meta-nav {
+             font-weight: normal;
+             font-style: normal;
+         }
+
+        h1, h2, h3, h4, h5, h6, .widget .nav-tabs li a, .author.widget .name, .widget_rss li > a.rsswidget, .widget_recent_comments .recentcomments a:last-child, .widget_recent_entries a, .cart_list li a, .product_list_widget li a {
+            font-weight: 700;
+            font-style: normal;
+            font-family: BKoodakBold;
+        }
+
+        .widget header h4, .widget .nav-tabs li a, .breaking-news header h4, #footer-main .title h4, #footer-main .nav-tabs a {
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        .navbar {
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        #title .container .title-container .primary {
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        #title .container .title-container .secondary {
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        .post-meta a, .comment-meta a, .comment-container .reply a, #reviews #comments ol.commentlist li .meta {
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        button, input[type=button], input[type=reset], input[type=submit], .btn, .button, #respond input#submit {
+            font-weight: 700;
+            font-style: normal;
+        }
+    </style>
+
+    <style>
+        #main-nav .navbar-header .navbar-brand img {
+            height: 58px;
+            margin-top: -20px;
+        }
+    </style>
+</head>
+
+<body class="rtl home page page-id-1727 page-template-default group-blog">
+
+    <header>
+        <!-- TOP NAVBAR
+        =============== -->
+        <nav class="navbar navbar-inverse " id="top-nav" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <a class="sr-only" href="#content">پرش به محتوا</a>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top-nav-collapse">
+                        <span class="sr-only">منو</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="top-nav-collapse">
+                    <ul id="menu-short" class="nav navbar-nav">
+                        <li id="menu-item-1833" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-1727 current_page_item menu-item-1833 active"><a title="صفحه اصلی" href="@Url.Action("Index", "Home")">صفحه اصلی</a></li>
+                        <li id="menu-item-1834" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1834"><a title="تماس با ما" href="@Url.Action("PageText", "Home", new {id = 1})"> <i class="fa fa-phone"></i> تماس با ما</a></li>
+
+                        @if (Request.IsAuthenticated)
+                        {
+                            <li id="menu-item-2028" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2028"><a title="دانلود نسخه اندروید" href="http://www.iransoftjoo.ir/Content/Iransoftjo.VistiManhole.apk"> <i class="fa fa-android"></i> دانلود اندروید</a></li>
+                            <li id="menu-item-2028" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2028"><a title="دانلود نسخه آیفون" href="#"> <i class="fa fa-apple"></i> دانلود آیفون</a></li>
+                            <li id="menu-item-2028" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2028"><a title="راهنمای سیستم" href="http://www.iransoftjoo.ir/Package/Manhol/Help.pdf"> <i class="fa fa-question"></i> راهنما</a></li>
+                            <li id="menu-item-1834" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1834">
+                                <a title="خروج" href="@Url.Action("Logout", "Account")">خروج از کاربری @ViewBag.FirstAndLastName </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li id="menu-item-1834" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1834"><a title="ورود" href="@Url.Action("Login", "Account")">ورود</a></li>
+                        }
+                    </ul>
+                    <form class="navbar-form navbar-right" method="get" action="#" role="search">
+                        <button type="submit">
+                            <span class="fa fa-search"></span>
+                            <span class="sr-only">جستجو</span>
+                        </button>
+                        <label class="sr-only" for="top_search_form">جستجو</label>
+                        <input id="top_search_form"
+                               name="s"
+                               type="search"
+                               placeholder="جستجو&hellip;"
+                               value="">
+                    </form>
+
+                    <!--Addon menu-->
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/Home/ListRSS" title="RSS" target="_blank">
+                                <i class="sc-sm sc-dark sc-rss"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- .navbar-collapse -->
+            </div>
+            <!--.container-->
+        </nav>
+        <!--#top-nav-->
+        <!-- MAIN NAVIBAR
+        ================= -->
+        <nav class="navbar navbar-default" id="main-nav" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header" style="float: left !important;">
+                    <a class="sr-only" href="#content">پرش به محتوا</a>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav-collapse">
+                        <span class="sr-only">منو</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <a class="navbar-brand" href="@Url.Action("index1", "Home")" rel="home">
+                        <img width="95" height="30" src="/Package/Manhol/Content/wp-content/uploads/2009/05/logo.png" class="attachment-full" alt="لوگو" />
+                    </a>
+
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="main-nav-collapse" style="margin-right: 0px !important">
+                    <ul id="menu-main-menu" class="nav navbar-nav navbar-right" style="float: right !important;">
+                        <li id="menu-item-1733" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-1727 current_page_item menu-item-1733">
+                            <a href="@Url.Action("index1", "Home")"><i class="fa fa-home"></i> صفحه اصلی </a>
+                        </li>
+                        @if (Request.IsAuthenticated)
+                        { 
+                            if (ViewBag.HomeIndex == "Index2")
+                            {
+                                <li class="menu-item  dropdown">
+                                    <a title="شناسنامه شیرخط ها" href="@Url.Action("ManholList", "Manhol")"> <i class="fa fa-save"></i>شناسنامه شیرخط ها </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="menu-item  dropdown">
+                                    <a title="شناسنامه منهول ها" href="@Url.Action("ManholList", "Manhol")"> <i class="fa fa-save"></i>شناسنامه منهول ها </a>
+                                </li>
+                            }
+
+                        <li class="menu-item  dropdown">
+                            <a title="جستجو کد روی نقشه " href="@Url.Action("SearchMap", "Manhol")"> <i class="fa fa-search"></i> جستجو روی نقشه </a>
+                        </li>
+
+                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2183 dropdown">
+                            <a title=" ثبت دستور کار" href="@Url.Action("Add", "ManholInspection")"> <i class="fa fa-android"></i>ثبت دستورکار </a>
+                            <ul role="menu" class=" dropdown-menu">
+                                <li id="menu-item-2240" class=" menu-item menu-item-type-custom menu-item-object-custom menu-item-2240">
+                                    <a title="بازدید منهول" href="@Url.Action("Add", "ManholInspection")"> برنامه بازرسی  </a>
+                                </li>
+                                <li role="presentation" class="divider"></li>
+                                <li id="menu-item-2240" class=" menu-item menu-item-type-custom menu-item-object-custom menu-item-2240">
+                                    <a title="بازدید منهول" href="@Url.Action("Add", "ManholInspection")"> برنامه شستشو</a>
+                                </li>
+                                <li role="presentation" class="divider"></li>
+                                <li id="menu-item-2240" class=" menu-item menu-item-type-custom menu-item-object-custom menu-item-2240">
+                                    <a title="بازدید منهول" href="@Url.Action("Add", "ManholInspection")"> برنامه سمپاشی</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2183 dropdown">
+                            <a title="نقشه آنلاین دستور کارها" href="@Url.Action("Index", "Manhol")"> <i class="fa fa-map-marker"></i> نقشه آنلاین دستورکارها </a>
+                            <ul role="menu" class=" dropdown-menu">
+                                <li id="menu-item-2240" class=" menu-item menu-item-type-custom menu-item-object-custom menu-item-2240">
+                                    <a title="بازدید منهول" href="@Url.Action("Index", "Manhol")"> برنامه بازرسی</a>
+                                </li>
+                                <li role="presentation" class="divider"></li>
+                                <li id="menu-item-2240" class=" menu-item menu-item-type-custom menu-item-object-custom menu-item-2240">
+                                    <a title="بازدید منهول" href="@Url.Action("Index", "Manhol")"> برنامه شستشو</a>
+                                </li>
+                                <li role="presentation" class="divider"></li>
+                                <li id="menu-item-2240" class=" menu-item menu-item-type-custom menu-item-object-custom menu-item-2240">
+                                    <a title="بازدید منهول" href="@Url.Action("Index", "Manhol")"> برنامه سمپاشی</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2183 dropdown">
+                            <a title="دستور کارهای انجام شده" href="@Url.Action("List", "ManholInspection")"> <i class="fa fa-list"></i>دستورکارانجام شده</a>
+                            <ul role="menu" class=" dropdown-menu">
+                                <li id="menu-item-2240" class=" menu-item menu-item-type-custom menu-item-object-custom menu-item-2240">
+                                    <a title="بازدید منهول" href="@Url.Action("List", "ManholInspection")"> برنامه بازرسی</a>
+                                </li>
+                                <li role="presentation" class="divider"></li>
+                                <li id="menu-item-2240" class=" menu-item menu-item-type-custom menu-item-object-custom menu-item-2240">
+                                    <a title="بازدید منهول" href="@Url.Action("List", "ManholInspection")"> برنامه شستشو</a>
+                                </li>
+                                <li role="presentation" class="divider"></li>
+                                <li id="menu-item-2240" class=" menu-item menu-item-type-custom menu-item-object-custom menu-item-2240">
+                                    <a title="بازدید منهول" href="@Url.Action("List", "ManholInspection")"> برنامه سمپاشی</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2183 dropdown">
+                            <a title="صورت وضعیت" href="@Url.Action("StatementBase", "Manhol")"> <i class="fa fa-calendar"></i>صورت وضعیت</a>
+                            <ul role="menu" class=" dropdown-menu">
+                                <li id="menu-item-2240" class=" menu-item menu-item-type-custom menu-item-object-custom menu-item-2240">
+                                    <a title="بازدید منهول" href="@Url.Action("StatementBase", "Manhol")"> داده های پایه</a>
+                                </li>
+                                <li role="presentation" class="divider"></li>
+                                <li id="menu-item-2240" class=" menu-item menu-item-type-custom menu-item-object-custom menu-item-2240">
+                                    <a title="بازدید منهول" href="@Url.Action("StatementCalc", "Manhol")"> محاسبه صورت وضعیت</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2183 dropdown">
+                            <a title="لیست پل ها" href="@Url.Action("Index", "TblChat")"> <i class="fa fa-inbox"></i> پیامها </a>
+                        </li>
+                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2183 dropdown">
+                            <a title="لیست پل ها" href="@Url.Action("Index", "User")"> <i class="fa fa-user"></i> کاربران </a>
+                        </li>
+                        }
+                    </ul>
+                </div>
+                <!-- .navbar-collapse -->
+            </div>
+            <!--.container-->
+        </nav>
+        <!--#main-nav-->
+
+        <div id="title">
+            <div class="image-light"></div>
+            <div class="container">
+                <div class="title-container">
+
+                    <a href="@Url.Action("Index", "Home")">
+                        <h1 class="primary" style="color: #F0F0F8">
+                            سامانه هوشمند ISC
+                        </h1>
+                    </a>
+
+
+                    <p class="secondary">نظارت آنلاین بر بازرسی از تاسیسات شبکه آب و فاضلاب بر پایه RFID</p>
+
+
+                </div>
+            </div>
+        </div>
+
+    </header>
+    @Html.GetMessage("/Images/Layout/emsgIcon.gif")
+    <div id="content">
+        <div class="container">
+
+            @if (ViewBag._LayoutAdmin != "_LayoutAdmin")
+            {
+
+
+                <div class="row">
+                    @RenderBody()
+                </div>
+
+
+                        <!--#content-->
+            }
+            else
+            {
+                @RenderBody()
+            }
+        </div>
+    </div>
+    <footer>
+
+        <!-- MAIN FOOTER
+        ==================================================================== -->
+        <div id="footer-main">
+
+            <div class="container">
+
+                <div class="row">
+
+
+                </div>
+                <!--.row-->
+
+            </div>
+            <!--.container-->
+
+        </div>
+        <!--#footer-main-->
+
+        <div id="footer-bottom">
+            <div class="container">
+
+                <p>تمامی حقوق این وب سایت متعلق به  <strong>شرکت آریا پژوان نوین</strong> میباشد</p>
+                <ul id="menu-short-1" class="menu">
+
+                    <li id="menu-item-1833" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-1727 current_page_item menu-item-1833 active"><a title="صفحه اصلی" href="@Url.Action("Index", "Home")">صفحه اصلی</a></li>
+
+                    <li id="menu-item-2028" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2028"><a title="راهنمای سیستم" href="http://www.iransoftjoo.ir/Package/Manhol/Help.pdf">راهنمای سیستم</a></li>
+                    <li id="menu-item-1834" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1834"><a title="تماس با ما" href="@Url.Action("PageText", "Home", new {id = 1})">تماس با ما</a></li>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li id="menu-item-1834" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1834"><a title="خروج" href="@Url.Action("Logout", "Account")">خروج</a></li>
+                    }
+                    else
+                    {
+                        <li id="menu-item-1834" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1834"><a title="ورود" href="@Url.Action("Login", "Account")">ورود</a></li>
+                    }
+
+                    @*<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-1727 current_page_item menu-item-1833"><a href="@Url.Action("Index", "Home")">خانه</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2028"><a href="@Url.Action("PageText", "Home", new {id = 1})">تبلیغات</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1834"><a href="@Url.Action("PageText", "Home", new {id = 2})">تماس با ما</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1834"><a href="@Url.Action("Login", "Account", new {title = "ورود"})">ورود</a></li>*@
+                </ul>
+                <h4 style="clear: both; text-align: center;">
+                    <a href="http://www.iransoftjo.com/" style="text-align: center !important;  font-size: 12px; text-decoration: none;" target="_blank">
+                        طراحی و پشتیبانی توسط <b>ایران سافتجو</b>
+                    </a>
+                </h4>
+            </div>
+            <!--.container-->
+        </div>
+        <!--#footer-bottom-->
+
+    </footer>
+    <!-- footer -->
+
+
+    <script type='text/javascript' src='/Package/Manhol/Content/wp-content/plugins/bbpress/templates/default/js/editor.js@ver=2.5.4-5380'></script>
+    <script type='text/javascript'>
+        /* <![CDATA[ */
+        var wc_add_to_cart_params = { "ajax_url": "\/warta\/wp\/wp-admin\/admin-ajax.php", "ajax_loader_url": "\/\/friskamax.com\/warta\/wp\/wp-content\/plugins\/woocommerce\/assets\/images\/ajax-loader@2x.gif", "i18n_view_cart": "View Cart", "cart_url": "http:\/\/friskamax.com\/warta\/wp\/cart\/", "is_cart": "", "cart_redirect_after_add": "no" };
+        /* ]]> */
+    </script>
+    <script type='text/javascript' src='/Package/Manhol/Content/wp-content/plugins/woocommerce/assets/add-to-cart.min.js'></script>
+    <script type='text/javascript' src='/Package/Manhol/Content/wp-content/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.min.js?ver=2.60'></script>
+    <script type='text/javascript'>
+        /* <![CDATA[ */
+        var woocommerce_params = { "ajax_url": "\/warta\/wp\/wp-admin\/admin-ajax.php", "ajax_loader_url": "\/\/friskamax.com\/warta\/wp\/wp-content\/plugins\/woocommerce\/assets\/images\/ajax-loader@2x.gif" };
+        /* ]]> */
+    </script>
+    <script type='text/javascript' src='//friskamax.com/warta/wp/wp-content/plugins/woocommerce/assets/js/frontend/woocommerce.min.js?ver=2.1.12'></script>
+    <script type='text/javascript' src='//friskamax.com/warta/wp/wp-content/plugins/woocommerce/assets/js/jquery-cookie/jquery.cookie.min.js?ver=1.3.1'></script>
+    <script type='text/javascript'>
+        /* <![CDATA[ */
+        var wc_cart_fragments_params = { "ajax_url": "\/warta\/wp\/wp-admin\/admin-ajax.php", "fragment_name": "wc_fragments" };
+        /* ]]> */
+    </script>
+    <script type='text/javascript' src='//friskamax.com/warta/wp/wp-content/plugins/woocommerce/assets/js/frontend/cart-fragments.min.js?ver=2.1.12'></script>
+    <script type='text/javascript' src='/Package/Manhol/Content/wp-includes/js/jquery/ui/jquery.ui.core.min.js?ver=1.10.4'></script>
+    <script type='text/javascript' src='/Package/Manhol/Content/wp-includes/js/jquery/ui/jquery.ui.effect.min.js?ver=1.10.4'></script>
+    <script type='text/javascript'>
+        /* <![CDATA[ */
+        var ajax_object = { "ajax_url": "http:\/\/friskamax.com\/warta\/wp\/wp-admin\/admin-ajax.php" };
+        /* ]]> */
+    </script>
+    <script type='text/javascript' src='/Package/Manhol/Content/wp-content/themes/warta/js/script.min.js'></script>
+    <script type='text/javascript' src='/Package/Manhol/Content/wp-content/themes/warta/js/init.min.js'></script>
+    <script type='text/javascript' src='/Package/Manhol/Content/wp-content/themes/warta/js/skip-link-focus-fix.js'></script>
+    <script type='text/javascript' src='/Package/Manhol/Content/wp-includes/js/comment-reply.min.js'></script>
+
+    @*<div style="visibility:collapse ">
+            <!-- Begin WebGozar.com Counter code -->
+            <script type="text/javascript" language="javascript" src="http://www.webgozar.ir/c.aspx?Code=3481553&amp;t=counter"></script>
+            <noscript><a href="http://www.webgozar.com/counter/stats.aspx?code=3481553" target="_blank">&#1570;&#1605;&#1575;&#1585;</a></noscript>
+            <!-- End WebGozar.com Counter code -->
+        </div>*@
+
+
+</body>
+</html>

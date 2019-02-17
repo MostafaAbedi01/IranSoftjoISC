@@ -1,0 +1,65 @@
+﻿@using IranSoftjo.Package.DataModel
+@using IranSoftjo.MvcPaging
+@using IranSoftjo.Package.WebUi.ViewModels
+@model PageVM
+@{
+    ViewBag.Title = Model;
+    var _db = new Entities();
+    List<Comment> comments = _db.Comments.Where(d => d.SubID == Model.PageID && d.IsActive == true).OrderByDescending(d => d.CommentID).ToList();
+    List<CommentVM> commentsVM = CommentVM.ToIEnumerable(comments).ToList();
+    //if (Model.Comment <= 0)
+    //{
+    //    Model.PageComment = 1;
+    //}
+    //int currentPageIndex = Model.PageComment.HasValue ? Model.PageComment.Value - 1 : 0;
+    int currentPageIndex =  0;
+    var toPagedList = commentsVM.ToPagedList(currentPageIndex, 5);
+}
+<div class="MainComment">
+    <div style="margin-bottom: 30px;">
+        <span class="NazarateShoma">نظرات شما  
+        </span>
+        <span style="float: left">
+         
+            <button style="margin-left: 10px;" class="k-button k-button-icontext" id="SendComment">ارسال نظر جدید</button>
+        </span>
+    </div>
+    @foreach (var product in commentsVM)
+    {
+        <div class="CommentHeader">
+            <div class="tarikh">تاريخ ثبت: <span dir="ltr">@product.CommentDate</span></div>
+            <div class="Name">
+                @product.UserName
+            </div>
+        </div>
+        <div class="CommentText">
+            @Html.Raw(product.CommentText)
+        </div>
+        <br />
+    }
+    <div class="pager">
+        @Html.Pager(toPagedList.PageSize, toPagedList.PageNumber, toPagedList.TotalItemCount).Options(o => o.PageRouteValueKey("Searchpage")
+            .AlwaysAddFirstPageNumber())
+    </div>
+</div>
+
+@(Html.Kendo().Window()
+      .Name("windowSendComment")
+      .Width(650)
+      .Height(510)
+      .Draggable()
+      .Resizable()
+      .Title("ارسال نظر جدید")
+      .LoadContentFrom("SendComment", "Home", new { id = Model.PageID })
+      .Iframe(true)
+      .Visible(false)
+      .Actions(actions => actions.Refresh().Maximize().Close())
+      )
+<script>
+    $(document).ready(function () {
+        $("#SendComment")
+            .bind("click", function () {
+                $("#windowSendComment").data("kendoWindow").center().open();
+            });
+    });
+</script>

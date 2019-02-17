@@ -1,0 +1,30 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model  IranSoftjo.Package.WebUi.ViewModels.GalleryVM
+@{
+    ViewBag.Title = "افزودن عکس";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@using (Html.BeginForm())
+{
+    <table class="form">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.EnhancedDropDownList(model => model.GalleryGroupId, "GalleryGroupId")
+        @Html.EnhancedEditorField(model => model.Title)
+        @Html.EnhancedEditorField(model => model.GalleryOrder)
+        @Html.EnhancedTextAreaField(model => model.Comment)
+        @Html.EnhancedCheckBoxField(model => model.IsActive)
+        <td>
+            <label>@Html.LabelFor(model => model.GalleryImageUrl)</label>
+        </td>
+        <td colspan="1" class="inputWrp">
+            <div class="k-rtl">
+                @Html.Kendo().Upload().Multiple(false).Name("file").Async(async => async.Save("SaveFile", "Gallery"))
+            </div>
+        </td>
+        @Html.EnhancedSubmit("افزودن")
+    </table>
+}
+<div>
+    @Html.ActionLink("بازگشت به لیست", "Index")
+</div>

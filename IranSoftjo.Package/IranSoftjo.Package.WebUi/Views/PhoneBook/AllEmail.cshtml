@@ -1,0 +1,18 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model  IranSoftjo.Package.WebUi.ViewModels.PhoneBookVM
+@{
+    ViewBag.Title = "ایمیل ها";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <table class="form">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.EnhancedTextAreaField(model => model.Email, new { style = "height:400px;width:800px" })
+    </table>
+}
+<div>
+    @Html.ActionLink("بازگشت به لیست", "Index")
+</div>

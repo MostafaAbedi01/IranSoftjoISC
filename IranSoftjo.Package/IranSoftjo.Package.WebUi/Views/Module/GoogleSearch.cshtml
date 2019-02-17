@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "جستجو گر اختصاصی گوگل";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<hgroup class="title">
+    <h1>جستجو گر اختصاصی گوگل</h1>
+    <hr />
+    <h2>جستجو گر اختصاصی گوگل با امکان جستجو در سایت شما یا در کل اینترنت</h2>
+</hgroup>
+
+<style>
+    input {
+        width: 1px;
+    }
+</style>
+<form style="border: 1px solid #D6D6CE;width: 45%" target='_blank' method=get action=http://www.google.com/search>
+    <table style="font-family: Tahoma; font-size: 9pt; width: 128px;" class='b-g-c-شفاف'>
+        <tbody><tr>
+                   <td>
+                       <center>
+                           <img border=0 src=http://www.google.com/logos/Logo_40wht.gif alt=Google>
+                           <input style=" width: 250px;" name=q size=15 maxlength="255"><br>
+                           <input type="submit" name="btnG" value="Search"><br>
+                       </center>
+                       <input value='iransoftjo.com' type=radio name=sitesearch checked=''>در اين سایت
+                       <br>
+                       <input type=radio name=sitesearch value="">در كل اينترنت
+                       <input type=hidden name=ie value=UTF-8>
+                       <input type=hidden name=oe value=UTF-8>
+                   </td>
+               </tr>
+        </tbody>
+    </table>
+</form>
+@Html.ActionLink("بازگشت به لیست ماژول ها","BuyCms", "Home",null, new {@class = "k-button k-button-icontext"} )

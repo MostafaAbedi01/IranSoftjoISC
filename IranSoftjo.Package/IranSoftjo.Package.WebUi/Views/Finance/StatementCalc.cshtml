@@ -1,0 +1,53 @@
+﻿@model System.Collections.Generic.IEnumerable<IranSoftjo.Package.WebUi.ViewModels.TblInspectionVm>
+
+@{
+    ViewBag.Title = "محاسبه صورت وضعیت";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hgroup class="title">
+
+    @if (Request.QueryString["Date1"] != null)
+    {
+        <h1>@ViewBag.Title  :  @Request.QueryString["Date1"] تا @Request.QueryString["Date2"]</h1>
+    }
+    else
+    {
+        <h1>
+            @ViewBag.Title
+        </h1>
+    }
+    <hr />
+</hgroup>
+<span class="k-picker-wrap k-state-default">
+    <label>از تاریخ : </label>
+    <input id="DateFilter1" name="DateFilter1" style="width: 200px;" type="text" value="@(Request.QueryString["Date1"] != null ? Request.QueryString["Date1"] : DateTime.Now.AddDays(-7).ToString())">
+    <label>تا تاریخ : </label>
+    <input id="DateFilter2" name="DateFilter2" style="width: 200px;" type="text" value="@(Request.QueryString["Date2"] != null ? Request.QueryString["Date2"] : DateTime.Now.ToString())">
+    <span role="button" class="k-select">
+    </span>
+    <input id="submitDateFilter" name="submitDateFilter" class="k-button k-button-icontext" type="submit" value="محاسبه صورت وضعیت">
+</span>
+<br />
+<br />
+<h2>وضعیت صورت حساب بازرسی در بازه انتخاب شده   :   </h2>
+<h3> @Session["Count"] تعداد * @Session["Price"] هزینه هر منهول =
+    @Session["PriceCount"]
+
+    
+    ریال  </h3>
+<script>
+    jQuery(function () {
+        jQuery("#DateFilter1").kendoDatePicker({ "format": "yyyy/MM/dd", "min": new Date(1900, 0, 1, 0, 0, 0, 0), "max": new Date(2099, 11, 31, 0, 0, 0, 0) });
+        jQuery("#DateFilter2").kendoDatePicker({ "format": "yyyy/MM/dd", "min": new Date(1900, 0, 1, 0, 0, 0, 0), "max": new Date(2099, 11, 31, 0, 0, 0, 0) });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#submitDateFilter").click(function () {
+            var x1 = $("#DateFilter1").val();
+            var x2 = $("#DateFilter2").val();
+            window.location.href = "/Manhol/StatementCalc?Date1=" + x1 + "&Date2=" + x2;
+        });
+    });
+</script>

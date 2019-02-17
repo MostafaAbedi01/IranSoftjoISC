@@ -1,0 +1,29 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.CommentVM
+@{
+    Layout = "~/Views/Shared/_LayoutNull.cshtml";
+}
+<h1>نظر شما
+</h1>
+<hr />
+<p style="color: green; font-size: 12px; font-weight: bold">
+    نظر شما با موفقیت دریافت شد و پس از تایید مدیریت در سایت قرار خواهد گرفت.
+</p>
+<br />
+<br />
+<table>
+    @Html.EnhancedLabelField(model => model.UserName)
+    @Html.EnhancedLabelField(model => model.UserEmail)
+    @Html.EnhancedLabelField(model => model.UserSite)
+    @Html.EnhancedLabelField(model => model.CommentDate)
+    <tr>
+        <td class="labelWrp">
+            <label for="UserName" class="fieldLabel">@Html.LabelFor(model => model.CommentText) :</label>
+        </td>
+        <td colspan="1" class="inputWrp">
+            @Html.Raw(Model.CommentText)
+        </td>
+    </tr>
+</table>
+<br />
+<br />

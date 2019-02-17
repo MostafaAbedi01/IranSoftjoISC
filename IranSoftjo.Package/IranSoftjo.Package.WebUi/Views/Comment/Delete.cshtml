@@ -1,0 +1,33 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.CommentVM
+@{
+    ViewBag.Title = "حذف نظر";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@using (Html.BeginForm())
+{
+    <table class="form">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "موارد مشخص شده با رنگ قرمز را مجددا بررسی نمایید.")
+            @Html.HiddenFor(model => model.CommentID)
+            @Html.EnhancedLabelField(model => model.UserName)
+            @Html.EnhancedLabelField(model => model.UserSite)
+            @Html.EnhancedLabelField(model => model.UserEmail)
+            <tr>
+                <td class="labelWrp">
+                    <label for="UserName" class="fieldLabel">@Html.LabelFor(model => model.CommentText) :</label>
+                </td>
+                <td colspan="1" class="inputWrp">
+                    @Html.Raw(Model.CommentText)
+                </td>
+            </tr>
+            @Html.EnhancedSubmit("حذف", new { @class = "k-button k-button-icontext" })
+        }
+    </table>
+}
+<br />
+<div>
+    @Html.ActionLink("بازگشت به لیست", "Index")
+</div>

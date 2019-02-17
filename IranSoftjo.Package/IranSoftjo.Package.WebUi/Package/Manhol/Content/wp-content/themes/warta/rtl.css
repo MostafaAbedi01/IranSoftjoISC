@@ -1,0 +1,186 @@
+/*
+Theme Name: Warta
+
+Adding support for language written in a Right To Left (RTL)
+
+http://codex.wordpress.org/Right_to_Left_Language_Support
+
+*/
+
+
+/*Float right
+==============*/
+/*WC account page*/
+.addresses .title h3,
+/*WC layout*/
+.woocommerce-page .woocommerce-result-count,
+.woocommerce-page form .form-row-first, 
+/*WP product page*/
+.product form.cart .button
+{
+        float: right;
+}
+
+
+
+
+/*Float left
+============*/
+/*WC account page*/
+.addresses .title .edit,
+ul.digital-downloads li .count,
+/*WC Layout*/
+.woocommerce-page .woocommerce-ordering,
+.woocommerce-page form .form-row-last,
+/*WC Rating*/
+.star-rating,
+/*WC alert*/
+.woocommerce-message .button, 
+.woocommerce-error .button, 
+.woocommerce-info .button
+{
+        float: left;
+}
+
+
+
+
+/*WC
+====*/
+.wc-forward:after, 
+.wc-forward a:after {
+        content: "\00a0\f100";
+}
+.wc-backward:before, 
+.wc-backward a:before {        
+		content: "\f101\00a0";
+}
+
+
+
+
+/*WC checkout
+=============*/
+#payment ul.payment_methods li input {
+        margin-right    : 0;
+        margin-left     : 1em; 
+}
+#payment div.payment_box:after {
+        right           : 0;
+        left            : auto;
+        margin-left     : 0;
+        margin-right    : 2em;
+}
+
+
+
+
+/*WC chosen
+===========*/
+.chosen-container .chosen-drop {
+        left: 9999px;
+}
+
+
+
+
+/*WC layout
+===========*/
+.woocommerce-page ul.products li.product {
+        float           : right;
+        margin-right    : 0;
+        margin-left     : 3.8%;
+}
+.woocommerce-page ul.products li.last {
+        margin-left: 0;
+}
+.woocommerce-page .col2-set .col-2 {
+        float           : left;
+        padding-left    : 1px;
+}
+.woocommerce-page .col2-set .col-1 {
+        float           : right;
+        padding-left    : 1px; 
+}
+
+
+
+
+/*WC menu cart
+==============*/
+.navbar-nav .menu-cart { margin-right: 1px; }
+
+
+
+
+/*WC product page
+=================*/
+.product .summary .woocommerce-product-rating .star-rating,
+.product form.cart div.quantity {
+        float           : right;
+        margin-right    : 0;
+        margin-left     : 4px;
+}
+.product form.cart table td {
+        padding-right   : 0;
+        padding-left    : .6em;
+}
+
+
+
+
+/*WC order page
+===============*/
+.order_details li {
+        float           : right;
+        border-right    : 0;
+        border-left     : 1px dashed #e0e0e8;
+        margin-right    : 0;
+        margin-left     : 2em; 
+        padding-right   : 0;
+        padding-left    : 2em; 
+}
+
+
+
+
+/*WC Review
+===========*/
+#reviews #comments ol.commentlist li .comment_container .avatar {
+        margin-right    : 0;
+        margin-left     : 15px; 
+}
+
+
+
+
+/*WC Rating
+===========*/
+.stars a {
+        margin-right    : 0;
+        margin-left     : 1em; 
+}
+.stars a.star-1, 
+.stars a.star-2, 
+.stars a.star-3, 
+.stars a.star-4{
+        border-right    : none;
+        border-left     : 1px solid #ccc;
+}
+.stars a.star-1:after, 
+.stars a.star-2:after, 
+.stars a.star-3:after, 
+.stars a.star-4:after, 
+.stars a.star-5:after {
+        left    : auto;
+        right   : 0;
+}
+
+
+
+
+
+/*WC table
+==========*/
+.my_account_orders .order-status        { text-align: right!important; }
+.my_account_orders .order-actions       { text-align: left }

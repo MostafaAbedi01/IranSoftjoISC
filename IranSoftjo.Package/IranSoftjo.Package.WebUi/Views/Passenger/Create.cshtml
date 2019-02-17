@@ -1,0 +1,32 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model  IranSoftjo.Package.WebUi.ViewModels.PassengerVm
+@{
+    ViewBag.Title = "افزودن مسافر";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="BreadCrumbPage">
+    @Html.ActionLink("لیست مسافران", "Index")
+    <strong>>></strong>
+    @Html.ActionLink("افزودن مسافر جدید", "Create")
+</div>
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+@using (Html.BeginForm())
+{
+    <table class="form">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.EnhancedEditorField(model => model.Code)
+        @Html.EnhancedEditorField(model => model.Name)
+        @Html.EnhancedEditorField(model => model.Mobile)
+        @Html.EnhancedEditorField(model => model.Phone)
+        @Html.EnhancedTextAreaField(model => model.Address, new { style = "height:100px;width:900px" })
+        @Html.EnhancedTextAreaField(model => model.Commnet, new { style = "height:100px;width:900px" })
+        @Html.EnhancedSubmit("ایجاد")
+    </table>
+}
+<div>
+    @Html.ActionLink("بازگشت به لیست", "Index")
+</div>

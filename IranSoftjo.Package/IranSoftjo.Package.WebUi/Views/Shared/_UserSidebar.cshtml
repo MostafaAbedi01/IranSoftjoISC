@@ -1,0 +1,143 @@
+﻿<!-- BEGIN SIDEBAR -->
+<div class="page-sidebar-wrapper">
+    <!-- END SIDEBAR -->
+    <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+    <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+    <div class="page-sidebar navbar-collapse collapse">
+        <!-- BEGIN SIDEBAR MENU -->
+        <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
+        <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
+        <!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
+        <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+        <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
+        <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+        <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-hover-submenu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+            @{
+                var items = new List<string>
+                {
+                    "Index1,Dashboard,پنل مدیریت فاضلاب,icon-home,2,در اینجا می توانید لیست منهول ها را ببینید ",
+                    "ManholList,Manhol,لیست منهولها,fa fa-long-arrow-down,3,در اینجا می توانید لیست منهول ها را ببینید",
+                    "SearchMap,ManholMap,منهولها بر روی نقشه,fa fa-map-marker,4,در اینجا مختصات هر منهول را روی نقشه گوگل نمایش داده میشود",
+                    "Index,ManholInspection,امور مالی,fa fa-credit-card,5,در اینجا می توانید لیست منهول ها را ببینید",
+                    "StatementBase,Finance,صورت وضعیت,icon-layers icons,5,در اینجا می توانید لیست منهول ها را ببینید",
+                    "Index,User,لیست کاربران,fa fa-user,7,در اینجا می توانید لیست منهول ها را ببینید",
+                    "Help,Help,راهنما,fa fa-life-saver,7,در اینجا می توانید لیست منهول ها را ببینید",
+                    "Logout,User,خروج از حساب کاربری,fa fa-sign-out,8,در اینجا می توانید لیست منهول ها را ببینید",
+                };
+
+                string controller = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString().ToLower();
+                string action = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().ToLower();
+
+              
+                foreach (var item in items)
+                {
+                    var splitedItem = item.Split(',');
+                    if (splitedItem[1].ToLower() == controller)
+                    {
+                        <li class="nav-item start active open">
+                            @if ( splitedItem[0].ToLower() == "index" && splitedItem[1]== "ManholInspection")
+                            {
+                                <a href="javascript:;" class="nav-link nav-toggle">
+                                    <i class="icon-home"></i>
+                                    <span class="title">دستور کارها</span>
+                                    <span class="arrow"></span>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li class="nav-item start ">
+                                        <a href="@Url.Action("List", "ManholInspection")" class="nav-link ">
+                                            <i class="icon-bar-chart"></i>
+                                            <span class="title"> برنامه بازرسی</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item start ">
+                                        <a href="@Url.Action("List", "ManholInspection")" class="nav-link ">
+                                            <i class="icon-bulb"></i>
+                                            <span class="title">برنامه سمپاشی</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item start ">
+                                        <a href="@Url.Action("List", "ManholInspection")" class="nav-link ">
+                                            <i class="icon-graph"></i>
+                                            <span class="title">برنامه شستشو</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action(splitedItem[0], splitedItem[1])" class="nav-link" data-step="@splitedItem[4]" data-intro="@splitedItem[5]">
+                                    <i class="@splitedItem[3]"></i>
+                                    <span class="title">@splitedItem[2]</span>
+                                    <span class="selected"></span>
+                                    <span class="arrow open"></span>
+                                </a>
+                            }
+                            
+                        </li>
+
+                      
+                    }
+                    else if (splitedItem[1].ToLower() == "help" && splitedItem[0].ToLower() == "help")
+                    {
+                        <li class="nav-item">
+                            <a onclick="HelpStart();" class="nav-link"  >
+                                <i class="@splitedItem[3]"></i>
+                                <span class="title">@splitedItem[2]</span>
+                            </a>
+                        </li>
+                    }
+                  
+                    else
+                    {
+                        <li class="nav-item ">
+                            @if (splitedItem[0].ToLower() == "index" && splitedItem[1] == "ManholInspection")
+                            {
+                                <a href="javascript:;" class="nav-link nav-toggle">
+                                    <i class="icon-wallet"></i>
+                                    <span class="title"> دستور کارها</span>
+                                    <span class="arrow"></span>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li class="nav-item start ">
+                                        <a href="@Url.Action("List", "ManholInspection")" class="nav-link ">
+                                            <i class="icon-bar-chart"></i>
+                                            <span class="title"> برنامه بازرسی</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item start ">
+                                        <a href="@Url.Action("List", "ManholInspection")" class="nav-link ">
+                                            <i class="icon-bulb"></i>
+                                            <span class="title">برنامه سمپاشی</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item start ">
+                                        <a href="@Url.Action("List", "ManholInspection")" class="nav-link ">
+                                            <i class="icon-graph"></i>
+                                            <span class="title">برنامه شستشو</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action(splitedItem[0], splitedItem[1])" class="nav-link" data-step="@splitedItem[4]" data-intro="@splitedItem[5]">
+                                    <i class="@splitedItem[3]"></i>
+                                    <span class="title">@splitedItem[2]</span>
+                                </a>
+                            }
+                        </li>
+                    }
+                }
+
+            }
+        </ul>
+        <!-- END SIDEBAR MENU -->
+    </div>
+    <!-- END SIDEBAR -->
+</div>
+<!-- END SIDEBAR -->
+<script type="text/javascript">
+    function HelpStart() {
+        introJs().setOptions({ 'nextLabel': 'بعد', 'prevLabel': 'قبل', 'skipLabel': 'خروج', 'doneLabel': 'اتمام' }).start();
+    } 
+</script>

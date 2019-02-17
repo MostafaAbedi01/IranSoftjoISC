@@ -1,0 +1,32 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.TblStoreVm
+@{
+    ViewBag.Title = "ویرایش ";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+
+
+@using (Html.BeginForm())
+{
+    <table class="form">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(false)
+        @Html.HiddenFor(model => model.TblStoreId)
+        @Html.HiddenFor(model => model.TblProjectId)
+        @Html.HiddenFor(model => model.DateSabt)
+        @Html.HiddenFor(model => model.UserID)
+        @Html.EnhancedDropDownList(model => model.ProductGroupID, "ProductGroupID")
+        @Html.EnhancedDropDownList(model => model.ProductID, "ProductID")
+        @Html.EnhancedEditorField(model => model.CountStr)
+        @Html.EnhancedEditorField(model => model.Ral)
+        @Html.EnhancedSubmit("ویرایش")
+    </table>
+
+}
+<div>
+    @Html.ActionLink("بازگشت به لیست", "TblStoreList")
+</div>

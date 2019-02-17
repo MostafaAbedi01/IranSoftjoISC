@@ -1,0 +1,33 @@
+﻿@model dynamic
+@{
+    ViewBag.Title = "ارتباط آنلاین با ما";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+<img src="~/Images/Common/SupportPage.jpg" alt="پشتیبانی" style="float: left"/>
+<span class="label">تلفن های شرکت:</span>
+@{
+    const string mobile = "۴۰۹۴۶۳۴-۰۹۱۲  یا ۸۵۳۳۷۶۳-۰۹۳۷ ";
+} 
+<br/>
+<span>۰۲۱-۲۲۱۴۴۷۰۳  </span>(دفتر مرکزی - سعادت آباد)
+<br/>
+<span>۰۲۱-۷۶۲۸۹۰۹۴  </span>(شعبه پردیس)
+<br/>
+<span class="label">ارتباط مستقیم ۲۴ ساعته :</span>
+<span>@mobile</span>
+<br/>
+<span class="label">ارتباط مستقیم با ما:</span>
+<span><a href="mailto:Info@IranSoftjo.com">Info@IranSoftjo.com</a></span>
+<br/>
+<br/>
+<br/>
+<span class="label"> پشتیبانی آنلاین :</span>
+<span>
+    <div id="MyLiveChatContainer"></div>
+<script type="text/javascript" src="https://mylivechat.com/chatbox.aspx?hccid=82863999"></script>
+    <script type="text/javascript" src="https://mylivechat.com/chatinline.aspx?hccid=82863999"> </script>
+</span>

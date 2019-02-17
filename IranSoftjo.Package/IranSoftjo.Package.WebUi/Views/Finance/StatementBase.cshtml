@@ -1,0 +1,41 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.TblStatementVm
+@{
+    ViewBag.Title = "اطلاعات پایه صورت وضعیت منهول";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<a class="btn btn-circle default green" href="@Url.Action("StatementCalc", "Finance")"> <i class="icon-calculator icons"></i> محاسبه صورت وضعیت</a>
+@using (Html.BeginForm("StatementBase", "Finance", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <table class="form">
+        @Html.ValidationSummary(true)
+        @Html.AntiForgeryToken()
+        <tr>
+            <td>
+                <hr/>
+                <label style="color: red" class="fieldLabel">اطلاعات پایه بازرسی </label>
+                <hr/>
+            </td>
+            <td>
+                <hr/>
+            </td>
+        </tr>
+
+        @Html.EnhancedEditorField(model => model.BasicPrice)
+        @Html.EnhancedEditorField(model => model.FactorPelosi)
+        @Html.EnhancedEditorField(model => model.FactorYear)
+        @Html.EnhancedEditorField(model => model.Complication)
+        @Html.EnhancedEditorField(model => model.Tax)
+        <tr>
+            <td>
+                <br/>
+            </td>
+            <td></td>
+        </tr>
+        @Html.EnhancedSubmit("ثبت اطلاعات پایه صورت وضعیت")
+
+
+    </table>
+
+}
+

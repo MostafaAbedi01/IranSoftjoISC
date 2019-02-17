@@ -1,0 +1,26 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.RasProductGroupVM
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "ویرایش گروه محصول";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+@using (Html.BeginForm())
+{
+    <table class="form">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+       
+        @Html.HiddenFor(model => model.ProductGroupID)
+        @Html.EnhancedEditorField(model => model.ProductGroupTitle)
+        @Html.EnhancedEditorField(model => model.ProductGroupOrder)
+        @Html.EnhancedCheckBoxField(model => model.IsActive)
+        @Html.EnhancedSubmit("ویرایش")
+    </table>
+}
+<div>
+    @Html.ActionLink("بازگشت به لیست", "Index")
+</div>

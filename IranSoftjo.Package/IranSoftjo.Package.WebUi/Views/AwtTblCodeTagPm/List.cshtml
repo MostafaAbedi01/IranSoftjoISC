@@ -1,0 +1,47 @@
+﻿@model IEnumerable<IranSoftjo.Package.WebUi.ViewModels.TblCodeTagPmVm>
+@{
+    ViewBag.Title = "کد تک و پی ام ها";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+
+<div class="k-rtl">
+
+    @(Html.Kendo().Grid(Model)
+    .Name("Grid")
+    .Columns(columns =>
+    {
+        columns.Bound(item => @item.TblCodeTagPmId).Title("دستورات").Filterable(false).Groupable(false)
+            .Template(@<text>
+            @Html.ActionLink("ویرایش", "Edit", new { id = @item.TblCodeTagPmId }, new { @class = "k-button k-button-icontext k-grid-edit" })
+            @Html.ActionLink("حذف", "Delete", new { id = @item.TblCodeTagPmId }, new { @class = "k-button k-button-icontext k-grid-delete" })
+            </text>).Width(230);
+        columns.Bound(model => model.TblCodeTagPmId).Visible(false);
+        columns.Bound(model => model.CodePm).Width(300);
+        columns.Bound(model => model.CodeTag);
+    })
+                                  .ToolBar(toolbar => toolbar.Custom().Action("Create", "AwtTblCodeTagPm").Text("افزودن جدید"))
+
+
+    .Pageable(d => d.PageSizes(true).Refresh(true))
+    .Sortable()
+    .Scrollable()
+    .Filterable().Groupable()
+
+    .HtmlAttributes(new { style = "height:600px; " })
+    .DataSource(dataSource => dataSource
+        .Server()
+        .Model(model => model.Id(item => item.TblCodeTagPmId)).PageSize(7)
+    )
+    .Resizable(resize => resize.Columns(true))
+    .ColumnMenu()
+    )
+</div>
+<style>
+    .container {
+        width: 1300px !important;
+    }
+</style>

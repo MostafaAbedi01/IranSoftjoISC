@@ -1,0 +1,28 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model  IranSoftjo.Package.WebUi.ViewModels.SlideShowVM
+@{
+    ViewBag.Title = "حذف اسلایدر";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <table class="form">
+        @Html.AntiForgeryToken()
+        @Html.EnhancedLabelField(model => model.SlideShowID)
+        @Html.EnhancedLabelField(model => model.SlideShowTitle)
+        @Html.EnhancedLabelField(model => model.SlideShowSubTitle)
+        @Html.EnhancedLabelField(model => model.SlideShowHref)
+        <td class="labelWrp">
+            <label for="ProductGroupID" class="fieldLabel">@Html.LabelFor(model => model.SlideShowImageUrl)</label>
+        </td>
+        <td colspan="1" class="inputWrp">
+            <img style="width: 100px;" src="@Model.SlideShowImageUrl"/>
+        </td>
+        @Html.EnhancedSubmit("حذف")
+    </table>
+}
+
+<div>
+    @Html.ActionLink("بازگشت به لیست", "Index")
+</div>

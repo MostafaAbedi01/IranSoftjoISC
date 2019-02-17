@@ -1,0 +1,36 @@
+﻿@using IranSoftjo.Package.DataModel
+@model IranSoftjo.Package.WebUi.ViewModels.PageVM
+@{
+    ViewBag.Title = Model.PageTitle;
+    Session["Marena"] = "Athletics8";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var db = new Entities();
+}
+
+<!-- Center Start -->
+<div class="contCntrLft">
+    @Html.Raw(Model.PageText)
+
+</div>
+
+<div class="contCntrRgtNw">
+    <div class="hot_dealsnew">
+        <h5>
+            محصولات ویژه
+        </h5>
+    </div>
+    @foreach (var item in db.Products.Take(3))
+    {
+        <div class="home_rgt_prd">
+            <div class="details"><a href="comfortwear/product/comfortwear/full-neck-coverage-facial-wear.html">جزئیات</a></div>
+            <h1>@item.ProductTitle</h1>
+            <p>@item.ProductCode</p>
+            <div class="home_rgt_prd_inner">
+                <a href="@Url.Action("Details", "Product", new { id = item.ProductID })">
+                    <img style="max-width:215px; max-height:150px;" src="@item.ProductThumbnailImageUrl" />
+                </a>
+            </div>
+        </div>
+    }
+</div>
+<!-- Center End -->

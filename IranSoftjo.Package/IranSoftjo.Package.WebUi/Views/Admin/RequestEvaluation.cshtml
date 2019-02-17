@@ -1,0 +1,28 @@
+﻿@model IEnumerable<IranSoftjo.Package.DataModel.RequestEvaluation>
+@{
+    ViewBag.Title = "لیست درخواست ارزیابی";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="k-rtl">
+    @(Html.Kendo().Grid(Model)
+          .Name("Grid")
+          .Columns(columns =>
+                   {
+                       columns.Bound(model => model.Id).Visible(false);
+                       columns.Bound(model => model.Name).Width(180);
+                       columns.Bound(model => model.Mobile).Width(100);
+                       columns.Bound(model => model.PhoneNumber).Width(50);
+                       columns.Bound(model => model.Email).Width(50);
+                       columns.Bound(model => model.Website).Width(50);
+                       columns.Bound(model => model.ProjectTypeEnum).Width(50);
+                       columns.Bound(model => model.AmountEnum).Width(50);
+                       columns.Bound(model => model.Description).Width(50);
+                   })
+          .Pageable()
+          .Sortable()
+          .Scrollable()
+          .Filterable()
+          )
+          )
+</div>

@@ -1,0 +1,70 @@
+﻿@using System.Activities.Expressions
+@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.SoftwareVM
+@{
+    ViewBag.Title = "ویرایش نرم افزار";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="BreadCrumbPage">
+    @Html.ActionLink("لیست نرم افزارها", "Index")
+    <strong>>></strong>
+    @Html.ActionLink("ویرایش نرم افزار جدید", "Delete")
+</div>
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr style="width: 95% !important" />
+</hgroup>
+@using (Html.BeginForm("Delete", "Software", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <table class="form">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.SoftwareID)
+        @Html.HiddenFor(model => model.UserID)
+        @Html.EnhancedLabelField(model => model.SoftwareName)
+        @Html.EnhancedLabelField(model => model.SoftwareEnName)
+        @Html.EnhancedLabelField(model => model.SoftwareWebSite)
+        @Html.EnhancedLabelField(model => model.SoftwarePrice)
+        @Html.EnhancedLabelField(model => model.SoftwarePriceType)
+        @Html.EnhancedLabelField(model => model.SoftwareStatus)
+        @Html.EnhancedLabelField(model => model.SoftwareSummary)
+        @Html.EnhancedLabelField(model => model.SoftwareUserLicense)
+        @Html.EnhancedLabelField(model => model.SoftwareUserRating)
+        @Html.EnhancedLabelField(model => model.SoftwareAdvantage)
+        @Html.EnhancedLabelField(model => model.SoftwareVisit)
+        @Html.EnhancedLabelField(model => model.SoftwareFullDescription)
+        @Html.EnhancedLabelField(model => model.OperatingSystemWinText)
+
+
+        <tr>
+            <td></td>
+            <td>
+                <span>
+                    <strong>اطلـاعات سیستمی </strong>
+                </span>
+                <hr style="border-bottom: 2px solid #17BCE9;">
+            </td>
+        </tr>
+        @Html.EnhancedCheckBoxField(model => model.OperatingSystemWeb)
+        @Html.EnhancedCheckBoxField(model => model.OperatingSystemWin)
+        @Html.EnhancedCheckBoxField(model => model.OperatingSystemAndroid)
+        @Html.EnhancedCheckBoxField(model => model.OperatingSystemIOS)
+        @Html.EnhancedCheckBoxField(model => model.OperatingSystemLinux)
+
+        @* @Html.EnhancedCheckboxListField(model => model.SelectListProjectType, Model.SelectListProjectType)*@
+
+
+        <td class="labelWrp">
+            <label for="ProductGroupID" class="fieldLabel">@Html.LabelFor(model => model.SoftwareImageLogoUrl)</label>
+        </td>
+        <td colspan="1" class="inputWrp">
+            @Html.Kendo().Upload().Name("file").Multiple(false).Async(async => async.Save("SaveFile", "Software"))
+        </td>
+        @Html.EnhancedTextAreaField(model => model.SoftwareSummary)
+        @Html.EnhancedSubmit("ذخیره")
+    </table>
+}
+
+<div>
+    @Html.ActionLink("بازگشت به لیست", "Index")
+</div>
+

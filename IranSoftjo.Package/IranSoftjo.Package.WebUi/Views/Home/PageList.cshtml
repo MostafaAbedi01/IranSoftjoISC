@@ -1,0 +1,138 @@
+﻿@using IranSoftjo.MvcPaging
+@using IranSoftjo.Package.WebUi.ViewModels
+@using Mehr
+@model IPagedList<PageVM>
+@{
+    var db = new IranSoftjo.Package.DataModel.Entities();
+    ViewBag.Title = Session["PageGroupTitle"];
+    Layout = "~/Views/Shared/_LayoutBox.cshtml";
+    var lstPage =
+   (from n in db.Pages.Where(d => d.ActivePage).OrderByDescending(d => d.PageID).Take(5)
+    select new { n.PageID, n.PageGroupID, n.PageOrder, n.PageThumbnailImageUrl, n.PageImageUrl, n.Summary, n.Visit, n.PageGroup, n.PageTitle, n.PageDate }).ToList();
+
+}
+
+<div class="col-md-8 col-sm-12">
+    <div class="row">
+        <div class="col-sm-12">
+
+            <div class="row aside">
+                <section class="col-md-12 breaking-news">
+                    <header>
+                        <h4>خبر های روز</h4>
+                        <i class="triangle"></i>
+                    </header>
+                    <div class="content"
+                         data-duration="22000"
+                         data-direction="Right"
+                         dir="ltr">
+                        <ul dir="rtl">
+                            @foreach (var item in lstPage)
+                            {
+                                <li>
+                                    <a href="@Url.Action("PageText", "Home", new { id = item.PageID  })">
+                                        <i class="fa fa-angle-double-right"></i>
+                                        @item.PageTitle
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </section>
+                <hgroup class="title">
+                    <h2>@ViewBag.Title</h2>
+                    <hr />
+                </hgroup>
+                <section id="warta_ads-3" class="col-md-12 widget widget_warta_ads">
+                    <div id="id1674111196" class=" hidden-xs no-mobile">
+                        <div class="frame thick">
+                            <a href="#" target="_blank">
+                                <div data-src="/Package/TarnamaNewsWarta/Images/Advertisement/728x90.gif" data-alt="Advertisement"></div>
+
+                            </a>
+                        </div>
+                        <img src="/Package/TarnamaNewsWarta/Content/wp-content/themes/warta/img/shadow.png" class="shadow" alt="shadow">
+                    </div>
+                </section>
+            </div>
+            @foreach (PageVM item in Model)
+            {
+                <article id="post-1241" class="post-1241 post type-post status-publish format-standard has-post-thumbnail sticky hentry category-general tag-sticky-2 tag-template article-medium">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="frame">
+                                <a class="image" href="@Url.Action("PageText", "Home", new { id = item.PageID })" target="_blank">
+                                    <figure class="image-holder">
+                                        <img src="@item.PageImageUrl" alt="@item.PageTitle">
+                                    </figure>
+                                    <div class="image-light"></div>
+                                    <span class="dashicons dashicons-format-standard"></span>
+                                </a><!--.image-->
+                            </div><!--.frame-->
+                            <img src="/Package/TarnamaNewsWarta/Content/wp-content/themes/warta/img/shadow.png" class="shadow" alt="shadow">
+                        </div>
+
+                        <div class="col-sm-6">
+
+                            <h4><a href="@Url.Action("PageText", "Home", new { id = item.PageID})" target="_blank">@item.PageTitle</a></h4>
+
+                            <p class="post-meta ">
+                                <a href="@Url.Action("PageText", "Home", new { id = item.PageID  })" title="همه پست های @item.PageDate.ToLongDateString().LocalizeNumbers()">
+                                    <i class="fa fa-clock-o"></i>@item.PageDate.ToLongDateString().LocalizeNumbers() &nbsp;
+                                </a>
+                                @*<a href="/#comments" title="2 comments">
+                                    <i class="fa fa-comments"></i>2&nbsp;
+                                </a>*@
+                                <a href="@Url.Action("PageText", "Home", new { id = item.PageID  })" title="@item.Visit.LocalizeNumbers()  بازدید">
+                                    <i class="fa fa-eye"></i><span class="post-view-count" data-id="2038">@item.Visit.LocalizeNumbers()</span>&nbsp;
+                                </a>
+                            </p>
+                            <p>
+                                @item.Summary
+                            </p>
+                            <div class="read-more">
+                                <a class="btn btn-primary btn-sm" href="@Url.Action("PageText", "Home", new { id = item.PageID  })">ادامه مطلب ...</a>
+                            </div><!--.read-more-->
+                        </div>
+                       
+                    </div>
+                  
+                    <div class="footer ">
+                        <ul class="tags">
+                            @foreach (var itemSplit in item.PageTitle.Split(' '))
+                            {
+                                <li>
+                                    <a href="@Url.Action("Pagelist", "Home", new { tag = @itemSplit })" rel="tag">
+                                        @itemSplit
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                       
+
+                    </div><!--.footer-->
+                </article>
+                <hr>
+            }
+            <div class="pager">
+                @Html.Pager(Model.PageSize, Model.PageNumber,
+                             Model.TotalItemCount).Options(o => o.PageRouteValueKey("searchpage")
+                    .AlwaysAddFirstPageNumber())
+            </div>
+            <div class="row aside">
+                <section id="warta_ads-6" class="col-md-12 widget widget_warta_ads">
+                    <div id="id1988847212" class=" hidden-xs no-mobile">
+                        <div class="frame thick">
+                            <a href="#" target="_blank">
+                                <div data-src="/Package/TarnamaNewsWarta/Images/Advertisement/728x90.gif" data-alt="Advertisement"></div>
+                            </a>
+                        </div>
+                        <img src="/Package/TarnamaNewsWarta/Content/wp-content/themes/warta/img/shadow.png" class="shadow" alt="shadow">
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+
+

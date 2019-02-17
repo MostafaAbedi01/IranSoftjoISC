@@ -1,0 +1,55 @@
+﻿@model IEnumerable<IranSoftjo.Package.WebUi.ViewModels.TblDocumentTreeVm>
+@{
+    ViewBag.Title = "شناسنامه درخت ها";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+
+<div class="k-rtl">
+
+    @(Html.Kendo().Grid(Model)
+    .Name("Grid")
+    .Columns(columns =>
+    {
+        columns.Bound(item => @item.TblDocumentTreeId).Title("دستورات").Filterable(false).Groupable(false)
+            .Template(@<text>
+                          @Html.ActionLink("موقعیت بروی نقشه", "SearchByManhoId", new {id = @item.TblDocumentTreeId}, new {@class = "k-button k-button-icontext k-grid-edit"})
+                          @Html.ActionLink( "تصاویر دیگر", "Index", "TblPhotoList", new {id = @item.TblDocumentTreeId}, new {@class = "k-button k-button-icontext k-grid-edit"})
+                          @Html.ActionLink("جزئیات", "Details", new {id = @item.TblDocumentTreeId}, new {@class = "k-button k-button-icontext k-grid-delete"})
+                          @Html.ActionLink("ویرایش", "Edit", new {id = @item.TblDocumentTreeId}, new {@class = "k-button k-button-icontext k-grid-edit"})
+                          @Html.ActionLink("حذف", "Delete", new {id = @item.TblDocumentTreeId}, new {@class = "k-button k-button-icontext k-grid-delete"})
+                       </text>).Width(230);
+        columns.Bound(model => model.TblDocumentTreeId).Visible(false);
+        columns.Bound(model => model.Address).Width(300);
+        columns.ForeignKey(p => p.TreeType, (System.Collections.IEnumerable)ViewBag.TreeType, "KeyID", "Title");
+        columns.ForeignKey(p => p.MantagheShahrdari, (System.Collections.IEnumerable)ViewBag.MantagheShahrdari, "KeyID", "Title");
+        columns.Bound(model => model.Pelak);
+        columns.Bound(model => model.YearPlanting);
+        columns.Bound(model => model.DateSabt).Width(130);
+        columns.ForeignKey(p => p.TblUserId, (System.Collections.IEnumerable)ViewBag.TblUserId, "UserID", "LastName");
+    })
+                                  .ToolBar(toolbar => toolbar.Custom().Action("SearchMap", "AgrTblDocumentTree").Text("نمایش لیست بر روی نقشه"))
+
+
+    .Pageable(d => d.PageSizes(true).Refresh(true))
+    .Sortable()
+    .Scrollable()
+    .Filterable().Groupable()
+
+    .HtmlAttributes(new {style = "height:600px; "})
+    .DataSource(dataSource => dataSource
+        .Server()
+        .Model(model => model.Id(item => item.TblDocumentTreeId)).PageSize(7)
+    )
+    .Resizable(resize => resize.Columns(true))
+    .ColumnMenu()
+    )
+</div>
+<style>
+    .container {
+    width: 1300px !important;
+}
+</style>

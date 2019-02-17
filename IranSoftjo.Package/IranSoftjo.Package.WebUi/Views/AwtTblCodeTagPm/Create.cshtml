@@ -1,0 +1,24 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.TblCodeTagPmVm
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+
+@using (Html.BeginForm("Create", "AwtTblCodeTagPm", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <table class="form">
+        @Html.ValidationSummary(true)
+        @Html.AntiForgeryToken()
+       
+        @Html.EnhancedEditorField(model => model.CodePm)
+        @Html.EnhancedEditorField(model => model.CodeTag)
+
+
+        @Html.EnhancedSubmit("ثبت منهول")
+    </table>
+}
+
+<div>
+    @Html.ActionLink("بازگشت به لیست", "List")
+</div>

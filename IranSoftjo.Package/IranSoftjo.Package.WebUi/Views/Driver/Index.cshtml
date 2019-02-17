@@ -1,0 +1,38 @@
+﻿@model IEnumerable<IranSoftjo.Package.WebUi.ViewModels.DriverVm>
+@{
+    ViewBag.Title = "لیست راننده ها";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+<div class="k-rtl">
+    @(Html.Kendo().Grid(Model)
+          .Name("Grid")
+          .Columns(columns =>
+          {
+              columns.Bound(model => model.DriverID).Visible(false).Width(60);
+              columns.Bound(model => model.Code).Width(100);
+              columns.Bound(model => model.FirstName).Width(200);
+              columns.Bound(model => model.LastName).Width(200);
+              columns.Bound(model => model.Mobile).Width(100);
+              columns.Bound(item => @item.DriverID).Title("دستورات").Filterable(false).Groupable(false)
+                  .Template(
+                      @<text>
+                           @Html.ActionLink("ویرایش", "Edit", new {id = @item.DriverID}, new {@class = "k-button k-button-icontext k-grid-edit"})
+                           @Html.ActionLink("حذف", "Delete", new {id = @item.DriverID}, new {@class = "k-button k-button-icontext k-grid-delete"})
+                       </text>
+                  ).Width(140);
+          })
+          .ToolBar(toolbar => toolbar.Custom().Action("Create", "Driver").Text("افزودن"))
+          .Sortable()
+          .Scrollable()
+          .Filterable()
+          .HtmlAttributes(new {style = "height:500px;"})
+          .DataSource(dataSource => dataSource
+              .Server()
+              .Model(model => model.Id(item => item.DriverID))
+          )
+          )
+</div>

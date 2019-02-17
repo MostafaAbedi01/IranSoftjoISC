@@ -1,0 +1,39 @@
+﻿@using Kendo.Mvc.UI
+@model List<IranSoftjo.Package.WebUi.ViewModels.ProductVM>
+<noscript>
+    <h1>جاوا اسکریپت شما غیر فعال میباشد لطفا فعال کنید</h1>
+</noscript>
+@Html.Partial("_KendoFilePartial")
+<script src="@Url.Content("~/Scripts/kendo/2013.3.1316/kendo.all.min.js")"> </script>
+<script type="text/x-kendo-tmpl" id="template">
+    <div class="product" id="product_${ProductID}">
+        <h3>${ProductTitle}</h3>
+        <br style="clear:both;" />        
+        <img src="${ProductThumbnailImageUrl}" alt="تصویر ${ProductTitle}" />
+        <br style="clear:both;" />        
+        <p>قیمت: ${kendo.toString(ProductPrice, "n0")} ریال</p>
+        <p>
+        <p>توضیحات: ${kendo.toString(ProductDescription).substring(0,30)} ...</p>
+        <p>گروه: ${ProductGroupTitle}</p>
+    <div class="inputbutton">
+        <p>
+        <input type="button" class="k-button k-button-icontext" value="افزودن به سبد خرید" id="btnAddToBasket_${ProductID}">
+        <input type="button" class="k-button k-button-icontext " value="جزئیات" id="btn_DetailProduct${ProductID}">
+        </p>
+    </div>
+    </div>
+</script>
+<div>
+    @(Html.Kendo().ListView(Model)
+          .Name((string) Session["ListViewName"])
+          .TagName("div")
+          .ClientTemplateId("template")
+          .DataSource(dataSource =>
+                      {
+                          dataSource.Read(read => read.Action("ReadThemes", "Home"));
+                          dataSource.PageSize((int)Session["CountProduct"]);
+                          dataSource.ServerOperation(false);
+                      })
+          .Pageable())
+</div>
+

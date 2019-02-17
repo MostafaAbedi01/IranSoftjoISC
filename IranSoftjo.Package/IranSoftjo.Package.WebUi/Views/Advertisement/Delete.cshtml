@@ -1,0 +1,29 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model  IranSoftjo.Package.WebUi.ViewModels.AdvertisementVM
+@{
+    ViewBag.Title = "حذف";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@using (Html.BeginForm())
+{
+    <table class="form">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.EnhancedLabelField(model => model.AdvertisementGroupID)
+        @Html.EnhancedLabelField(model => model.AdvertisementGroupID)
+        @Html.EnhancedLabelField(model => model.AdvertisementTitle)
+        @Html.EnhancedLabelField(model => model.AdvertisementUrl)
+        @Html.EnhancedLabelField(model => model.AdvertisementOrder)
+        @Html.EnhancedLabelField(model => model.AdvertisementIsActive)
+        <td class="labelWrp">
+            <label for="ProductGroupID" class="fieldLabel">@Html.LabelFor(model => model.AdvertisementImage)</label>
+        </td>
+        <td colspan="1" class="inputWrp">
+            <img style="width: 100px;" src="@Model.AdvertisementImage"/>
+        </td>
+        @Html.EnhancedSubmit("حذف")
+    </table>
+}
+<div>
+    @Html.ActionLink("بازگشت به لیست", "Index")
+</div>

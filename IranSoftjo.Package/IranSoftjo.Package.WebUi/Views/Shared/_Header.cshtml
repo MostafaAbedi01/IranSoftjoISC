@@ -1,0 +1,207 @@
+﻿@using IranSoftjo.Package.DataModel
+@using IranSoftjo.Package.WebUi.Configs
+@model IranSoftjo.Package.DataModel.SiteSetting
+@{
+    var db = new Entities();
+}
+<div class="content-header">
+    @if (PackageSettings.Active.SiteTypeCms)
+    {
+        <img  style="max-height: 150px" src="~/Package/@PackageSettings.Active.SiteTheme/Images/HeaderBanner.png" alt=@Model.WebSiteTitle />
+    }
+    else if (PackageSettings.Active.SiteTypeEShop)
+    {
+        <div class="header-left">
+            <a href="@Url.Action("index", "Home")">
+                <img     width="200"     height="70" src="@Model.LogoImageUrl" alt=@Model.WebSiteTitle />
+            </a>
+        </div>
+        <div class="header-right">
+            <section id="login">
+                @Html.Partial("_LoginPartial")
+            </section>
+
+        </div>
+        <div class="header-center">
+
+            <div class="demo-section">
+
+                <div class="k-rtl">
+                    @*   @(Html.Kendo().DropDownList()
+          .Name("color")
+         .DataTextField("ProductTitle")
+          .DataValueField("ProductID")
+           .HtmlAttributes(new { style = "width:100px" })
+            .Value("1")
+          .DataSource(source => source.Read(read => read.Action("GetProductGroups", "Products"))))*@
+
+                    @(Html.Kendo().DropDownList()
+                              .Name("color")
+                              .DataTextField("Text")
+                              .DataValueField("Value")
+                              .HtmlAttributes(new { style = "width:100px" })
+                              .BindTo(new List<SelectListItem>
+                                      {
+                                          new SelectListItem
+                                          {
+                                              Text = "همه گروه ها",
+                                              Value = "1"
+                                          },
+                                          new SelectListItem
+                                          {
+                                              Text = "عسل",
+                                              Value = "2"
+                                          },
+                                          new SelectListItem
+                                          {
+                                              Text = "ساير محصولات زنبور",
+                                              Value = "3"
+                                          },
+                                          new SelectListItem
+                                          {
+                                              Text = "تجهیزات زنبور داری",
+                                              Value = "3"
+                                          }
+                                      })
+                              .Value("1")
+                              )
+                    @(Html.Kendo().AutoComplete()
+                              .Name("states")
+                              .Filter("contains")
+                              .HtmlAttributes(new { style = "width:250px" })
+                              .Placeholder("جستجو محصول ...")
+                              .BindTo(new[]
+                                      {
+                                          "عسل",
+                                          "عشل",
+                                          "سیر",
+                                          "شیر"
+                                      })
+            //.Template("<span class=\"k-state-default\"><img src=\"" + Url.Content("~/Images/Common/News.jpg") + "#:data.CustomerID#.jpg\" alt=\"#:data.CustomerID#\" /></span>" +
+            //          "<span class=\"k-state-default\"><h3>#: data.ContactName #</h3><p>#: data.CompanyName #</p></span>")
+                              )
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div class="header-bottom">
+    <div class="k-rtl">
+        @(Html.Kendo().Menu()
+                  .Name("MenuLayout")
+                  .Items(items =>
+                         {
+                             items.Add()
+                                 .Text("صفحه اصلی").Action("Index", "Home");
+                             if (PackageSettings.Active.SiteTypeEShop)
+                             {
+                                 items.Add()
+                                     .Text("محصولات").Action("List", "Product");
+                              
+                             }
+                             items.Add().Text("گالری").Action("List", "GalleryGroup");
+                             foreach (PageGroup itemPageGroup in db.PageGroups.OrderBy(d => d.PageGroupOrder))
+                             {
+                                 if (itemPageGroup.PageGroupIsActive)
+                                 {
+                                     if (itemPageGroup.TypeLogEnum == PageGroupTypeEnum.Tab)
+                                     {
+                                         PageGroup @group = itemPageGroup;
+                                         if (itemPageGroup.IsMenuLink)
+                                         {
+                                             items.Add().Text(itemPageGroup.PageGroupTitle)
+                                             .Action("PageTab", "Home", new { id = itemPageGroup.PageGroupID, title = itemPageGroup.PageGroupID })
+                                             .Items(itemsChild =>
+                                                        {
+                                                            if (@group.IsSubMenu)
+                                                            {
+                                                                foreach (var varitem in @group.Pages)
+                                                                {
+                                                                    itemsChild.Add().Text(varitem.PageTitle).Action("PageText", "Home", new { pageId = varitem.PageID, title = varitem.PageTitle });
+                                                                }
+                                                            }
+                                                        });
+                                         }
+                                         else
+                                         {
+                                             items.Add().Text(itemPageGroup.PageGroupTitle)
+                                                                                 .Items(itemsChild =>
+                                                                                 {
+                                                                                     if (@group.IsSubMenu)
+                                                                                     {
+                                                                                         foreach (var varitem in @group.Pages)
+                                                                                         {
+                                                                                             itemsChild.Add().Text(varitem.PageTitle).Action("PageText", "Home", new { pageId = varitem.PageID, title = varitem.PageTitle });
+                                                                                         }
+                                                                                     }
+                                                                                 });
+                                         }
+
+                                     }
+                                     else if (itemPageGroup.TypeLogEnum == PageGroupTypeEnum.Pager)
+                                     {
+                                         PageGroup @group = itemPageGroup;
+                                         items.Add().Text(itemPageGroup.PageGroupTitle).Action("PageList", "Home", new { id = itemPageGroup.PageGroupID, title = itemPageGroup.PageGroupID })
+                                                 .Items(itemsChild =>
+                                                 {
+                                                     if (@group.IsSubMenu)
+                                                     {
+                                                         foreach (var varitem in @group.Pages.OrderBy(d=>d.PageOrder))
+                                                         {
+                                                             itemsChild.Add().Text(varitem.PageTitle).Action("PageText", "Home", new { pageId = varitem.PageID, title = varitem.PageTitle });
+                                                         }
+                                                     }
+                                                 });
+                                     }
+                                     else if (itemPageGroup.TypeLogEnum == PageGroupTypeEnum.Book)
+                                     {
+                                         items.Add().Text(itemPageGroup.PageGroupTitle).Action("PageBook", "Home", new { id = itemPageGroup.PageGroupID, title = itemPageGroup.PageGroupID });
+                                     }
+                                     else if (itemPageGroup.TypeLogEnum == PageGroupTypeEnum.PanelBar)
+                                     {
+                                         PageGroup @group = itemPageGroup;
+                                         items.Add().Text(itemPageGroup.PageGroupTitle).Action("PagePanelBar", "Home", new { id = itemPageGroup.PageGroupID, title = itemPageGroup.PageGroupID })
+                                              .Items(itemsChild =>
+                                              {
+                                                  if (@group.IsSubMenu)
+                                                  {
+                                                      foreach (var varitem in @group.Pages)
+                                                      {
+                                                          itemsChild.Add().Text(varitem.PageTitle).Action("PageText", "Home", new { pageId = varitem.PageID, title = varitem.PageTitle });
+                                                      }
+                                                  }
+                                              });
+                                     }
+                                     //else if (itemPageGroup.TypeLogEnum == PageGroupTypeEnum..GalleryTn3)
+                                     //{
+                                     //    items.Add().Text(itemPageGroup.PageGroupTitle).Action("PageGalleryTn3", "Home", new { id = itemPageGroup.PageGroupID, title = itemPageGroup.PageGroupID });
+                                     //}
+                                     //else if (itemPageGroup.TypeLogEnum == PageGroupTypeEnum.GalleryLightbox)
+                                     //{
+                                     //    items.Add().Text(itemPageGroup.PageGroupTitle).Action("PageGalleryLightbox", "Home", new { id = itemPageGroup.PageGroupID, title = itemPageGroup.PageGroupID });
+                                     //}
+                                     else if (itemPageGroup.TypeLogEnum == PageGroupTypeEnum.Text)
+                                     {
+                                         items.Add().Text(itemPageGroup.PageGroupTitle).Action("PageText", "Home", new { pageGroupId = itemPageGroup.PageGroupID, title = itemPageGroup.PageGroupID });
+                                     }
+                                 }
+                             }
+                             items.Add().Text("نمایندگی").Action("List", "Agency");
+                             if (Request.IsAuthenticated)
+                             {
+                                 items.Add().Text("میزکار").Action("Edit", "SiteSetting");
+                                 items.Add().Text("خروج").Action("Logout", "Account");
+                             }
+                             if (PackageSettings.Active.SiteTypeCms)
+                             {
+                                 if (!Request.IsAuthenticated)
+                                 {
+                                     items.Add().Text("ورود").Action("Login", "Account");
+                                 }
+                             }
+                         }
+                  )
+
+                  )
+    </div>
+</div>

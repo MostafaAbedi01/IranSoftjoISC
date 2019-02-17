@@ -1,0 +1,34 @@
+﻿@using IranSoftjo.Package.DataModel
+@model List<IranSoftjo.Package.DataModel.ProductImage>
+@{
+    Layout = null;
+}
+<link rel="stylesheet" type="text/css" href="~/Content/Lightbox/style.css" />
+@for (int i = 0; i < Model.Count(); i++)
+{
+    ProductImage item = Model[i];
+    <p>
+        @{
+            string nex = (i + 1).ToString();
+            string pre = (i - 1).ToString();
+        }
+        <ul class="lb-album">
+            <li>
+                <a href="#image-@i">
+                    <img width="150px" height="150px" src="@item.ProductThumbnailImageUrl" alt="@item.ProductImageTitle">
+                    <span>@item.ProductImageTitle</span>
+                </a>
+                <div class="lb-overlay" id="image-@i">
+                    <img src="@item.ProductImageUrl" alt="@item.ProductImageTitle" />
+                    <div>
+                        <h3>@item.ProductImageTitle</h3>
+                        <a href="#image-@pre" class="lb-prev">قبلی</a>
+                        <a href="#image-@nex" class="lb-next">بعدی</a>
+                    </div>
+                    <a href="#page" class="lb-close">X  خروج</a>
+                </div>
+            </li>
+
+        </ul>
+    </p>
+}

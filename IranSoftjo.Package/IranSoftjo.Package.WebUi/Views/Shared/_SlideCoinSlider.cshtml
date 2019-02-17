@@ -1,0 +1,16 @@
+﻿@model System.Data.Entity.DbSet<IranSoftjo.Package.DataModel.SlideShow>
+<link rel="stylesheet" type="text/css" href="~/content/coin-slider.css" />
+<script type="text/javascript" src="/scripts/script.js"> </script>
+<script type="text/javascript" src="/scripts/coin-slider.min.js"> </script>
+<div id="templatemo_middle_wrapper">
+    <div class="slider">
+        <div id="coin-slider">
+            @foreach (var item in Model)
+            {
+                <a href="@item.SlideShowHref" target="_blank">
+                    <img src="@item.SlideShowImageUrl" width="960" height="250" alt="@item.SlideShowSubTitle" />
+                </a>
+            }
+        </div>
+    </div>
+</div>

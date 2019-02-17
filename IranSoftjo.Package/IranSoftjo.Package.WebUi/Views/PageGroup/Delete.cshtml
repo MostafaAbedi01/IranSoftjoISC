@@ -1,0 +1,31 @@
+﻿@model IranSoftjo.Package.WebUi.ViewModels.PageGroupVM
+@using IranSoftjo.Core.Web.Mvc.Html
+@{
+    ViewBag.Title = "حذف منو";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="BreadCrumbPage">
+    @Html.ActionLink("لیست منوها", "Index")
+    <strong>>></strong>
+    @Html.ActionLink("حذف منو ", "Delete")
+</div>
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+@using (Html.BeginForm())
+{
+    <table class="form">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.PageGroupID)
+        @Html.EnhancedLabelField(model => model.PageGroupType, Model.SelectListPageGroupType)
+        @Html.EnhancedLabelField(model => model.PageGroupTitle)
+        @Html.EnhancedLabelField(model => model.PageGroupIsActive)
+        @Html.EnhancedLabelField(model => model.PageGroupOrder)
+        @Html.EnhancedSubmit("حذف")
+    </table>
+}
+<div>
+    @Html.ActionLink("بازگشت به لیست", "Index")
+</div>

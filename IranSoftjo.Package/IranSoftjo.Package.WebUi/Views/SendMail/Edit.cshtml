@@ -1,0 +1,26 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.SendMailVM
+@{
+    ViewBag.Title = "ارسال ایمیل";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <table class="form">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.SendMailID)
+        @Html.EnhancedEditorField(model => model.Subject)
+        @Html.EnhancedEditorField(model => model.ToEmail)
+        @Html.EnhancedEditorField(model => model.CcEmail)
+        @Html.EnhancedEditorField(model => model.BccEmail)
+        @Html.EnhancedCheckBoxField(model => model.SendMailToAllPhoneBook)
+        @Html.EnhancedEditorField(model => model.Body)
+        @Html.EnhancedSubmit("ارسال ایمیل")
+    </table>
+}
+<div>
+    @Html.ActionLink("بازگشت به لیست", "Index")
+</div>
+

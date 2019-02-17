@@ -1,0 +1,18 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.GalleryGroupVM
+@{
+    ViewBag.Title = "حذف گروه گالری";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@using (Html.BeginForm())
+{
+    <table class="form">
+        
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.GalleryGroupId)
+        @Html.EnhancedLabelField(model => model.GalleryGroupId)
+        @Html.EnhancedLabelField(model => model.GalleryGroupTitle)
+        @Html.EnhancedSubmit("حذف")
+    </table>
+}
+@Html.ActionLink("بازگشت به لیست", "Index")

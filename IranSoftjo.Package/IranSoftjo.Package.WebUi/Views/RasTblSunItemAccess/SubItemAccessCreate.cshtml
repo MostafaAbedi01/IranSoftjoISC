@@ -1,0 +1,68 @@
+﻿@model IranSoftjo.Package.WebUi.ViewModels.TblSubItemAccessVm
+@using IranSoftjo.Core.Web.Mvc.Html
+@{
+    ViewBag.Title = "افزودن ایتم کاری";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+
+
+@using (Html.BeginForm("SubItemAccessCreate", "RasTblSunItemAccess", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <table class="form">
+        @Html.ValidationSummary(true)
+        @Html.AntiForgeryToken()
+      
+        <span id="states-loading-progress" style="display: none;">چند لحظه صبر کنید...</span>
+        @Html.EnhancedDropDownList(model => model.KeyId1, "KeyId1")
+        @Html.EnhancedDropDownList(model => model.KeyId2, "KeyId2")
+        @Html.EnhancedEditorField(model => model.Ral)
+        @Html.EnhancedEditorField(model => model.Title)
+
+        @Html.EnhancedSubmit("ثبت ")
+    </table>
+}
+
+<script type="text/javascript">
+    $(function () {
+        $("#KeyId1").change(function () {
+                 var selectedItem = $(this).val();
+                 var ddlStates = $("#KeyId2");
+              var statesProgress = $("#states-loading-progress");
+             statesProgress.show();
+             $.ajax({
+                 cache: false,
+                 type: "GET",
+                 url: '@Url.Action("GetStatesByCountryId", "RasTblSunItemAccess")',
+                 data: { "KeyId1": selectedItem },
+                    success: function (data) {
+                        ddlStates.html('');
+                        $.each(data, function (id, option) {
+                            ddlStates.append($('<option></option>').val(option.KeyID).html(option.Title));
+                        });
+                        statesProgress.hide();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert('Failed to retrieve states.');
+                        statesProgress.hide();
+                    }
+             });
+
+            var ral = $("#Ral");
+            var ddlStates2 = $('#KeyId1').val();
+            if (ddlStates2 >=3)  {
+                ral.show();
+            } else {
+                ral.hide();
+            }
+        });
+
+      
+        });
+</script> 
+<div>
+    @Html.ActionLink("بازگشت به لیست", "SubItemAccessList")
+</div>

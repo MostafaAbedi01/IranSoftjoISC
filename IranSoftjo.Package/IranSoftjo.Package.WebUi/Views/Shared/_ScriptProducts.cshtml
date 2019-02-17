@@ -1,0 +1,143 @@
+﻿<script type="text/javascript">
+    $(document).ready(function () {
+        $("[id*=btnAddToBasket]").each(function() {
+            $(this).click(function() {
+                var productid = $(this).attr("id").match(/[\d]+$/);
+                $.ajax({
+                    url: "/api/ShoppingCartApi",
+                    data: { ProductID: productid },
+                    type: "GET"
+                }).done(function(result) {
+                    if (result) {
+                        $(".cartinfo").fadeOut(200).html("سبد: " + result).fadeIn(200);
+                        $.ajax({
+                            url: "/api/ShoppingCartApi",
+                            type: "GET"
+                        }).done(function(result) {
+                            if (result) {
+                                $("#product_ListViewName0" +  productid).fadeOut(500).fadeIn(800);
+                                $("#product_ListViewName1" +  productid).fadeOut(500).fadeIn(800);
+                                $("#product_ListViewName2" + productid).fadeOut(500).fadeIn(800);
+                                $("#product_ListViewName3" + productid).fadeOut(500).fadeIn(800);
+                                $("#productsShow").html(result).fadeOut(200).fadeIn(200);
+                                $("tr:even").css("background-color", "#FCF4CF");
+                                $("tr:odd").css("background-color", "#ffffff");
+                            }
+                        });
+                    }
+                });
+            });
+
+            $("[id*=btn_DetailProduct]").each(function() {
+                $(this).click(function() {
+                    var productid = $(this).attr("id").match(/[\d]+$/);
+                    document.location.href = '/Product/Details/' + productid;
+                });
+            });
+        });
+    });
+</script>
+
+<style>
+    .product
+    {
+        -webkit-border-radius: 15px;
+        border: 1px solid #F46514;
+        border-radius: 15px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        float: right;
+        /*height: 260px;*/
+        margin: 10px 4px;
+        width: 166px;
+    }
+
+        .product p
+        {
+            text-align: center;
+        }
+
+        .product *
+        {
+            margin: 1px auto;
+        }
+
+        .product img
+        {
+            -webkit-border-radius: 15px;
+            border-radius: 5px 5px 5px 5px;
+            height: 110px;
+            /* float: right;*/
+            margin-right: 30px;
+            text-align: center;
+            width: 110px;
+        }
+
+        .product h3
+        {
+            border-radius: 15px 15px 0 0;
+            color: #0F103D;
+            font-size: 1em;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .product dl
+        {
+            float: left;
+            margin: 15px 0 0 0;
+        }
+
+        .product dt, dd
+        {
+            float: right;
+            margin: 0;
+            padding: 0;
+            width: 80px;
+        }
+
+        .product dt
+        {
+            clear: left;
+            opacity: 0.6;
+            padding: 0 5px 0 15px;
+            text-align: right;
+            width: 30px;
+        }
+
+        .k-listview:after, .product dl:after
+        {
+            clear: both;
+            content: ".";
+            display: block;
+            height: 0;
+            visibility: hidden;
+        }
+
+    .k-listview
+    {
+        border: 0;
+        min-width: 0;
+        padding: 0;
+    }
+
+    #ListViewName1.k-block, #ListViewName1.k-widget ,
+    #ListViewName2.k-block, #ListViewName2.k-widget ,
+    #ListViewName3.k-block, #ListViewName3.k-widget 
+    {
+        background-color: transparent;
+    }
+
+    input[type="submit"], input[type="button"], button
+    {
+        border: 0px !important;
+        font-size: 12px !important;
+        font-weight: 400 !important;
+    }
+
+    .inputbutton
+    {
+        margin: 1px 2px 10px;
+    }
+</style>

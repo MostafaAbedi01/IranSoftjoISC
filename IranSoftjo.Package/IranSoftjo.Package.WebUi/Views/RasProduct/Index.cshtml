@@ -1,0 +1,46 @@
+﻿@model IEnumerable<IranSoftjo.Package.WebUi.ViewModels.RasProductVM>
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "محصولات";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+<div class="k-rtl">
+    @(Html.Kendo().Grid(Model)
+          .Name("Grid")
+          .Columns(columns =>
+          {
+              columns.Bound(item => item.ProductID).Visible(false);
+              columns.Bound(item => item.ProductTitle);
+              columns.Bound(item => item.ProductCode);
+              columns.Bound(item => item.TitleHardener);
+              columns.Bound(item => item.TitleThinner);
+              columns.Bound(item => item.ProductGroupTitle).Title("گروه محصول").Width(100);
+              columns.Bound(item => @item.ProductID).Title("دستورات").Filterable(false).Groupable(false)
+                  .Template(@<text>
+                                 @Html.ActionLink("ویرایش", "Edit", new { id = @item.ProductID }, new { @class = "k-button k-button-icontext k-grid-edit" })
+                                 @Html.ActionLink("حذف", "Delete", new { id = @item.ProductID }, new { @class = "k-button k-button-icontext k-grid-delete" })
+                             </text>).Width(200);
+          })
+          .ToolBar(toolbar => toolbar.Custom().Action("Create", "RasProduct").Text("افزودن"))
+          .Sortable()
+          .Scrollable()
+          .Filterable()
+          .HtmlAttributes(new { style = "height:550px;" })
+          .DataSource(dataSource => dataSource
+              .Server()
+              .Model(model => model.Id(item => item.ProductID))
+              .Group(groups => groups.Add(p => p.ProductGroupTitle))
+              
+          )
+          )
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+            $(Grid).find('.k-icon.k-i-collapse').trigger('click');
+    });
+</script>

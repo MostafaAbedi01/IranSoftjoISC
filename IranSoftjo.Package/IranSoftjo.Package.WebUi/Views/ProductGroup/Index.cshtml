@@ -1,0 +1,32 @@
+﻿@model IEnumerable<IranSoftjo.Package.WebUi.ViewModels.ProductGroupVM>
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "گروه محصولات";
+}
+<div class="k-rtl">
+    @(Html.Kendo().Grid(Model)
+           .Name("Grid")
+           .Columns(columns =>
+               {
+                   columns.Bound(item => item.ProductGroupID).Title("سریال");
+                   columns.Bound(item => item.ProductGroupTitle).Title("گروه محصول");
+                   columns.Bound(item => item.ProductGroupOrder).Title("ترتیب نمایش");
+                   columns.Bound(item => item.IsActive).Title("فعال");
+                   columns.Bound(item => @item.ProductGroupID).Title("دستورات").Filterable(false).Groupable(false)
+                          .Template(@<text>
+    @Html.ActionLink("ویرایش", "Edit", new { id = @item.ProductGroupID }, new { @class = "k-button k-button-icontext k-grid-edit" })
+    @Html.ActionLink("حذف", "Delete", new { id = @item.ProductGroupID }, new { @class = "k-button k-button-icontext k-grid-delete" })
+    </text>).Width(200);
+               })
+           .ToolBar(toolbar => toolbar.Custom().Action("Create", "ProductGroup").Text("افزودن"))
+           .Sortable()
+
+           .Scrollable()
+           .Filterable()
+           .HtmlAttributes(new { style = "height:500px;" })
+           .DataSource(dataSource => dataSource
+                                         .Server()
+                                         .Model(model => model.Id(item => item.ProductGroupID))
+           )
+           )
+</div>

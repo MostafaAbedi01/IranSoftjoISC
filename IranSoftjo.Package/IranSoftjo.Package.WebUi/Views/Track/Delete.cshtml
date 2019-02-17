@@ -1,0 +1,31 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.TrackVm
+@{
+    ViewBag.Title = "حذف مسیر";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="BreadCrumbPage">
+    @Html.ActionLink("لیست مسیرها", "Index")
+    <strong>>></strong>
+    @Html.ActionLink("حذف مسیر ", "Create")
+</div>
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+@using (Html.BeginForm())
+{
+    <table class="form">
+        
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.TrackID)
+        @Html.EnhancedLabelField(model => model.Code)
+        @Html.EnhancedLabelField(model => model.Name)
+        @Html.EnhancedLabelField(model => model.Mobile)
+        @Html.EnhancedLabelField(model => model.Price)
+        @Html.EnhancedLabelField(model => model.TimeTrack)
+        @Html.EnhancedLabelField(model => model.TypeTrack)
+        @Html.EnhancedSubmit("حذف")
+    </table>
+}
+@Html.ActionLink("بازگشت به لیست", "Index")

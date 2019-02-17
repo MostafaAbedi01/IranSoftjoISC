@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "نمایش تاريخ";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<hgroup class="title">
+    <h1>نمایش تاريخ شمسي ، قمري  و ميلادي به همراه مناسبت</h1>
+    <hr />
+    <h2>نمایش تاریخ با امکان تنظیمات زیر :</h2>
+</hgroup>
+<div style="margin-right: 20px">
+    <lo>
+        <li> تاریخ شمسی نمایش داده شود؟ </li>
+        <li> تاریخ میلادی نمایش داده شود؟  </li>
+        <li>   تاریخ قمری نمایش داده شود؟  </li>
+        <li> مناسبت های امروز نمایش داده شود(درصورت وجود مناسبت)؟  </li>
+        <li>    مناسبت های فردا نمایش داده شود(درصورت وجود مناسبت)؟  </li>
+    </lo>
+</div>
+<script type="text/javascript" src="http://blogers.ir/cod/date/cod.php?s=1&stom=yes&stym=yes&qamari=yes&miladi=yes&shamsi=yes"> </script>
+<style>
+    td { padding: 0 !important; }
+</style>
+<br/>
+@Html.ActionLink("بازگشت به لیست ماژول ها","BuyCms", "Home",null, new {@class = "k-button k-button-icontext"} )

@@ -1,0 +1,37 @@
+﻿@model IEnumerable<IranSoftjo.Package.WebUi.ViewModels.TblChatVm>
+@{
+    ViewBag.Title = "لیست پیامها";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+<div class="k-rtl">
+
+    @(Html.Kendo().Grid(Model)
+          .Name("Grid")
+          .Columns(columns =>
+                   {
+                       columns.Bound(model => model.TblChatId).Visible(false);
+                       columns.ForeignKey(p => p.TblUserIdFrom, (System.Collections.IEnumerable)ViewBag.TblUserIdFrom, "UserID", "LastName").Width(180);
+                       columns.ForeignKey(p => p.TblUserIdTo, (System.Collections.IEnumerable)ViewBag.TblUserIdTo, "UserID", "LastName").Width(180);
+                       columns.Bound(model => model.TextChat);
+                       columns.Bound(model => model.DateSabt).Format("{0:yyyy/MM/dd HH:mm}").Width(130);
+                       columns.Bound(item => @item.TblChatId).Title("دستورات").Filterable(false).Groupable(false)
+                           .Template(@<text>
+                            @Html.ActionLink("حذف", "Delete", new { id = @item.TblChatId }, new { @class = "k-button k-button-icontext k-grid-delete" })
+                        </text>).Width(80);
+                   })
+                                                                                                          .ToolBar(toolbar => toolbar.Custom().Action("Create", "TblChat").Text("ارسال پیام جدید"))
+                                          .Pageable()
+                                          .Sortable()
+                                          .Scrollable()
+                                          .Filterable()
+                                          .HtmlAttributes(new { style = "height:500px;" })
+                                          .DataSource(dataSource => dataSource
+                                              .Server()
+                                                                              .Model(model => model.Id(item => item.TblChatId))
+                                          )
+    )
+</div>

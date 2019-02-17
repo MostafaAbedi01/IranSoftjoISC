@@ -1,0 +1,66 @@
+﻿@{
+    Layout = "../Shared/_LayoutNull.cshtml";
+    ViewBag.ViewBag = "سامانه هوشمند ISC";
+}
+<style>
+     h1 span,.codrops-demos a {
+            font-weight: 700;
+            font-style: normal;
+                   font-family: BKoodakBold;
+        }
+</style>
+<link rel="stylesheet" type="text/css" href="/Content/SVGDrawingAnimation/normalize.css" />
+<link rel="stylesheet" type="text/css" href="/Content/SVGDrawingAnimation/demo.css" />
+<link rel="stylesheet" type="text/css" href="/Content/SVGDrawingAnimation/component.css" />
+<div class="container">
+    <!-- Top Navigation -->
+    <header class="codrops-header">
+        <svg id="logo" class="line-drawing" width="148" height="167" xmlns="http://www.w3.org/2000/svg">
+            <path class="darker" d="M 80.889194,41.80541 C 80.889194,63.45198 63.341174,81 41.694594,81 20.048024,81 2.5,63.45198 2.5,41.80541 2.5,20.158827 20.048024,2.61081 41.694594,2.61081 c 21.64658,0 39.1946,17.548017 39.1946,39.1946 z" />
+        </svg>
+        <div data-svg="logo" class="codrops-logo hide"></div>
+        <nav class="codrops-demos">
+            <svg id="demo-link-1" class="line-drawing" width="84" height="40" xmlns="http://www.w3.org/2000/svg">
+                <path class="darker" d="m 7.5228307,2.6236947 67.7360843,0 c 2.782649,0 5.022831,2.23 5.022831,5 l 0,24.6482333 c 0,2.77 -2.240182,5 -5.022831,5 l -67.7360843,0 c -2.7826481,0 -5.0228307,-2.23 -5.0228307,-5 l 0,-24.6482333 c 0,-2.77 2.2401826,-5 5.0228307,-5 z" />
+            </svg>
+            <a data-svg="demo-link-1" class="hide" href="@Url.Action("Index1", "Dashboard")">فاضلاب</a>
+
+            <svg id="demo-link-2" class="line-drawing" width="84" height="40" xmlns="http://www.w3.org/2000/svg">
+                <path class="darker" d="m 7.5228307,2.6236947 67.7360843,0 c 2.782649,0 5.022831,2.23 5.022831,5 l 0,24.6482333 c 0,2.77 -2.240182,5 -5.022831,5 l -67.7360843,0 c -2.7826481,0 -5.0228307,-2.23 -5.0228307,-5 l 0,-24.6482333 c 0,-2.77 2.2401826,-5 5.0228307,-5 z" />
+            </svg>
+            <a data-svg="demo-link-2" class="hide" href="@Url.Action("Index2", "Home")">آب</a>
+
+            <svg id="demo-link-3" class="line-drawing" width="84" height="40" xmlns="http://www.w3.org/2000/svg">
+                <path d="m 7.5228307,2.6236947 67.7360843,0 c 2.782649,0 5.022831,2.23 5.022831,5 l 0,24.6482333 c 0,2.77 -2.240182,5 -5.022831,5 l -67.7360843,0 c -2.7826481,0 -5.0228307,-2.23 -5.0228307,-5 l 0,-24.6482333 c 0,-2.77 2.2401826,-5 5.0228307,-5 z" />
+            </svg>
+            <a data-svg="demo-link-3" class="current-demo hide" href="@Url.Action("Index1", "Dashboard")">کنتور</a>
+
+            <svg id="demo-link-4" class="line-drawing" width="84" height="40" xmlns="http://www.w3.org/2000/svg">
+                <path d="m 7.5228307,2.6236947 67.7360843,0 c 2.782649,0 5.022831,2.23 5.022831,5 l 0,24.6482333 c 0,2.77 -2.240182,5 -5.022831,5 l -67.7360843,0 c -2.7826481,0 -5.0228307,-2.23 -5.0228307,-5 l 0,-24.6482333 c 0,-2.77 2.2401826,-5 5.0228307,-5 z" />
+            </svg>
+            <a data-svg="demo-link-4" class="current-demo hide" href="@Url.Action("Index1", "Dashboard")">حوادث</a>
+        </nav>
+    </header>
+    <div class="main">
+        <div class="headline">
+            <svg id="rectangle" class="line-drawing" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 710 374">
+                <path d="m -6.5883883,2.7054603 725.0078083,0 0,368.9433697 -725.0078083,0 z" />
+            </svg>
+            <div data-svg="rectangle" class="hide"></div>
+            <svg id="headline" class="line-drawing" width="560" height="120" viewBox="0 0 560 120" xmlns="http://www.w3.org/2000/svg">
+                <path class="darker" d="m20.714289,18.822632l518.571417,0c2.77002,0 5,2.22998 5,5l0,37.857178c0,2.769958 -2.22998,5 -5,5l-518.571417,0c-2.77,0 -5.000001,-2.230042 -5.000001,-5l0,-37.857178c0,-2.77002 2.23,-5 5.000001,-5z" />
+                <path d="m35.269436,78.108337l492.063084,0c1.13855,0 2.055176,1.279114 2.055176,2.867981l0,16.79834c0,1.588745 -0.916626,2.86792 -2.055176,2.86792l-492.063084,0c-1.13855,0 -2.055149,-1.279175 -2.055149,-2.86792l0,-16.79834c0,-1.588867 0.916599,-2.867981 2.055149,-2.867981z" />
+            </svg>
+            <h1 data-svg="headline" class="hide">
+                <span>
+                    سامانه هوشمند ISC
+                </span>
+                <span>نظارت آنلاین بر بازرسی از تاسیسات شبکه آب و فاضلاب بر پایه RFID</span>
+            </h1>
+        </div>
+
+    </div>
+
+</div><!-- /container -->
+<script src="/Scripts/SVGDrawingAnimation/classie.js"></script>
+<script src="/Scripts/SVGDrawingAnimation/svganimations3.js"></script>

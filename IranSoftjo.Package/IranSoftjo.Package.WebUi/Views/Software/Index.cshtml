@@ -1,0 +1,86 @@
+﻿@using System.Net.Mail
+@using IranSoftjo.Package.DataModel
+@using IranSoftjo.Package.WebUi.Configs
+@using IranSoftjo.Package.WebUi.ViewModels
+@using Mehr
+@model IranSoftjo.Package.WebUi.Android.ViewModels.UserVm
+@{
+    ViewBag.Title = "صفحه نخست کاربری";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+    Entities _db = new Entities();
+    var softwareToIEnumerable = SoftwareVM.ToIEnumerable(_db.Softwares);
+}
+<div class="BoxWelcome">
+    <h2 style="  background-color: #282e3e;color: #ffffff;    border-radius: 10px;  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);padding-right: 10px">
+        <span style="color: #F46514">@Model.FirstName     @Model.LastName  </span>
+        به صفحه کاربری خود خوش آمدید.
+    </h2>
+    <p>
+        آخرین زمان ورود به سیستم 	: 	  
+        @if (Model.LastLoginDateTime == null)
+        {
+            <b>شما اولین بار است که وارد سیستم میشوید.
+            </b>
+        }
+        else
+        {
+            <b>
+                @Model.LastLoginDateTime.LocalizeNumbers()
+            </b>
+        }
+    </p>
+    <p>
+        آخرین آی پی ورود به سیستم 	: 	  
+        @if (Model.LastLoginDateTime == null)
+        {
+            <b>شما اولین بار است که وارد سیستم میشوید.
+            </b>
+        }
+        else
+        {
+            <b>
+                @Model.LastLoginIp.LocalizeNumbers()
+            </b>
+        }
+    </p>
+    @Html.ActionLink("تاریخچه ورود و خروج ها", "LoginLogs","Account")
+    <br />
+    <br />
+
+</div>
+<div class="BoxWelcome">
+    <p>
+        <b>لیست نرم افزارها ثبت شده</b>
+    </p>
+    <hr />
+    <br />
+    <div class="k-rtl">
+    @(Html.Kendo().Grid(softwareToIEnumerable)
+          .Name("Grid")
+          .Columns(columns =>
+                   {
+                       columns.Bound(model => model.SoftwareID).Visible(false).Width(60);
+                       columns.Bound(model => model.SoftwareName).Width(110);
+                       columns.Bound(model => model.SoftwareEnName).Width(110);
+                       columns.Bound(model => model.SoftwareStatusEnum).Width(70);
+                       columns.Bound(item => @item.SoftwareID).Title("دستورات").Filterable(false).Groupable(false)
+                           .Template(
+                               @<text>
+                                    @Html.ActionLink("مشاهده", "Details", new {id = @item.SoftwareID}, new {@class = "k-button k-button-icontext k-grid-edit"})
+                                    @Html.ActionLink("ویرایش", "Edit", new {id = @item.SoftwareID}, new {@class = "k-button k-button-icontext k-grid-edit"})
+                                    @Html.ActionLink("حذف", "Delete", new {id = @item.SoftwareID}, new {@class = "k-button k-button-icontext k-grid-edit"})
+                                </text>
+                           ).Width(140);
+                   })
+          .ToolBar(toolbar => toolbar.Custom().Action("Create", "Software").Text("ثبت نرم افزار جدید"))
+          .Sortable()
+          .Scrollable()
+          .Filterable()
+          .HtmlAttributes(new {style = "height:500px;"})
+          .DataSource(dataSource => dataSource
+              .Server()
+              .Model(model => model.Id(item => item.SoftwareID))
+          )
+          )
+</div>
+</div>

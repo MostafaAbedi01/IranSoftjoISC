@@ -1,0 +1,56 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@using IranSoftjo.Package.DataModel
+@using IranSoftjo.Package.WebUi.Configs
+@using Mehr
+@model IranSoftjo.Package.WebUi.ViewModels.LoginVM
+@{
+    ViewBag.Title = "ورود به سایت";
+    Layout = "~/Views/Shared/_LayoutNull.cshtml";
+    var db = new Entities();
+    var siteSettings = db.SiteSettings.FirstOrDefault();
+    ViewBag.MetaDescription = siteSettings.MetaDescription + " , " + ViewBag.Title; ;
+    ViewBag.Metakeywords = siteSettings.Metakeywords + "," + ViewBag.Title;
+    ViewBag.ViewBag = siteSettings.WebSiteTitle + " | " + ViewBag.Title;
+}
+
+<hgroup class="title">
+    <h1>@siteSettings.MetaDescription</h1>
+    <span style="margin-right: 770px">
+        @DateTime.Now.ToLongDateString().LocalizeNumbers()
+    </span>
+    <hr />
+    <img alt="لوگو" src="/Images/Layout/IranSoftjo_Designe.jpg" style="float: left;">
+    <h1>
+        <p style="color: red; font-weight: bold; text-shadow: 0 0 5px #FFA93A;">@siteSettings.WebSiteTitle  </p>
+    </h1>
+    <br />
+    <br />
+    <br />
+    <div>
+        <br />
+        <h2>
+            <p style="text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); color: #333333; font-weight: bold;">مدت زمان باقی مانده تا افتتاح سایت </p>
+        </h2>
+        <br />
+        @Html.Partial("_FlipCock")
+    </div>
+
+
+</hgroup>
+
+<h4>جهت ورود به سایت نام کاربری و کلمه عبور خود را وارد نمایید</h4>
+<table class="form">
+    @using (Html.BeginForm(new { ReturnUrl = Session["ReturnUrl"] }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.EnhancedEditorField(m => m.Username)
+        @Html.EnhancedEditorField(m => m.Password)
+        @Html.EnhancedSubmit("     ورود به سایت    ", new { @class = "k-button k-button-icontext" })
+    }
+</table>
+
+<h2 style="float: left; width: 65%; margin: 25px; font-size: 12px">
+    <a target="_blank" style="color: #005B85; font-size: 11px; text-decoration: none;" href="http://www.iransoftjo.com/">طراحی و پشتیبانی سایت توسط ایران سافتجو 
+    </a>
+</h2>

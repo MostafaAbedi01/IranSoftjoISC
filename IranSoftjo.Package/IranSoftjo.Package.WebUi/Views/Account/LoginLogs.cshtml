@@ -1,0 +1,25 @@
+﻿@model IEnumerable<IranSoftjo.Package.DataModel.LoginLog>
+@{
+    ViewBag.Title = "تاریخچه ورود و خروج ها";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+<div class="k-rtl">
+    @(Html.Kendo().Grid(Model)
+          .Name("Grid")
+          .Columns(columns =>
+                   {
+                       columns.Bound(model => model.Id).Title("سریال").Width(150);
+                       columns.Bound(model => model.TypeLogEnum).Title("نوع").Width(150);
+                       columns.Bound(model => model.LogDatetime).Title("تاریخ").Width(200);
+                       columns.Bound(model => model.LogIp).Title("آی پی").Width(200);
+                   })
+          .Pageable()
+          .Sortable()
+          .Scrollable()
+          .Filterable()
+          .DataSource(dataSource => dataSource
+              .Server()
+              .Model(model => model.Id(item => item.Id))
+          )              
+          )
+</div>

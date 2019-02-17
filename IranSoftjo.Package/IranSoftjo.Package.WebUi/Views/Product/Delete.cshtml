@@ -1,0 +1,23 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.ProductVM
+@{
+    ViewBag.Title = "حذف محصول";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<table class="form">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.EnhancedLabelField(model => model.ProductID)
+        @Html.EnhancedLabelField(model => model.ProductCode)
+        @Html.EnhancedLabelField(model => model.ProductTitle)
+        @Html.EnhancedLabelField(model => model.ProductPrice)
+        @Html.EnhancedLabelField(model => model.ProductDescription)
+        @Html.EnhancedLabelField(model => model.MetaDescription)
+        @Html.EnhancedLabelField(model => model.Metakeywords)
+        @Html.EnhancedLabelField(model => model.IsActive)
+        @Html.EnhancedLabelField(model => model.ProductOrder)
+        @Html.EnhancedSubmit("حذف")
+    }
+</table>
+@Html.ActionLink("بازگشت به لیست", "Index")

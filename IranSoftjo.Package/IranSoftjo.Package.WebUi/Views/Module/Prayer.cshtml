@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "نمایش اوقات شرعی";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<hgroup class="title">
+    <h1>نمایش اوقات شرعی</h1>
+    <hr />
+    <h2>نمایش اوقات شرعی هر شهر با امکان انتخاب شهرهای دیگی و همچنین نمایش مدت زمان مانده تا اذان</h2>
+</hgroup>
+<script src="http://blogers.ir/cod/extra-cods/oqhat-sharee/code.php?city=26" type=text/javascript> </script>
+<div style="display: none">
+    <a href="http://blogers.ir/cod/extra-cods/oqhat-sharee/">کد اوقات شرعی</a>
+    <a href="http://blogers.ir/cod/extra-cods/oqhat-sharee/oghatcode.php?city=26">اوقات شرعی تهران</a>
+</div>
+
+<br/>
+@Html.ActionLink("بازگشت به لیست ماژول ها","BuyCms", "Home",null, new {@class = "k-button k-button-icontext"} )
+

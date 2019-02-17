@@ -1,0 +1,45 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@using IranSoftjo.WebUi.Controllers
+@model  IranSoftjo.Package.WebUi.ViewModels.RequestEvaluationVM
+@{
+    ViewBag.Title = "درخواست ارزیابی رایگان پروژه";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+<ol>
+    <li>آیا شما در بین میلیون ها صفحه اینترنتی سردرگم شده اید ؟
+    </li>
+    <li>آیا به فكر گسترش تجارت كسب و كار خود در فضای مجازی افتاده اید ؟
+    </li>
+    <li>آیا میخواهید ایده تجارت الكترونیك خود را برآورد هزینه كنید ؟
+    </li>
+    <li>آیا به دنبال بهترین شركت سرویس دهنده در میان صدها شركت موجود میگردید ؟
+    </li>
+</ol>
+<p>
+    <b>ایران سافتجو</b> شما را در این تصمیم گیری یاری میكند، شما میتوانید با تكمیل فرم زیر،
+    درخواست خود را ارسال نمایید تا مشاوران با تجربه ما بهترین راه حل را هم از لحاظ بهترین راه كار استراتژیك و هم از نظر اقتصادی راهنمایی كنند.
+    اطلاعات ارسالی از سوی شما حداكثر طی دو روز كاری بررسی شده و سپس نتیجه این بررسی به شما اعلام خواهد شد .
+</p>
+<section class="contact">
+    <table class="form">
+        @using (Html.BeginForm())
+        {
+            <h2>ارسال درخواست ارزیابی</h2>
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "موارد مشخص شده با رنگ قرمز را مجددا بررسی نمایید.")
+            @Html.EnhancedTextBoxField(model => model.Name)
+            @Html.EnhancedTextBoxField(model => model.Email, new { @class = "latin" }, "نمونه : myname@samplesite.com")
+            @Html.EnhancedTextBoxField(model => model.Mobile, new { @class = "numeric" }, "نمونه: ۹۱۲۰۰۰۲۲۶۶")
+            @Html.EnhancedTextBoxField(model => model.PhoneNumber, new { @class = "numeric" }, "شماره تلفن ثابت با پیش شماره نمونه:۲۱۲۲۰۰۰۲۲۶۶")
+            @Html.EnhancedTextBoxField(model => model.Website, new { @class = "numeric" })
+            @Html.EnhancedDropDownListField(model => model.ProjectType, Model.SelectListProjectType)
+            @Html.EnhancedDropDownListField(model => model.Amount, Model.SelectListAmount)
+            @Html.EnhancedTextAreaField(model => model.Description)
+            @Html.EnhancedSubmit("ارسال درخواست ارزیابی", new { @class = "k-button k-button-icontext" })
+        }
+    </table>
+</section>

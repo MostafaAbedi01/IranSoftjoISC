@@ -1,0 +1,35 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.TblStoreVm
+
+@{
+    ViewBag.Title = "حذف ";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+
+
+<div style="box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); height: auto;">
+    <div>
+       
+            @Html.EnhancedLabelField(model => model.Count)
+            @Html.EnhancedLabelField(model => model.DateSabt)
+            @using (Html.BeginForm())
+            {
+                <table class="form">
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.TblProjectId)
+                    @Html.EnhancedSubmit("حذف")
+                </table>
+            }
+    </div>
+
+</div>
+
+<div>
+    @Html.ActionLink("بازگشت به لیست", "TblStoreList")
+</div>
+

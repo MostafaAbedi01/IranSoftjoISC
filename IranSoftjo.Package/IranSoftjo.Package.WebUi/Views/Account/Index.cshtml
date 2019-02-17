@@ -1,0 +1,77 @@
+﻿@using System.Net.Mail
+@using IranSoftjo.Package.WebUi.Configs
+@using Mehr
+@model IranSoftjo.Package.WebUi.Android.ViewModels.UserVm
+@{
+    ViewBag.Title = "صفحه نخست کاربری";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+<div  class="BoxWelcome"> 
+    <h2>
+        <span style="color: #F46514">@Model.FirstName     @Model.LastName  </span>  
+        به صفحه کاربری خود خوش آمدید.
+    </h2>
+    <p>
+        آخرین زمان ورود به سیستم 	: 	  
+        @if (Model.LastLoginDateTime == null)
+        {
+            <b>
+                شما اولین بار است که وارد سیستم میشوید.
+            </b>
+        }
+        else
+        {
+            <b>
+                @Model.LastLoginDateTime.LocalizeNumbers()
+            </b>
+        } 
+    </p>
+    <p>
+        آخرین آی پی ورود به سیستم 	: 	  
+        @if (Model.LastLoginDateTime == null)
+        {
+            <b>
+                شما اولین بار است که وارد سیستم میشوید.
+            </b>
+        }
+        else
+        {
+            <b>
+                @Model.LastLoginIp.LocalizeNumbers()
+            </b>
+        } 
+    </p>
+    @Html.ActionLink("تاریخچه ورود و خروج ها", "LoginLogs")
+    <br/>
+    <br/>
+ 
+</div>
+  @if (PackageSettings.Active.SiteTypeEShop)
+  {
+      <div class="BoxWelcome" >
+          <p>
+              <b>خلاصه گزارش حساب</b>
+          </p>
+          <hr/>
+          <br/>
+          <p>
+              صاحب حساب : <b>	 @Model.FirstName     @Model.LastName </b> </p>
+          <p>   موجودی حساب شما :<b> @Model.AccountBalance.ToString().NumericalMoney()</b>
+          <p>   درآمد تبلیغات حساب شما :<b> @Model.EarnMoneyPropaganda.ToString().NumericalMoney()</b>
+          <p>   درآمد نمایندگی حساب شما :<b> @Model.EarnMoneyAgency.ToString().NumericalMoney()</b>
+          </p>
+          <br/>
+          <p>
+              @Html.ActionLink("افزایش موجودی حساب خود", "IncreaseBalance", "Account", null, new {@class = "k-button k-button-icontext"})
+          </p>
+          <p>
+              @Html.ActionLink("لیست تراکنش (واریز و پرداخت) های مالی", "PaymentLogs", "ShoppingCart", null, new {@class = "k-button k-button-icontext"})
+          </p>
+          <p>جهت اطلاعات بیشتر در رابطه با انواع نحوه پرداخت می توانید
+              <a class = "k-button k-button-icontext" href="@Url.Action("Payments", "Help")" target="_blank">
+                  اینجا کلیک
+              </a> کنید.</p>
+          
+         
+      </div>
+  }

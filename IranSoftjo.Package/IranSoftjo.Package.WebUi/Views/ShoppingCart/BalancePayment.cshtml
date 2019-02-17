@@ -1,0 +1,41 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@using Mehr
+@model IranSoftjo.Package.WebUi.ViewModels.IncreaseBalanceVM
+@{
+    ViewBag.Title = "پرداخت از موجودی";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+@{
+    string amount = Model.Amount.NumericalMoney();
+}
+<hgroup class="title">
+    <h2>جهت اطلاعات بیشتر در رابطه با انواع نحوه پرداخت می توانید
+        <a class = "k-button k-button-icontext" href="@Url.Action("Payments", "Help")"  target="_blank">
+            اینجا کلیک
+        </a> کنید.</h2>
+</hgroup>
+<h2>
+    کاربر گرامی، از طریق این صفحه شما می توانید پرداخت فاکتور را از طریق موجودی حساب خود نزد سایت  انجام دهید.
+</h2>
+<br/>
+<br/>
+<p>
+    @Html.EnhancedLabelField(model => model.AccountBalance) 
+</p>
+<br/>
+<table class="form">
+    <label class="fieldLabel" >مبلغ فاکتور:</label>
+    <b>
+        @amount
+    </b>
+    <br/>
+    <br/>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Amount)
+        @Html.HiddenFor(model => model.UserID)
+        @Html.HiddenFor(model => model.OrderID)
+        @Html.EnhancedSubmit("پرداخت از موجودی", new {@class = "k-button k-button-icontext"})
+    }
+</table >

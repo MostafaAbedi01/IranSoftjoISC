@@ -1,0 +1,23 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.TblSubItemAccessVm
+@{
+    ViewBag.Title = "جزئیات مرحله ";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+
+
+<div>
+
+    @Html.EnhancedLabelField(model => model.Title)
+    @Html.EnhancedLabelField(model => model.KeyID1Title)
+    @Html.EnhancedLabelField(model => model.KeyID2Title)
+
+</div>
+
+<div>
+    @Html.ActionLink("بازگشت به لیست", "SubItemAccessList")
+</div>

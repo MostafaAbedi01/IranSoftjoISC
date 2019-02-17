@@ -1,0 +1,26 @@
+﻿@using IranSoftjo.Package.DataModel
+@{
+    var db = new Entities();
+    var siteSettings = db.SiteSettings.FirstOrDefault();
+}
+@*<!DOCTYPE html>
+<html>
+    @Html.Partial("_Head",siteSettings)
+    <body class="k-rtl">
+        <div  class="BodyLayoutNull" >
+            @RenderBody()
+        </div>
+    </body >
+</html>
+<style >
+    body { border-bottom: 0 none !important; }
+/*ul {padding: 2em !important}*/
+</style>*@
+
+<!DOCTYPE html>
+<html lang="en" class="demo-loading no-js">
+@Html.Partial("_Head", siteSettings)
+<body class="k-rtl">
+        @RenderBody()
+</body>
+</html>

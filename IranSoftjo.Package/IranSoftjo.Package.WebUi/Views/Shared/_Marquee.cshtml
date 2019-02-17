@@ -1,0 +1,20 @@
+﻿@model System.Data.Entity.DbSet<IranSoftjo.Package.DataModel.Marquee>
+<script type="text/javascript" src="~/Content/MarqueeJquery/jquery.marquee.js"></script>
+<link type="text/css" href="~/Content/MarqueeJquery/jquery.marquee.css" rel="stylesheet" title="default" media="all" />
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#marquee6").marquee({ yScroll: "bottom" });
+    });
+</script>
+<div id="marquee-author"></div>
+<ul id="marquee6" class="marquee">
+    @foreach (var item in Model.Where(d=>d.IsActive))
+    {
+        <li>
+            <a style="color: #ffffff; text-decoration: none" href="@item.MarqueeUrl">
+                @item.Title
+            </a>
+        </li>
+    }
+</ul>
+

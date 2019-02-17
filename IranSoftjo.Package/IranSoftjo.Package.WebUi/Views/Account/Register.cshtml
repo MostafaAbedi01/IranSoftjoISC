@@ -1,0 +1,39 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@using IranSoftjo.WebUi.Controllers
+@model IranSoftjo.Package.WebUi.Android.ViewModels.UserVm
+@{
+    ViewBag.Title = "ثبت نام";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+    <h2> جهت ایجاد کاربری جدید در سایت مشخصات خود را وارد نمایید</h2>
+</hgroup>
+<table class="form">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "موارد مشخص شده با رنگ قرمز را مجددا بررسی نمایید.")
+        @Html.EnhancedEditorField(model => model.FirstName)
+        @Html.EnhancedEditorField(model => model.LastName)
+        @Html.EnhancedEditorField(model => model.Username)
+        @Html.EnhancedEditorField(model => model.Password)
+        @Html.EnhancedEditorField(model => model.PasswordConfirm)
+     @Html.EnhancedEditorField(model => model.Email, note:"نمونه : myname@samplesite.com")
+        @Html.EnhancedEditorField(model => model.Mobile,note: "نمونه: ۰۹۱۲۰۰۰۲۲۶۶")
+        @Html.EnhancedEditorField(model => model.Phone,note: " نمونه:۰۲۱۲۲۰۰۰۲۲۶۶  شماره تلفن ثابت با پیش شماره ")
+        @Html.EnhancedTextAreaField(model => model.Address)
+        //@Html.EnhancedCapthaField(CaptchaController.RefreshImageRelativeUrl)
+        @Html.EnhancedSubmit("ثبت نام")
+    }
+</table >
+<style>
+    span.captcha {
+        display: block;
+        margin: 5px 2px;
+    }
+    ._dpartLoader {
+         visibility: collapse;
+    }
+</style>

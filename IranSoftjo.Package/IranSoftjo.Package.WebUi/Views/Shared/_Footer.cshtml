@@ -1,0 +1,59 @@
+﻿@using IranSoftjo.Package.DataModel
+@{ var _db = new Entities();}
+
+<div id="templatemo_footer">
+    <div class="col col_footer">
+        <h5><a href="@Url.Action("List", "Product")">>>جدیدترین محصولات</a> </h5>
+        <ul class="footer_list">
+            @foreach (var item in _db.Products.Where(f => f.IsActive).OrderByDescending(d => d.ProductID).Take(5))
+            {
+                <li>
+                    <a href="~/Product/Details/@item.ProductID#@item.ProductTitle" >
+                        @item.ProductTitle
+                    </a>
+                </li>
+                <hr />
+            }
+        </ul>
+    </div>
+    <div class="col col_14">
+        <h5 style="margin-right: 25px">>>با ما باشید </h5>
+        <ul class="footer_list">
+            <li><a target="_blank" href="#" class="social facebook" rel="nofollow">فیس بوک</a></li>
+            <li><a target="_blank" href="#" class="social google" rel="nofollow">گوگل پلاس</a></li>
+            <li><a target="_blank" href="#" class="social google" rel="nofollow">تویتر</a></li>
+            <li><a target="_blank" href="http://healinghoney.persianblog.ir" class="social google">وبلاگ</a></li>
+        </ul>
+
+    </div>
+
+    <div class="col ">
+        <h5 style="margin-bottom: -20px">
+            >>روش های پرداخت
+        </h5>
+        <h6 style="color: white; padding: 5px; float: right">
+            <a class="footerlink" href="@Url.Action("Payments", "Help")">پرداخت اینترنتی آنلاین</a>
+        </h6>
+        <h6 style="color: white; padding: 5px; float: right">
+            <a class="footerlink"  href="@Url.Action("Payments", "Help")">پرداخت از اعتبار موجودی کاربری</a>
+        </h6>
+        <h6 style="color: white; padding: 5px;">
+            <a class="footerlink"  href="@Url.Action("Payments", "Help")">پرداخت آفلاین</a>
+        </h6>
+        <h5 style="margin-bottom: -20px">
+            >>روش های دریافت کالا
+        </h5>
+
+        <h6 style="color: white; padding: 5px; float: right">
+            <a  class="footerlink" href="@Url.Action("Payments", "Help")">رایگان</a>
+        </h6>
+        <h6 style=" padding: 5px; float: right">
+            <a class="footerlink" href="@Url.Action("Payments", "Help")">پست پیشتاز</a>
+        </h6>
+        <div class="cleaner h30"></div>
+        <hr />
+        تمامی حقوق سایت متعلق به سایت پرشین هانی با برند نحل منفرد میباشد 
+                <hr />
+    </div>
+    <div class="cleaner"></div>
+</div>

@@ -1,0 +1,88 @@
+﻿@using IranSoftjo.Package.WebUi.ViewModels
+@model IranSoftjo.Package.DataModel.SiteSetting
+@using Mehr
+@{
+    List<ProductInShoppingCartVM> productsInCart = Session["ShoppingCartItems"] as List<ProductInShoppingCartVM> ?? new List<ProductInShoppingCartVM>();
+}
+@if (Request.IsAuthenticated)
+{
+    <ul>
+        <li style="float: right">
+
+            <a href="~/ShoppingCart" style="padding: 0px">
+                <div class="cartinfo" style="margin: 0px" id="cartinfo" title="مشاهده سبد خرید">
+                  <h3 style="font-size: 11px;">سبد : @productsInCart.Sum(t => t.ProductCount).LocalizeNumbers()
+                    </h3>
+                </div>
+                <div style="margin: -4px 3px 0 0">
+                    <img href="~/ShoppingCart" src="../../Images/Layout/shopping_cart_red.png" alt="سبد ایران سافتجو" />
+                </div>
+            </a>
+
+
+        </li>
+        <li style="float: right; margin: 5px">
+            <img src="../../Images/Layout/seprator.gif" alt="جدا کننده" />
+        </li>
+
+        <li style="float: right">
+            <div>
+                <h1 style="font-size: 11px;font-family: Tahoma ">با سلام , @Html.ActionLink(User.Identity.Name, "Index", "Account", null, new { @class = "username", title = "صفحه پرتال کاربری" }) خوش آمدید.
+                </h1>
+            </div>
+            <div style="float: right">
+                <img src="../../Images/Layout/people.png" alt="کاربر" />
+            </div>
+            <div id="loginLink">
+                <div id="loginContainer">
+                    @using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <a style="text-decoration: underline" href="javascript:document.getElementById('logoutForm').submit()">خروج</a>
+                    }
+                    |
+                    @Html.ActionLink("صفحه کاربری", "Index", "Account", null, new { @class = "username" })
+                </div>
+            </div>
+        </li>
+    </ul>
+}
+else
+{
+    <ul>
+        <li style="float: right">
+            <a href="~/ShoppingCart " style="padding: 0">
+                <div class="cartinfo"  style="margin: 0px" id="cartinfo" title="مشاهده سبد خرید">
+                    <h3 style="font-size: 11px;font-family: Tahoma ">سبد : @productsInCart.Sum(t => t.ProductCount).LocalizeNumbers()
+                    </h3>
+                </div>
+                <div style="margin: -4px 3px 0 0">
+                    <img href="~/ShoppingCart" src="../../Images/Layout/shopping_cart_red.png" alt="سبد " />
+                </div>
+            </a>
+        </li>
+        <li style="float: right; margin: 5px">
+
+            <img src="../../Images/Layout/seprator.gif" alt="کاربر" />
+        </li>
+        <li style="float: right">
+            <div>
+                <h1 style="font-size: 11px;font-family: Tahoma ">به @Model.WebSiteTitle خوش آمدید
+
+                </h1>
+            </div>
+            <div style="float: right">
+                <img src="../../Images/Layout/people.png" alt="کاربر " />
+            </div>
+            <div id="loginLink">
+                <div id="loginContainer">
+                    @Html.ActionLink("ورود", "Login", "Account", null, new { id = "registerLink" })
+                    |
+                    @Html.ActionLink("عضویت", "Register", "Account", null, new { id = "registerLink" })
+                </div>
+            </div>
+
+
+        </li>
+    </ul>
+}

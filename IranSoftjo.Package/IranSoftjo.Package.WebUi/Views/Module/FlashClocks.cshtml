@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "ساعتهای فلش";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<hgroup class="title">
+    <h1>ساعتهای فلش</h1>
+    <hr />
+    <h2>نمایش و انتخاب هرگونه ساعت به صورت فلش در سایت خود</h2>
+</hgroup>
+<style>
+    .flashclock {
+        height: 130px;
+        margin: 5px;
+        width: 130px;
+    }
+</style>
+@for (int i = 1; i <= 15; i++)
+{
+    string name = i + ".swf";
+    name = name.PadLeft(7, '0');
+    <object class="flashclock" height="250" width="300" data="~/Content/FlashClock/@name" type="application/x-shockwave-flash">
+        <param value="internal" name="allowNetworking">
+        <param value="never" name="allowScriptAccess">
+        <param value="transparent" name="wmode">
+    </object>
+}
+<br/>
+@Html.ActionLink("بازگشت به لیست ماژول ها","BuyCms", "Home",null, new {@class = "k-button k-button-icontext"} )
+

@@ -1,0 +1,210 @@
+﻿@using Mehr
+@{
+    var db = new IranSoftjo.Package.DataModel.Entities();
+    Layout = "../Shared/_Layout.cshtml";
+    ViewBag.Title = "صفحه اصلی";
+    ViewBag.HomeIndex = "Index2";
+    var active = "active";
+    var lstTblManhols =
+      (from n in db.TblManhols.OrderByDescending(d => d.TblManholId)
+       select new { n.TblManholId, n.NoeManhol, n.CodeMakani, n.CodeGis, n.DateSabt }).ToList();
+
+}
+
+<!--.content-->
+<div class="row">
+    <div class="col-sm-6">
+        <aside class="widget widget_warta_articles">
+            <div class="articles-v3">
+                <header class="clearfix">
+                    <h4>جدیدترین شیرخط ها ثبت شده</h4>
+                    <a href="@Url.Action("ManholList", "Manhol", new { id = 2 })" class="control" title="همه پست ها">
+                        <i class="fa fa-archive"></i>
+                    </a>
+                </header>
+
+                @foreach (var item in db.TblManhols.OrderByDescending(d => d.TblManholId).Take(4))
+                {
+                    <div class="article-tiny">
+                        <a href="@Url.Action("ManholDetails", "Manhol", new { id = item.TblManholId })" class="image">
+                            <figure class="image-holder">
+                                <img src="@item.ThumbnailImageUrl"
+                                     alt="@item.CodePm">
+                            </figure>
+                            <div class="image-light"></div>
+                            <span class="dashicons dashicons-format-standard"></span>
+                        </a>
+                        <h5>
+                            <a href="@Url.Action("ManholDetails", "Manhol",  new { id = item.TblManholId  })">
+                                @item.CodePm
+                            </a>
+                        </h5>
+                        <p class="post-meta ">
+                            <a href="@Url.Action("ManholDetails", "Manhol", new {id = item.TblManholId})" title="2 comments">
+                                <i class="fa fa-comments"></i>@item.Address
+                            </a>
+                            <a href="@Url.Action("ManholDetails", "Manhol", new { id = item.TblManholId })" title="همه پست های @item.DateSabt.LocalizeNumbers()">
+                                <i class="fa fa-clock-o"></i>@item.DateSabt.LocalizeNumbers() &nbsp;
+                            </a>
+                            <a href="@Url.Action("ManholDetails", "Manhol", new { id = item.TblManholId })" title="@item.CodePm.LocalizeNumbers()  آدرس">
+                                <i class="fa fa-eye"></i><span class="post-view-count" data-id="2038">@item.Comment</span>&nbsp;
+                            </a>
+                        </p>
+                    </div>
+                    <hr>
+                }
+            </div>
+        </aside>
+    </div>
+    <div class="col-sm-6">
+        <aside class="widget widget_warta_articles">
+            <div class="articles-v3">
+                <header class="clearfix">
+                    <h4>جدیدترین شیرخط ها ثبت دستور کار شده</h4>
+                    <a href="@Url.Action("ManholList", "Manhol", new { id = 1 })" class="control" title="همه شیرخط ها">
+                        <i class="fa fa-archive"></i>
+                    </a>
+                </header>
+                @foreach (var item in db.TblInspections.OrderByDescending(d => d.TblInspectionId).Take(4))
+                {
+                    <div class="article-tiny">
+                        <a href="@Url.Action("ManholDetails", "Manhol", new { id = item.TblManholId })" class="image">
+                            <figure class="image-holder">
+                                <img src="@item.TblManhol.ThumbnailImageUrl"
+                                     alt="@item.TblInspectionId">
+                            </figure>
+                            <div class="image-light"></div>
+                            <span class="dashicons dashicons-format-standard"></span>
+                        </a>
+                        <h5>
+                            <a href="@Url.Action("ManholDetails", "Manhol", new { id = item.TblManholId })">
+                                @item.TblManhol.CodePm
+                            </a>
+                        </h5>
+
+                        <p class="post-meta ">
+                            <a href="@Url.Action("ManholDetails", "Manhol", new {id = item.TblManholId})" title="2 comments">
+                                <i class="fa fa-comments"></i>@item.TblManhol.Address
+                            </a>
+                            <a href="@Url.Action("ManholDetails", "Manhol", new {id = item.TblManholId})" title="همه پست های @item.DateSabt.LocalizeNumbers()">
+                                <i class="fa fa-clock-o"></i>@item.TblManhol.DateSabt.LocalizeNumbers() &nbsp;
+                            </a>
+                            <a href="@Url.Action("ManholDetails", "Manhol", new {id = item.TblManholId})" title="@item.TblManhol.CodePm.LocalizeNumbers()  آدرس">
+                                <i class="fa fa-eye"></i><span class="post-view-count" data-id="2038">@item.TblManhol.Comment</span>&nbsp;
+                            </a>
+                        </p>
+
+                    </div>
+                    <hr>
+                }
+            </div>
+        </aside>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-3">
+        <aside class="widget widget_warta_articles">
+            <div class="articles-v4">
+                <header class="clearfix">
+                    <h4>تعداد کل شیرخط های ثبت شده تا این لحظه</h4>
+                    <a href="@Url.Action("ManholList", "Manhol")" class="control" title="More posts">
+                        <i class="fa fa-list-ul"></i>
+                    </a>
+                </header>
+
+                <hr>
+                <div>
+                    <h5>
+                        <a href="@Url.Action("ManholList", "Manhol")">
+                            @lstTblManhols.Count
+                        </a>
+                    </h5>
+
+                </div>
+
+                <hr>
+            </div>
+        </aside>
+    </div>
+    <div class="col-sm-3">
+        <aside class="widget widget_warta_articles">
+            <div class="articles-v4">
+                <header class="clearfix">
+                    <h4>تعداد کل شیرخط  ثبت شده امروز</h4>
+                    <a href="@Url.Action("ManholList", "Manhol")" class="control" title="More posts">
+                        <i class="fa fa-list-ul"></i>
+                    </a>
+                </header>
+
+                <hr>
+                <div>
+                    <h5>
+                        <a href="@Url.Action("ManholList", "Manhol")">
+                            @{
+                                var ddd = DateTime.Now.Date;
+                            }
+                            @lstTblManhols.Where(d => d.DateSabt > ddd ).ToList().Count
+                        </a>
+                    </h5>
+
+                </div>
+                <hr>
+            </div>
+        </aside>
+    </div>
+    <div class="col-sm-3">
+        <aside class="widget widget_warta_articles">
+            <div class="articles-v4">
+                <header class="clearfix">
+                    <h4>تعداد کل شیرخط های بازرسی شده امروز</h4>
+                    <a href="@Url.Action("ManholList", "Manhol")" class="control" title="More posts">
+                        <i class="fa fa-list-ul"></i>
+                    </a>
+                </header>
+
+                <hr>
+                <div>
+                    <h5>
+                        <a href="@Url.Action("ManholList", "Manhol")">
+                            0
+                            @*@db.TblInspections.Where(d => d.DateSabt >= DateTime.Now.AddDays(-1)).ToList().Count*@
+                        </a>
+                    </h5>
+
+                </div>
+
+                <hr>
+            </div>
+        </aside>
+    </div>
+
+    <div class="col-sm-3">
+        <aside class="widget widget_warta_articles">
+            <div class="articles-v4">
+                <header class="clearfix">
+                    <h4>تعداد کل شیرخط های سمپاشی شده امروز</h4>
+                    <a href="@Url.Action("ManholList", "Manhol")" class="control" title="More posts">
+                        <i class="fa fa-list-ul"></i>
+                    </a>
+                </header>
+
+                <hr>
+                <div>
+                    <h5>
+                        <a href="@Url.Action("ManholList", "Manhol")">
+                            0
+                        </a>
+                    </h5>
+
+                </div>
+
+                <hr>
+            </div>
+        </aside>
+    </div>
+</div>
+<style>
+    .container {
+        width: 1300px !important;
+    }
+</style>

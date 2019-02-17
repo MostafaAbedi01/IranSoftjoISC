@@ -1,0 +1,38 @@
+﻿@model IEnumerable<IranSoftjo.Package.WebUi.ViewModels.TblPhotoListVM>
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "تصاویر ";
+}
+<hgroup class="title">
+    <h1> @ViewBag.Title</h1>
+    <hr />
+</hgroup>
+<div class="k-rtl">
+    @(Html.Kendo().Grid(Model)
+           .Name("Grid")
+           .Columns(columns =>
+               {
+                   columns.Bound(item => item.ItemId);
+                   columns.Bound(item => item.Title);
+                   columns.Bound(item => item.ThumbnailImageUrl).Width(100)
+                       .Template(@@<div style="text-align: center;"><a target="_blank" href="@item.ImageUrl"><img style=" width: 50px;height: 50px" src="@item.ThumbnailImageUrl" title="@item.ItemId" /></a></div>);
+                   columns.Bound(item => @item.TblPhotoListId).Title("دستورات").Filterable(false).Groupable(false)
+                       .Template(@<text>
+                        @if (Request.IsAuthenticated && (User.IsInRole("Administrator") || User.IsInRole("Customer")))
+                        {
+                            @Html.ActionLink("ویرایش", "Edit", new { id = @item.TblPhotoListId }, new { @class = "k-button k-button-icontext k-grid-edit" })
+                            @Html.ActionLink("حذف", "Delete", new { id = @item.TblPhotoListId }, new { @class = "k-button k-button-icontext k-grid-delete" })}
+                    </text>).Width(200);
+               })
+
+                                                                                                       .ToolBar(toolbar => toolbar.Custom().Action("Create", "TblPhotoList").Text("افزودن تصویر جدید "))
+                                                                                               .Sortable()
+                                                                                               .Scrollable()
+                                                                                               .Filterable()
+                                                                                               .HtmlAttributes(new { style = "height:500px;" })
+                                                                                               .DataSource(dataSource => dataSource
+                                                                                                                             .Server()
+                                                                                                                                     .Model(model => model.Id(item => item.TblPhotoListId))
+                                                                                               )
+    )
+</div>

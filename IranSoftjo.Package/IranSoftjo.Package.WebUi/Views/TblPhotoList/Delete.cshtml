@@ -1,0 +1,22 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.TblPhotoListVM
+@{
+    ViewBag.Title = "حذف تصویر محصول";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<table class="form">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.EnhancedLabelField(model => model.ItemId)
+        @Html.EnhancedLabelField(model => model.TblPhotoListId)
+        <td class="labelWrp">
+            <label for="ProductGroupID" class="fieldLabel">@Html.LabelFor(model => model.ImageUrl)</label>
+        </td>
+        <td colspan="1" class="inputWrp">
+            <img style="width: 100px;" src="@Model.ThumbnailImageUrl"/>
+        </td>
+        @Html.EnhancedSubmit("حذف")
+    }
+</table>
+@Html.ActionLink("بازگشت به لیست", "Index")

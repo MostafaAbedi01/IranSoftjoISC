@@ -1,0 +1,26 @@
+﻿@using Mehr
+@model IranSoftjo.Package.WebUi.ViewModels.PageVM
+@{
+    ViewBag.Title = Model.PageTitle;
+    Layout = "~/Views/Shared/_LayoutNull.cshtml";
+}
+<h1>
+    @Model.PageTitle
+</h1>
+<br />
+<hr />
+<p>
+    @Html.Raw(Model.PageText)
+</p>
+<div class="displayLabelPage">
+    <span style="float: right">
+     تاریخ بروز رسانی :  @Model.PageDate.ToLongDateString() 
+    </span>
+  
+    <span style="margin-right: 100px" >تعداد بازدید  :  @Model.Visit.LocalizeNumbers()
+    </span>
+    
+      <a   style="float: left" href="javascript:window.print()" title="چاپ صفحه">
+        <img src="~/Images/Layout/Print.png" alt="چاپ صفحه">
+    </a>
+</div>

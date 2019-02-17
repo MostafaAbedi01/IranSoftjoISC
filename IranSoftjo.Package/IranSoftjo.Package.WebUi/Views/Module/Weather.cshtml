@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "وضعیت آب و هوا";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<hgroup class="title">
+    <h1>وضعیت آب و هوا</h1>
+    <hr />
+    <h2>نمایش وضعیت آب و هوای هر شهر با امکان نمایش به صورت پیشرفته یا ساده</h2>
+</hgroup>
+<script src='http://blogers.ir/cod/weather/cod.php?width=1&style=1&textcolor=000000&bgcolor=E6E5E6&city=IRXX0018&border=B01937' type=text/javascript > </script>
+<br/>
+
+<script src='http://blogers.ir/cod/weather/cod.php?width=1&style=2&textcolor=000000&bgcolor=E6E5E6&city=IRXX0018&border=B01937' type=text/javascript ></script>
+<br/>
+@Html.ActionLink("بازگشت به لیست ماژول ها","BuyCms", "Home",null, new {@class = "k-button k-button-icontext"} )

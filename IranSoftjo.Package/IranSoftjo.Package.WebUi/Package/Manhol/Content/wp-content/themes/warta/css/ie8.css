@@ -1,0 +1,51 @@
+/* Fix input text position
+============================================================================= */
+input[type="color"], 
+input[type="email"], 
+input[type="number"], 
+input[type="password"], 
+input[type="tel"], 
+input[type="url"], 
+input[type="text"] { padding-top: 8px; }
+
+/* Fix social-media-icon background-size 
+============================================================================= */
+.sc-sm { background-image: url("../img/ie8-social-media-icons.png"); }
+
+/* Fix transparency
+============================================================================= */
+.carousel .carousel-caption p,
+.carousel-small .item .caption,
+.nivo-lightbox-theme-default.nivo-lightbox-overlay,
+#title .container .title-container .secondary { background: url(../img/ie8-transparent.png); }
+
+.categories li:hover a .post-counts { background: none }
+
+/* Fix input group addon's height
+============================================================================= */
+.input-group i {
+    padding-bottom  : 0;
+    padding-top     : 0;
+}
+
+/* Hide anything that can't displayed properly
+============================================================================= */
+.dashicons,
+.breaking-news .title .triangle { display: none }
+
+/* Fix widget control's height
+============================================================================= */
+.widget .header .control { padding: 10.5px 10px }
+
+/*Remove border on dropdown menu
+============================================================================= */
+.dropdown-menu { border: none }
+
+/*Fix menu's border
+============================================================================= */
+.navbar-nav > li.active a,
+.navbar-nav > li:hover a { border-color: transparent !important }
+
+/*Fix breaking news triangle gap
+============================================================================= */
+html[dir=rtl] .breaking-news .triangle { margin-right: -1px }

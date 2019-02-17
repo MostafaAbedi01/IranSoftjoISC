@@ -1,0 +1,84 @@
+﻿@model IranSoftjo.Package.WebUi.ViewModels.PageGroupVM
+@using IranSoftjo.Core.Web.Mvc.Html
+@{
+    ViewBag.Title = "ویرایش منو";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="BreadCrumbPage">
+    @Html.ActionLink("لیست منوها", "Index")
+    <strong>>></strong>
+    @Html.ActionLink("ویرایش منو ", "Edit")
+</div>
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+@using (Html.BeginForm())
+{
+    <table class="form">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.PageGroupID)
+        <span>چیدمان منوهای سایت:</span>
+        @(Html.Kendo().TreeView()
+          .HtmlAttributes(new { style = "width:96%x;background-color:#e3e3e3;padding: 15px;" })
+              .Animation(animation => animation.Expand(open =>
+                                                       {
+                                                           open.Expand(ExpandDirection.Vertical);
+                                                           open.SlideIn(SlideDirection.Down);
+                                                           open.Fade(FadeDirection.In);
+                                                       }))
+              .Name("treeview")
+              .Events(events => events
+                  .Select("onSelect")
+                  .DataBound("dataBound")
+              )
+              .Template("#= item.Name #  <input type='hidden' class='data_id' value='#=item.id#'>")
+              .DataTextField("Name")
+              .DataSource(dataSource => dataSource
+                  .Read(read => read
+                      .Action("PageGroupTree", "PageGroup")
+                  )
+              )
+       
+              )
+        <script>
+            var treeview;
+            function dataBound(e) {
+                var treeview = $("#treeview").data("kendoTreeView");
+                treeview.loadOnDemand = false;
+                treeview.expand('.k-item');
+                var idn = $("#PageGroupID").val();
+                var getitem = treeview.dataSource.get(idn);
+                treeview.findByUid(getitem.uid);
+                var selectitem = treeview.findByUid(getitem.uid);
+                treeview.select(selectitem);
+            }
+
+            function onSelect(e) {
+                var nodeid = $("#treeview").getKendoTreeView().dataItem(e.node).id;
+                $("#PageGroupIDTree").val(nodeid);
+            }
+            $(document).ready(function () {
+                treeview = $("#treeview").data("kendoTreeView");
+            });
+        </script>
+        <style>
+            .k-in
+            {
+                border: .5px solid #F46D20 !important;
+            }
+        </style>
+        @Html.HiddenFor(model => model.PageGroupIDTree)
+        @Html.EnhancedDropDownListField(model => model.PageGroupType, Model.SelectListPageGroupType)
+        @Html.EnhancedEditorField(model => model.PageGroupTitle)
+        @Html.EnhancedEditorField(model => model.PageGroupOrder)
+        @Html.EnhancedCheckBoxField(model => model.PageGroupIsActive)
+        @Html.EnhancedCheckBoxField(model => model.IsSubMenu)
+        @Html.EnhancedCheckBoxField(model => model.IsMenuLink)
+        @Html.EnhancedSubmit("ویرایش")
+    </table>
+}
+<div>
+    @Html.ActionLink("بازگشت به لیست", "Index")
+</div>

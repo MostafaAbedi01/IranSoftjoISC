@@ -1,0 +1,46 @@
+﻿@using IranSoftjo.Package.WebUi.ViewModels
+@model List<GalleryVM>
+@{
+    ViewBag.Title = "گالری عکس - " + Session["PageGroupTitle"];
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<h1>
+    @ViewBag.Title
+</h1>
+<br />
+<hr />
+<link rel="stylesheet" type="text/css" href="~/Content/Lightbox/style.css" />
+@for (int i = 0; i < Model.Count(); i++)
+{
+    GalleryVM item = Model[i];
+    <section>
+        @{
+            string nex = (i + 1).ToString();
+            string pre = (i - 1).ToString();
+        }
+        <ul class="lb-album">
+            <li>
+                <a href="#image-@i">
+                    <img src="@item.GalleryImageUrlThumb" alt="@item.Title">
+                    <span>@item.Title</span>
+                </a>
+                <div class="lb-overlay" id="image-@i">
+                    <img src="@item.GalleryImageUrl" alt="@item.Title" />
+                    <div>
+                        <p>@item.GalleryOrder</p>
+                        <h3>@item.Title</h3>
+
+                        <a href="#image-@pre" class="lb-prev">قبلی</a>
+                        <a href="#image-@nex" class="lb-next">بعدی</a>
+                    </div>
+                    <a href="#page" class="lb-close">X  خروج</a>
+                </div>
+            </li>
+
+        </ul>
+    </section>
+}
+
+<div style="clear: both">
+    @Html.ActionLink("بازگشت به گالری ها","List", "GalleryGroup")
+</div>

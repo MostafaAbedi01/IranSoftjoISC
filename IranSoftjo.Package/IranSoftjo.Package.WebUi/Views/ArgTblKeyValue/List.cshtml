@@ -1,0 +1,45 @@
+﻿@model IEnumerable<IranSoftjo.Package.WebUi.ViewModels.TblKeyValueAgrVm>
+@{
+    ViewBag.Title = "لیست اطلاعات پایه";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+<div class="k-rtl">
+    @(Html.Kendo().Grid(Model)
+          .Name("Grid")
+          .Columns(columns =>
+          {
+              columns.Bound(model => model.TblKeyValueId).Visible(false);
+              columns.ForeignKey(p => p.Type, (System.Collections.IEnumerable)ViewBag.Type, "KeyID", "Title");
+              columns.Bound(model => model.Title);
+              columns.Bound(item => @item.TblKeyValueId).Title("دستورات").Filterable(false).Groupable(false)
+                  .Template(@<text>
+                    @Html.ActionLink("جزئیات", "Details", new { id = @item.TblKeyValueId }, new { @class = "k-button k-button-icontext k-grid-delete" })
+                    @Html.ActionLink("ویرایش", "Edit", new { id = @item.TblKeyValueId }, new { @class = "k-button k-button-icontext k-grid-edit" })
+                    @Html.ActionLink("حذف", "Delete", new { id = @item.TblKeyValueId }, new { @class = "k-button k-button-icontext k-grid-delete" })
+                </text>).Width(230);
+          })
+                                                                                                          .ToolBar(toolbar => toolbar.Custom().Action("Create", "ArgTblKeyValue").Text("افزودن جدید"))
+                                                        
+                                                          .Sortable()
+                                                          .Scrollable()
+                                                          .Filterable().Groupable()
+                                                          .HtmlAttributes(new { style = "height:600px; " })
+                                                          .DataSource(dataSource => dataSource
+                                                              .Server()
+                                                                                      .Model(model => model.Id(item => item.TblKeyValueId))
+                                                                                                                                       .Group(groups => groups.Add(p => p.Type))
+                                                          )
+                                                          .Resizable(resize => resize.Columns(true))
+                                                          .ColumnMenu()
+    )
+</div>
+
+<style>
+    .container {
+        width: 1300px !important;
+    }
+</style>

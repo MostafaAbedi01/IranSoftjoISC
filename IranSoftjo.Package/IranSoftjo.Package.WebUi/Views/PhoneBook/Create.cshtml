@@ -1,0 +1,35 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model  IranSoftjo.Package.WebUi.ViewModels.PhoneBookVM
+@{
+    ViewBag.Title = "افزودن";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <table class="form">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.EnhancedDropDownList(model => model.PhoneBookGroupID, "PhoneBookGroupID")
+        @Html.EnhancedEditorField(model => model.Title)
+        @Html.EnhancedEditorField(model => model.Email)
+        @Html.EnhancedEditorField(model => model.Mobile)
+        @Html.EnhancedEditorField(model => model.PhoneNumber)
+        @Html.EnhancedEditorField(model => model.Fax)
+        @Html.EnhancedEditorField(model => model.Site)
+        @Html.EnhancedTextAreaField(model => model.Comment, new { style = "height:100px;width:800px" })
+        @Html.EnhancedSubmit("ذخیره")
+        @Html.EnhancedReset();
+  @*      @Html.EnhancedBackList();*@
+        <td>
+            @Html.ActionLink("بازگشت به لیست", "Index", null, new { @class = "k-button k-button-icontext" })
+        </td>
+    </table>
+}
+<div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        document.getElementById('input').reset();
+    });
+</script>

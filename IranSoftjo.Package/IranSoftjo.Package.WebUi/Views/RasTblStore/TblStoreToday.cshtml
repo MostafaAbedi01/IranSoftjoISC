@@ -1,0 +1,42 @@
+﻿@model System.Collections.Generic.IEnumerable<IranSoftjo.Package.WebUi.ViewModels.TblStorePointOrderVm>
+
+@{
+    ViewBag.Title = "وضعیت روز آنلاین انبار ";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+<div class="k-rtl">
+    @(Html.Kendo().Grid(Model)
+          .Name("Grid")
+          .Columns(columns =>
+          {
+              columns.Bound(model => model.ProductGroupTitle);
+              columns.Bound(model => model.ProductTitle);
+              columns.Bound(model => model.Ral);
+              columns.Bound(model => model.CountUse);
+              columns.Bound(model => model.CountInStore);
+              columns.Bound(model => model.CountInStoreToday);
+              columns.Bound(model => model.CountProgress);
+          })
+
+                                                                      .Sortable()
+                                                                      .Scrollable()
+                                                                      .Filterable().Groupable()
+                                                                      .HtmlAttributes(new { style = "height:600px; " })
+                                                                      .DataSource(dataSource => dataSource
+                                                                          .Server()
+                                                                      )
+                                                                      .Resizable(resize => resize.Columns(true))
+                                                                      .ColumnMenu()
+    )
+</div>
+
+<style>
+    .container {
+        width: 1300px !important;
+    }
+
+</style>

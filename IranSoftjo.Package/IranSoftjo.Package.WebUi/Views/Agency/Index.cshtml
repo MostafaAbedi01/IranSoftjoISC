@@ -1,0 +1,34 @@
+﻿@model IEnumerable<IranSoftjo.Package.WebUi.ViewModels.AgencyVM>
+@{
+    ViewBag.Title = "لیست نمایندگی ها";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="k-rtl">
+    @(Html.Kendo().Grid(Model)
+          .Name("Grid")
+          .Columns(columns =>
+                   {
+                       columns.Bound(model => model.Id).Visible(false);
+                       columns.Bound(model => model.Name).Width(100);
+                       columns.Bound(model => model.Phone).Width(80);
+                       columns.Bound(model => model.Manager).Width(80);
+                       columns.Bound(model => model.Email).Width(80);
+                       columns.Bound(model => model.ActiveType).Width(80);
+                       columns.Bound(item => @item.Id).Title("دستورات").Filterable(false).Groupable(false)
+                           .Template(@<text>
+                                          @Html.ActionLink("ویرایش", "Edit", new {id = @item.Id}, new {@class = "k-button k-button-icontext k-grid-edit"})
+                                          @Html.ActionLink("حذف", "Delete", new {id = @item.Id}, new {@class = "k-button k-button-icontext k-grid-delete"})
+                                      </text>).Width(140);
+                   })
+          .Pageable()
+          		.ToolBar(toolbar => toolbar.Custom().Action("Create","Agency").Text("افزودن"))
+          .Sortable()
+          .Scrollable()
+          .Filterable()
+            .HtmlAttributes(new {style = "height:500px;"})   
+          .DataSource(dataSource => dataSource
+              .Server()
+              .Model(model => model.Id(item => item.Id))
+          )              
+          )
+</div>

@@ -1,0 +1,55 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@using IranSoftjo.WebUi.Controllers
+@model IranSoftjo.Package.WebUi.ViewModels.UserSoftwareVM
+@{
+    ViewBag.Title = "ثبت  نـام تولید کننده/توسعه دهنده نرم افـزار";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+@*<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+    <h2>جهت ایجاد کاربری جدید در سایت مشخصات خود را وارد نمایید</h2>
+</hgroup>*@
+<table class="form">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "موارد مشخص شده با رنگ قرمز را مجددا بررسی نمایید.")
+        <tr>
+            <td></td>
+            <td>
+                <span>
+                    <strong>اطلـاعات کاربــری</strong>
+                </span>
+                <hr style="border-bottom: 2px solid #17BCE9;">
+            </td>
+        </tr>
+    
+        @Html.EnhancedEditorField(model => model.Username)
+        @Html.EnhancedEditorField(model => model.Password)
+        @Html.EnhancedEditorField(model => model.PasswordConfirm)
+        <tr>
+            <td></td>
+            <td>
+                <span>
+                    <strong>اطلـاعات تولید کننده/توسعه دهنده نرم افـزار </strong>
+                </span>
+                <hr style="border-bottom: 2px solid #17BCE9;">
+            </td>
+        </tr>   
+        @Html.EnhancedEditorField(model => model.FirstName)
+        @Html.EnhancedEditorField(model => model.LastName)
+        @Html.EnhancedEditorField(model => model.Email, note: "نمونه : myname@samplesite.com")
+        @Html.EnhancedEditorField(model => model.Mobile, note: "نمونه: ۰۹۱۲۰۰۰۲۲۶۶")
+        @Html.EnhancedEditorField(model => model.Phone, note: " نمونه:۰۲۱۲۲۰۰۰۲۲۶۶  شماره تلفن ثابت با پیش شماره ")
+        @Html.EnhancedTextAreaField(model => model.Address)
+        
+        <td class="labelWrp">
+            <label for="ProductGroupID" class="fieldLabel">@Html.LabelFor(model => model.UserImageUrl)</label>
+        </td>
+        <td colspan="1" class="inputWrp">
+            @Html.Kendo().Upload().Name("file").Multiple(false).Async(async => async.Save("SaveFile", "Software"))
+        </td>
+        @Html.EnhancedSubmit("ثبت نام")
+    }
+</table>

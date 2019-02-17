@@ -1,0 +1,27 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.EscrowAttachmentVm
+@{
+    ViewBag.Title = "افزودن ضمیمه جدید";
+    Layout = "~/Views/Shared/_AdminDashboardWithPanel.cshtml";
+}
+<div class="alert alert-info" style="text-align: right">
+    <strong>توجه!</strong> شما در این بخش میتوانید ضمیمه ها و پیوست های هر مبادله را به صورت تصایر موجود دارید به مبادله خود پیوست نمایید..
+</div>
+@using (Html.BeginForm("AddAttachment", "Dashboard", FormMethod.Post, new { role = "form" }))
+{
+    <table class="form">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(m => m.EscrowID)
+        @Html.EnhancedTextAreaField(m => m.Comment)
+        <tr>
+            <td class="labelWrp">
+                <label for="UserImageUrl" class="fieldLabel">@Html.LabelFor(model => model.ThumbnailImageUrl):</label>
+            </td>
+            <td colspan="1" class="inputWrp">
+                @Html.Kendo().Upload().Name("file").Multiple(false).Async(async => async.Save("SaveFile", "Dashboard")).HtmlAttributes(new { accept = ".png,.jpg" })
+            </td>
+        </tr>
+        @Html.EnhancedSubmit()
+    </table>
+}

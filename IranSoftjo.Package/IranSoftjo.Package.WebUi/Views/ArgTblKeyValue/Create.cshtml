@@ -1,0 +1,25 @@
+﻿@model IranSoftjo.Package.WebUi.ViewModels.TblKeyValueAgrVm
+@using IranSoftjo.Core.Web.Mvc.Html
+@{
+    ViewBag.Title = "افزودن جدید";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+
+@using (Html.BeginForm("Create", "ArgTblKeyValue", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <table class="form">
+        @Html.ValidationSummary(true)
+        @Html.AntiForgeryToken()
+        @Html.EnhancedDropDownList(model => model.Type, "Type")
+        @Html.EnhancedEditorField(model => model.Title)
+        @Html.EnhancedSubmit("ثبت")
+    </table>
+}
+
+<div>
+    @Html.ActionLink("بازگشت به لیست", "List")
+</div>

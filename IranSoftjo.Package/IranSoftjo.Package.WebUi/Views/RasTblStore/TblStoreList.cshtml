@@ -1,0 +1,51 @@
+﻿@using Mehr
+@model IEnumerable<IranSoftjo.Package.WebUi.ViewModels.TblStoreVm>
+@{
+    ViewBag.Title = "لیست  ورودی انبار ";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+<div class="k-rtl">
+    @(Html.Kendo().Grid(Model)
+          .Name("Grid")
+          .Columns(columns =>
+          {
+              columns.Bound(model => model.TblProjectId).Visible(false);
+              columns.Bound(model => model.ProductGroupTitle);
+              columns.Bound(model => model.ProductTitle);
+              columns.Bound(model => model.Count).FooterTemplate(@<text>جمع:@string.Format("{0:#,0.00}",Model.Sum(d => d.Count)).LocalizeNumbers()</text>);
+              columns.Bound(model => model.Ral);
+              columns.Bound(model => model.DateSabt).Format("{0:yyyy/MM/dd HH:mm}").Width(130);
+              columns.ForeignKey(p => p.UserID, (System.Collections.IEnumerable)ViewBag.UserID, "UserID", "LastName").Width(80);
+              columns.Bound(item => @item.TblProjectId).Title("دستورات").Filterable(false).Groupable(false)
+            .Template(@<text>
+                    @Html.ActionLink("ویرایش", "Edit", new { id = @item.TblStoreId }, new { @class = "k-button k-button-icontext k-grid-edit" })
+                    @Html.ActionLink("حذف", "Delete", new { id = @item.TblStoreId }, new { @class = "k-button k-button-icontext k-grid-delete" })
+            </text>).Width(180);
+          })
+                                                             .ToolBar(toolbar => toolbar.Custom().Action("Create", "RasTblStore").Text("ورود محصول جدید به انبار "))
+                                                                                  .Pageable(d => d.PageSizes(true).Refresh(true))
+                                                                                  .Sortable()
+                                                                                  .Scrollable()
+                                                                                  .Filterable().Groupable()
+                                                                                  .HtmlAttributes(new { style = "height:600px; " })
+                                                                                  .DataSource(dataSource => dataSource
+                                                                                      .Server()
+                                                                                      .Model(model => model.Id(item => item.TblProjectId)).PageSize(10)
+                                                                                  )
+                                                                                  .Resizable(resize => resize.Columns(true))
+                                                                                  .ColumnMenu()
+)
+</div>
+
+<style>
+    .container {
+        width: 1300px !important;
+    }
+      .pageContentRightDiv {
+        height: 700px;;
+    }
+</style>

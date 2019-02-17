@@ -1,0 +1,42 @@
+﻿@model IEnumerable<IranSoftjo.Package.WebUi.ViewModels.PhoneBookVM>
+@{
+    ViewBag.Title = "بانک تبلیغاتی";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="k-rtl">
+    
+    @(Html.Kendo().Grid(Model)
+    
+          .ToolBar(toolbar => toolbar.Custom().Action("Create", "PhoneBook").Text("افزودن جدید"))
+          .ToolBar(toolbar => toolbar.Custom().Action("AllMobile", "PhoneBook").Text("بدست آوردن همه موبایل ها"))
+          .ToolBar(toolbar => toolbar.Custom().Action("AllEmail", "PhoneBook").Text("بدست آوردن همه ایمیل ها"))
+          .Name("Grid")
+          .Columns(columns =>
+                   {
+                       columns.Bound(model => model.PhoneBookID).Width(60);
+                       columns.Bound(model => model.PhoneBookGroupTitle).Width(110);
+                       columns.Bound(model => model.Title).Width(110);
+                       columns.Bound(model => model.Email).Width(110);
+                       columns.Bound(model => model.Mobile).Width(100);
+                       columns.Bound(model => model.PhoneNumber).Width(100);
+                       columns.Bound(model => model.Comment).Width(150);
+                       columns.Bound(item => @item.PhoneBookID).Title("دستورات").Filterable(false).Groupable(false)
+                           .Template(
+                               @<text>
+                                    @Html.ActionLink("ویرایش", "Edit", new { id = @item.PhoneBookID }, new { @class = "k-button k-button-icontext k-grid-edit" })
+                                    @Html.ActionLink("حذف", "Delete", new { id = @item.PhoneBookID }, new { @class = "k-button k-button-icontext k-grid-delete" })
+                                </text>
+                           ).Width(150);
+                   })
+          .Sortable()
+          .Scrollable()
+          .Filterable().Pageable()
+          .HtmlAttributes(new { style = "height:500px;" })
+          .DataSource(dataSource => dataSource
+              .Server()
+              .Model(model => model.Id(item => item.PhoneBookID))
+          )
+          )
+</div>
+

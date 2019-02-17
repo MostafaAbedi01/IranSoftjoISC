@@ -1,0 +1,39 @@
+﻿@using Mehr
+@model System.Data.Entity.DbSet<IranSoftjo.Package.DataModel.SlideShow>
+<link rel='stylesheet' id='camera-css' href='/Content/CameraSlider/camera.css' type='text/css' media='all'>
+<script type='text/javascript' src='/scripts/CameraSlider/jquery.easing.1.3.js'></script>
+<script type='text/javascript' src='/scripts/CameraSlider/camera.min.js'></script>
+@{
+    if (Session["loader"]==null)
+    {
+        Session["loader"] = "pie";
+    }
+}
+<script>
+    jQuery(function () {
+        jQuery('#camera_wrap_1').camera({
+            height: '350px',
+            fx: 'simpleFade, scrollRight,simpleFade,blindCurtainTopLeft,simpleFade', // 'blindCurtainTopLeft'//'simpleFade',
+            barDirection: 'rightToLeft',
+            loader: '@Session["loader"]' ,
+            //    thumbnails: true
+               // 'curtainTopLeft'
+        });
+    });
+</script>
+<div class="fluid_container">
+    <div class="camera_wrap camera_azure_skin" id="camera_wrap_1" style="margin-bottom: -10px !important">
+        @foreach (var item in Model)
+        {
+            <div data-thumb="#" data-src="@item.SlideShowImageUrl">
+                @if (!string.IsNullOrEmpty(item.SlideShowSubTitle))
+                {
+                    <div class="camera_caption fadeFromBottom">
+                        @item.SlideShowSubTitle.LocalizeNumbers()
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+<div style="clear: both; display: block;"></div>

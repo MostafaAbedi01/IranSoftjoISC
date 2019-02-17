@@ -1,0 +1,33 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@using IranSoftjo.Package.WebUi.Configs
+@model  IranSoftjo.Package.WebUi.ViewModels.SlideShowVM
+@{
+    ViewBag.Title = "افزودن محصول";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm("Create", "SlideShow", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <table class="form">
+        @Html.AntiForgeryToken()
+        @Html.EnhancedTextAreaField(model => model.SlideShowTitle)
+        @Html.EnhancedTextAreaField(model => model.SlideShowSubTitle)
+        @Html.EnhancedEditorField(model => model.SlideShowHref)
+        <td class="labelWrp">
+            <label class="fieldLabel">@Html.LabelFor(model => model.SlideShowImageUrl)</label>
+        </td>
+        <td colspan="1" class="inputWrp">
+            @Html.Kendo().Upload().Name("file").Multiple(false).Async(async => async.Save("SaveFile", "SlideShow"))
+        </td>
+        @Html.EnhancedSubmit("ذخیره")
+    </table>
+}
+
+<div>
+    @Html.ActionLink("بازگشت به لیست", "Index")
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#file").closest(".k-upload").find("span").text("انتخاب تصویر");
+    });
+</script>

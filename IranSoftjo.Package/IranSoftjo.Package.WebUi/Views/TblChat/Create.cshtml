@@ -1,0 +1,20 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.TblChatVm
+@{
+    ViewBag.Title = "ارسال پیام جدید";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+<table class="form">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "موارد مشخص شده با رنگ قرمز را مجددا بررسی نمایید.")
+    @Html.EnhancedDropDownList(model => model.TblUserIdTo, "TblUserIdTo")
+        @Html.EnhancedTextAreaField(model => model.TextChat)
+        @Html.EnhancedSubmit()
+    }
+</table>

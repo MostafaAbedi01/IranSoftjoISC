@@ -1,0 +1,31 @@
+﻿@model IEnumerable<IranSoftjo.Package.WebUi.ViewModels.SendMailVM>
+@{
+    ViewBag.Title = "ارسال ایمیل";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="k-rtl">
+    @(Html.Kendo().Grid(Model)
+          .Name("Grid")
+          .Columns(columns =>
+                   {
+                       columns.Bound(model => model.SendMailID).Visible(false);
+                       columns.Bound(model => model.Subject).Width(230);
+                       columns.Bound(model => model.ToEmail).Width(100);
+                       columns.Bound(model => model.DateTimeSend).Width(100);
+                       columns.Bound(item => @item.SendMailID).Title("دستورات").Filterable(false).Groupable(false)
+                           .Template(@<text>
+                                          @Html.ActionLink("ارسال دوباره", "Edit", new {id = @item.SendMailID}, new {@class = "k-button k-button-icontext k-grid-edit"})
+                                          @Html.ActionLink("حذف", "Delete", new {id = @item.SendMailID}, new {@class = "k-button k-button-icontext k-grid-delete"})
+                                      </text>).Width(140);
+                   })
+          .ToolBar(toolbar => toolbar.Custom().Action("Create", "SendMail").Text("ارسال ایمیل جدید"))
+          .Sortable()
+          .Scrollable()
+          .Filterable()
+          .HtmlAttributes(new {style = "height:500px;"})             
+          .DataSource(dataSource => dataSource
+              .Server()
+              .Model(model => model.Id(item => item.SendMailID))
+          )              
+          )
+</div>

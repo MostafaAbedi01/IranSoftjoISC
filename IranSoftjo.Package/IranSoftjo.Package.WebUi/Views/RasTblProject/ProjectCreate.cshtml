@@ -1,0 +1,36 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@using IranSoftjo.Package.WebUi.Controllers
+@model IranSoftjo.Package.WebUi.ViewModels.TblProjectVm
+@{
+    ViewBag.Title = "افزودن پروژه";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+
+@using (Html.BeginForm("ProjectCreate", "RasTblProject", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <table class="form">
+        @Html.ValidationSummary(true)
+        @Html.AntiForgeryToken()
+        @Html.EnhancedLabelField(model => model.ProjectCode)
+        @Html.EnhancedEditorField(model => model.ProjectName)
+        @Html.EnhancedEditorField(model => model.KarfarmaName)
+        @Html.EnhancedEditorField(model => model.PeimanKarName)
+        @Html.EnhancedEditorField(model => model.PeimanKarJozName)
+        @Html.EnhancedEditorField(model => model.SarparastKargahName)
+        @Html.EnhancedEditorField(model => model.ModirProjectName)
+        @Html.EnhancedEditorField(model => model.DateStartPeiman)
+        @Html.EnhancedEditorField(model => model.DateStartGharardad)
+        @Html.EnhancedTextAreaField(model => model.AddressKarfarma)
+        @Html.EnhancedTextAreaField(model => model.AddressProject)
+        @Html.EnhancedCheckBoxField(model => model.IsGoogleMap)
+        @Html.EnhancedSubmit("ثبت پروژه")
+    </table>
+}
+
+<div>
+    @Html.ActionLink("بازگشت به لیست", "ProjectList")
+</div>

@@ -1,0 +1,87 @@
+﻿@using IranSoftjo.Package.WebUi.ViewModels
+@model List<IranSoftjo.Package.WebUi.ViewModels.GalleryVM>
+@{
+    ViewBag.Title = "گالری عکس - " + Session["PageGroupTitle"];
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<h1>
+    @ViewBag.Title
+</h1>
+<br />
+<hr />
+<style type="text/css">
+    .tn3-thumbs ul {
+        position: inherit !important;
+        width: -1px !important;
+    }
+
+    #content {
+        margin: 0px auto;
+        width: 620px;
+    }
+</style>
+<link type="text/css" rel="stylesheet" href="~/Content/Tn3Gallery/tn3.css"></link>
+<script type="text/javascript" src="~/Scripts/Tn3Gallery/jquery.tn3lite.min.js"> </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        //Thumbnailer.config.shaderOpacity = 1;
+        var tn1 = $('.mygallery').tn3({
+            skinDir: "skins",
+            imageClick: "fullscreen",
+            image: {
+                maxZoom: 1.5,
+                crop: true,
+                clickEvent: "dblclick",
+                transitions: [{
+                        type: "blinds"
+                    }, {
+                        type: "grid"
+                    }, {
+                        type: "grid",
+                        duration: 460,
+                        easing: "easeInQuad",
+                        gridX: 1,
+                        gridY: 8,
+                        // flat, diagonal, circle, random
+                        sort: "random",
+                        sortReverse: false,
+                        diagonalStart: "bl",
+                        // fade, scale
+                        method: "scale",
+                        partDuration: 360,
+                        partEasing: "easeOutSine",
+                        partDirection: "left"
+                    }]
+            }
+        });
+    });
+</script>
+<p>
+    جهت مشاهده تمام صفحه دوبار بر روی عکس کلیک کنید
+</p>
+<div id="content">
+    <div class="mygallery">
+        <div class="tn3 album">
+            <ol>
+                @for (int i = 0; i < Model.Count(); i++)
+                {
+                    GalleryVM item = Model[i];
+                    <li>
+                        <h4>@item.Title</h4>
+                        <div class="tn3 ">@item.Title</div>
+                        <a href="@item.GalleryImageUrl">
+                            <img  width="35px" height = "35px" src="@item.GalleryImageUrlThumb" />
+                        </a>
+                    </li>
+                }
+            </ol>
+        </div>
+    </div>
+</div>
+<br/>
+<br/>
+<br/>
+<p>
+    
+   @Html.ActionLink("بازگشت به لیست گالری عکسها", "List","GalleryGroup")
+</p>

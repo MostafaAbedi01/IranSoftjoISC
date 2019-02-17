@@ -1,0 +1,21 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.EscrowVm
+@{
+    ViewBag.Title = "آزاد سازی وجه برای فروشنده";
+    Layout = "~/Views/Shared/_AdminDashboardWithPanel.cshtml";
+}
+<div class="alert alert-info" style="text-align: right">
+    <strong>توجه!</strong> خریدار محترم پس از کلیک بر روی دکمه
+     <b style="color: #286090"> تایید آزاد سازی وجه برای فروشنده </b> پول برای فروشنده آزاد و قابل برداشت خواهد شد.
+</div>
+@using (Html.BeginForm("ReleaseMoney", "Dashboard", FormMethod.Post, new { role = "form" }))
+{
+    <table class="form">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.EscrowID)
+        @Html.EnhancedLabelField(m => m.UsernameUserSaller)
+        @Html.EnhancedLabelField(m => m.CreateDate)
+        @Html.EnhancedLabelField(m => m.Price)
+        @Html.EnhancedSubmit("تایید آزاد سازی وجه برای فروشنده")
+    </table>
+}

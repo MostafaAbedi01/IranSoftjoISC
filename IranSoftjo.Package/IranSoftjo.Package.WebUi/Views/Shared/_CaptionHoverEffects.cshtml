@@ -1,0 +1,98 @@
+﻿@using Mehr
+@model List<IranSoftjo.Package.WebUi.ViewModels.ProductVM>
+<link rel="stylesheet" type="text/css" href="/Content/CaptionHoverEffects/default.css" />
+<link rel="stylesheet" type="text/css" href="/Content/CaptionHoverEffects/component.css" />
+<script src="/Scripts/CaptionHoverEffects/modernizr.custom.js"></script>
+<div class="container">
+    <!-- Top Navigation -->
+    <ul class="grid cs-style-3">
+        @foreach (var item in Model)
+        {
+            var nameProductID = Session["ListViewName"] + item.ProductID.ToString();
+            <li>
+                <div id="product_@nameProductID">
+                    <figure>
+                        <div class="productHoverEffects">
+                            <h3>
+                                <a style="text-decoration: none" href="/Product/Details/@item.ProductID">@item.ProductTitle</a>
+                            </h3>
+                        </div>
+                        <img  width="130" height="210"  src="@item.ProductImageUrl" alt="@item.ProductTitle">
+                        <figcaption>
+                            @*<h3>@item.ProductTitle</h3>*@
+                               @*<b>@item.ProductTypeTitle.LocalizeNumbers()</b>|*@
+                            @if (!item.IsCall)
+                            {
+
+                                <span>@item.ProductPrice.NumericalMoney()</span>
+                            }
+                            else
+                            {
+                                <label class="fieldLabel">قیمت کالا : تماس بگیرید </label>
+                            }
+                          
+                            <hr />
+                             @if (!item.IsCall)
+                             {
+                                 <div>
+                                     <a id="btnAddToBasket_@item.ProductID" class="k-button k-button-icontext ">افزودن به سبد</a>
+                                 </div>
+                                 <div style="margin: -33px 100px 0 0">
+                                     <a href="/Product/Details/@item.ProductID" class="k-button k-button-icontext ">جزئیات</a>
+                                 </div>
+                             }
+                             else
+                             {
+                                     <div style="margin: 0px 100px 0 0">
+                                <a href="/Product/Details/@item.ProductID" class="k-button k-button-icontext ">جزئیات</a>
+                            </div>
+                             }
+                        
+                        </figcaption>
+                    </figure>
+                </div>
+            </li>
+        }
+    </ul>
+</div>
+<!-- /container -->
+<script src="/Scripts/CaptionHoverEffects/toucheffects.js"></script>
+@*<script type="text/javascript">
+    $(document).ready(function () {
+        $("[id*=btnAddToBasket]").each(function () {
+            $(this).click(function () {
+                var productid = $(this).attr("id").match(/[\d]+$/);
+                $.ajax({
+                    url: "/api/ShoppingCartApi",
+                    data: { ProductID: productid },
+                    type: "GET"
+                }).done(function (result) {
+                    if (result) {
+                        $("#cartinfo").fadeOut(200).html("سبد: " + result).fadeIn(200);
+                        $.ajax({
+                            url: "/api/ShoppingCartApi",
+                            type: "GET"
+                        }).done(function (result) {
+                            if (result) {
+                                $("#product_" + productid).fadeOut(500).fadeIn(800);
+                                $("#productsShow").html(result).fadeOut(200).fadeIn(200);
+                                $("tr:even").css("background-color", "#FCF4CF");
+                                $("tr:odd").css("background-color", "#ffffff");
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    });
+</script>*@
+<style>
+    .productHoverEffects h3
+    {
+        font-size: 1em;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        width: 100%;
+    }
+</style>

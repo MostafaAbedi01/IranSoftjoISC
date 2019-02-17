@@ -1,0 +1,78 @@
+﻿@using System.Collections
+@model IEnumerable<IranSoftjo.Package.WebUi.ViewModels.TblInspectionVm>
+@{
+    ViewBag.Title = "لیست بازرسی ها";
+    if (Request.QueryString["Date"] != null)
+    {
+        ViewBag.Title =
+        ViewBag.Title  + Request.QueryString["Date"];
+    }
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+  
+    <span class="k-picker-wrap k-state-default">
+        <label>روز ثبت بازرسی: </label>
+        <input id="DateFilter" name="DateFilter" style="width: 200px;" type="text" value="@(Request.QueryString["Date"] != null ? Request.QueryString["Date"] : DateTime.Now.ToString())">
+        <span role="button" class="k-select">
+        </span>
+        <a  class="btn btn-circle default green" href="@Url.Action("Index", "ManholMap")"> <i class="icon-pointer blue"></i> نقشه آنلاین دستور کار روز انتخاب شده</a>
+        <input id="submitDateFilter" name="submitDateFilter" class="btn btn-circle default green-stripe" type="submit" value="نمایش لیست روز انتخاب شده">
+    </span>
+    <script>
+        jQuery(function () { jQuery("#DateFilter").kendoDatePicker({ "format": "yyyy/MM/dd", "min": new Date(1900, 0, 1, 0, 0, 0, 0), "max": new Date(2099, 11, 31, 0, 0, 0, 0) }); });
+    </script>
+    <div class="k-rtl">
+        @(Html.Kendo().Grid(Model)
+          .Name("Grid")
+          .Columns(columns =>
+          {
+              columns.Bound(item => @item.TblManholId).Title("دستورات").Filterable(false).Groupable(false)
+                  .Template(@<text>
+                @Html.ActionLink("تصاویر دیگر", "Index", "TblPhotoList", new { id = @item.TblManholId }, new { @class = "btn btn-default blue-stripe" })
+                @Html.ActionLink("جزئیات", "ManholDetails", "Manhol", new { id = @item.TblManholId }, new { @class = "btn btn-default blue-hoki" })
+                @Html.ActionLink("حذف", "Delete", new { id = @item.TblInspectionId },  new { @class = "btn btn-default red" })
+                </text>).Width(250);
+          columns.Bound(model => model.TblManholId).Visible(false);
+          columns.Bound(model => model.DateOrder).Format("{0:yyyy/MM/dd}").Width(95);
+          columns.Bound(model => model.CodePm).Width(100);
+          columns.Bound(model => model.CodeTag).Width(100);
+          columns.Bound(model => model.DateSabt).Format("{0:yyyy/MM/dd HH:mm}").Width(130);
+          columns.ForeignKey(p => p.NeedShostosho, (IEnumerable)ViewBag.ViewBag10, "KeyID", "Title").Width(100);
+          columns.ForeignKey(p => p.NeedBazsazi, (IEnumerable)ViewBag.ViewBag10, "KeyID", "Title").Width(100);
+          columns.ForeignKey(p => p.NeedHamsatSazi, (IEnumerable)ViewBag.ViewBag10, "KeyID", "Title").Width(100);
+          columns.ForeignKey(p => p.NeedSampashi, (IEnumerable)ViewBag.ViewBag10, "KeyID", "Title").Width(100);
+          columns.ForeignKey(p => p.JenseManhole, (IEnumerable)ViewBag.JenseManhole, "KeyID", "Title").Width(100);
+          columns.ForeignKey(p => p.TypeManhole, (IEnumerable)ViewBag.TypeManhole, "KeyID", "Title").Width(100);
+          columns.ForeignKey(p => p.VaziatManhole, (IEnumerable)ViewBag.VaziatManhole, "KeyID", "Title").Width(100);
+          columns.ForeignKey(p => p.StatusMahiche, (IEnumerable)ViewBag.ViewBag8, "KeyID", "Title").Width(100);
+          columns.ForeignKey(p => p.StatusPashne, (IEnumerable)ViewBag.ViewBag8, "KeyID", "Title").Width(100);
+          columns.Bound(model => model.Address).Width(360);
+
+          // columns.Bound(item => item.ThumbnailImageUrl).Width(100)
+        @*.Template(@<div style="text-align: center;">
+                <img style="width: 50px; height: 50px" src="@item.ThumbnailImageUrl" title="@item.CodePm"/>
+            </div>);*@
+          })
+           .Pageable(d => d.PageSizes(true).Refresh(true))
+    .Sortable()
+    .Scrollable()
+    .Filterable()
+       .Resizable(resize => resize.Columns(true))
+          .HtmlAttributes(new { style = "height:500px; " })
+              .ToolBar(toolbar => toolbar.Custom().Action("Add", "ManholInspection").Text("<i class='fa fa fa-plus'></i> افزودن دستور کار بازرسی منهول جدید ").HtmlAttributes(new { @class = "btn btn-circle default green-stripe" }))
+          .DataSource(dataSource => dataSource
+              .Server()
+              .Model(model => model.Id(item => item.TblManholId))
+          )
+        )
+    </div>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#submitDateFilter").click(function () {
+                var x = $("#DateFilter").val();
+                window.location.href = "/ManholInspection/List?Date=" + x;
+            });
+        });
+    </script>

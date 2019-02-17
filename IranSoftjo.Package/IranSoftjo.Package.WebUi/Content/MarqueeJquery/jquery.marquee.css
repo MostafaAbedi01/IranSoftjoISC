@@ -1,0 +1,22 @@
+ul.marquee {
+	/* required styles */
+	display: block;
+	margin: 0;
+	list-style: none;
+	position: relative;
+	overflow: hidden;
+	height: 22px; /* height should be included to reserve visual space for the marquee */
+	background-color: #0F57A3;
+}
+
+ul.marquee li {
+	/* required styles */
+	position: absolute;
+	top: -999em;
+	left: auto !important;
+	display: block;
+	white-space: nowrap; /* keep all text on a single line */
+
+	/* optional styles for appearance */
+	padding: 3px 5px;
+}

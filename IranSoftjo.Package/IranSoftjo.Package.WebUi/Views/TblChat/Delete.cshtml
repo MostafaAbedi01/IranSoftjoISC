@@ -1,0 +1,15 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.TblChatVm
+@{
+    ViewBag.Title = "حذف پیام";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<table class="form">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.EnhancedLabelField(model => model.TextChat)
+        @Html.EnhancedLabelField(model => model.DateSabt)
+        @Html.EnhancedSubmit("حذف")
+    }
+</table>

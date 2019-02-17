@@ -1,0 +1,104 @@
+﻿@{
+    ViewBag.Title = "نمایش مختصات جبهه بر روی نقشه";
+    Layout = "../Shared/_Layout.cshtml";
+}
+@model int
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC4QY3t06BnpiMl-0rgHG9-Pe8MdLlq5W0&sensor=false"></script>
+
+<style>
+    #map_canvas img {
+        max-width: none;
+    }
+</style>
+
+<!-- This css is to give a nice big popup "info window" when a marker is clicked on the map -->
+<style>
+    .infoDiv {
+        height: 200px;
+        width: 300px;
+        -webkit-user-select: none;
+        background-color: white;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <aside class="widget widget_warta_slider_tabs">
+                    <div id="slider-tabs-768237792">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab"> نمایش مختصات جبهه بر روی نقشه </a></li>
+                        </ul>
+                        <div id="mapId" style="visibility: collapse">
+                            @Model
+                        </div>
+                        <div class="tab-content">
+                            <div id="googleMap" style="width: 100%; height: 550px;"></div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        Initialize();
+    });
+
+    function Initialize() {
+
+        window.google.maps.visualRefresh = true;
+        var Liverpool = new window.google.maps.LatLng(35.7, 51.4);
+
+        var mapOptions = {
+            zoom: 11,
+            center: Liverpool,
+            mapTypeId: window.google.maps.MapTypeId.G_NORMAL_MAP
+        };
+
+        var map = new window.google.maps.Map(document.getElementById("googleMap"), mapOptions);
+        
+        var mapId = $("#mapId").text();
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("SearchById", "RasTblItems")', //"../Map/Search"
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ "manhoId": mapId }),
+            dataType: "json",
+            success: function (data) {
+                $.each(data, function (i, item) {
+
+                    var latlng = new window.google.maps.LatLng( item.Latitude,item.Longitude);
+                    var marker = new window.google.maps.Marker({
+                        position: latlng,
+                        icon: "/Package/Raspod/Photo/pink-dot.png",
+                        map: map
+                    });
+
+                    var infowindow = new window.google.maps.InfoWindow({
+                        content: "<div class='infoDiv'>" +
+                         " <hr/> کد آیتم :  " + "<h2>" + item.ItemCode + "</h2>" +
+                              " <hr/> آدرس :  " + item.Address + "</div>"
+                    });
+                    window.google.maps.event.addListener(marker, 'click', function () {
+                        infowindow.open(map, marker);
+                    });
+                });
+
+                
+            }
+        });
+
+     
+    }
+</script>
+
+

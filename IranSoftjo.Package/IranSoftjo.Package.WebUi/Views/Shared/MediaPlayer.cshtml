@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "پخش فیلم";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    FilmVM filmVM = StaticValue.LstFilmVM.Find(d => d.FilmName == Session["FileName"]);
+}
+<div class="BoxComment">
+    <h1>
+             @if (filmVM != null)
+             {
+                 <span style="float: right">عنوان کلیپ : @filmVM.FilmTitle
+                 </span>
+                 <span style="margin-right: 200px">تهیه کننده  :  @filmVM.FilmPreparator
+                 </span>
+             }
+    </h1>
+</div>
+<div class="television">
+    @{ string filename = "/VideoFile/" + Session["FileName"] + Session["Extension"]; }
+    <video style="margin: 25px 20px 30px 20px" src="@Url.Action("Index", "Video", new{ fileName = filename})" width="680" height="370"  controls autoplay="autoplay">
+        <source src="@Url.Action("Index", "Video",new{ fileName = filename})" type="video/ogg">
+        <source src="@Url.Action("Index", "Video",new{ fileName = filename})" type="video/mp4">
+        <source src="@Url.Action("Index", "Video", new{ fileName = filename})" type="video/webm">
+        <object data="@Url.Action("Index", "Video", new{ fileName = filename})" width="320" height="240">
+            <embed src="@Url.Action("Index", "Video", new{ fileName = filename})" width="320" height="240" >
+        </object>
+    </video>
+</div>
+<div class="BoxComment" style="height: 42px">
+    <a style="display: block" href=@filename >
+        <h2 style="float: right">دانلود فیلم
+        </h2>
+        <img style="float: left" src="~/Images/WaterConsumption/download.png" alt="دانلود" />
+    </a>
+</div>

@@ -1,0 +1,62 @@
+﻿@model IEnumerable<IranSoftjo.Package.WebUi.ViewModels.TblSubItemVm>
+@{
+    ViewBag.Title = "گزارش آیتم ها";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hgroup class="title">
+    <h1>
+        <a href="@Url.Action("ReportTblProject", "RasTblAndroidLevel")">@Session["TblProjects"] </a> >>
+        <a href="@Url.Action("ReportTblItems", "RasTblAndroidLevel", new { id = Session["TblItemsId"] })">@Session["TblItems"] </a> >> @ViewBag.Title
+    </h1>
+    <hr />
+</hgroup>
+<div class="k-rtl">
+    @(Html.Kendo().Grid(Model)
+          .Name("Grid")
+                            .CellAction(cell =>
+            {
+                if (cell.Column.Title == "متراژ رنگ شده")
+                {
+                    if (cell.DataItem.AllMetrajColor != null && (cell.DataItem.MetrajKol != null &&
+                        cell.DataItem.MetrajKol.Value < cell.DataItem.AllMetrajColor.Value))
+                    {
+                        cell.HtmlAttributes["style"] = "background-color: #FF9900";
+                    }
+                }
+            })
+          .Columns(columns =>
+          {
+              columns.Bound(item => @item.TblSubItemId).Title("گزارش سطح پایین").Filterable(false).Groupable(false)
+    .Template(@<text>
+                    @Html.ActionLink("گزارش پیشرفت هر مرحله", "ReportAllLevel", "RasTblAndroidLevel", new { id = @item.TblSubItemId }, new { @class = "k-button k-button-icontext k-grid-delete" })
+    </text>).Width(190);
+              columns.Bound(model => model.TblSubItemId).Visible(false);
+              columns.Bound(model => model.SubItemCode).Width(100);
+              columns.Bound(model => model.Title);
+              columns.Bound(model => model.MetrajKol);
+              columns.Bound(model => model.AllMetrajColor);
+              columns.Bound(model => model.AllMetrajLine);
+              columns.Bound(model => model.AllColorUse);
+              columns.Bound(model => model.AllColorLine);
+              columns.Bound(model => model.AllThinner);
+              columns.Bound(model => model.AllHardener);
+              columns.Bound(model => model.AllProgress);
+              columns.Bound(model => model.AllRate);
+          })
+                                                          .Sortable()
+                                                          .Scrollable()
+                                                          .Filterable().Groupable()
+                                                          .HtmlAttributes(new { style = "height:550px; " })
+                                                          .DataSource(dataSource => dataSource
+                                                              .Server()
+                                                              .Model(model => model.Id(item => item.TblSubItemId)).PageSize(7)
+                                                          )
+                                                          .Resizable(resize => resize.Columns(true))
+                                                          .ColumnMenu()
+    )
+</div>
+<style>
+    .container {
+        width: 1300px !important;
+    }
+</style>

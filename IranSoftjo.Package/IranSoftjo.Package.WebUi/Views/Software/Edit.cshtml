@@ -1,0 +1,174 @@
+﻿@using System.Activities.Expressions
+@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.SoftwareVM
+@{
+    ViewBag.Title = "ویرایش نرم افزار ";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+<div class="BreadCrumbPage">
+    @Html.ActionLink("لیست نرم افزارها", "Index")
+    <strong>>></strong>
+    @Html.ActionLink("ویرایش نرم افزار ", "Edit")
+</div>
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+<p style="text-align: center; color: red; font-weight: bold;">
+    " وارد نمودن مواردی که با ستاره قرمز مشخص شده اند الزامی میباشند      " 
+</p>
+@using (Html.BeginForm("Edit", "Software", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <table class="form">
+        @Html.HiddenFor(model => model.SoftwareID)
+        @Html.HiddenFor(model => model.UserID)
+        
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "موارد مشخص شده با رنگ قرمز را مجددا بررسی نمایید.")
+        <tr>
+            <td></td>
+            <td>
+                <span>
+                    <strong>مشخصات عمومی نرم افزار </strong>
+                </span>
+                <hr style="border-bottom: 2px solid #17BCE9;">
+            </td>
+        </tr>
+        @Html.EnhancedEditorField(model => model.SoftwareName)
+        @Html.EnhancedEditorField(model => model.SoftwareEnName)
+        @Html.EnhancedEditorField(model => model.SoftwareWebSite)
+        @Html.EnhancedDropDownListField(model => model.SoftwarePriceType, Model.SelectListSoftwarePriceType)
+        @Html.EnhancedEditorField(model => model.SoftwarePrice)
+        
+        @Html.EnhancedDropDownListField(model => model.SoftwareUserLicense, Model.SelectListSoftwareUserLicense)
+        <td class="labelWrp">
+            <label class="fieldLabel">لوگو :</label>
+        </td>
+        <td colspan="1" class="inputWrp">
+            @Html.Kendo().Upload().Name("file").Multiple(false).Async(async => async.Save("SaveFile", "Software"))
+        </td>
+        <tr>
+            <td></td>
+            <td>
+                <span>
+                    <strong>توضیحات </strong>
+                </span>
+                <hr style="border-bottom: 2px solid #17BCE9">
+                <br />
+            </td>
+        </tr>
+        @Html.EnhancedTextAreaField(model => model.SoftwareSummary, note: "حداکثر 500 کاراکتر به صورت متن ساده")
+        @Html.EnhancedTextAreaField(model => model.SoftwareAdvantage, note: "امکانات و قابلیت هایی که این نرم افزار را از سایر نرم افزارهای مشابه متمایز می کند؟ (فقط به صورت موردی نام ببرید و از ذکر توضیحات خودداری کنید .به وسیله خط فاصله (-) جدا شوند")
+        @Html.EnhancedEditorField(model => model.SoftwareFullDescription)
+       <tr>
+            <td></td>
+            <td>
+                <span>
+                    <strong>اطلـاعات سیستمی </strong>
+                </span>
+                <hr style="border-bottom: 2px solid #17BCE9;">
+            </td>
+        </tr>
+        @*    @Html.EnhancedCheckBoxField(model => model.OperatingSystemWeb)
+        @Html.EnhancedCheckBoxField(model => model.OperatingSystemWin)
+        @Html.EnhancedCheckBoxField(model => model.OperatingSystemAndroid)
+        @Html.EnhancedCheckBoxField(model => model.OperatingSystemIOS)
+        @Html.EnhancedCheckBoxField(model => model.OperatingSystemLinux)*@
+
+        @Html.EnhancedCheckboxListField(model => model.SelectListProjectType, Model.SelectListProjectType)
+        @Html.EnhancedTextAreaField(model => model.OperatingSystemWinText)
+        @Html.EnhancedTextAreaField(model => model.OperatingSystemWebText)
+        @Html.EnhancedTextAreaField(model => model.OperatingSystemAndroidText)
+        @Html.EnhancedTextAreaField(model => model.OperatingSystemIOSText)
+        @Html.EnhancedTextAreaField(model => model.OperatingSystemWinMobileText)
+
+
+
+        @Html.EnhancedSubmit("ذخیره")
+    </table>
+}
+
+<div>
+    @Html.ActionLink("بازگشت به لیست", "Index")
+</div>
+
+<script src="@Url.Content("/Scripts/LimitTextArea/jquery.limit-textarea.js")" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#OperatingSystemWinText').css('visibility', 'collapse');
+        $('#OperatingSystemWebText').css('visibility', 'collapse');
+        $('#OperatingSystemAndroidText').css('visibility', 'collapse');
+        $('#OperatingSystemIOSText').css('visibility', 'collapse');
+        $('#OperatingSystemWinMobileText').css('visibility', 'collapse');
+
+        $('input[type="checkbox"]').change(function () {
+            if (this.id == "SelectListProjectType_0") {
+                if ($(this).is(':checked')) {
+                    $('#OperatingSystemWinText').fadeOut('slow', function () {
+                        $(this).css({ "visibility": "visible" });
+                        $(this).css({ "display": "block" });
+                    });
+                } else {
+                    $('#OperatingSystemWinText').fadeOut('slow', function () {
+                        $(this).css({ "visibility": "collapse" });
+                        $(this).css({ "display": "block" });
+                    });
+                }
+            }
+            if (this.id == "SelectListProjectType_1") {
+                if ($(this).is(':checked')) {
+                    $('#OperatingSystemWebText').fadeOut('slow', function () {
+                        $(this).css({ "visibility": "visible" });
+                        $(this).css({ "display": "block" });
+                    });
+                } else {
+                    $('#OperatingSystemWebText').fadeOut('slow', function () {
+                        $(this).css({ "visibility": "collapse" });
+                        $(this).css({ "display": "block" });
+                    });
+                }
+            }
+            if (this.id == "SelectListProjectType_2") {
+                if ($(this).is(':checked')) {
+                    $('#OperatingSystemAndroidText').fadeOut('slow', function () {
+                        $(this).css({ "visibility": "visible" });
+                        $(this).css({ "display": "block" });
+                    });
+                } else {
+                    $('#OperatingSystemAndroidText').fadeOut('slow', function () {
+                        $(this).css({ "visibility": "collapse" });
+                        $(this).css({ "display": "block" });
+                    });
+                }
+            }
+            if (this.id == "SelectListProjectType_3") {
+                if ($(this).is(':checked')) {
+                    $('#OperatingSystemIOSText').fadeOut('slow', function () {
+                        $(this).css({ "visibility": "visible" });
+                        $(this).css({ "display": "block" });
+                    });
+                } else {
+                    $('#OperatingSystemIOSText').fadeOut('slow', function () {
+                        $(this).css({ "visibility": "collapse" });
+                        $(this).css({ "display": "block" });
+                    });
+                }
+            }
+            if (this.id == "SelectListProjectType_4") {
+                if ($(this).is(':checked')) {
+                    $('#OperatingSystemWinMobileText').fadeOut('slow', function () {
+                        $(this).css({ "visibility": "visible" });
+                        $(this).css({ "display": "block" });
+                    });
+                } else {
+                    $('#OperatingSystemWinMobileText').fadeOut('slow', function () {
+                        $(this).css({ "visibility": "collapse" });
+                        $(this).css({ "display": "block" });
+                    });
+                }
+            }
+        });
+        $("[id$='SoftwareSummary']").limit_textarea({ maxLength: 500, displayText: ' : تعداد کاراکتر باقی مانده' });
+        $("[id$='SoftwareAdvantage']").limit_textarea({ maxLength: 500, displayText: ' : تعداد کاراکتر باقی مانده' });
+    });
+</script>

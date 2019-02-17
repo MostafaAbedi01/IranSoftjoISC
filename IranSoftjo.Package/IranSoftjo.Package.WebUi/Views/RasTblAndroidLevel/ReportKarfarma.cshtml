@@ -1,0 +1,278 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@using IranSoftjo.Package.DataModel
+@using IranSoftjo.Package.WebUi.ViewModels
+@model System.Collections.Generic.IEnumerable<IranSoftjo.Package.WebUi.ViewModels.PercentVm>
+@{
+    Entities db = new Entities();
+    ViewBag.Title = "داشبورد مدیریت ";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var userName = User.Identity.Name;
+    var tblProjectId = db.Users.FirstOrDefault(d => d.Username == userName).TblProjectId;
+    var list = db.TblItems.Where(d => d.TblProjectId == tblProjectId).OrderByDescending(d => d.TblItemId);
+    var tblItemVm = TblItemVm.ToIEnumerable(list).ToList();
+    List<TblAndroidLevel> lstTblAndroidLevel = db.TblAndroidLevels.Where(d => d.TblProjectId == tblProjectId).ToList();
+    var lstTblSubItemAccesses = db.TblSubItemAccesses.ToList();
+    var lstTblSubItems = db.TblSubItems.ToList();
+    foreach (var item in tblItemVm)
+    {
+        var item1 = item;
+        var tblAndroidLevels = lstTblAndroidLevel.Where(d => d.TblItemId == item1.TblItemId);
+        item.AllMetraj = lstTblSubItems.Where(d => d.TblItemId == item.TblItemId).Sum(d => d.MetrajKol);
+        var androidLevels = tblAndroidLevels as IList<TblAndroidLevel> ?? tblAndroidLevels.ToList();
+
+        if (androidLevels.Any())
+        {
+            item.AllMetrajColor = androidLevels.Where(d => d.KeyID1 == 5).Sum(d => d.Metraj);
+        }
+        if (item.AllMetrajColor != null)
+        {
+            item.AllMetrajColor = Math.Round((double)item.AllMetrajColor, 2);
+        }
+
+        var tblSubItemVm = TblSubItemVm.ToIEnumerable(lstTblSubItems.Where(d => d.TblItemId == item.TblItemId).OrderByDescending(d => d.TblSubItemId)).ToList();
+        item.AllProgress = 0;
+
+        foreach (var item2 in tblSubItemVm)
+        {
+            var tblAndroidLevelsTblSubItemId = lstTblAndroidLevel.Where(d => d.TblSubItemId == item2.TblSubItemId);
+
+            item.ProgressLevel1 = 0;
+            item.ProgressLevel1 = 0;
+            item.ProgressLevel2 = 0;
+            item.ProgressLevel3 = 0;
+            item.ProgressLevel4 = 0;
+            item.ProgressLevel5 = 0;
+            item.ProgressLevel6 = 0;
+
+            var tblSubItemAccesses = lstTblSubItemAccesses.Where(d => d.TblSubItemId == item2.TblSubItemId).ToList();
+            if (tblSubItemAccesses.Count(d => d.KeyID1 == 1) == 0 && tblAndroidLevelsTblSubItemId.Any())
+            {
+                item.ProgressLevel1 = 100;
+            }
+            if (tblSubItemAccesses.Count(d => d.KeyID1 == 2) == 0 && tblAndroidLevelsTblSubItemId.Any())
+            {
+                item.ProgressLevel2 = 100;
+            }
+            if (tblSubItemAccesses.Count(d => d.KeyID1 == 3) == 0 && tblAndroidLevelsTblSubItemId.Any())
+            {
+                item.ProgressLevel3 = 100;
+            }
+            if (tblSubItemAccesses.Count(d => d.KeyID1 == 4) == 0 && tblAndroidLevelsTblSubItemId.Any())
+            {
+                item.ProgressLevel4 = 100;
+            }
+            if (tblSubItemAccesses.Count(d => d.KeyID1 == 5) == 0 && tblAndroidLevelsTblSubItemId.Any())
+            {
+                item.ProgressLevel5 = 100;
+            }
+            if (tblSubItemAccesses.Count(d => d.KeyID1 == 6) == 0 && tblAndroidLevelsTblSubItemId.Any())
+            {
+                item.ProgressLevel6 = 100;
+            }
+            if (item2.MetrajKol > 0)
+            {
+                if (tblSubItemAccesses.Count(d => d.KeyID1 == 1) > 0)
+                {
+                    item.ProgressLevel1 = (((tblAndroidLevelsTblSubItemId.Where(d => d.KeyID1 == 1).Sum(d => d.Metraj) /
+                                             tblSubItemAccesses.Count(d => d.KeyID1 == 1)) * 100) / item2.MetrajKol);
+                }
+
+                if (tblSubItemAccesses.Count(d => d.KeyID1 == 2) > 0)
+                {
+                    item.ProgressLevel2 = ((tblAndroidLevelsTblSubItemId.Where(d => d.KeyID1 == 2).Sum(d => d.Metraj) /
+                                             tblSubItemAccesses.Count(d => d.KeyID1 == 2)) * 100) / item2.MetrajKol;
+                }
+
+                if (tblSubItemAccesses.Count(d => d.KeyID1 == 3) > 0)
+                {
+                    item.ProgressLevel3 = ((tblAndroidLevelsTblSubItemId.Where(d => d.KeyID1 == 3).Sum(d => d.Metraj) /
+                                            tblSubItemAccesses.Count(d => d.KeyID1 == 3)) * 100) / item2.MetrajKol;
+                }
+
+                if (tblSubItemAccesses.Count(d => d.KeyID1 == 4) > 0)
+                {
+                    item.ProgressLevel4 = (tblAndroidLevelsTblSubItemId.Where(d => d.KeyID1 == 4).Sum(d => d.Metraj) /
+                                            tblSubItemAccesses.Count(d => d.KeyID1 == 4) * 100) / item2.MetrajKol;
+                }
+
+                if (tblSubItemAccesses.Count(d => d.KeyID1 == 5) > 0)
+                {
+                    item.ProgressLevel5 = ((tblAndroidLevelsTblSubItemId.Where(d => d.KeyID1 == 5).Sum(d => d.Metraj)) /
+                                             tblSubItemAccesses.Count(d => d.KeyID1 == 5) * 100) / item2.MetrajKol;
+                }
+
+                if (tblAndroidLevelsTblSubItemId.Count(d => d.KeyID1 == 6) > 0)
+                {
+                    item.ProgressLevel6 = 100;
+                }
+            }
+            if (item.ProgressLevel1 == null)
+            { item.ProgressLevel1 = 0; }
+            if (item.ProgressLevel2 == null)
+            { item.ProgressLevel2 = 0; }
+            if (item.ProgressLevel3 == null)
+            { item.ProgressLevel3 = 0; }
+            if (item.ProgressLevel4 == null)
+            { item.ProgressLevel4 = 0; }
+            if (item.ProgressLevel5 == null)
+            { item.ProgressLevel5 = 0; }
+            if (item.ProgressLevel6 == null)
+            { item.ProgressLevel6 = 0; }
+
+            item.AllProgress += (((item.ProgressLevel1 * 30) / 100) +
+                               ((item.ProgressLevel2 * 10) / 100) +
+                               ((item.ProgressLevel3 * 25) / 100) +
+                               ((item.ProgressLevel4 * 15) / 100) +
+                               ((item.ProgressLevel5 * 15) / 100) +
+                               ((item.ProgressLevel6 * 5) / 100));
+
+        }
+        item.AllProgress = item.AllProgress / tblSubItemVm.Count();
+        if (item.AllProgress != null)
+        {
+            item.AllProgress = Math.Round((double)item.AllProgress, 2);
+        }
+    }
+
+}
+<link href="~/Content/kendo/2014.3/kendo.default.min.css" rel="stylesheet">
+<link href="~/Content/kendo/2014.3/kendo.dataviz.min.css" rel="stylesheet">
+<link href="~/Content/kendo/2014.3/kendo.dataviz.default.min.css" rel="stylesheet">
+<hgroup class="title">
+    <h1>درصد پیشرفت پروژه</h1>
+    <hr />
+</hgroup>
+
+<div class="k-content">
+    <div id="chart" style="background: center no-repeat url('~/Images//world-map.png');"></div>
+</div>
+<script>
+    var datavalue =
+    [
+    ];
+    $.ajax({
+        type: "Post",
+        url: '@Url.Action("PercentProject", "RasTblAndroidLevel")', //"../Map/Search"
+        contentType: "application/json; charset=utf-8",
+        data: JSON,
+        dataType: "json",
+        success: function (data) {
+            $.each(data, function (index, value) {
+                datavalue.push(
+                    {
+                        'source': value.Name,
+                        'percentage': value.Value,
+                        'explode': value.Explode
+                    }
+                    );
+                function createChart() {
+                    $("#chart").kendoChart({
+                        title: {
+                            text: " در صد پیشرفت پروژه"
+                        },
+
+                        seriesDefaults: {
+                            labels: {
+                                template: "#= category # - #= kendo.format('{0}%', value)#",
+                                position: "outsideEnd",
+                                visible: true,
+                                background: "transparent"
+                            }
+                        },
+
+                        dataSource: {
+                            data: datavalue
+                        },
+                        series: [
+                            {
+                                type: "pie",
+                                field: "percentage",
+                                categoryField: "source",
+                                explodeField: "explode"
+                            }
+                        ],
+                        seriesColors: ["#7FCE11", "#E23815"],
+                        tooltip: {
+                            visible: true,
+                            template: "${ category } - ${ value }%"
+                        }
+                    });
+                }
+
+                $(document).ready(createChart);
+                $(document).bind("kendo:skinChange", createChart);
+            });
+        }
+    });
+
+
+
+</script>
+<hgroup class="title">
+    <h1>  درصد پیشرفت هر جبهه کاری</h1>
+    <hr />
+</hgroup>
+<div class="k-rtl">
+    @(Html.Kendo().Grid(tblItemVm)
+          .Name("Grid")
+          .CellAction(cell =>
+                    {
+                        if (cell.Column.Title == "درصدپیشرفت")
+                        {
+                            if (cell.DataItem.AllProgress == 100)
+                            {
+                                cell.HtmlAttributes["style"] = "background-color: #A8F76A";
+                            }
+                            if (cell.DataItem.AllProgress == 0)
+                            {
+                                cell.HtmlAttributes["style"] = "background-color: #EB8E86";
+                            }
+                        }
+                    })
+          .Columns(columns =>
+          {
+              columns.Bound(model => model.TblItemId).Visible(false);
+              columns.Bound(model => model.ItemCode).Width(50);
+              columns.Bound(model => model.Title);
+              columns.Bound(model => model.Address);
+              columns.Bound(model => model.AllProgress).Width(150);
+              columns.Bound(item => @item.TblItemId).Title("دستورات").Filterable(false).Groupable(false)
+                  .Template(@<text>
+                    @Html.ActionLink("تصاویر جبهه کاری", "Index", "TblPhotoList", new { id = @item.TblItemId }, new { @class = "k-button k-button-icontext k-grid-delete" })
+
+
+                    @if (item.IsGoogleMap)
+                    {
+                        @Html.ActionLink("نمایش مختصات بر روی نقشه", "SearchByItemId", "RasTblItems", new { id = @item.TblItemId }, new { @class = "k-button k-button-icontext k-grid-delete" })
+                    }
+
+
+                </text>).Width(350);
+
+          })
+                                                                                                                                                                             .ToolBar(toolbar => toolbar.Custom().Action("SearchMap", "RasTblAndroidLevel", new { id = 1 }).Text("نمایش همه جبهه کاری بر روی نقشه"))
+
+                                                                                                                                  .Sortable()
+                                                                                                                                  .Scrollable()
+                                                                                                                                  .Filterable()
+                                                                                                                                  .HtmlAttributes(new { style = "height:550px; " })
+                                                                                                                                  .DataSource(dataSource => dataSource
+                                                                                                                                      .Server()
+                                                                                                                                      .Model(model => model.Id(item => item.TblItemId))
+                                                                                                                                  )
+                                                                                                                                  .Resizable(resize => resize.Columns(true))
+                                                                                                                                  .ColumnMenu()
+    )
+</div>
+<style>
+    text {
+        font-family: BKoodakBold !important;
+        font-style: normal !important;
+        font-size: 20px !important;
+    }
+
+    #chart {
+        background: rgba(0, 0, 0, 0) url("~/Images/world-map.png") no-repeat scroll center center;
+        position: relative;
+    }
+</style>

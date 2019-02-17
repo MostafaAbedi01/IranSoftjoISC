@@ -1,0 +1,22 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.Android.ViewModels.UserVm
+@{
+    ViewBag.Title = "ویرایش";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<table class="form">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "موارد مشخص شده با رنگ قرمز را مجددا بررسی نمایید.")
+                @Html.EnhancedDropDownList(model => model.RoleID, "RoleID")
+    @Html.EnhancedDropDownList(model => model.TblProjectId, "TblProjectId")
+        @Html.HiddenFor(model => model.UserID)
+        @Html.EnhancedEditorField(model => model.FirstName)
+        @Html.EnhancedEditorField(model => model.LastName)
+        @Html.EnhancedEditorField(model => model.Username)
+        @Html.EnhancedEditorField(model => model.Password)
+        @Html.EnhancedEditorField(model => model.PasswordConfirm)
+        @Html.EnhancedSubmit("ویرایش")
+    }
+</table >

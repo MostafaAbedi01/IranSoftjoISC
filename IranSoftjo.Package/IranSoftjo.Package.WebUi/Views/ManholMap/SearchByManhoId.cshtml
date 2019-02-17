@@ -1,0 +1,166 @@
+﻿@{
+    ViewBag.Title = "نمایش مختصات منهول بر روی نقشه";
+    Layout = "../Shared/_Layout.cshtml";
+}
+@model int
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC4QY3t06BnpiMl-0rgHG9-Pe8MdLlq5W0&sensor=false"></script>
+
+<style>
+    #map_canvas img {
+        max-width: none;
+    }
+</style>
+
+<!-- This css is to give a nice big popup "info window" when a marker is clicked on the map -->
+<style>
+    .infoDiv {
+        height: 200px;
+        width: 300px;
+        -webkit-user-select: none;
+        background-color: white;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <aside class="widget widget_warta_slider_tabs">
+                    <div id="slider-tabs-768237792">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab"> نمایش مختصات منهول بر روی نقشه </a></li>
+                        </ul>
+                        <div id="mapId" style="visibility: collapse">
+                            @Model
+                        </div>
+                        <div class="tab-content">
+                            <div id="googleMap" style="width: 100%; height: 550px;"></div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        Initialize();
+    });
+
+    // Where all the fun happens
+    function Initialize() {
+
+        // Google has tweaked their interface somewhat - this tells the api to use that new UI
+        window.google.maps.visualRefresh = true;
+        var Liverpool = new window.google.maps.LatLng(35.7, 51.4);
+
+        // These are options that set initial zoom level, where the map is centered globally to start, and the type of map to show
+        var mapOptions = {
+            zoom: 11,
+            center: Liverpool,
+            mapTypeId: window.google.maps.MapTypeId.G_NORMAL_MAP
+        };
+
+        // This makes the div with id "map_canvas" a google map
+        var map = new window.google.maps.Map(document.getElementById("googleMap"), mapOptions);
+
+
+        //var Latitude = $("#Latitude").text();
+        //var Longitude = $("#Longitude").text();
+
+
+        ////// This shows adding a simple pin "marker" - this happens to be the Tate Gallery in Liverpool!
+        //var myLatlng = new google.maps.LatLng(Longitude, Latitude);
+
+        //var marker = new google.maps.Marker({
+        //    position: myLatlng,
+        //    map: map,
+        //    title: 'بازرسی نشده'
+        //});
+
+        //// You can make markers different colors...  google it up!
+        //marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
+        ////35.7, 51.4
+        //var infowindow = new google.maps.InfoWindow({
+        //    content: " <hr/>   <br/>بازرسی نشده  "
+        //});
+
+        //// finally hook up an "OnClick" listener to the map so it pops up out info-window when the marker-pin is clicked!
+        //google.maps.event.addListener(marker, 'click', function () {
+        //    infowindow.open(map, marker);
+        //});
+
+        // a sample list of JSON encoded data of places to visit in Liverpool, UK
+        // you can either make up a JSON list server side, or call it from a controller using JSONResult
+        //var data = [
+        //    { "Id": 1, "PlaceName": "کد :21052405", "OpeningHours": "9:5, M-F", "GeoLong": "35.72", "GeoLat": "51.41" },
+        //    { "Id": 2, "PlaceName": "کد : 02154255", "OpeningHours": "9:1,2:5, M-F", "GeoLong": "35.73", "GeoLat": "51.45" },
+        //    { "Id": 3, "PlaceName": "کد :21548855", "OpeningHours": "9:7", "GeoLong": "35.74", "GeoLat": "51.43" },
+        //];
+        var mapId = $("#mapId").text();
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("SearchById", "ManholMap")', //"../Map/Search"
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ "manhoId": mapId }),
+            dataType: "json",
+            success: function (data) {
+                $.each(data, function (i, item) {
+
+                    var latlng = new window.google.maps.LatLng( item.Latitude,item.Longitude);
+                    var marker = new window.google.maps.Marker({
+                        position: latlng,
+                        icon: "/Package/Manhol/Photo/pink-dot.png",
+                        map: map
+                    });
+
+                    var infowindow = new window.google.maps.InfoWindow({
+                        content: "<div class='infoDiv'>" +
+                         " <hr/> کد پی ام :  " + "<h2>" + item.CodePm + "</h2>" +
+                              " <hr/> آدرس :  " + item.Address + "</div>"
+                    });
+                    window.google.maps.event.addListener(marker, 'click', function () {
+                        infowindow.open(map, marker);
+                    });
+                });
+
+                //if (x == "") {
+                //    for (j = 0; j < gmarkers.length; j++) {
+                //        marker[j].setMap(null);
+                //    }
+                //}
+            }
+        });
+
+        // Using the JQuery "each" selector to iterate through the JSON list and drop marker pins
+        //$.each(data, function (i, item) {
+        //    var marker = new google.maps.Marker({
+        //        'position': new google.maps.LatLng(item.GeoLong, item.GeoLat),
+        //        'map': map,
+        //        'title': item.PlaceName
+        //    });
+
+        //    // Make the marker-pin blue!
+        //    marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png')
+
+        //    // put in some information about each json object - in this case, the opening hours.
+        //    var infowindow = new google.maps.InfoWindow({
+        //        content: "<div class='infoDiv'><h2>" + item.PlaceName + "</h2>" + "<div><h4>ساعت بازدید: " + item.OpeningHours + "</h4></div></div>"
+        //    });
+
+        //    // finally hook up an "OnClick" listener to the map so it pops up out info-window when the marker-pin is clicked!
+        //    google.maps.event.addListener(marker, 'click', function () {
+        //        infowindow.open(map, marker);
+        //    });
+
+        //})
+    }
+</script>
+
+

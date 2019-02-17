@@ -1,0 +1,59 @@
+﻿@model IEnumerable<IranSoftjo.Package.WebUi.ViewModels.TblShirkhatVm>
+@{
+    ViewBag.Title = "لیست شیرخط ها";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+
+<div class="k-rtl">
+
+    @(Html.Kendo().Grid(Model)
+    .Name("Grid")
+    .Columns(columns =>
+    {
+        columns.Bound(item => @item.TblShirkhatId).Title("دستورات").Filterable(false).Groupable(false)
+            .Template(@<text>
+    @Html.ActionLink("موقعیت بروی نقشه", "SearchByIdOnMap", new { id = @item.TblShirkhatId }, new { @class = "k-button k-button-icontext k-grid-edit" })
+                          @Html.ActionLink("تصاویردیگر", "Index", "TblPhotoList", new {id = @item.TblShirkhatId}, new {@class = "k-button k-button-icontext k-grid-edit"})
+                          @Html.ActionLink("ویرایش", "Edit", new {id = @item.TblShirkhatId}, new {@class = "k-button k-button-icontext k-grid-edit"})
+                          @Html.ActionLink("جزئیات", "Details", new {id = @item.TblShirkhatId}, new {@class = "k-button k-button-icontext k-grid-edit"})
+                          @Html.ActionLink("حذف", "Delete", new {id = @item.TblShirkhatId}, new {@class = "k-button k-button-icontext k-grid-delete"})
+                       </text>).Width(170);
+        columns.Bound(model => model.TblShirkhatId).Visible(false);
+
+        columns.Bound(model => model.Address);
+        columns.Bound(model => model.Status);
+        columns.Bound(model => model.SizeDariceh);
+        columns.Bound(model => model.SizeOtaghak);
+        columns.ForeignKey(p => p.VaziatZaheri, (System.Collections.IEnumerable)ViewBag.VaziatZaheri, "KeyID", "Title");
+        columns.ForeignKey(p => p.OtaghakType, (System.Collections.IEnumerable)ViewBag.OtaghakType, "KeyID", "Title");
+        columns.ForeignKey(p => p.StatusMode, (System.Collections.IEnumerable)ViewBag.StatusMode, "KeyID", "Title");
+        columns.ForeignKey(p => p.VaziatDaricheh, (System.Collections.IEnumerable)ViewBag.Vaziat, "KeyID", "Title");
+        columns.ForeignKey(p => p.VaziatShir, (System.Collections.IEnumerable)ViewBag.Vaziat, "KeyID", "Title");
+        columns.ForeignKey(p => p.VaziatPelak, (System.Collections.IEnumerable)ViewBag.Vaziat, "KeyID", "Title");
+        columns.Bound(model => model.CodePm).Width(95);
+        columns.Bound(model => model.DateTimeSabt).Format("{0:yyyy/MM/dd HH:mm}").Width(90);
+        columns.Bound(model => model.Comment);
+    })
+    .Pageable(d => d.PageSizes(true).Refresh(true))
+    .Sortable()
+    .Scrollable()
+    .Filterable().Groupable()
+
+    .HtmlAttributes(new { style = "height:600px; " })
+    .DataSource(dataSource => dataSource
+        .Server()
+        .Model(model => model.Id(item => item.TblShirkhatId)).PageSize(7)
+    )
+    .Resizable(resize => resize.Columns(true))
+    .ColumnMenu()
+    )
+</div>
+<style>
+    .container {
+        width: 1300px !important;
+    }
+</style>

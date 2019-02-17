@@ -1,0 +1,18 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.TblKeyValueVm
+
+@{
+    ViewBag.Title = "جزئیات  ";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr/>
+</hgroup>
+<div>
+    @Html.EnhancedLabelField(model => model.Title)
+</div>
+
+<div>
+    @Html.ActionLink("بازگشت به لیست", "List")
+</div>

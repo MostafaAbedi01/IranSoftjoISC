@@ -1,0 +1,55 @@
+﻿@using IranSoftjo.Package.WebUi.Controllers
+@using Mehr
+@model IEnumerable<IranSoftjo.Package.WebUi.ViewModels.TblProjectVm>
+
+@{
+    ViewBag.Title = "لیست انبار هر پروژه ";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+<div class="k-rtl">
+    @(Html.Kendo().Grid(Model)
+          .Name("Grid")
+          .Columns(columns =>
+          {
+              columns.Bound(model => model.TblProjectId).Visible(false);
+              columns.Bound(item => @item.TblProjectId).Title("لیست").Filterable(false).Groupable(false)
+                  .Template(@<text>
+                    @Html.ActionLink("ورود به انبار", "TblStoreList", "RasTblStore", new { id = @item.TblProjectId }, new { @class = "k-button k-button-icontext k-grid-delete" })
+                    @Html.ActionLink("خروج از انبار", "TblStoreOutList", "RasTblStore", new { id = @item.TblProjectId }, new { @class = "k-button k-button-icontext k-grid-delete" })
+                    @Html.ActionLink("وضعیت روز آنلاین انبار", "TblStoreToday", "RasTblStore", new { id = @item.TblProjectId }, new { @class = "k-button k-button-icontext k-grid-delete" })
+                </text>).Width(340);
+
+              columns.Bound(model => model.ProjectCode).Width(100);
+              columns.Bound(model => model.ProjectName);
+              columns.Bound(model => model.AllColorUse).Title("رنگ در انبار");
+              columns.Bound(model => model.AllThinner).Title("تینر در انبار");
+              columns.Bound(model => model.AllHardener).Title("هاردنر در انبار");
+          })
+
+                                                    .Sortable()
+                                                    .Scrollable()
+                                                    .Filterable().Groupable()
+                                                    .HtmlAttributes(new { style = "height:600px; " })
+                                                    .DataSource(dataSource => dataSource
+                                                        .Server()
+                                                        .Model(model => model.Id(item => item.TblProjectId)).PageSize(10)
+                                                    )
+                                                    .Resizable(resize => resize.Columns(true))
+                                                    .ColumnMenu()
+    )
+</div>
+
+<style>
+    .container {
+        width: 1300px !important;
+    }
+
+    .pageContentRightDiv {
+        height: 700px;
+        ;
+    }
+</style>

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<IranSoftjo.Package.WebUi.ViewModels.PageGroupVM>
+@{
+    ViewBag.Title = "لیست منو";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="BreadCrumbPage">
+    @Html.ActionLink("لیست منوها", "Index")
+    <strong>>></strong>
+</div>
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+<div class="k-rtl">
+    @(Html.Kendo().Grid(Model)
+           .Name("Grid")
+           .Columns(columns =>
+               {
+                   columns.Bound(item => item.PageGroupID).Visible(false);
+                   columns.Bound(item => item.PageGroupTitle).Width(250);
+                   columns.Bound(item => item.PageGroupIsActive).Width(100);
+                   columns.Bound(item => item.PageGroupOrder).Width(70);
+                   columns.Bound(item => @item.PageGroupID).Title("دستورات").Filterable(false).Groupable(false).Width(450)
+                          .Template(@<text>
+    @Html.ActionLink("ویرایش", "Edit", new { id = @item.PageGroupID }, new { @class = "k-button k-button-icontext k-grid-edit" })
+    @Html.ActionLink("حذف", "Delete", new { id = @item.PageGroupID }, new { @class = "k-button k-button-icontext k-grid-delete" })
+    </text>).Width(200);
+               })
+           .ToolBar(toolbar => toolbar.Custom().Action("Create", "PageGroup").Text("افزودن منو جدید"))
+           .Sortable()
+           .Scrollable()
+           .Filterable().Pageable().Groupable()
+           .HtmlAttributes(new { style = "height:500px;" })
+           .DataSource(dataSource => dataSource
+                                         .Server()
+                                         .Model(model => model.Id(item => item.PageGroupID))
+           )
+           )
+</div>

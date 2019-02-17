@@ -1,0 +1,32 @@
+﻿@model IranSoftjo.Package.WebUi.ViewModels.TblSubItemVm
+@using IranSoftjo.Core.Web.Mvc.Html
+@{
+    ViewBag.Title = "جزئیات آیتم ";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+
+    <table class="form">
+        @Html.ValidationSummary(true)
+        @Html.AntiForgeryToken()
+        <tr>
+            <td>
+                <hr />
+                <label style="color: red" class="fieldLabel">مشخصات  </label>
+                <hr />
+            </td>
+            <td>
+                <hr />
+            </td>
+        </tr>
+        @Html.EnhancedLabelField(model => model.SubItemCode)
+        @Html.EnhancedLabelField(model => model.Title)
+        @Html.EnhancedLabelField(model => model.MetrajKol)
+    </table>
+
+<div>
+    @Html.ActionLink("بازگشت به لیست", "SubItemList", new { id = Model.TblItemId })
+</div>

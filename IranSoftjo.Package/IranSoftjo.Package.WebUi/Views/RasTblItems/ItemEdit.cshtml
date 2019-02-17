@@ -1,0 +1,115 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.TblItemVm
+
+@{
+    ViewBag.Title = "ویرایش جبهه کاری";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr/>
+</hgroup>
+
+@if (Model.IsGoogleMap)
+{
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <aside class="widget widget_warta_slider_tabs">
+                        <div id="slider-tabs-768237792">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab"> لطفا مختصات آیتم را از روی نقشه انتخاب کنید </a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div id="googleMap" style="width: 100%; height: 300px;"></div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@using (Html.BeginForm())
+{
+  
+    <table class="form">
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.TblItemId)
+        @Html.HiddenFor(model => model.TblProjectId)
+        @if (Model.IsGoogleMap)
+        {
+            @Html.EnhancedEditorField(model => model.LatitudeStr)
+            @Html.EnhancedEditorField(model => model.LongitudeStr)
+        }
+        @Html.HiddenFor(model => model.ItemCode)
+        @Html.EnhancedLabelField(model => model.ItemCode)
+        @Html.EnhancedEditorField(model => model.Title)
+        @Html.EnhancedTextAreaField(model => model.Address)
+        @Html.EnhancedTextAreaField(model => model.Comment)
+        <td class="labelWrp">
+            <label class="fieldLabel">@Html.LabelFor(model => model.ImageUrl)</label>
+        </td>
+        <td colspan="1" class="inputWrp">
+            @Html.Kendo().Upload().Name("file").Multiple(false).Async(async => async.Save("SaveFile", "Bridge"))
+        </td>
+        @Html.EnhancedSubmit("ویرایش پل")
+    </table>
+}
+<div>
+    @Html.ActionLink("بازگشت به لیست", "ItemList", new {id = Model.TblProjectId})
+</div>
+
+@*<script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>*@
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC4QY3t06BnpiMl-0rgHG9-Pe8MdLlq5W0&sensor=false"></script>
+<style>
+    #map_canvas img {
+        max-width: none;
+    }
+</style>
+
+<!-- This css is to give a nice big popup "info window" when a marker is clicked on the map -->
+<style>
+    .infoDiv {
+        height: 200px;
+        width: 300px;
+        -webkit-user-select: none;
+        background-color: white;
+    }
+</style>
+
+<script type="text/javascript">
+
+
+    $(document).ready(function () {
+        Initialize();
+    });
+
+    // Where all the fun happens
+    function Initialize() {
+
+        // Google has tweaked their interface somewhat - this tells the api to use that new UI
+        google.maps.visualRefresh = true;
+        var Liverpool = new google.maps.LatLng(35.7, 51.4);
+
+        // These are options that set initial zoom level, where the map is centered globally to start, and the type of map to show
+        var mapOptions = {
+            zoom: 11,
+            center: Liverpool,
+            mapTypeId: google.maps.MapTypeId.G_NORMAL_MAP
+        };
+
+        // This makes the div with id "map_canvas" a google map
+        var map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);
+
+        google.maps.event.addListener(map, 'click', function (event) {
+            var ddLatitude = document.getElementById("LatitudeStr");
+            ddLatitude.value = event.latLng.lat();
+            var ddLongitude = document.getElementById("LongitudeStr");
+            ddLongitude.value = event.latLng.lng();
+            alert("عرض جغرافیایی: " + event.latLng.lat() + " " + ", طول جغرافیایی : " + event.latLng.lng() + "با موفقیت انتخاب شد.");
+        });
+    }
+</script>

@@ -1,0 +1,3 @@
+@model DateTime?
+
+@(Html.Kendo().DatePickerFor(m => m) .HtmlAttributes(new { style = "width: 20em" }).Value(DateTime.Now))

@@ -1,0 +1,43 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.ProductVM
+@{
+    ViewBag.Title = "افزودن محصول";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm("Create", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <table class="form">
+        @Html.AntiForgeryToken()
+        @Html.EnhancedDropDownList(model => model.ProductGroupID, "ProductGroupID")
+        @Html.EnhancedDropDownList(model => model.ProductTypeID, "ProductTypeID")
+        @Html.EnhancedEditorField(model => model.ProductTitle)
+        @Html.EnhancedEditorField(model => model.ProductPrice)
+        @Html.EnhancedEditorField(model => model.ProductCode)
+        @Html.EnhancedTextAreaField(model => model.ProductSummery)
+        @Html.EnhancedEditorField(model => model.ProductDescription)
+        @Html.EnhancedTextAreaField(model => model.MetaDescription)
+        @Html.EnhancedTextAreaField(model => model.Metakeywords)
+        @Html.EnhancedCheckBoxField(model => model.IsActive)
+        @Html.EnhancedEditorField(model => model.IsSpecial)
+        @Html.EnhancedEditorField(model => model.IsCall)
+        @Html.EnhancedEditorField(model => model.ProductOrder)
+        @Html.EnhancedEditorField(model => model.ProductAvailable ,note:"در صورت نامحدود بودن -1 وارد شود")
+        <td class="labelWrp">
+            <label for="ProductGroupID" class="fieldLabel">@Html.LabelFor(model => model.ProductImageUrl)</label>
+        </td>
+        <td colspan="1" class="inputWrp">
+            @Html.Kendo().Upload().Name("file").Multiple(false).Async(async => async.Save("SaveFile", "Product"))
+        </td>
+        @Html.EnhancedSubmit("ذخیره")
+    </table>
+}
+
+<div>
+    @Html.ActionLink("بازگشت به لیست", "Index")
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#file").closest(".k-upload").find("span").text("انتخاب تصویر");
+    });
+</script>

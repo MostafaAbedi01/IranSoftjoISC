@@ -1,0 +1,47 @@
+﻿@model IEnumerable<IranSoftjo.Package.WebUi.ViewModels.PageVM>
+@{
+    ViewBag.Title = "لیست صفحات";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="BreadCrumbPage">
+    @Html.ActionLink("لیست صفحات", "Index")
+    <strong>>></strong>
+</div>
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+<div class="k-rtl">
+    @(Html.Kendo().Grid(Model)
+          .Name("Grid")
+          .Columns(columns =>
+          {
+              columns.Bound(model => model.PageID).Width(100);
+              columns.Bound(model => model.PageOrder).Width(70);
+              columns.Bound(model => model.PageGroupTitle).Width(100);
+              columns.Bound(model => model.PageTitle).Width(200);
+              columns.Bound(model => model.PageDate).Width(130);
+              columns.Bound(item => @item.PageID).Title("دستورات").Filterable(false).Groupable(false)
+                  .Template(@<text>
+                    @Html.ActionLink("ویرایش", "Edit", new { id = @item.PageID }, new { @class = "k-button k-button-icontext k-grid-edit" })
+                    @Html.ActionLink("حذف", "Delete", new { id = @item.PageID }, new { @class = "k-button k-button-icontext k-grid-delete" })
+                </text>).Width(140);
+          })
+                                  .ToolBar(toolbar => toolbar.Custom().Action("Create", "Page").Text("افزودن صفحه جدید"))
+                                  .Sortable()
+                                  .Scrollable()
+                                  .Filterable()
+                                  .HtmlAttributes(new { style = "height:500px;" })
+                                  .DataSource(dataSource => dataSource
+                                      .Server()
+                                      .Model(model => model.Id(item => item.PageID))
+                                      .Group(groups => groups.Add(p => p.PageGroupTitle))
+                                  )
+    )
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+            $(Grid).find('.k-icon.k-i-collapse').trigger('click');
+    });
+</script>

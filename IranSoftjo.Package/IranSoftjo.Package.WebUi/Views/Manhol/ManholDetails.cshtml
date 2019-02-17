@@ -1,0 +1,328 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@using IranSoftjo.Package.WebUi.Configs
+@model IranSoftjo.Package.WebUi.ViewModels.TblManholVm
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "جزئیات منهول";
+}
+
+<div style="box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); height: auto;">
+    <div style="float: right; margin: 10px; width: 40%">
+        <a href="@Model.ImageUrl">
+            <div>
+                <img width="@PackageSettings.Active.PageThumbnailImageUrlWidth" height="@PackageSettings.Active.PageThumbnailImageUrlHeight" src="@Model.ThumbnailImageUrl" alt="عکس منهول" title="عکس منهول" />
+            </div>
+            <div style="float: right; margin-top: 0px;">
+                بزرگنمایی عکس منهول
+            </div>
+        </a>
+    </div>
+    <div style="float: left; margin: 10px;">
+        <a class="btn btn-circle " href="/ManholMap/SearchByManhoId/@Model.TblManholId">
+            <div>
+                <img style="float: left;" width="60%" height="60%" src="/Package/Manhol/Photo/GPS.png" alt="@Model.CodePm" title="@Model.CodePm" />
+            </div>
+            <div style="float: left; margin-top: 0px;">
+                نمایش موقعیت روی نقشه
+            </div>
+            <a class="btn btn-circle blue-ebonyclay" href="/Manhol/ManholEdit/@Model.TblManholId">ویرایش منهول</a>
+            <a class="btn btn-circle blue-ebonyclay" href="/ManholInspection/List/@Model.TblManholId">لیست بازرسی </a>
+        </a>
+    </div>
+    <div>
+        <h1 style="color: #D24B28; font-size: 1.8em; padding: 25px;">کد پی ام : @Model.CodePm</h1>
+        <div style="margin: 30px; padding: 20px;">
+            <hr />
+            <label style="color: red" class="fieldLabel">مشخصات مکانی </label>
+            <hr />
+            @Html.EnhancedLabelField(model => model.CodeTag)
+            @Html.EnhancedLabelField(model => model.CodeGis)
+            @Html.EnhancedLabelField(model => model.CodeMakani)
+            @Html.EnhancedLabelField(model => model.DateSabt)
+            @Html.EnhancedLabelField(model => model.Latitude)
+            @Html.EnhancedLabelField(model => model.Longitude)
+
+            @Html.EnhancedLabelField(model => model.Address)
+            <hr />
+            <label style="color: red" class="fieldLabel">مشخصات منهول </label>
+            <hr />
+
+            <label class="fieldLabel">وضعیت ظاهری : </label>
+            @if (Model.VaziatZaheri1 == 1)
+            {
+                <span> نامرئی </span>
+            }
+            else if (Model.VaziatZaheri1 == 0)
+            {
+                <span> مرئی </span>
+            }
+            else
+            {
+                <span> ... </span>
+            }
+            <br />
+            <label class="fieldLabel">وضعیت ظاهری : </label>
+            @if (Model.VaziatZaheri2 == 1)
+            {
+                <span> سالم </span>
+            }
+            else if (Model.VaziatZaheri2 == 0)
+            {
+                <span> شکسته </span>
+            }
+            else
+            {
+                <span> ... </span>
+            }
+            <br />
+            <label class="fieldLabel">وضعیت ظاهری : </label>
+            @if (Model.VaziatZaheri3 == 1)
+            {
+                <span> غیر همسطح </span>
+            }
+            else if (Model.VaziatZaheri3 == 0)
+            {
+                <span> همسطح </span>
+            }
+            else
+            {
+                <span> ... </span>
+            }
+            <br />
+
+            <label class="fieldLabel">جنس دریچه : </label>
+            @if (Model.JenseDaricheh == 0)
+            {
+                <span>  </span>
+            }
+            else if (Model.JenseDaricheh == 1)
+            {
+                <span> چدن </span>
+            }
+            else if (Model.JenseDaricheh == 2)
+            {
+                <span> بتن </span>
+            }
+            else if (Model.JenseDaricheh == 3)
+            {
+                <span> چدن داکتیل </span>
+            }
+            else if (Model.JenseDaricheh == 4)
+            {
+                <span> کامپوزیت </span>
+            }
+            else if (Model.JenseDaricheh == 5)
+            {
+                <span> ورق آهن </span>
+            }
+            else
+            {
+                <span> ... </span>
+            }
+            <br />
+
+            <label class="fieldLabel">قطر دریچه : </label>
+            @if (Model.GhotrDariche == 0)
+            {
+                <span> 58 </span>
+            }
+            else if (Model.GhotrDariche == 1)
+            {
+                <span> 58 </span>
+            }
+            else if (Model.GhotrDariche == 2)
+            {
+                <span> 63 </span>
+            }
+            else if (Model.GhotrDariche == 3)
+            {
+                <span> 68 </span>
+            }
+
+            else
+            {
+                <span> ... </span>
+            }
+            <br />
+            @Html.EnhancedLabelField(model => model.OmgheManhol)
+            @Html.EnhancedLabelField(model => model.GhotreManhol)
+
+            <label class="fieldLabel">نوع منهول : </label>
+            @if (Model.NoeManhol == 1)
+            {
+                <span> غیر ریزشی </span>
+            }
+            else if (Model.GhotrDariche == 0)
+            {
+                <span> ریزشی </span>
+            }
+
+            else
+            {
+                <span> ... </span>
+            }
+            <br />
+
+            <label class="fieldLabel">جنس منهول : </label>
+            @if (Model.JenseManhol == 0)
+            {
+                <span>  </span>
+            }
+            else if(Model.JenseManhol == 1)
+            {
+            <span > آجری </span>
+            }
+            else if (Model.JenseManhol == 2)
+            {
+            <span> پلی اتیلن </span>
+            }
+            else if (Model.JenseManhol ==3)
+            {
+            <span> بتن درجا </span>
+            }
+            else if (Model.JenseManhol == 4)
+            {
+            <span> بتن پیش ساخته </span>
+            }
+            else if (Model.JenseManhol == 5)
+            {
+            <span>پلیمری </span>
+            }
+            else
+            {
+            <span> ... </span>
+            }
+            <br />
+            @Html.EnhancedLabelField(model => model.GhotreLolehVorodi)
+            @Html.EnhancedLabelField(model => model.GhotreLolehKhoroji)
+            @Html.EnhancedLabelField(model => model.TedadLoleVorodi)
+
+            <label class="fieldLabel">وضعیت پلکان : </label>
+            @if (Model.Pelekan1 == 1)
+            {
+                <span> ناسالم </span>
+            }
+            else if (Model.Pelekan1 == 0)
+            {
+                <span> سالم </span>
+            }
+            else
+            {
+                <span> ... </span>
+            }
+            <br />
+            <label class="fieldLabel">نوع پلکان : </label>
+            @if (Model.Pelekan2 == 1)
+            {
+                <span> پلاستیکی </span>
+            }
+            else if (Model.Pelekan2 == 0)
+            {
+                <span> فلزی </span>
+            }
+            else
+            {
+                <span> ... </span>
+            }
+            <br />
+            <label class="fieldLabel">نیاز به سمپاشی : </label>
+            @if (Model.SamPashi == 1)
+            {
+                <span> ندارد </span>
+            }
+            else if (Model.SamPashi == 0)
+            {
+                <span> دارد </span>
+            }
+            else
+            {
+                <span> ... </span>
+            }
+            <br />
+            <label class="fieldLabel">نیاز به بندکشی : </label>
+            @if (Model.BandKeshi == 1)
+            {
+                <span> ندارد </span>
+            }
+            else if (Model.BandKeshi == 0)
+            {
+                <span> دارد </span>
+            }
+            else
+            {
+                <span> ... </span>
+            }
+            <br />
+            <label class="fieldLabel">نیاز به لایروبی : </label>
+            @if (Model.LiRobi == 1)
+            {
+                <span> ندارد </span>
+            }
+            else if (Model.LiRobi == 0)
+            {
+                <span> دارد </span>
+            }
+            else
+            {
+                <span> ... </span>
+            }
+            <br />
+            <label class="fieldLabel">ماهیچه منهول : </label>
+            @if (Model.Mahicheh == 1)
+            {
+                <span> ناسالم </span>
+            }
+            else if (Model.Mahicheh == 0)
+            {
+                <span> سالم </span>
+            }
+            else
+            {
+                <span> ... </span>
+            }
+            <br />
+            <label class="fieldLabel">پاشنه منهول : </label>
+            @if (Model.Pashneh == 1)
+            {
+                <span> ناسالم </span>
+            }
+            else if (Model.Pashneh == 0)
+            {
+                <span> سالم </span>
+            }
+            else
+            {
+                <span> ... </span>
+            }
+            <br />
+            @Html.EnhancedLabelField(model => model.DateSakht)
+            @Html.EnhancedLabelField(model => model.DateNasb)
+            @Html.EnhancedLabelField(model => model.DateBahrebardari)
+            @Html.EnhancedLabelField(model => model.MehvarName)
+            @Html.EnhancedLabelField(model => model.CodeEshterak)
+            @Html.EnhancedLabelField(model => model.Comment)
+            <hr style="color: red !important" />
+            <label style="color: red" class="fieldLabel">مشخصات مکانی </label>
+            <hr style="color: red !important" />
+            @Html.EnhancedLabelField(model => model.CodeNaheyeh)
+            @Html.EnhancedLabelField(model => model.MapOld)
+            @Html.EnhancedLabelField(model => model.MapNew)
+            @Html.EnhancedLabelField(model => model.CodeTasfieKhane)
+            @Html.EnhancedLabelField(model => model.MantagheShahrdari)
+            @Html.EnhancedLabelField(model => model.MantagheGaz)
+            @Html.EnhancedLabelField(model => model.MantagheBargh)
+            @Html.EnhancedLabelField(model => model.MantagheMohakhaberat)
+            @Html.EnhancedLabelField(model => model.MantagheRanandegi)
+
+            <hr />
+            <label style="color: red" class="fieldLabel">مشخصات ثبت کننده </label>
+            <hr />
+            @Html.EnhancedLabelField(model => model.TblUserId)
+            @Html.EnhancedLabelField(model => model.CodeCompany)
+            @Html.EnhancedLabelField(model => model.CodeSystem)
+        </div>
+    </div>
+</div>
+<div>
+    @Html.ActionLink("بازگشت به لیست", "ManholList")
+</div>

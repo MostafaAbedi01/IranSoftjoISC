@@ -1,0 +1,13 @@
+﻿@model string
+@{
+    ViewBag.Title = "قالب";
+    Layout = "~/Views/Shared/_LayouNull.cshtml";
+}
+<p>
+    @{
+        if (Session["Address"] != null)
+        {
+            <img width="925" height="510" src="../..@Session["Address"].ToString()" alt="@Session["Address"].ToString()"/>
+        }
+    } 
+</p>

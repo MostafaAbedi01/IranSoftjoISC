@@ -1,0 +1,19 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.ConflictResolutionVm
+@{
+    ViewBag.Title = "حل اختلاف";
+    Layout = "~/Views/Shared/_AdminDashboardWithPanel.cshtml";
+}
+<div class="alert alert-info" style="text-align: right">
+    <strong>توجه!</strong> برای انجام حل اختلاف مبادله ابتدا لازم است تا درخواست خود را ارسال نمایید پس از بررسی توسط تیم مبادله نتیجه اعلام خواهد شد.
+</div>
+@using (Html.BeginForm("ConflictResolution", "Dashboard", FormMethod.Post, new { role = "form" }))
+{
+    <table class="form">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(m => m.EscrowID)
+        @Html.EnhancedTextAreaField(m => m.Comment)
+        @Html.EnhancedSubmit("ثبت حل اختلاف")
+    </table>
+}

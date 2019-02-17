@@ -1,0 +1,32 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model  IranSoftjo.Package.WebUi.ViewModels.TrackVm
+@{
+    ViewBag.Title = "افزودن مسیر";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="BreadCrumbPage">
+    @Html.ActionLink("لیست مسیرها", "Index")
+    <strong>>></strong>
+    @Html.ActionLink("افزودن مسیر جدید", "Create")
+</div>
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+@using (Html.BeginForm())
+{
+    <table class="form">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.EnhancedEditorField(model => model.Code)
+        @Html.EnhancedEditorField(model => model.Name)
+        @Html.EnhancedEditorField(model => model.Mobile)
+        @Html.EnhancedEditorField(model => model.Price)
+        @Html.EnhancedEditorField(model => model.TimeTrack)
+        @Html.EnhancedEditorField(model => model.TypeTrack)
+        @Html.EnhancedSubmit("ایجاد")
+    </table>
+}
+<div>
+    @Html.ActionLink("بازگشت به لیست", "Index")
+</div>

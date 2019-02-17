@@ -1,0 +1,27 @@
+﻿@using IranSoftjo.Package.DataModel
+@{
+    var db = new Entities();
+    var siteSettings = db.SiteSettings.FirstOrDefault();
+    ViewBag.MetaDescription = siteSettings.MetaDescription + " , " + ViewBag.Title; ;
+    ViewBag.Metakeywords = siteSettings.Metakeywords + "," + ViewBag.Title;
+    ViewBag.TitleTag = ViewBag.Title;
+    ViewBag.FirstAndLastName = "";
+    if (Request.IsAuthenticated)
+    {
+        var userName = User.Identity.Name;
+        var user = db.Users.FirstOrDefault(d => d.Username == userName);
+        if (user != null)
+        {
+            ViewBag.FirstAndLastName = user.FirstName + " " + user.LastName;
+        }
+    }
+    if (ViewBag.HomeIndex == "HomeIndex")
+    {
+        ViewBag.TitleTag = "سامانه هوشمند نظارت بر عملکرد پیمانکاران بهره بردار شبکه تاسیسات آب و فاضلاب تهران";
+    }
+    var active = "active";
+    var activeitemGalleries = "active";
+ 
+    Layout = "~/Views/Shared/_AdminDashboardWithPanel.cshtml";
+}
+@RenderBody()

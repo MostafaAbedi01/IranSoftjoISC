@@ -1,0 +1,39 @@
+﻿@model IranSoftjo.Package.WebUi.ViewModels.SoftwareVM
+@{
+    Layout = "~/Views/Shared/_LayoutBox.cshtml";
+    ViewBag.Title = Model.SoftwareName;
+    var softwareImageLogoUrl = "/Images/SoftWare/Logo_Thempalte.png";
+    if (!string.IsNullOrEmpty(Model.SoftwareImageLogoUrl))
+    {
+        softwareImageLogoUrl = Model.SoftwareImageLogoUrl;
+    }
+}
+<div class="BreadCrumbPage">
+    @Html.ActionLink("لیست نرم افزارها", "Index")
+    <strong>>></strong>
+    @Html.ActionLink("افزودن نرم افزار جدید", "Create")
+</div>
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+<div style="height: auto; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);">
+    <div style="float: right; margin: 10px; width: 40%">
+        <img src="@softwareImageLogoUrl" alt="@Model.SoftwareEnName" title="@Model.SoftwareEnName"/>
+    </div>
+    <div>
+        <h1 style="padding: 15px; color: #D24B28"> @Model.SoftwareName</h1>
+        <h3>نام لاتین نرم افزار : @Model.SoftwareEnName</h3>
+        <h3>تعداد بازدید : @Model.SoftwareVisit</h3>
+        <p>
+            @Model.SoftwareSummary
+        </p>
+        <div style="margin: 5px">
+               <span>
+                   <strong>توضیحات کامل نرم افزار </strong>
+                <hr style="border-bottom: 2px solid #17BCE9;">
+                </span>
+            @Html.Raw(Model.SoftwareFullDescription)
+        </div>
+    </div>
+</div>

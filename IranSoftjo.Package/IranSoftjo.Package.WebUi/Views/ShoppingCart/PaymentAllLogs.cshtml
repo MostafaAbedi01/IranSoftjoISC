@@ -1,0 +1,38 @@
+﻿@using Mehr
+@model List<IranSoftjo.Package.WebUi.ViewModels.PaymentLogVM>
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "لیست  همه پرداختها";
+}
+<div>
+    @(Html.Kendo().Grid(Model)
+          .Name("Grid").Groupable()
+          .Columns(columns =>
+                   {
+                       columns.Bound(model => model.PaymentLogID).Width(50);
+                       columns.Bound(item => item.UserName).Width(90);
+                       columns.Bound(model => model.Amount).Width(80).Format("{0:#,0 ریال}").FooterTemplate(@<text>جمع پرداختی : @string.Format("{0:#,0 ریال}", Model.Where(d=>d.IsSuccessful).Sum(d => d.Amount)).LocalizeNumbers()</text>);
+                       columns.Bound(model => model.PaymentDate).Width(70);
+                       columns.Bound(item => item.IsSuccessful).Width(70).Title("وضعیت")
+                            .Template(@<text>
+    @if (item.IsSuccessful)
+    {
+        @:موفق
+    }
+
+    else
+    {
+        @:ناموفق
+    }
+    </text>).Width(60);
+                       columns.Bound(model => model.OrderID).Width(100);
+                       columns.Bound(model => model.TrackingCode).Width(80);
+                       columns.Bound(model => model.PaymentTypeVal).Width(80);
+                       columns.Bound(model => model.PaymentResponseMessage).Width(110);
+                   })
+          .Sortable()
+          .Pageable()
+          .Scrollable()
+          .Filterable()
+          )
+</div>

@@ -1,0 +1,47 @@
+﻿@model IEnumerable<IranSoftjo.Package.WebUi.ViewModels.ProductVM>
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "محصولات";
+    var counter = 1;
+}
+<div class="k-rtl">
+    @(Html.Kendo().Grid(Model)
+          .Name("Grid")
+          .Columns(columns =>
+          {
+              columns.Bound(item => item.ProductOrder).Width(50);
+              columns.Bound(item => item.ProductID).Visible(false);
+              columns.Bound(item => item.ProductGroupTitle).Title("گروه محصول").Width(100);
+              columns.Bound(item => item.ProductTitle).Width(150);
+              columns.Bound(item => item.ProductPrice).Width(100);
+              columns.Bound(item => item.ProductThumbnailImageUrl).Width(100)
+                  .Template(@@<div style="text-align: center;">
+                                  <img style=" width: 50px;height: 50px" src="@item.ProductThumbnailImageUrl" title="@item.ProductTitle"/></div>);
+
+              columns.Bound(item => @item.ProductID).Title("دستورات").Filterable(false).Groupable(false)
+                  .Template(@<text>
+                                 @Html.ActionLink("تصاویر", "Index", "ProductImage", new { id = @item.ProductID }, new { @class = "k-button k-button-icontext k-grid-edit" })
+                                 @Html.ActionLink("ویرایش", "Edit", new { id = @item.ProductID }, new { @class = "k-button k-button-icontext k-grid-edit" })
+                                 @Html.ActionLink("حذف", "Delete", new { id = @item.ProductID }, new { @class = "k-button k-button-icontext k-grid-delete" })
+                             </text>).Width(200);
+          })
+          .ToolBar(toolbar => toolbar.Custom().Action("Create", "Product").Text("افزودن"))
+          .Sortable()
+          .Scrollable()
+          .Filterable()
+          .HtmlAttributes(new { style = "height:800px;" })
+          .DataSource(dataSource => dataSource
+              .Server()
+              .Model(model => model.Id(item => item.ProductID))
+              .Group(groups => groups.Add(p => p.ProductGroupTitle))
+              
+          )
+          )
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+            $(Grid).find('.k-icon.k-i-collapse').trigger('click');
+    });
+</script>

@@ -1,0 +1,31 @@
+﻿@model IEnumerable<IranSoftjo.Package.WebUi.ViewModels.ProductImageVM>
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "تصاویر محصولات";
+}
+<div class="k-rtl">
+    @(Html.Kendo().Grid(Model)
+           .Name("Grid")
+           .Columns(columns =>
+               {
+                   columns.Bound(item => item.ProductImageID);
+                   columns.Bound(item => item.ProductImageTitle);
+                       columns.Bound(item => item.ProductThumbnailImageUrl).Width(100)
+                        .Template(@@<div style="text-align: center;"><img style=" width: 50px;height: 50px" src="@item.ProductThumbnailImageUrl" title="@item.ProductID"/></div>);					
+                   columns.Bound(item => @item.ProductImageID).Title("دستورات").Filterable(false).Groupable(false)
+                          .Template(@<text>
+    @Html.ActionLink("ویرایش", "Edit", new { id = @item.ProductImageID }, new { @class = "k-button k-button-icontext k-grid-edit" })
+    @Html.ActionLink("حذف", "Delete", new { id = @item.ProductImageID }, new { @class = "k-button k-button-icontext k-grid-delete" })
+    </text>).Width(200);
+               })
+           .ToolBar(toolbar => toolbar.Custom().Action("Create", "ProductImage").Text("افزودن"))
+           .Sortable()
+           .Scrollable()
+           .Filterable()
+           .HtmlAttributes(new { style = "height:500px;" })
+           .DataSource(dataSource => dataSource
+                                         .Server()
+                                         .Model(model => model.Id(item => item.ProductImageID))
+           )
+           )
+</div>

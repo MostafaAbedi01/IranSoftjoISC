@@ -1,0 +1,53 @@
+﻿@*<link rel="stylesheet" type="text/css" href="/Content/CircularContentCarousel/demo.css" />*@
+<link rel="stylesheet" type="text/css" href="/Content/CircularContentCarousel/reset.css" />
+<link rel="stylesheet" type="text/css" href="/Content/CircularContentCarousel/style.css" />
+<link rel="stylesheet" type="text/css" href="/Content/CircularContentCarousel/jquery.jscrollpane.css" media="all" />
+
+@model List<IranSoftjo.Package.WebUi.ViewModels.ProductVM>
+<div class="container">
+    <div id="ca-container" class="ca-container">
+        <div class="ca-wrapper">
+            @foreach (var item in Model)
+            {
+                <div class="ca-item ca-item-@item.ProductID" style=" background-image: url(@item.ProductThumbnailImageUrl);">
+                    <div class="ca-item-main">
+                        <div class="ca-icon"></div>
+                        <h3>@item.ProductTitle</h3>
+                        <h4>
+                            <span>@item.ProductPrice </span>
+                            @if (item.ProductDescription.Length >= 25)
+                            {
+                                <span>@item.ProductDescription.Substring(0, 25) ...</span>
+                            }
+                            else
+                            {
+                                <span>@item.ProductDescription ...</span>
+                            }
+                        </h4>
+                        <a href="#" class="ca-more">جزئیات...</a>
+                    </div>
+                    <div class="ca-content-wrapper">
+                        <div class="ca-content">
+                            <h6>@item.ProductTitle</h6>
+                            <a href="#" class="ca-close"></a>
+                            <div class="ca-content-text">
+                                @item.ProductDescription
+                            </div>
+                            <ul>
+                                <li><a href="#">افزودن به سبد</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+            }
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/Scripts/CircularContentCarousel/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="/Scripts/CircularContentCarousel/jquery.mousewheel.js"></script>
+<script type="text/javascript" src="/Scripts/CircularContentCarousel/jquery.contentcarousel.js"></script>
+<script type="text/javascript">
+    $('#ca-container').contentcarousel();
+</script>
+

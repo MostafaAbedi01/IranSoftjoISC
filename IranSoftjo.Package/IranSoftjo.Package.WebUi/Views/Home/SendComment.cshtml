@@ -1,0 +1,21 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.CommentVM
+@{
+    Layout = "~/Views/Shared/_LayoutEmpty.cshtml";
+}
+@using (Html.BeginForm("SendComment", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <table>
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.SubID)
+        @Html.EnhancedEditorField(model => model.UserName)
+        @Html.EnhancedEditorField(model => model.UserEmail)
+        @Html.EnhancedEditorField(model => model.UserSite)
+        @Html.EnhancedTextAreaField(model => model.CommentText,new
+                                                               {
+                                                                   style="width: 550px; height: 150px;"
+                                                               })
+        @Html.EnhancedSubmit("ارسال نظر")
+    </table>
+}

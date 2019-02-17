@@ -1,0 +1,31 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.ProductImageVM
+@{
+    ViewBag.Title = "ویرایش محصول";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@using (Html.BeginForm())
+{
+    <table class="form">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(false)
+        @Html.HiddenFor(model => model.ProductImageID)
+        @Html.HiddenFor(model => model.ProductID)
+        @Html.HiddenFor(model => model.ProductImageUrl)
+        @Html.HiddenFor(model => model.ProductThumbnailImageUrl)
+        @Html.EnhancedEditorField(model => model.ProductImageTitle)
+        <td class="labelWrp">
+            <label for="ProductGroupID" class="fieldLabel">@Html.LabelFor(model => model.ProductImageUrl)</label>
+        </td>
+        <td colspan="1" class="inputWrp">
+            @Html.Kendo().Upload().Name("file").Multiple(false).Async(async => async.Save("SaveFile", "ProductImage"))
+            <br>
+            <span data-valmsg-replace="true" data-valmsg-for="ProductGroupID" class="field-validation-valid"></span>
+            <img style="width: 100px;" src="@Model.ProductThumbnailImageUrl"/>
+        </td>
+        @Html.EnhancedSubmit("ویرایش")
+    </table>
+}
+<div>
+    @Html.ActionLink("بازگشت به لیست", "Index")
+</div>

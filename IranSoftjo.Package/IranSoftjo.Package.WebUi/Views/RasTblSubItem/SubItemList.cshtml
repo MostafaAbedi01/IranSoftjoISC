@@ -1,0 +1,49 @@
+﻿@model IEnumerable<IranSoftjo.Package.WebUi.ViewModels.TblSubItemVm>
+@{
+    ViewBag.Title = "لیست آیتم ها";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hgroup class="title">
+    <h1>
+        <a href="@Url.Action("ProjectList", "RasTblProject")">@Session["TblProjects"] </a> >>
+        <a href="@Url.Action("ItemList", "RasTblItems", new {id = Session["TblItemsId"]})">@Session["TblItems"] </a> >> @ViewBag.Title</h1>
+    <hr/>
+</hgroup>
+<div class="k-rtl">
+    @(Html.Kendo().Grid(Model)
+          .Name("Grid")
+          .Columns(columns =>
+          {
+              columns.Bound(item => @item.TblSubItemId).Title("لیست").Filterable(false).Groupable(false)
+                  .Template(@<text>
+                                @Html.ActionLink("لیست مراحل انجام", "SubItemAccessList", "RasTblSunItemAccess", new {id = @item.TblSubItemId}, new {@class = "k-button k-button-icontext k-grid-delete"})
+                             </text>);
+              columns.Bound(model => model.TblSubItemId).Visible(false);
+              columns.Bound(model => model.SubItemCode);
+              columns.Bound(model => model.Title);
+              columns.Bound(model => model.MetrajKol);
+
+              columns.Bound(item => @item.TblSubItemId).Title("دستورات").Filterable(false).Groupable(false)
+                  .Template(@<text>
+                                @Html.ActionLink("جزئیات", "SubItemDetails", new {id = @item.TblSubItemId}, new {@class = "k-button k-button-icontext k-grid-delete"})
+                                @Html.ActionLink("ویرایش", "SubItemEdit", new {id = @item.TblSubItemId}, new {@class = "k-button k-button-icontext k-grid-edit"})
+                                @Html.ActionLink("حذف", "SubItemDelete", new {id = @item.TblSubItemId}, new {@class = "k-button k-button-icontext k-grid-delete"})
+                             </text>).Width(230);
+          })
+          .ToolBar(toolbar => toolbar.Custom().Action("SubItemCreate", "RasTblSubItem").Text("افزودن آیتم جدید"))
+          .Pageable(d => d.PageSizes(true).Refresh(true))
+          .Sortable()
+          .Scrollable()
+          .Filterable().Groupable()
+          .HtmlAttributes(new {style = "height:600px; "})
+          .DataSource(dataSource => dataSource
+              .Server()
+              .Model(model => model.Id(item => item.TblSubItemId)).PageSize(7)
+          )
+          .Resizable(resize => resize.Columns(true))
+          .ColumnMenu()
+          )
+</div>
+<style>
+    .container { width: 1300px !important; }
+</style>

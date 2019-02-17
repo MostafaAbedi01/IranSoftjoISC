@@ -1,0 +1,97 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model  IranSoftjo.Package.WebUi.ViewModels.PageVM
+@{
+    ViewBag.Title = "افزودن صفحه جدید";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="BreadCrumbPage">
+    @Html.ActionLink("لیست صفحات", "Index")
+    <strong>>></strong>
+    @Html.ActionLink("افزودن صفحه جدید", "Create")
+</div>
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+@using (Html.BeginForm())
+{
+    <table class="form">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+         @*     <span>چیدمان منوهای سایت:</span>
+           @(Html.Kendo().TreeView()
+              .HtmlAttributes(new { style = "width:96%x;background-color:#e3e3e3;padding: 15px;" })
+              .Animation(animation => animation.Expand(open =>
+                                                       {
+                                                           open.Expand(ExpandDirection.Vertical);
+                                                           open.SlideIn(SlideDirection.Down);
+                                                           open.Fade(FadeDirection.In);
+                                                       }))
+              .Name("treeview")
+              .Events(events => events
+                  .Select("onSelect")
+                  .DataBound("dataBound")
+              )
+              .Template( "#= item.Name #  <input type='hidden' class='data_id' value='#=item.id#'>")
+              //.DataImageUrlField(Url.Content("~/Images/Layout/edit.png"))
+              .DataTextField("Name")
+              .DataSource(dataSource => dataSource
+                  .Read(read => read
+                      .Action("PageGroupTree", "PageGroup")
+                  )
+              )
+              )
+        <script>
+            var treeview;
+            function dataBound(e) {
+                var treeview = $("#treeview").data("kendoTreeView");
+                treeview.loadOnDemand = false;
+                treeview.expand('.k-item');
+                //var idn = $("#PageGroupID").val();
+                //var getitem = treeview.dataSource.get(idn);
+                //treeview.findByUid(getitem.uid);
+                //var selectitem = treeview.findByUid(getitem.uid);
+                //treeview.select(selectitem);
+            }
+
+            function onSelect(e) {
+                var nodeid = $("#treeview").getKendoTreeView().dataItem(e.node).id;
+                $("#PageGroupId").val(nodeid);
+            }
+            $(document).ready(function () {
+                treeview = $("#treeview").data("kendoTreeView");
+            });
+        </script>
+          <style>
+            .k-in {
+                border: .5px solid #F46D20 !important;
+            }
+        </style>*@
+        @Html.EnhancedDropDownList(model => model.PageGroupID, "PageGroupId")
+        @Html.HiddenFor(model => model.PageGroupID)
+        @Html.EnhancedEditorField(model => model.PageTitle)
+        @Html.EnhancedTextAreaField(model => model.Summary)
+        @Html.EnhancedEditorField(model => model.PageText)
+        @Html.EnhancedEditorField(model => model.PageDate)
+        @Html.EnhancedEditorField(model => model.PageOrder)
+        @Html.EnhancedCheckBoxField(model => model.HasComment)
+        @Html.EnhancedCheckBoxField(model => model.ActiveCommentAdmin)
+        @Html.EnhancedCheckBoxField(model => model.ActivePage)
+        @Html.EnhancedCheckBoxField(model => model.ActivePageDate)
+        @Html.EnhancedCheckBoxField(model => model.ActivePrint)
+        @Html.EnhancedCheckBoxField(model => model.ActiveVisit)
+        @Html.EnhancedCheckBoxField(model => model.IsSpecial)
+        <td class="labelWrp">
+            <label for="ProductGroupID" class="fieldLabel">@Html.LabelFor(model => model.PageThumbnailImageUrl)</label>
+        </td>
+        <td colspan="1" class="inputWrp">
+            @Html.Kendo().Upload().Name("file").Multiple(false).Async(async => async.Save("SaveFile", "Page"))
+            <br>
+            <span data-valmsg-replace="true" data-valmsg-for="ProductGroupID" class="field-validation-valid"></span>
+        </td>
+        @Html.EnhancedSubmit("ایجاد")
+    </table>
+}
+<div>
+    @Html.ActionLink("بازگشت به لیست", "Index")
+</div>

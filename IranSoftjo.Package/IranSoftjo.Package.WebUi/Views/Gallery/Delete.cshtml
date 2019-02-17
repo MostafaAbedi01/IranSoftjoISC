@@ -1,0 +1,30 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.GalleryVM
+@{
+    ViewBag.Title = "حذف صفحه";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <table class="form">
+        
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.GalleryId)
+        @Html.HiddenFor(model => model.GalleryGroupId)
+        @Html.HiddenFor(model => model.GalleryImageUrl)
+        @Html.HiddenFor(model => model.GalleryImageUrlThumb)
+        @Html.EnhancedLabelField(model => model.Title)
+        @Html.EnhancedLabelField(model => model.Comment)
+        <tr>
+            <td class="labelWrp">
+                <label class="fieldLabel">@Html.LabelFor(model => model.GalleryImageUrl)</label>
+            </td>
+            <td colspan="1" class="inputWrp">
+                <img style="width: 100px;" src="@Model.GalleryImageUrlThumb"/>
+            </td>
+        </tr>
+        @Html.EnhancedSubmit("حذف عکس")
+    </table>
+}
+@Html.ActionLink("بازگشت به لیست", "Index")

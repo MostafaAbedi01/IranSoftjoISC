@@ -1,0 +1,21 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.TblCodeTagPmVm
+@{
+    ViewBag.Title = "ویرایش ";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@using (Html.BeginForm())
+{
+    <table class="form">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(false)
+        @Html.HiddenFor(model => model.TblCodeTagPmId)
+        @Html.EnhancedEditorField(model => model.CodePm)
+        @Html.EnhancedEditorField(model => model.CodeTag)
+        @Html.EnhancedSubmit("ویرایش")
+    </table>
+
+}
+<div>
+    @Html.ActionLink("بازگشت به لیست", "List")
+</div>

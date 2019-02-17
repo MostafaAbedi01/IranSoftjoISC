@@ -1,0 +1,21 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.Android.ViewModels.UserVm
+@{
+    ViewBag.Title = "حذف کاربر";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<table class="form">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "موارد مشخص شده با رنگ قرمز را مجددا بررسی نمایید.")
+        @Html.EnhancedLabelField(model => model.FirstName)
+        @Html.EnhancedLabelField(model => model.LastName)
+        @Html.EnhancedLabelField(model => model.Username)
+        @Html.EnhancedLabelField(model => model.Email, "نمونه : myname@samplesite.com")
+        @Html.EnhancedLabelField(model => model.Mobile, "نمونه: ۹۱۲۰۰۰۲۲۶۶")
+        @Html.EnhancedLabelField(model => model.Phone, " نمونه:۲۱۲۲۰۰۰۲۲۶۶  شماره تلفن ثابت با پیش شماره ")
+        @Html.EnhancedLabelField(model => model.Address)
+        @Html.EnhancedSubmit("حذف")
+    }
+</table >

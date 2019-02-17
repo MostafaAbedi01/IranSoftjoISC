@@ -1,0 +1,35 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@using IranSoftjo.Package.WebUi.Controllers
+@model IranSoftjo.Package.WebUi.ViewModels.TblProjectVm
+
+@{
+    ViewBag.Title = "ویرایش پروژه";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@using (Html.BeginForm())
+{
+    <table class="form">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(false)
+        @Html.HiddenFor(model => model.TblProjectId)
+        @Html.HiddenFor(model => model.ProjectCode)
+        @Html.EnhancedLabelField(model => model.ProjectCode)
+        @Html.EnhancedEditorField(model => model.ProjectName)
+        @Html.EnhancedEditorField(model => model.KarfarmaName)
+        @Html.EnhancedEditorField(model => model.PeimanKarName)
+        @Html.EnhancedEditorField(model => model.PeimanKarJozName)
+        @Html.EnhancedEditorField(model => model.SarparastKargahName)
+        @Html.EnhancedEditorField(model => model.ModirProjectName)
+        @Html.EnhancedEditorField(model => model.DateStartPeiman)
+        @Html.EnhancedEditorField(model => model.DateStartGharardad)
+        @Html.EnhancedTextAreaField(model => model.AddressKarfarma)
+        @Html.EnhancedTextAreaField(model => model.AddressProject)
+        @Html.EnhancedCheckBoxField(model => model.IsGoogleMap)
+        @Html.EnhancedSubmit("ویرایش")
+    </table>
+
+}
+<div>
+    @Html.ActionLink("بازگشت به لیست", "ProjectList")
+</div>
+

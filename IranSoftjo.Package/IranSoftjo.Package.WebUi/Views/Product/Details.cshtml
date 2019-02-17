@@ -1,0 +1,152 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@using IranSoftjo.Package.DataModel
+@using IranSoftjo.Package.WebUi.Configs
+@using IranSoftjo.Package.WebUi.ViewModels
+@using Mehr
+@model IranSoftjo.Package.WebUi.ViewModels.ProductVM
+@{
+    Layout = "~/Views/Shared/_LayoutBox.cshtml";
+    ViewBag.Title = "جزئیات محصول";
+    var db = new Entities();
+    List<Comment> comments = db.Comments.Where(d => d.SubID == Model.ProductID && d.IsActive == true).OrderByDescending(d => d.CommentID).ToList();
+}
+<div class="title">
+    <h2>
+        <a href="@Url.Action("List", "Product")"> محصولات </a> >>
+        <a href="@Url.Action("List", "Product",new { id = Model.ProductGroupID })">   @Model.ProductGroupTitle  </a> >>  @Model.ProductTitle
+    </h2>
+</div>
+<div style="height: auto; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);">
+    <div style="float: right; margin: 10px; width: 40%">
+        <img width="@PackageSettings.Active.ProductThumbnailImageUrlWidth" height="@PackageSettings.Active.ProductThumbnailImageUrlHeight" src="@Model.ProductThumbnailImageUrl" alt="@Model.ProductTitle" title="@Model.ProductTitle" />
+    </div>
+    <div>
+        <h1 style="padding: 15px; color: #D24B28; font-size: 1.6em;">نام محصول : @Model.ProductTitle</h1>
+        @if (!Model.IsCall)
+        {
+            <br />
+            <input type="button" class="k-button k-button-icontext" value="افزودن به سبد خرید" id="btnAddToBasket_@Model.ProductID">
+            <br />
+        }
+        <h3 style="font-size: 1.4em;">گروه محصول : @Model.ProductGroupTitle</h3>
+        @if (!Model.IsCall)
+        {
+
+            <label class="fieldLabel">قیمت کالا :  </label>
+            @Model.ProductPrice.NumericalMoney()
+        }
+        else
+        {
+            <label>قیمت کالا : تماس بگیرید </label>
+        }
+        <br />
+        @Html.EnhancedLabelField(model => model.ProductTypeTitle)
+        <br />
+        <label>وضعیت کالا :  </label>
+        @if (Model.IsActive)
+        {
+            <img src="/Images/Common/Available.png" alt="موجود" />
+        }
+        else
+        {
+            <img src="/Images/Common/Unavailable.png" alt="ناموجود" />
+        }
+        <br />
+        @if (Model.ProductAvailable != -1 && Model.ProductAvailable != null)
+        {
+            <label class="fieldLabel">موجودی کالا :  </label>
+            @Model.ProductAvailableLoc
+            <br />
+        }
+        @Html.EnhancedLabelField(model => model.ProductCode)
+        @Html.EnhancedLabelField(model => model.VisitLoc)
+
+        <div style="padding: 10px; margin: 10px">
+
+            <div class="title">
+                <h2>خلاصه مشخصات کالا</h2>
+            </div>
+            <hr />
+            @Model.ProductSummery
+            <div class="title">
+                <h2>شرح کامل از مشخصات کالا</h2>
+            </div>
+            <hr />
+            @Html.Raw(Model.ProductDescription)
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="span12">
+            <ul class="nav nav-tabs">
+                <li><a href="#tab2" data-toggle="tab">تصاویر کالا</a></li>
+                <li><a href="#tab3" data-toggle="tab">محصولات مشابه</a></li>
+                <li class="active"><a href="#tab1" data-toggle="tab">نظرات</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade in active" id="tab1">
+                    <div class="MainComment">
+                        @foreach (var product in comments)
+                        {
+                            <div class="CommentHeader">
+                                <div class="tarikh">تاريخ ثبت: <span dir="ltr">@product.CommentDate.LocalizeNumbers()</span></div>
+                                <div class="Name">
+                                    @product.UserName
+                                </div>
+                            </div>
+                            <div class="CommentText">
+                                @product.CommentText
+                            </div>
+                            <br />
+                        }
+                    </div>
+                    @{Html.RenderAction("SendComment", "Home", new { id = Model.ProductID });}
+                </div>
+                <div class="tab-pane fade" id="tab2">
+                    @*   @{Html.RenderAction("List", "ProductImage", new { id = Model.ProductID });}*@
+                </div>
+                <div class="tab-pane fade" id="tab3">
+                    @*        @{Html.RenderAction("Similar", "Product", new { id = Model.ProductID });}*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("[id*=btnAddToBasket]").each(function () {
+            $(this).click(function () {
+                var productid = $(this).attr("id").match(/[\d]+$/);
+                $.ajax({
+                    url: "/api/ShoppingCartApi",
+                    data: { ProductID: productid },
+                    type: "GET"
+                }).done(function (result) {
+                    if (result) {
+                        $(".cartinfo").fadeOut(200).html(result).fadeIn(200);
+                        $(".RenderBody").fadeOut(200).fadeIn(200);
+                        $.ajax({
+                            url: "/api/ShoppingCartApi",
+                            type: "GET"
+                        }).done(function (result) {
+                            if (result) {
+                                $("#product" + productid).fadeOut(200).fadeIn(200);
+                                $("#productsShow").html(result).fadeOut(200).fadeIn(200);
+                            }
+                        });
+                    }
+                });
+            });
+
+            $("[id*=btn_DetailProduct]").each(function () {
+                $(this).click(function () {
+                    var productid = $(this).attr("id").match(/[\d]+$/);
+                    document.location.href = '/Product/Details/' + productid;
+                });
+            });
+        });
+    });
+</script>

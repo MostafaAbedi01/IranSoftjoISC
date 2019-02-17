@@ -1,0 +1,30 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model  IranSoftjo.Package.WebUi.ViewModels.AdvertisementVM
+@{
+    ViewBag.Title = "افزودن";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@using (Html.BeginForm())
+{
+    <table class="form">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.EnhancedDropDownList(model => model.AdvertisementGroupID, "AdvertisementGroupID")
+        @Html.EnhancedEditorField(model => model.AdvertisementTitle)
+        @Html.EnhancedEditorField(model => model.AdvertisementUrl)
+        @Html.EnhancedEditorField(model => model.AdvertisementOrder)
+        @Html.EnhancedCheckBoxField(model => model.AdvertisementIsActive)
+           <td class="labelWrp">
+            <label for="ProductGroupID" class="fieldLabel">@Html.LabelFor(model => model.AdvertisementImage)</label>
+        </td>
+        <td colspan="1" class="inputWrp">
+            @Html.Kendo().Upload().Name("file").Multiple(false).Async(async => async.Save("SaveFile", "Advertisement"))
+            <br>
+            <span data-valmsg-replace="true" data-valmsg-for="ProductGroupID" class="field-validation-valid"></span>
+        </td>
+        @Html.EnhancedSubmit("افزودن")
+    </table>
+}
+<div>
+    @Html.ActionLink("بازگشت به لیست", "Index")
+</div>

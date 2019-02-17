@@ -1,0 +1,48 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.GalleryVM
+@{
+    ViewBag.Title = "ویرایش گالری";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@using (Html.BeginForm())
+{
+    <table class="form">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(false)
+
+        @Html.HiddenFor(model => model.GalleryId)
+        @Html.HiddenFor(model => model.GalleryImageUrl)
+        @Html.HiddenFor(model => model.GalleryImageUrlThumb)
+        @Html.EnhancedDropDownList(model => model.GalleryGroupId, "GalleryGroupId")
+        @Html.EnhancedEditorField(model => model.GalleryOrder)
+        @Html.EnhancedEditorField(model => model.Title)
+        @Html.EnhancedTextAreaField(model => model.Comment)
+        @Html.EnhancedCheckBoxField(model => model.IsActive)
+        <tr>
+            <td>
+                <label>@Html.LabelFor(model => model.GalleryImageUrl)</label>
+            </td>
+            <td colspan="1" class="inputWrp">
+                <div class="k-rtl">
+                    @Html.Kendo().Upload().Multiple(false).Name("file").Async(async => async.Save("SaveFile", "Gallery"))
+                </div>
+                <br>
+                <span data-valmsg-replace="true" data-valmsg-for="ProductGroupID" class="field-validation-valid"></span>
+                <img style="width: 100px;" src="@Model.GalleryImageUrlThumb"/>
+            </td>
+        </tr>
+        @Html.EnhancedSubmit("ویرایش")
+    </table>
+
+}
+<br />
+<div>
+    @Html.ActionLink("بازگشت به لیست", "Index")
+</div>
+<style>
+    table.k-editor .k-content
+    {
+        resize: vertical;
+    }
+</style>
+

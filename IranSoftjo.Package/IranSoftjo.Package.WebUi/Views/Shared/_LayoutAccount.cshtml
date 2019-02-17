@@ -1,0 +1,38 @@
+﻿@using IranSoftjo.Package.WebUi.Configs
+@{
+    Layout = "_Layout.cshtml";
+    ViewBag._LayoutAccount = "_LayoutAccount";
+}
+@Html.Partial("_KendoFilePartial")
+@*<script src="@Url.Content("~/Scripts/kendo/2013.3.1316/kendo.aspnetmvc.min.js")"> </script>
+<script src="@Url.Content("~/Scripts/kendo/ShamsiDatePicker/kendo.all.min.js")"> </script>
+<script src="@Url.Content("~/Scripts/kendo/2013.3.1316/cultures/kendo.culture.fa-IR.min.js")"> </script>*@
+<div  style=" box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); ">
+    <div class="k-rtl" >
+        
+    @(Html.Kendo().Menu()
+          .Name("MenuAccount").HtmlAttributes(new {style = "border-radius: 0px;"})
+          .Items(items =>
+                 {
+                     items.Add().Text("صفحه نخست کاربری").Action("Index", "Account");
+                     if (PackageSettings.Active.SiteTypeEShop)
+                     {
+                         items.Add().Text("لیست سفارشات").Action("Orders", "ShoppingCart");
+                         items.Add().Text("لیست پرداخت ها").Action("PaymentLogs", "ShoppingCart");
+                     }
+                     //items.Add().Text("درآمد نمایندگی").Action("PaymentAgency", "Account");
+                     //items.Add().Text("درآمد تبلیغات").Action("PaymentEarnMoney", "Account");
+                     items.Add().Text("ویرایش پروفایل").Action("ProfileUser", "Account");
+                     items.Add().Text("راهنماها").Items(children =>
+                     {
+                         children.Add().Text("انواع نحوه پرداخت").Action("Payments", "Help");
+                         children.Add().Text("نحوه پرداخت آنلاین از درگاه زرین پال").Action("ZarinPal", "Help");
+                     });
+                 })
+          )
+    </div>
+</div>
+
+<div  class="pageContentRightDiv" >
+    @RenderBody()
+</div>

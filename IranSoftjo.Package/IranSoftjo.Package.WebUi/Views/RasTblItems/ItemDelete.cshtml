@@ -1,0 +1,57 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@using IranSoftjo.Package.WebUi.Configs
+@model IranSoftjo.Package.WebUi.ViewModels.TblItemVm
+@{
+    ViewBag.Title = "حذف جبهه";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+
+
+<div style="box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); height: auto;">
+    <div style="float: right; margin: 10px; width: 40%">
+        <a href="@Model.TblItemId">
+            <div>
+                <img width="@PackageSettings.Active.PageThumbnailImageUrlWidth" height="@PackageSettings.Active.PageThumbnailImageUrlHeight" src="@Model.TblItemId" alt="عکس " title="عکس " />
+            </div>
+            <div style="float: right; margin-top: 0px;">
+                بزرگنمایی عکس 
+            </div>
+        </a>
+    </div>
+
+    <div>
+        <h1 style="color: #D24B28; font-size: 1.8em; padding: 25px;">کد آیتم : @Model.ItemCode</h1>
+        <div style="margin: 30px; padding: 20px;">
+            <hr />
+            <label style="color: red" class="fieldLabel">مشخصات مکانی </label>
+            <hr />
+            @Html.EnhancedLabelField(model => model.Latitude)
+            @Html.EnhancedLabelField(model => model.Longitude)
+            @Html.EnhancedLabelField(model => model.Address)
+
+            @Html.EnhancedLabelField(model => model.ItemCode)
+            @Html.EnhancedLabelField(model => model.Title)
+            @Html.EnhancedLabelField(model => model.Comment)
+
+            @using (Html.BeginForm())
+            {
+                <table class="form">
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.TblItemId)
+                    @Html.EnhancedSubmit("حذف ")
+                </table>
+            }
+        </div>
+    </div>
+
+</div>
+
+<div>
+    @Html.ActionLink("بازگشت به لیست", "ItemList", new { id = Model.TblProjectId })
+</div>
+

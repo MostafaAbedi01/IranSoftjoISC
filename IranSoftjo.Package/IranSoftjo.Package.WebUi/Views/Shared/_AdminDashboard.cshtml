@@ -1,0 +1,278 @@
+﻿@using System.Diagnostics
+@using IranSoftjo.Package.DataModel
+@{
+    User user = Session["User"] as User;
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" dir="rtl">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <meta charset="utf-8" />
+    <title>سامانه هوشمند ISC - @ViewBag.Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <script src="~/Scripts/IntroJs/intro.js"></script>
+    <link href="~/Scripts/IntroJs/introjs.css" rel="stylesheet" />
+    <link href="~/Scripts/IntroJs/introjs-rtl.css" rel="stylesheet" />
+
+    <link href="~/Scripts/IntroJs/introjs-milad.css" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/kendo/2014.3/kendo.common.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2014.3/kendo.rtl.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2014.3/kendo.default.min.css")" rel="stylesheet" type="text/css" />
+
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <script src="/PackageAdmin/global/plugins/jquery.min.js" type="text/javascript"></script>
+
+
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    @*<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />*@
+    <link href="/PackageAdmin/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="/PackageAdmin/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="/PackageAdmin/global/plugins/bootstrap/css/bootstrap-rtl.min.css" rel="stylesheet" type="text/css" />
+    <link href="/PackageAdmin/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css" />
+    <link href="/PackageAdmin/global/plugins/bootstrap-switch/css/bootstrap-switch-rtl.min.css" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <link href="/PackageAdmin/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
+    <link href="/PackageAdmin/global/plugins/morris/morris.css" rel="stylesheet" type="text/css" />
+    <link href="/PackageAdmin/global/plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet" type="text/css" />
+    <link href="/PackageAdmin/global/plugins/jqvmap/jqvmap/jqvmap.css" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN THEME GLOBAL STYLES -->
+    <link href="~/PackageAdmin/global/css/components-rounded-rtl.min.css" rel="stylesheet" id="style_components" type="text/css" />
+    <link href="/PackageAdmin/global/css/plugins-rtl.min.css" rel="stylesheet" type="text/css" />
+    <!-- END THEME GLOBAL STYLES -->
+    <!-- BEGIN THEME LAYOUT STYLES -->
+    <link href="/PackageAdmin/layouts/layout2/css/layout-rtl.min.css" rel="stylesheet" type="text/css" />
+    <link href="/PackageAdmin/layouts/layout2/css/themes/grey-rtl.min.css" rel="stylesheet" type="text/css" id="style_color" />
+    <link href="/PackageAdmin/layouts/layout2/css/custom-rtl.min.css" rel="stylesheet" type="text/css" />
+    <!-- END THEME LAYOUT STYLES -->
+
+    <link href="/PackageAdmin/Custom.css" rel="stylesheet" />
+    @RenderSection("head", required: false)
+    <link href="/Images/abfaicon.ico" rel="shortcut icon" type="image/x-icon" />
+</head>
+<!-- END HEAD -->
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid">
+
+    <!-- BEGIN HEADER -->
+    <div class="page-header navbar navbar-static">
+        <!-- BEGIN HEADER INNER -->
+        <div class="page-header-inner ">
+            <!-- BEGIN LOGO -->
+            <div class="page-logo">
+                <a href="/" target="_blank">
+                    <img src="~/Package/logo.png" alt="logo" class="logo-default" />
+                </a>
+                <div class="menu-toggler sidebar-toggler">
+                    <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
+                </div>
+            </div>
+            <!-- END LOGO -->
+            <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+            <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"> </a>
+            <!-- END RESPONSIVE MENU TOGGLER -->
+            <!-- BEGIN PAGE ACTIONS -->
+            <!-- DOC: Remove "hide" class to enable the page header actions -->
+            <div class="page-actions">
+                <div class="btn-group">
+                    <a style="font-size: 120%" href="http://www.iransoftjoo.ir/Content/Iransoftjo.VistiManhole.apk" class="btn btn-circle green-jungle"  data-step="1" data-intro="در اینجا می توانید نسخه اندرویدی نرم افزار را دانلود و نصب نمایید">
+                        <i class="fa fa-android"></i>&nbsp;
+                       دانلود نسخه اندروید&nbsp;
+                    </a>
+                </div>
+            </div>
+            <!-- END PAGE ACTIONS -->
+            <!-- BEGIN PAGE TOP -->
+            <div class="page-top">
+                <!-- BEGIN TOP NAVIGATION MENU -->
+                <div class="top-menu">
+                    <ul class="nav navbar-nav pull-right">
+                        <!-- BEGIN USER LOGIN DROPDOWN -->
+                        <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+                        <li class="dropdown dropdown-user">
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+
+                                <img alt="کاربر" class="img-circle" src="/PackageAdmin/img/User.png"/>
+
+
+                                @if (user != null)
+                                {
+                                    <span class="username username-hide-on-mobile">سلام  @user.Username</span>
+                                }
+                                else
+                                {
+                                    <span class="username username-hide-on-mobile">سلام  کاربر</span>
+                                }
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-default">
+                                <li>
+                                    <a href="@Url.Action("ProfileUser", "Account")" class="Default-Font">
+                                        <i class="icon-user"></i> پروفایل
+                                    </a>
+                                </li>
+
+
+
+                                <li>
+                                    <a href="@Url.Action("Logout", "Account")" class="Default-Font">
+                                        <i class="icon-key"></i> خروج از پنل کاربری
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+                        <li class="dropdown dropdown-language">
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                <img alt="" src="/PackageAdmin/global/img/flags/es.png">
+                                <span class="langname">
+                                    فارسی
+                                </span>
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="javascript:;">
+                                        <img alt="" src="/PackageAdmin/global/img/flags/es.png"> فارسی
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <img alt="" src="/PackageAdmin/global/img/flags/us.png"> English
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- END LANGUAGE BAR -->
+
+                        <!-- END USER LOGIN DROPDOWN -->
+                        <!-- BEGIN QUICK SIDEBAR TOGGLER -->
+                        <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+                        @*<li class="dropdown dropdown-extended quick-sidebar-toggler">
+                            <span class="sr-only">ارتباط با دوستان</span>
+                            <i class="icon-logout"></i>
+                        </li>*@
+                        <!-- END QUICK SIDEBAR TOGGLER -->
+                    </ul>
+                </div>
+                <!-- END TOP NAVIGATION MENU -->
+            </div>
+            <!-- END PAGE TOP -->
+        </div>
+        <!-- END HEADER INNER -->
+    </div>
+    <!-- END HEADER -->
+    <!-- BEGIN HEADER & CONTENT DIVIDER -->
+    <div class="clearfix"> </div>
+    <!-- END HEADER & CONTENT DIVIDER -->
+    <!-- BEGIN CONTAINER -->
+    <div class="page-container">
+       
+                @Html.Partial("_UserSidebar")
+        
+
+        <!-- BEGIN CONTENT -->
+        <div class="page-content-wrapper">
+            <!-- BEGIN CONTENT BODY -->
+            <div class="page-content">
+                <!-- END PAGE HEADER-->
+                @RenderBody()
+            </div>
+            <!-- END CONTENT BODY -->
+        </div>
+        <!-- END CONTENT -->
+        @*<button class="quick-sidebar-toggler" data-toggle="collapse" type="button">
+            <div class="quick-sidebar-notification">
+                <span class="badge badge-danger">7</span>
+            </div>
+        </button>*@
+            @*@Html.Partial("_QuickSidebar")*@
+</div>
+    <!-- END CONTAINER -->
+    <!-- BEGIN FOOTER -->
+    <div class="page-footer">
+        <div class="page-footer-inner">
+            تمامی حقوق برای آبفا محفوظ است.
+        </div>
+        <div class="scroll-to-top">
+            <i class="icon-arrow-up"></i>
+        </div>
+    </div>
+    <!-- END FOOTER -->
+    <!--[if lt IE 9]>
+    <script src="../assets/global/plugins/respond.min.js"></script>
+    <script src="../assets/global/plugins/excanvas.min.js"></script>
+    <![endif]-->
+    <!-- BEGIN CORE PLUGINS -->
+
+
+    <script src="/PackageAdmin/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/PackageAdmin/global/plugins/js.cookie.min.js" type="text/javascript"></script>
+    <script src="/PackageAdmin/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+    <script src="/PackageAdmin/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="/PackageAdmin/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+    <script src="/PackageAdmin/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+    <script src="/PackageAdmin/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+    <!-- END CORE PLUGINS -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="/PackageAdmin/global/plugins/bootstrap-daterangepicker/moment.min.js" type="text/javascript"></script>
+    <script src="/PackageAdmin/global/plugins/bootstrap-daterangepicker/daterangepicker.js" type="text/javascript"></script>
+    <script src="/PackageAdmin/global/plugins/morris/morris.min.js" type="text/javascript"></script>
+    <script src="/PackageAdmin/global/plugins/morris/raphael-min.js" type="text/javascript"></script>
+    <script src="/PackageAdmin/global/plugins/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
+    <script src="/PackageAdmin/global/plugins/flot/jquery.flot.min.js" type="text/javascript"></script>
+    <script src="/PackageAdmin/global/plugins/flot/jquery.flot.resize.min.js" type="text/javascript"></script>
+    <script src="/PackageAdmin/global/plugins/flot/jquery.flot.categories.min.js" type="text/javascript"></script>
+    <script src="/PackageAdmin/global/plugins/jquery-easypiechart/jquery.easypiechart.min.js" type="text/javascript"></script>
+    <script src="/PackageAdmin/global/plugins/jquery.sparkline.min.js" type="text/javascript"></script>
+
+    <script src="@Url.Content("~/Scripts/ShamsiDatePicker/kendo.all.min.js")"> </script>
+     <script src="/Scripts/kendo/kendo.aspnetmvc.min.js"> </script>
+
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN THEME GLOBAL SCRIPTS -->
+    <script src="/PackageAdmin/global/scripts/app.min.js" type="text/javascript"></script>
+    <!-- END THEME GLOBAL SCRIPTS -->
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="/PackageAdmin/pages/scripts/dashboard.js" type="text/javascript"></script>
+    <!-- END PAGE LEVEL SCRIPTS -->
+    <!-- BEGIN THEME LAYOUT SCRIPTS -->
+    <script src="/PackageAdmin/layouts/layout2/scripts/layout.min.js" type="text/javascript"></script>
+    <script src="/PackageAdmin/layouts/layout2/scripts/demo.min.js" type="text/javascript"></script>
+    <script src="/PackageAdmin/layouts/global/scripts/quick-sidebar.js" type="text/javascript"></script>
+<!-- END THEME LAYOUT SCRIPTS -->
+
+@*    @if (user != null && user.IsHelpActive)*@
+@*    {*@
+@*        <script type="text/javascript">*@
+@*            introJs().setOptions({ 'nextLabel': 'بعد', 'prevLabel': 'قبل', 'skipLabel': 'خروج', 'doneLabel': 'اتمام' }).start();*@
+@*        </script>*@
+@*       *@
+@*    }*@
+
+    @RenderSection("scripts", required: false)
+    @*<noscript>
+        <iframe src="//www.googletagmanager.com/ns.html?id=GTM-PFV5L3"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+            '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-PFV5L3');</script>*@
+    <!-- End Google Tag Manager -->
+</body>
+</html>

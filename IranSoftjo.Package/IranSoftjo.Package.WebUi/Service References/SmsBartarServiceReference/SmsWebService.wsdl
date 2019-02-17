@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:typens="urn:SmsWebService" xmlns="http://schemas.xmlsoap.org/wsdl/" name="SmsWebService" targetNamespace="urn:SmsWebService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:SmsWebService">
+      <xsd:complexType name="ArrayOfstring">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="xsd:string[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfint">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="xsd:int[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="AccountInfo">
+        <xsd:all>
+          <xsd:element name="numbers" type="typens:ArrayOfstring" />
+          <xsd:element name="defaultNumber" type="xsd:string" />
+          <xsd:element name="receiveUrl" type="xsd:string" />
+          <xsd:element name="sent" type="xsd:int" />
+          <xsd:element name="received" type="xsd:int" />
+          <xsd:element name="credit" type="xsd:int" />
+          <xsd:element name="remaining" type="xsd:int" />
+        </xsd:all>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="send">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="to" type="xsd:string" />
+    <wsdl:part name="msg" type="xsd:string" />
+    <wsdl:part name="from" type="xsd:string" />
+    <wsdl:part name="time" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="sendResponse">
+    <wsdl:part name="sendResponse" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="sendToMany">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="to" type="typens:ArrayOfstring" />
+    <wsdl:part name="msg" type="xsd:string" />
+    <wsdl:part name="from" type="xsd:string" />
+    <wsdl:part name="time" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="sendToManyResponse">
+    <wsdl:part name="sendToManyResponse" type="typens:ArrayOfint" />
+  </wsdl:message>
+  <wsdl:message name="sendOneToOne">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="to" type="typens:ArrayOfstring" />
+    <wsdl:part name="msg" type="typens:ArrayOfstring" />
+    <wsdl:part name="from" type="typens:ArrayOfstring" />
+    <wsdl:part name="time" type="typens:ArrayOfint" />
+  </wsdl:message>
+  <wsdl:message name="sendOneToOneResponse">
+    <wsdl:part name="sendOneToOneResponse" type="typens:ArrayOfint" />
+  </wsdl:message>
+  <wsdl:message name="sendToAll">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="to" type="xsd:string" />
+    <wsdl:part name="msg" type="xsd:string" />
+    <wsdl:part name="from" type="xsd:string" />
+    <wsdl:part name="time" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="sendToAllResponse">
+    <wsdl:part name="sendToAllResponse" type="typens:ArrayOfint" />
+  </wsdl:message>
+  <wsdl:message name="deliveryStatus">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="recipientId" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="deliveryStatusResponse">
+    <wsdl:part name="deliveryStatusResponse" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="verifyReceive">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="ticket" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="verifyReceiveResponse">
+    <wsdl:part name="verifyReceiveResponse" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="accountInfo">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="accountInfoResponse">
+    <wsdl:part name="accountInfoResponse" type="typens:AccountInfo" />
+  </wsdl:message>
+  <wsdl:message name="changePassword">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="newPassword" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="changePasswordResponse">
+    <wsdl:part name="changePasswordResponse" type="xsd:void" />
+  </wsdl:message>
+  <wsdl:message name="changeTrafficRelay">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="newURL" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="changeTrafficRelayResponse">
+    <wsdl:part name="changeTrafficRelayResponse" type="xsd:void" />
+  </wsdl:message>
+  <wsdl:portType name="SmsWebServicePort">
+    <wsdl:operation name="send">
+      <documentation>Send one SMS.</documentation>
+      <wsdl:input message="typens:send" />
+      <wsdl:output message="typens:sendResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="sendToMany">
+      <documentation>Send one SMS to many.</documentation>
+      <wsdl:input message="typens:sendToMany" />
+      <wsdl:output message="typens:sendToManyResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="sendOneToOne">
+      <documentation>Send one to one SMS.</documentation>
+      <wsdl:input message="typens:sendOneToOne" />
+      <wsdl:output message="typens:sendOneToOneResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="sendToAll">
+      <documentation>Send one SMS to all numbers separated by semicolon. (Deprecated)</documentation>
+      <wsdl:input message="typens:sendToAll" />
+      <wsdl:output message="typens:sendToAllResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deliveryStatus">
+      <documentation>Check SMS delivery status.</documentation>
+      <wsdl:input message="typens:deliveryStatus" />
+      <wsdl:output message="typens:deliveryStatusResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="verifyReceive">
+      <documentation>Verify sms validity when you receive an sms</documentation>
+      <wsdl:input message="typens:verifyReceive" />
+      <wsdl:output message="typens:verifyReceiveResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="accountInfo">
+      <documentation>Get account info.</documentation>
+      <wsdl:input message="typens:accountInfo" />
+      <wsdl:output message="typens:accountInfoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="changePassword">
+      <documentation>Change account password.</documentation>
+      <wsdl:input message="typens:changePassword" />
+      <wsdl:output message="typens:changePasswordResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="changeTrafficRelay">
+      <documentation>Change traffic relay.</documentation>
+      <wsdl:input message="typens:changeTrafficRelay" />
+      <wsdl:output message="typens:changeTrafficRelayResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SmsWebServiceBinding" type="typens:SmsWebServicePort">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="send">
+      <soap:operation soapAction="urn:SmsWebServiceAction" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:SmsWebService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:SmsWebService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendToMany">
+      <soap:operation soapAction="urn:SmsWebServiceAction" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:SmsWebService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:SmsWebService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendOneToOne">
+      <soap:operation soapAction="urn:SmsWebServiceAction" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:SmsWebService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:SmsWebService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendToAll">
+      <soap:operation soapAction="urn:SmsWebServiceAction" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:SmsWebService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:SmsWebService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deliveryStatus">
+      <soap:operation soapAction="urn:SmsWebServiceAction" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:SmsWebService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:SmsWebService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="verifyReceive">
+      <soap:operation soapAction="urn:SmsWebServiceAction" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:SmsWebService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:SmsWebService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="accountInfo">
+      <soap:operation soapAction="urn:SmsWebServiceAction" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:SmsWebService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:SmsWebService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="changePassword">
+      <soap:operation soapAction="urn:SmsWebServiceAction" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:SmsWebService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:SmsWebService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="changeTrafficRelay">
+      <soap:operation soapAction="urn:SmsWebServiceAction" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:SmsWebService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:SmsWebService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SmsWebService">
+    <wsdl:port name="SmsWebServicePort" binding="typens:SmsWebServiceBinding">
+      <soap:address location="http://sms.sms-bartar.com/webservice/v1/index.php" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

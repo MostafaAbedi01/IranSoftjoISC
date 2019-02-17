@@ -1,0 +1,22 @@
+﻿@model IranSoftjo.Package.WebUi.ViewModels.TblCodeTagPmVm
+
+@using IranSoftjo.Core.Web.Mvc.Html
+@{
+    ViewBag.Title = "حذف ";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+<table class="form">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "موارد مشخص شده با رنگ قرمز را مجددا بررسی نمایید.")
+        @Html.HiddenFor(model => model.TblCodeTagPmId)
+        @Html.EnhancedLabelField(model => model.CodeTag)
+        @Html.EnhancedLabelField(model => model.CodePm)
+        @Html.EnhancedSubmit("حذف")
+    }
+</table>

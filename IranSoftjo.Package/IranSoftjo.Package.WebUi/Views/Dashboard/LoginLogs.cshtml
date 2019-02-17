@@ -1,0 +1,26 @@
+﻿@using System.Collections
+@model IEnumerable<IranSoftjo.Package.DataModel.LoginLog>
+@{
+    ViewBag.Title = "تاریخچه ورود و خروج کاربر";
+    Layout = "~/Views/Shared/_LayoutUserWithPanel.cshtml";
+}
+<div class="k-rtl">
+    @(Html.Kendo().Grid(Model)
+          .Name("Grid")
+          .Columns(columns =>
+          {
+              columns.Bound(model => model.Id).Title("سریال").Width(150);
+              columns.ForeignKey(p => p.TypeLog, (IEnumerable)ViewBag.TypeLog, "KeyID", "Title").Title("نوع");
+              columns.Bound(model => model.LogDatetime).Title("تاریخ").Width(200);
+              columns.Bound(model => model.LogIp).Title("آی پی").Width(200);
+          })
+          .Pageable()
+          .Sortable()
+          .Scrollable()
+          .Filterable()
+          .DataSource(dataSource => dataSource
+              .Server()
+              .Model(model => model.Id(item => item.Id))
+          )
+          )
+</div>

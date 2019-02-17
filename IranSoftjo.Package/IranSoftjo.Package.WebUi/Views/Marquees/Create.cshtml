@@ -1,0 +1,21 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model  IranSoftjo.Package.WebUi.ViewModels.MarqueesVM
+@{
+    ViewBag.Title = "افزودن پیام";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <table class="form">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+             @Html.EnhancedTextAreaField(model => model.Title, new { style = "height:100px;width:900px" })
+           @Html.EnhancedEditorField(model => model.MarqueeUrl)    
+            @Html.EnhancedCheckBoxField(model => model.IsActive)
+        @Html.EnhancedSubmit("ایجاد")
+    </table>
+}
+<div>
+@Html.ActionLink("بازگشت به لیست", "Index")
+</div>

@@ -1,0 +1,28 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@using IranSoftjo.Package.WebUi.Controllers
+@model IranSoftjo.Package.WebUi.ViewModels.TblProjectVm
+
+@{
+    ViewBag.Title = "جزئیات پروژه";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+<div style="box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); height: auto; padding: 10px">
+    @Html.EnhancedLabelField(model => model.ProjectCode)
+    @Html.EnhancedLabelField(model => model.ProjectName)
+    @Html.EnhancedLabelField(model => model.KarfarmaName)
+    @Html.EnhancedLabelField(model => model.PeimanKarName)
+    @Html.EnhancedLabelField(model => model.PeimanKarJozName)
+    @Html.EnhancedLabelField(model => model.SarparastKargahName)
+    @Html.EnhancedLabelField(model => model.ModirProjectName)
+    @Html.EnhancedLabelField(model => model.DateStartPeiman)
+    @Html.EnhancedLabelField(model => model.DateStartGharardad)
+    @Html.EnhancedLabelField(model => model.AddressKarfarma)
+    @Html.EnhancedLabelField(model => model.AddressProject)
+</div>
+<div>
+    @Html.ActionLink("بازگشت به لیست", "ProjectList")
+</div>

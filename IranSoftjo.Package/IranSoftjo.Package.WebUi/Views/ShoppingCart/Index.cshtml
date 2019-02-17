@@ -1,0 +1,63 @@
+﻿@using Mehr
+@model IEnumerable<IranSoftjo.Package.WebUi.ViewModels.ShoppingCartVM>
+@{
+    ViewBag.Title = "سبد خرید شما" ;
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+<div class="k-rtl">
+    @(Html.Kendo().Grid(Model)
+          .Name("Grid")
+          .Columns(columns =>
+                   {
+                       columns.Bound(model => model.ProductID).Visible(false);
+                       columns.Bound(model => model.ProductTitle).Width(180);
+                       columns.Bound(model => model.ProductPriceLocalize).Width(100);
+                       columns.Bound(model => model.ProductCountLocalize).Width(50)
+                           .FooterTemplate(@<text>جمع: @string.Format("{0:#,0 عدد}", Model.Sum(d => d.ProductCount)).LocalizeNumbers()</text>);
+                       columns.Bound(model => model.RowTotalLocalize).Width(100)
+                           .FooterTemplate(@<text>جمع مبالغ: @Model.Sum(d => d.RowTotal).NumericalMoney()</text>);
+                       columns.Bound(item => @item.ProductID).Title("دستورات").Filterable(false).Groupable(false)
+                           .Template(@<text>
+                                          @Html.ActionLink("حذف", "Delete", new {id = @item.ProductID}, new {@class = "k-button k-button-icontext"})
+                                      </text>).Width(60);
+                   })
+          .ToolBar(toolbar => toolbar.Custom().Action("FinalizeShopping", "ShoppingCart").Text("ثبت فاکتور خرید و  تسویه حساب"))
+          .Pageable()
+          .Sortable()
+          .Scrollable()
+          .Filterable()
+          .DataSource(dataSource => dataSource
+              .Server()
+              .Aggregates(aggregates =>
+                          {
+                              aggregates.Add(p => p.ProductPrice).Sum();
+                              aggregates.Add(p => p.ProductCount).Sum();
+                              aggregates.Add(p => p.RowTotal).Sum();
+                          })
+              .Model(model => model.Id(item => item.ProductID))
+          )
+          )
+</div>
+@if (@Session["DiscountCode"] != null)
+{
+    <section class="contact" style="border-radius: 0 !important; text-align: center;">
+        <table width="100%">
+            <tr >
+                @{
+                    int amountPercent = Model.Sum(d => d.RowTotal)/10;
+                    string amount = (Model.Sum(d => d.RowTotal) - amountPercent).NumericalMoney();
+                }
+                <td >مبلغ تخفیف : 
+                    <b>@amountPercent.NumericalMoney()</b></td>
+                <td  class="BoxPrice">
+                    مبلغ قابل پرداخت :    <b>@amount</b>
+                </td>
+            </tr>
+        </table >
+    </section>
+}

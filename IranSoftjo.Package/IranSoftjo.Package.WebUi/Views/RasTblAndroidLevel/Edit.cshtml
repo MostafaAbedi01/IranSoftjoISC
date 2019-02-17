@@ -1,0 +1,42 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.TblAndroidLevelVm
+@{
+    ViewBag.Title = "ویرایش ";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+
+
+@using (Html.BeginForm())
+{
+    <table class="form">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(false)
+        @Html.HiddenFor(model => model.KeyID1)
+        @Html.HiddenFor(model => model.KeyID2)
+        @Html.HiddenFor(model => model.TblProjectId)
+        @Html.HiddenFor(model => model.TblSubItemId)
+     
+        @Html.HiddenFor(model => model.UserID)
+        @Html.HiddenFor(model => model.TblSubItemAccessId)
+        @Html.HiddenFor(model => model.TblAndroidLevelId)
+
+        @Html.EnhancedEditorField(model => model.Color)
+        @Html.EnhancedEditorField(model => model.Thinner)
+        @Html.EnhancedEditorField(model => model.Hardener)
+        @Html.EnhancedEditorField(model => model.Metraj)
+        @Html.EnhancedEditorField(model => model.Comment)
+        @Html.EnhancedEditorField(model => model.TimeStart)
+        @Html.EnhancedEditorField(model => model.TimeEnd)
+        @Html.EnhancedEditorField(model => model.DateDo)
+        @Html.EnhancedEditorField(model => model.DateSend)
+        @Html.EnhancedSubmit("ویرایش")
+    </table>
+
+}
+<div>
+    @Html.ActionLink("بازگشت به لیست", "TblAndroidLevelList")
+</div>

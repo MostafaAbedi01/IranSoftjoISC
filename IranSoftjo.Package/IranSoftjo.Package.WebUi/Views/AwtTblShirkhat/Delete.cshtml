@@ -1,0 +1,107 @@
+﻿@using IranSoftjo.Core.Web.Mvc.Html
+@model IranSoftjo.Package.WebUi.ViewModels.TblShirkhatVm
+@{
+    ViewBag.Title = "حذف شیر خط";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+</hgroup>
+<table class="form">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.EnhancedLabelField(model => model.CodePm)
+        @Html.EnhancedLabelField(model => model.CodeTag)
+        @Html.EnhancedLabelField(model => model.SizeDariceh)
+        @Html.EnhancedLabelField(model => model.SizeOtaghak)
+        @Html.EnhancedLabelField(model => model.Comment)
+        <br />
+            <label class="fieldLabel">وضعیت ظاهری : </label>
+            if (Model.VaziatZaheri == 0)
+            {
+                <span> مرئی </span>
+            }
+            else if (Model.VaziatZaheri == 1)
+            {
+                <span> نامرئی </span>
+            }
+            else
+            {
+                <span> ... </span>
+            }
+            <br />
+            <label class="fieldLabel">نوع اتاقک : </label>
+            if (Model.OtaghakType == 1)
+            {
+                <span> رینگ بتونی </span>
+            }
+            else if (Model.OtaghakType == 0)
+            {
+                <span> آجری </span>
+            }
+            else
+            {
+                <span> ... </span>
+            }
+            <br />
+            <label class="fieldLabel">وضعیت  : </label>
+            if (Model.VaziatZaheri == 1)
+            {
+                <span> باز  </span>
+            }
+            else if (Model.VaziatZaheri == 0)
+            {
+                <span> بسته </span>
+            }
+            else
+            {
+                <span> ... </span>
+            }
+            <br />
+            <label class="fieldLabel">وضعیت دریچه : </label>
+            if (Model.VaziatDaricheh == 1)
+            {
+                <span> ناسالم  </span>
+            }
+            else if (Model.VaziatDaricheh == 0)
+            {
+                <span> سالم </span>
+            }
+            else
+            {
+                <span> ... </span>
+            }
+            <br />
+            <label class="fieldLabel">وضعیت شیر : </label>
+            if (Model.VaziatShir == 1)
+            {
+                <span> ناسالم  </span>
+            }
+            else if (Model.VaziatShir == 0)
+            {
+                <span> سالم </span>
+            }
+            else
+            {
+                <span> ... </span>
+            }
+            <br />
+            <label class="fieldLabel">وضعیت پلاک : </label>
+            if (Model.VaziatPelak == 1)
+            {
+                <span> ناسالم  </span>
+            }
+            else if (Model.VaziatPelak == 0)
+            {
+                <span> سالم </span>
+            }
+            else
+            {
+                <span> ... </span>
+            }
+            <br />
+        @Html.EnhancedSubmit("حذف")
+    }
+</table>
